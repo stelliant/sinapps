@@ -22,9 +22,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <swagger-annotations-version>1.5.8</swagger-annotations-version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-batch</artifactId>
@@ -40,6 +45,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- swagger-codegen -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger-annotations-version}</version>
         </dependency>
 
         <!-- test -->
@@ -66,6 +78,51 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <version>2.3.1</version>
+                <executions>
+                    <execution>
+                        <id>transverse</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <!-- specify the swagger yaml -->
+                            <inputSpec>src/main/resources/swagger/swagger-api-sinapps-transverse.yaml</inputSpec>
+                            <!-- target to generate java client code
+                            <language>java</language> -->
+                            <!-- hint: if you want to generate java server code, e.g. based on Spring Boot,
+                                 you can use the following target: -->
+                            <language>spring</language>
+                            <modelPackage>eu.stelliant.sinapps.api</modelPackage>
+                            <!-- pass any necessary config options -->
+                            <configOptions>
+                            </configOptions>
+                            <configOptions>
+                                <sourceFolder>src/java</sourceFolder>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>expertise</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>src/main/resources/swagger/swagger-api-sinapps-ird-expertise.yaml</inputSpec>
+                            <language>spring</language>
+                            <modelPackage>eu.stelliant.sinapps.api</modelPackage>
+                            <configOptions>
+                            </configOptions>
+                            <configOptions>
+                                <sourceFolder>src/java</sourceFolder>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
