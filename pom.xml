@@ -34,19 +34,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-batch</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-integration</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <!-- swagger-codegen -->
@@ -81,6 +69,12 @@
 
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>
+        <outputDirectory>target/classes</outputDirectory>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources/</directory>
+            </testResource>
+        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -105,7 +99,7 @@
                                  you can use the following target:
                             <language>spring</language> -->
                             <language>spring</language>
-                            <modelPackage>eu.stelliant.sinapps.api</modelPackage>
+                            <modelPackage>eu.stelliant.sinapps.api.transverse</modelPackage>
                             <generateApis>false</generateApis>
                             <generateApiTests>false</generateApiTests>
                             <generateApiDocumentation>false</generateApiDocumentation>
@@ -113,8 +107,6 @@
                             <generateModelDocumentation>false</generateModelDocumentation>
                             <generateSupportingFiles>false</generateSupportingFiles>
                             <!-- pass any necessary config options -->
-                            <configOptions>
-                            </configOptions>
                             <configOptions>
                                 <sourceFolder>src/java</sourceFolder>
                             </configOptions>
@@ -128,15 +120,13 @@
                         <configuration>
                             <inputSpec>src/main/resources/swagger/swagger-api-sinapps-ird-expertise.yaml</inputSpec>
                             <language>spring</language>
-                            <modelPackage>eu.stelliant.sinapps.api</modelPackage>
+                            <modelPackage>eu.stelliant.sinapps.api.expertise</modelPackage>
                             <generateApis>false</generateApis>
                             <generateApiTests>false</generateApiTests>
                             <generateApiDocumentation>false</generateApiDocumentation>
                             <generateModelTests>true</generateModelTests>
                             <generateModelDocumentation>false</generateModelDocumentation>
                             <generateSupportingFiles>false</generateSupportingFiles>
-                            <configOptions>
-                            </configOptions>
                             <configOptions>
                                 <sourceFolder>src/java</sourceFolder>
                             </configOptions>
