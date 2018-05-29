@@ -1,55 +1,45 @@
 package eu.stelliant.sinapps.api;
 
+import io.swagger.sinapps.client.ApiClient;
+import eu.stelliant.sinapps.client.transverse.api.ConnexionDconnexionApi;
 import eu.stelliant.sinapps.client.transverse.model.Body;
 import eu.stelliant.sinapps.client.transverse.model.InlineResponse200;
-import eu.stelliant.sinapps.client.transverse.model.InlineResponse2001;
-import eu.stelliant.sinapps.client.transverse.model.LinksInner;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-public class ApiDiscoveryTest extends TestApiSetup {
+public class ApiClientTest extends TestApiSetup {
 
-  private static final Logger log = LoggerFactory.getLogger(ApiDiscoveryTest.class);
+  private static final Logger log = LoggerFactory.getLogger(ApiClientTest.class);
+
+  @Autowired
+  private ApiClient api;
+
+  @Autowired
+  private ConnexionDconnexionApi authentificationApi;
 
   @Test
   public void login() {
 
-    RestTemplate restTemplate;
-    HttpHeaders requestHeaders;
-
     try {
 
-      // Create a new RestTemplate instance
-      restTemplate = new RestTemplate();
-      // Add the Jackson and String message converters
-      restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-      restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-
-      // Set the Content-Type header
-      requestHeaders = new HttpHeaders();
-      requestHeaders.setContentType(new MediaType("application", "json"));
+      api.setBasePath(baseUrl+"/core");
 
       Body body = new Body();
       body.setLogin(login);
       body.setPassword(password);
-      HttpEntity<Body> bodyEntity = new HttpEntity<>(body, requestHeaders);
 
-      // Make the HTTP POST request, marshaling the request to JSON, and the response to a String
-      ResponseEntity<InlineResponse200> inlineResponse200 = restTemplate
-          .exchange(baseUrl + loginPath,
-                    HttpMethod.POST,
-                    bodyEntity,
-                    InlineResponse200.class);
+      InlineResponse200 inlineResponse200 = authentificationApi.apiLoginPost(body);
       log.info("Retour API sinapps {}", inlineResponse200);
+/*
 
       String PLAY_SESSION = inlineResponse200.getHeaders().getFirst(HttpHeaders.SET_COOKIE);
 
@@ -71,6 +61,7 @@ public class ApiDiscoveryTest extends TestApiSetup {
                     requestEntity,
                     InlineResponse2001.class);
       log.info("Retour API sinapps {}", inlineResponse2001);
+*/
 
     } catch (Exception e) {
       log.error("####", e);
