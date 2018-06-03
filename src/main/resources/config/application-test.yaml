@@ -1,7 +1,7 @@
 # ===================================================================
 # Spring Boot configuration for the "dev" profile.
 #
-# This configuration overrides the application.yml file.
+# This configuration overrides the application.yaml file.
 # ===================================================================
 # ===================================================================
 # Standard Spring Boot properties.
@@ -18,8 +18,9 @@ spring:
     jackson:
         serialization.indent_output: true
 
-sinappsApi:
-    baseUrl: https://sinapps-ird-v2.demo.darva.com
-    loginPath: /core/api/login
-    login: 28953sinapps
-    password: bb*1xSZO
+sinapps:
+    api:
+      baseUrl: https://sinapps-ird-v2.demo.darva.com
+      loginPath: /core/api/login
+      login: 28953sinapps
+      password: bb*1xSZO

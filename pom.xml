@@ -30,19 +30,40 @@
   </properties>
 
   <dependencies>
+    <!-- IDE Code Completion -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+    </dependency>
+
+    <!-- Spring Boot -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-integration</artifactId>
+    </dependency>
 
-    <!-- swagger -->
+    <!-- Spring Integration -->
+    <dependency>
+      <groupId>org.springframework.integration</groupId>
+      <artifactId>spring-integration-http</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.integration</groupId>
+      <artifactId>spring-integration-stream</artifactId>
+    </dependency>
+
+    <!-- Swagger -->
     <dependency>
       <groupId>io.swagger</groupId>
       <artifactId>swagger-annotations</artifactId>
       <version>${swagger-annotations-version}</version>
     </dependency>
 
-    <!-- JSON processing: jackson -->
+    <!-- Json Processing -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
@@ -64,7 +85,7 @@
       <version>${jackson-version}</version>
     </dependency>
 
-    <!-- test -->
+    <!-- Test -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -96,44 +117,45 @@
               <goal>generate</goal>
             </goals>
             <configuration>
-              <!-- specify the swagger yaml -->
               <inputSpec>src/main/resources/swagger/swagger-api-sinapps-transverse.yaml</inputSpec>
-              <!-- target to generate java client code -->
-              <!-- hint: if you want to generate java server code, e.g. based on Spring Boot,
-                   you can use the following target: spring -->
               <language>java</language>
               <library>resttemplate</library>
-              <generateApis>true</generateApis>
               <generateApiTests>false</generateApiTests>
-              <generateApiDocumentation>true</generateApiDocumentation>
               <generateModelTests>false</generateModelTests>
-              <generateModelDocumentation>true</generateModelDocumentation>
-              <generateSupportingFiles>true</generateSupportingFiles>
-              <!-- pass any necessary config options -->
               <configOptions>
-                <modelPackage>eu.stelliant.sinapps.client.transverse.model</modelPackage>
-                <apiPackage>eu.stelliant.sinapps.client.transverse.api</apiPackage>
-                <invokerPackage>io.swagger.sinapps.client</invokerPackage>
-                <dateLibrary>java8</dateLibrary>
                 <sourceFolder>src/java</sourceFolder>
+                <apiPackage>io.swagger.sinapps.api.client.transverse.api</apiPackage>
+                <invokerPackage>io.swagger.sinapps.api.client</invokerPackage>
+                <dateLibrary>java8</dateLibrary>
+                <useBeanValidation>true</useBeanValidation>
+                <java8>true</java8>
+                <modelPackage>io.swagger.sinapps.api.client.transverse.model</modelPackage>
               </configOptions>
             </configuration>
           </execution>
-          <!--<execution>
-              <id>expertise</id>
-              <goals>
-                  <goal>generate</goal>
-              </goals>
-              <configuration>
-                  <inputSpec>src/main/resources/swagger/swagger-api-sinapps-ird-expertise.yaml</inputSpec>
-                  <language>java</language>
-                  <library>resttemplate</library>
-                  <modelPackage>eu.stelliant.sinapps.api.expertise</modelPackage>
-                  <configOptions>
-                      <sourceFolder>src/java</sourceFolder>
-                  </configOptions>
-              </configuration>
-          </execution>-->
+          <execution>
+            <id>expertise</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>src/main/resources/swagger/swagger-api-sinapps-ird-expertise.yaml
+              </inputSpec>
+              <language>java</language>
+              <library>resttemplate</library>
+              <generateApiTests>false</generateApiTests>
+              <generateModelTests>false</generateModelTests>
+              <configOptions>
+                <sourceFolder>src/java</sourceFolder>
+                <apiPackage>io.swagger.sinapps.api.client.expertise.api</apiPackage>
+                <invokerPackage>io.swagger.sinapps.api.client</invokerPackage>
+                <dateLibrary>java8</dateLibrary>
+                <useBeanValidation>true</useBeanValidation>
+                <java8>true</java8>
+                <modelPackage>io.swagger.sinapps.api.client.expertise.model</modelPackage>
+              </configOptions>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
     </plugins>

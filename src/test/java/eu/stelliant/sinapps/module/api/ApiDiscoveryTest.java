@@ -1,9 +1,9 @@
-package eu.stelliant.sinapps.api;
+package eu.stelliant.sinapps.module.api;
 
-import eu.stelliant.sinapps.client.transverse.model.Body;
-import eu.stelliant.sinapps.client.transverse.model.InlineResponse200;
-import eu.stelliant.sinapps.client.transverse.model.InlineResponse2001;
-import eu.stelliant.sinapps.client.transverse.model.LinksInner;
+import io.swagger.sinapps.api.client.transverse.model.Body;
+import io.swagger.sinapps.api.client.transverse.model.InlineResponse200;
+import io.swagger.sinapps.api.client.transverse.model.InlineResponse2001;
+import io.swagger.sinapps.api.client.transverse.model.LinksInner;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,25 +39,28 @@ public class ApiDiscoveryTest extends TestApiSetup {
       requestHeaders.setContentType(new MediaType("application", "json"));
 
       Body body = new Body();
-      body.setLogin(login);
-      body.setPassword(password);
+      body.setLogin(apiProperties.getApi().getLogin());
+      body.setPassword(apiProperties.getApi().getPassword());
       HttpEntity<Body> bodyEntity = new HttpEntity<>(body, requestHeaders);
 
       // Make the HTTP POST request, marshaling the request to JSON, and the response to a String
+      log.info("Calling {}",
+               apiProperties.getApi().getBaseUrl() + apiProperties.getApi().getLoginPath());
       ResponseEntity<InlineResponse200> inlineResponse200 = restTemplate
-          .exchange(baseUrl + loginPath,
-                    HttpMethod.POST,
-                    bodyEntity,
-                    InlineResponse200.class);
+          .exchange(
+              apiProperties.getApi().getBaseUrl() + apiProperties.getApi().getLoginPath(),
+              HttpMethod.POST,
+              bodyEntity,
+              InlineResponse200.class);
       log.info("Retour API sinapps {}", inlineResponse200);
 
       String PLAY_SESSION = inlineResponse200.getHeaders().getFirst(HttpHeaders.SET_COOKIE);
 
-      restTemplate = new RestTemplate();
-
       // Set the Content-Type header
       requestHeaders.set(HttpHeaders.COOKIE, PLAY_SESSION);
       HttpEntity<String> requestEntity = new HttpEntity<>(requestHeaders);
+
+      restTemplate = new RestTemplate();
 
       // Make the HTTP POST request, marshaling the request to JSON, and the response to a String
       String partenairePath = inlineResponse200.getBody().getLinks().stream()
@@ -65,12 +68,25 @@ public class ApiDiscoveryTest extends TestApiSetup {
           .map(LinksInner::getHref)
           .findFirst()
           .orElse("");
+      log.info("Calling {}", apiProperties.getApi().getBaseUrl() + partenairePath);
       ResponseEntity<InlineResponse2001> inlineResponse2001 = restTemplate
-          .exchange(baseUrl + partenairePath,
+          .exchange(apiProperties.getApi().getBaseUrl() + partenairePath,
                     HttpMethod.GET,
                     requestEntity,
                     InlineResponse2001.class);
       log.info("Retour API sinapps {}", inlineResponse2001);
+
+      // Make the HTTP POST request, marshaling the request to JSON, and the response to a String
+      inlineResponse2001.getBody().getLinks().forEach(linksInner -> {
+        final RestTemplate lambdaRestTemplate = new RestTemplate();
+        log.info("Calling {}", apiProperties.getApi().getBaseUrl() + linksInner.getHref());
+        ResponseEntity<String> response = lambdaRestTemplate
+            .exchange(apiProperties.getApi().getBaseUrl() + linksInner.getHref(),
+                      HttpMethod.GET,
+                      requestEntity,
+                      String.class);
+        log.info("Retour API sinapps {}", response);
+      });
 
     } catch (Exception e) {
       log.error("####", e);
