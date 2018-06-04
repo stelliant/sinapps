@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- edited with XMLSpy v2007 rel. 3 sp1 (http://www.altova.com) by fabrice evrard (TEXA) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:tg="http://www.texa.fr/edi-texi/typeTG" targetNamespace="http://www.texa.fr/edi-texi/typeTG" elementFormDefault="qualified" attributeFormDefault="qualified">
+  <xs:simpleType name="TypeEmail">
+    <xs:restriction base="xs:string">
+      <xs:pattern value=".*"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TypeNumeroTel">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="16"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TypeDate">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{2}/\d{2}/\d{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TypeHeure">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{2}:\d{2}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TypeAdresse">
+    <xs:sequence>
+      <xs:element name="numeroVoie" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="6"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="extention" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="9"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="typeVoie" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="64"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="nomVoie" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="64"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="complementAdresse" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="256"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="etage" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="3"/>
+            <xs:pattern value="[0-9]*"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ville">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="32"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TypeAdresseFR">
+    <xs:complexContent>
+      <xs:extension base="tg:TypeAdresse">
+        <xs:sequence>
+          <xs:element name="codePostal" type="tg:TypeCodePostalFr"/>
+          <xs:element name="inseeCode" type="tg:TypeCodeInsee" minOccurs="0"/>
+          <xs:element name="codePays" type="xs:string"/>
+          <xs:element name="codeQualite" type="tg:TypeCodeQualite" minOccurs="0"/>
+          <xs:element name="iType" type="tg:TypeIType" minOccurs="0"/>
+          <xs:element name="hexavia" type="tg:TypeHexavia" minOccurs="0"/>
+          <xs:element name="hexacle" type="tg:TypeHexacle" minOccurs="0"/>
+          <xs:element name="cpltNumVoie" type="tg:TypeCpltNumVoie" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TypeAdresseInt">
+    <xs:complexContent>
+      <xs:extension base="tg:TypeAdresse">
+        <xs:sequence>
+          <xs:element name="codePostal">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="16"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="codePays" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="TypeAdresseReferentiel">
+    <xs:complexContent>
+      <xs:extension base="tg:TypeAdresse">
+        <xs:sequence>
+          <xs:element name="codePostal">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="10"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="codePays">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="3"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="TypeCodePostalFr">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="5"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TypeCodeInsee">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="5"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TypeIType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TypeHexavia">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="9"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TypeHexacle">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="11"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TypeCpltNumVoie">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="3"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TypeCodeQualite">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TiersGeres">
+    <xs:sequence>
+      <xs:element name="reference">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="20"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="typeEntite" type="xs:string"/>
+      <xs:element name="codeNiv1">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="16"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="codeNiv2" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="16"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="codeNiv3" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="16"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="libelleNiv1">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="64"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="libelleNiv2" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="64"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="libelleNiv3" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="64"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="codeTypeIntermediaire" type="xs:string" minOccurs="0"/>
+      <xs:element name="contact" type="tg:Contact" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TypeIntermediaire">
+    <xs:sequence>
+      <xs:element name="reference" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="20"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="typeEntite" type="xs:string" minOccurs="0"/>
+      <xs:element name="codeNiv1" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="16"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="codeNiv2" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="16"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="codeNiv3" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="16"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="libelleNiv1" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="64"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="libelleNiv2" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="64"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="libelleNiv3" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="64"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="codeTypeIntermediaire" type="xs:string" minOccurs="0"/>
+      <xs:element name="adresseInt" type="tg:TypeAdresseReferentiel" minOccurs="0"/>
+      <xs:element name="telephone" type="tg:TypeNumeroTel" minOccurs="0"/>
+      <xs:element name="fax" type="tg:TypeNumeroTel" minOccurs="0"/>
+      <xs:element name="email" type="tg:TypeEmail" minOccurs="0"/>
+      <xs:element name="contact" type="tg:Contact" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Contact">
+    <xs:sequence>
+      <xs:element name="role" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="256"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="titre" type="xs:string"/>
+      <xs:element name="nom">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="80"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="prenom" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="32"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="adresse" minOccurs="0">
+        <xs:complexType>
+          <xs:choice minOccurs="0">
+            <xs:element name="Adresse1" type="tg:TypeAdresseFR"/>
+            <xs:element name="Adresse2" type="tg:TypeAdresseInt"/>
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="telephone" type="tg:TypeNumeroTel" minOccurs="0"/>
+      <xs:element name="telephonePortable" type="tg:TypeNumeroTel" minOccurs="0"/>
+      <xs:element name="fax" type="tg:TypeNumeroTel" minOccurs="0"/>
+      <xs:element name="email" type="tg:TypeEmail" minOccurs="0"/>
+      <xs:element name="commentaire" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="256"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

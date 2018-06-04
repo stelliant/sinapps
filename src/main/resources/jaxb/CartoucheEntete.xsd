@@ -3,8 +3,8 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cart="http://www.texa.fr/edi-texi/cartoucheEntete" targetNamespace="http://www.texa.fr/edi-texi/cartoucheEntete" elementFormDefault="qualified" attributeFormDefault="qualified">
 	<xs:complexType name="cartoucheEntete">
 		<xs:annotation>
-			<xs:documentation xml:lang="FR">Element entête commun à l'ensemble des XSD TexiGestion (Dossier, Mission, ...). 
-			La cartouche d'entête qui contient l'ensemble des informations pour indentifer le dossier côté TexiGestion ainsi que la nature du contenu</xs:documentation>
+			<xs:documentation xml:lang="FR">Element entête commun à l'ensemble des XSD TexiGestion (Dossier, Mission, ...).
+				La cartouche d'entête qui contient l'ensemble des informations pour indentifer le dossier côté TexiGestion ainsi que la nature du contenu</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="typeAction">
@@ -42,6 +42,7 @@
 						<xs:enumeration value="DARVA"/>
 						<xs:enumeration value="GROUPAMA"/>
 						<xs:enumeration value="SOGESSUR"/>
+						<xs:enumeration value="GENERALI"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>

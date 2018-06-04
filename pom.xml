@@ -162,7 +162,7 @@
       </plugin>
 
       <!-- JAXB - XSD to DTO -->
-      <!--<plugin>
+      <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>jaxb2-maven-plugin</artifactId>
         <version>2.3.1</version>
@@ -177,10 +177,9 @@
         <configuration>
           <sources>
             <source>src/main/resources/jaxb</source>
-            <packageName>io.jaxb</packageName>
           </sources>
         </configuration>
-      </plugin>-->
+      </plugin>
     </plugins>
   </build>
 </project>

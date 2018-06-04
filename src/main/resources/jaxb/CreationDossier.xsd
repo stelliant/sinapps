@@ -3,7 +3,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:edi="http://www.texa.fr/edi-texi" xmlns:cart="http://www.texa.fr/edi-texi/cartoucheEntete" xmlns:tg="http://www.texa.fr/edi-texi/typeTG" targetNamespace="http://www.texa.fr/edi-texi" elementFormDefault="qualified" attributeFormDefault="qualified">
 	<xs:annotation>
 		<xs:documentation xml:lang="fr">
-			 XSD de création de Mission/dossier sous TexiGestion
+			XSD de création de Mission/dossier sous TexiGestion
 		</xs:documentation>
 	</xs:annotation>
 	<xs:import namespace="http://www.texa.fr/edi-texi/typeTG" schemaLocation="TypeTexi.xsd"/>
