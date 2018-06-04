@@ -1,0 +1,3663 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 rel. 3 (http://www.altova.com) by saidou ba (TEXA) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" targetNamespace="http://www.texa.fr/edi-texi/reference" elementFormDefault="qualified" attributeFormDefault="qualified" jaxb:version="2.0">
+	<xs:annotation>
+		<xs:documentation xml:lang="fr">
+            XSD regroupant la liste des types simple pouvant être repris par l'ensemble des autres XSD de l'injecteur
+            TexiGestion.
+            Ces types simple permettent de typer les différents éléments des types complexes des différentes XSD de
+            l'injecteur Texigestion (ex : le type complexe Adresse ou RDV).
+            Chacun de ces types simples corresponde au contenue d'une table de la BdD Referentiel ou Gest.
+        </xs:documentation>
+	</xs:annotation>
+	<xs:simpleType name="TypeAuteurAnnulation">
+		<xs:annotation>
+			<xs:documentation xml:lang="fr">Motif de l'annulation du RDV - A utiliser dans l'organisation du RDV
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="10" name="CODE_10"/>
+					<jaxb:typesafeEnumMember value="11" name="CODE_11"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+					<jaxb:typesafeEnumMember value="5" name="CODE_5"/>
+					<jaxb:typesafeEnumMember value="6" name="CODE_6"/>
+					<jaxb:typesafeEnumMember value="7" name="CODE_7"/>
+					<jaxb:typesafeEnumMember value="8" name="CODE_8"/>
+					<jaxb:typesafeEnumMember value="9" name="CODE_9"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeCauseSinistre">
+		<xs:annotation>
+			<xs:documentation xml:lang="fr">Liste de choix pour la "Cause du sinistre supprimer" (Oui, Non, En cours
+                ...) - Onglet Sinistre de TG
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+					<jaxb:typesafeEnumMember value="5" name="CODE_5"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeMiseEnCause">
+		<xs:annotation>
+			<xs:documentation xml:lang="fr">Liste de choix pour la "Mise en cause d'une partie tiers" - A utiliser dans
+                l'organisation du RDV
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeNatureContrat">
+		<xs:annotation>
+			<xs:documentation xml:lang="fr">Liste de choix pour la "Nature du contrat" chez l'assureur (Particulier -
+                Auto/Moto, Particulier - Habitation, Entreprise - Bris de machine, ..) - Utiliser dans l'onglet
+                "Prescripteur /Contrat" de TG
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="10" name="CODE_10"/>
+					<jaxb:typesafeEnumMember value="11" name="CODE_11"/>
+					<jaxb:typesafeEnumMember value="12" name="CODE_12"/>
+					<jaxb:typesafeEnumMember value="13" name="CODE_13"/>
+					<jaxb:typesafeEnumMember value="14" name="CODE_14"/>
+					<jaxb:typesafeEnumMember value="15" name="CODE_15"/>
+					<jaxb:typesafeEnumMember value="16" name="CODE_16"/>
+					<jaxb:typesafeEnumMember value="17" name="CODE_17"/>
+					<jaxb:typesafeEnumMember value="18" name="CODE_18"/>
+					<jaxb:typesafeEnumMember value="19" name="CODE_19"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="20" name="CODE_20"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+					<jaxb:typesafeEnumMember value="5" name="CODE_5"/>
+					<jaxb:typesafeEnumMember value="6" name="CODE_6"/>
+					<jaxb:typesafeEnumMember value="7" name="CODE_7"/>
+					<jaxb:typesafeEnumMember value="8" name="CODE_8"/>
+					<jaxb:typesafeEnumMember value="9" name="CODE_9"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="19"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeNatureFranchise">
+		<xs:annotation>
+			<xs:documentation xml:lang="fr">Liste des natures de franchise de l'assureur appliqué au contrat (Relative,
+                Absolue, propotionnelle, ...) - Utiliser dans l'onglet "Prescripteur / Contrat" pour la liste des
+                Garanties/Franchises de TG
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeNatureGarantie">
+		<xs:annotation>
+			<xs:documentation xml:lang="fr">Liste des garantie prise en compte pour l'organisation du RDV (Incendie,
+                Bris de glace, Dégât des eaux ...) - Information rattachée à l'ongler Dossier de TG
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="10" name="CODE_10"/>
+					<jaxb:typesafeEnumMember value="11" name="CODE_11"/>
+					<jaxb:typesafeEnumMember value="12" name="CODE_12"/>
+					<jaxb:typesafeEnumMember value="13" name="CODE_13"/>
+					<jaxb:typesafeEnumMember value="14" name="CODE_14"/>
+					<jaxb:typesafeEnumMember value="15" name="CODE_15"/>
+					<jaxb:typesafeEnumMember value="16" name="CODE_16"/>
+					<jaxb:typesafeEnumMember value="17" name="CODE_17"/>
+					<jaxb:typesafeEnumMember value="18" name="CODE_18"/>
+					<jaxb:typesafeEnumMember value="19" name="CODE_19"/>
+					<jaxb:typesafeEnumMember value="20" name="CODE_20"/>
+					<jaxb:typesafeEnumMember value="21" name="CODE_21"/>
+					<jaxb:typesafeEnumMember value="22" name="CODE_22"/>
+					<jaxb:typesafeEnumMember value="23" name="CODE_23"/>
+					<jaxb:typesafeEnumMember value="24" name="CODE_24"/>
+					<jaxb:typesafeEnumMember value="25" name="CODE_25"/>
+					<jaxb:typesafeEnumMember value="26" name="CODE_26"/>
+					<jaxb:typesafeEnumMember value="27" name="CODE_27"/>
+					<jaxb:typesafeEnumMember value="28" name="CODE_28"/>
+					<jaxb:typesafeEnumMember value="29" name="CODE_29"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="30" name="CODE_30"/>
+					<jaxb:typesafeEnumMember value="31" name="CODE_31"/>
+					<jaxb:typesafeEnumMember value="32" name="CODE_32"/>
+					<jaxb:typesafeEnumMember value="33" name="CODE_33"/>
+					<jaxb:typesafeEnumMember value="34" name="CODE_34"/>
+					<jaxb:typesafeEnumMember value="35" name="CODE_35"/>
+					<jaxb:typesafeEnumMember value="36" name="CODE_36"/>
+					<jaxb:typesafeEnumMember value="37" name="CODE_37"/>
+					<jaxb:typesafeEnumMember value="38" name="CODE_38"/>
+					<jaxb:typesafeEnumMember value="39" name="CODE_39"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+					<jaxb:typesafeEnumMember value="40" name="CODE_40"/>
+					<jaxb:typesafeEnumMember value="41" name="CODE_41"/>
+					<jaxb:typesafeEnumMember value="42" name="CODE_42"/>
+					<jaxb:typesafeEnumMember value="43" name="CODE_43"/>
+					<jaxb:typesafeEnumMember value="44" name="CODE_44"/>
+					<jaxb:typesafeEnumMember value="45" name="CODE_45"/>
+					<jaxb:typesafeEnumMember value="46" name="CODE_46"/>
+					<jaxb:typesafeEnumMember value="47" name="CODE_47"/>
+					<jaxb:typesafeEnumMember value="48" name="CODE_48"/>
+					<jaxb:typesafeEnumMember value="49" name="CODE_49"/>
+					<jaxb:typesafeEnumMember value="5" name="CODE_5"/>
+					<jaxb:typesafeEnumMember value="50" name="CODE_50"/>
+					<jaxb:typesafeEnumMember value="51" name="CODE_51"/>
+					<jaxb:typesafeEnumMember value="52" name="CODE_52"/>
+					<jaxb:typesafeEnumMember value="53" name="CODE_53"/>
+					<jaxb:typesafeEnumMember value="54" name="CODE_54"/>
+					<jaxb:typesafeEnumMember value="55" name="CODE_55"/>
+					<jaxb:typesafeEnumMember value="56" name="CODE_56"/>
+					<jaxb:typesafeEnumMember value="57" name="CODE_57"/>
+					<jaxb:typesafeEnumMember value="6" name="CODE_6"/>
+					<jaxb:typesafeEnumMember value="7" name="CODE_7"/>
+					<jaxb:typesafeEnumMember value="8" name="CODE_8"/>
+					<jaxb:typesafeEnumMember value="9" name="CODE_9"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="19"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
+			<xs:enumeration value="25"/>
+			<xs:enumeration value="26"/>
+			<xs:enumeration value="27"/>
+			<xs:enumeration value="28"/>
+			<xs:enumeration value="29"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="30"/>
+			<xs:enumeration value="31"/>
+			<xs:enumeration value="32"/>
+			<xs:enumeration value="33"/>
+			<xs:enumeration value="34"/>
+			<xs:enumeration value="35"/>
+			<xs:enumeration value="36"/>
+			<xs:enumeration value="37"/>
+			<xs:enumeration value="38"/>
+			<xs:enumeration value="39"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="40"/>
+			<xs:enumeration value="41"/>
+			<xs:enumeration value="42"/>
+			<xs:enumeration value="43"/>
+			<xs:enumeration value="44"/>
+			<xs:enumeration value="45"/>
+			<xs:enumeration value="46"/>
+			<xs:enumeration value="47"/>
+			<xs:enumeration value="48"/>
+			<xs:enumeration value="49"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="50"/>
+			<xs:enumeration value="51"/>
+			<xs:enumeration value="52"/>
+			<xs:enumeration value="53"/>
+			<xs:enumeration value="54"/>
+			<xs:enumeration value="55"/>
+			<xs:enumeration value="56"/>
+			<xs:enumeration value="57"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeNatureTraitement">
+		<xs:annotation>
+			<xs:documentation xml:lang="fr">Utilisé dans l'évaluation des dommages dans l'onglet "Chiffrage de TG"
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeOrdreMission">
+		<xs:annotation>
+			<xs:documentation>Liste des supports de reception des ordres de mission (Téléphone, Fax, EDI, ...) -
+                Information rattachée à l'onglet Mission de TG
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+					<jaxb:typesafeEnumMember value="5" name="CODE_5"/>
+					<jaxb:typesafeEnumMember value="6" name="CODE_6"/>
+					<jaxb:typesafeEnumMember value="7" name="CODE_7"/>
+					<jaxb:typesafeEnumMember value="8" name="CODE_8"/>
+					<jaxb:typesafeEnumMember value="9" name="CODE_9"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeQualification">
+		<xs:annotation>
+			<xs:documentation>Liste des qualifications APE - Information rattachée à l'onglet Assuré de TG
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="10" name="CODE_10"/>
+					<jaxb:typesafeEnumMember value="100" name="CODE_100"/>
+					<jaxb:typesafeEnumMember value="101" name="CODE_101"/>
+					<jaxb:typesafeEnumMember value="102" name="CODE_102"/>
+					<jaxb:typesafeEnumMember value="103" name="CODE_103"/>
+					<jaxb:typesafeEnumMember value="104" name="CODE_104"/>
+					<jaxb:typesafeEnumMember value="105" name="CODE_105"/>
+					<jaxb:typesafeEnumMember value="106" name="CODE_106"/>
+					<jaxb:typesafeEnumMember value="107" name="CODE_107"/>
+					<jaxb:typesafeEnumMember value="108" name="CODE_108"/>
+					<jaxb:typesafeEnumMember value="109" name="CODE_109"/>
+					<jaxb:typesafeEnumMember value="11" name="CODE_11"/>
+					<jaxb:typesafeEnumMember value="110" name="CODE_110"/>
+					<jaxb:typesafeEnumMember value="111" name="CODE_111"/>
+					<jaxb:typesafeEnumMember value="112" name="CODE_112"/>
+					<jaxb:typesafeEnumMember value="113" name="CODE_113"/>
+					<jaxb:typesafeEnumMember value="114" name="CODE_114"/>
+					<jaxb:typesafeEnumMember value="115" name="CODE_115"/>
+					<jaxb:typesafeEnumMember value="116" name="CODE_116"/>
+					<jaxb:typesafeEnumMember value="117" name="CODE_117"/>
+					<jaxb:typesafeEnumMember value="118" name="CODE_118"/>
+					<jaxb:typesafeEnumMember value="119" name="CODE_119"/>
+					<jaxb:typesafeEnumMember value="12" name="CODE_12"/>
+					<jaxb:typesafeEnumMember value="120" name="CODE_120"/>
+					<jaxb:typesafeEnumMember value="121" name="CODE_121"/>
+					<jaxb:typesafeEnumMember value="122" name="CODE_122"/>
+					<jaxb:typesafeEnumMember value="123" name="CODE_123"/>
+					<jaxb:typesafeEnumMember value="124" name="CODE_124"/>
+					<jaxb:typesafeEnumMember value="125" name="CODE_125"/>
+					<jaxb:typesafeEnumMember value="126" name="CODE_126"/>
+					<jaxb:typesafeEnumMember value="127" name="CODE_127"/>
+					<jaxb:typesafeEnumMember value="128" name="CODE_128"/>
+					<jaxb:typesafeEnumMember value="129" name="CODE_129"/>
+					<jaxb:typesafeEnumMember value="13" name="CODE_13"/>
+					<jaxb:typesafeEnumMember value="130" name="CODE_130"/>
+					<jaxb:typesafeEnumMember value="131" name="CODE_131"/>
+					<jaxb:typesafeEnumMember value="132" name="CODE_132"/>
+					<jaxb:typesafeEnumMember value="133" name="CODE_133"/>
+					<jaxb:typesafeEnumMember value="134" name="CODE_134"/>
+					<jaxb:typesafeEnumMember value="135" name="CODE_135"/>
+					<jaxb:typesafeEnumMember value="136" name="CODE_136"/>
+					<jaxb:typesafeEnumMember value="137" name="CODE_137"/>
+					<jaxb:typesafeEnumMember value="138" name="CODE_138"/>
+					<jaxb:typesafeEnumMember value="139" name="CODE_139"/>
+					<jaxb:typesafeEnumMember value="14" name="CODE_14"/>
+					<jaxb:typesafeEnumMember value="140" name="CODE_140"/>
+					<jaxb:typesafeEnumMember value="141" name="CODE_141"/>
+					<jaxb:typesafeEnumMember value="142" name="CODE_142"/>
+					<jaxb:typesafeEnumMember value="143" name="CODE_143"/>
+					<jaxb:typesafeEnumMember value="144" name="CODE_144"/>
+					<jaxb:typesafeEnumMember value="145" name="CODE_145"/>
+					<jaxb:typesafeEnumMember value="146" name="CODE_146"/>
+					<jaxb:typesafeEnumMember value="147" name="CODE_147"/>
+					<jaxb:typesafeEnumMember value="148" name="CODE_148"/>
+					<jaxb:typesafeEnumMember value="149" name="CODE_149"/>
+					<jaxb:typesafeEnumMember value="15" name="CODE_15"/>
+					<jaxb:typesafeEnumMember value="150" name="CODE_150"/>
+					<jaxb:typesafeEnumMember value="151" name="CODE_151"/>
+					<jaxb:typesafeEnumMember value="152" name="CODE_152"/>
+					<jaxb:typesafeEnumMember value="153" name="CODE_153"/>
+					<jaxb:typesafeEnumMember value="154" name="CODE_154"/>
+					<jaxb:typesafeEnumMember value="155" name="CODE_155"/>
+					<jaxb:typesafeEnumMember value="156" name="CODE_156"/>
+					<jaxb:typesafeEnumMember value="157" name="CODE_157"/>
+					<jaxb:typesafeEnumMember value="158" name="CODE_158"/>
+					<jaxb:typesafeEnumMember value="159" name="CODE_159"/>
+					<jaxb:typesafeEnumMember value="16" name="CODE_16"/>
+					<jaxb:typesafeEnumMember value="160" name="CODE_160"/>
+					<jaxb:typesafeEnumMember value="161" name="CODE_161"/>
+					<jaxb:typesafeEnumMember value="162" name="CODE_162"/>
+					<jaxb:typesafeEnumMember value="163" name="CODE_163"/>
+					<jaxb:typesafeEnumMember value="164" name="CODE_164"/>
+					<jaxb:typesafeEnumMember value="165" name="CODE_165"/>
+					<jaxb:typesafeEnumMember value="166" name="CODE_166"/>
+					<jaxb:typesafeEnumMember value="167" name="CODE_167"/>
+					<jaxb:typesafeEnumMember value="168" name="CODE_168"/>
+					<jaxb:typesafeEnumMember value="169" name="CODE_169"/>
+					<jaxb:typesafeEnumMember value="17" name="CODE_17"/>
+					<jaxb:typesafeEnumMember value="170" name="CODE_170"/>
+					<jaxb:typesafeEnumMember value="171" name="CODE_171"/>
+					<jaxb:typesafeEnumMember value="172" name="CODE_172"/>
+					<jaxb:typesafeEnumMember value="173" name="CODE_173"/>
+					<jaxb:typesafeEnumMember value="174" name="CODE_174"/>
+					<jaxb:typesafeEnumMember value="175" name="CODE_175"/>
+					<jaxb:typesafeEnumMember value="176" name="CODE_176"/>
+					<jaxb:typesafeEnumMember value="177" name="CODE_177"/>
+					<jaxb:typesafeEnumMember value="178" name="CODE_178"/>
+					<jaxb:typesafeEnumMember value="179" name="CODE_179"/>
+					<jaxb:typesafeEnumMember value="18" name="CODE_18"/>
+					<jaxb:typesafeEnumMember value="180" name="CODE_180"/>
+					<jaxb:typesafeEnumMember value="181" name="CODE_181"/>
+					<jaxb:typesafeEnumMember value="182" name="CODE_182"/>
+					<jaxb:typesafeEnumMember value="183" name="CODE_183"/>
+					<jaxb:typesafeEnumMember value="184" name="CODE_184"/>
+					<jaxb:typesafeEnumMember value="185" name="CODE_185"/>
+					<jaxb:typesafeEnumMember value="186" name="CODE_186"/>
+					<jaxb:typesafeEnumMember value="187" name="CODE_187"/>
+					<jaxb:typesafeEnumMember value="188" name="CODE_188"/>
+					<jaxb:typesafeEnumMember value="189" name="CODE_189"/>
+					<jaxb:typesafeEnumMember value="19" name="CODE_19"/>
+					<jaxb:typesafeEnumMember value="190" name="CODE_190"/>
+					<jaxb:typesafeEnumMember value="191" name="CODE_191"/>
+					<jaxb:typesafeEnumMember value="192" name="CODE_192"/>
+					<jaxb:typesafeEnumMember value="193" name="CODE_193"/>
+					<jaxb:typesafeEnumMember value="194" name="CODE_194"/>
+					<jaxb:typesafeEnumMember value="195" name="CODE_195"/>
+					<jaxb:typesafeEnumMember value="196" name="CODE_196"/>
+					<jaxb:typesafeEnumMember value="197" name="CODE_197"/>
+					<jaxb:typesafeEnumMember value="198" name="CODE_198"/>
+					<jaxb:typesafeEnumMember value="199" name="CODE_199"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="20" name="CODE_20"/>
+					<jaxb:typesafeEnumMember value="200" name="CODE_200"/>
+					<jaxb:typesafeEnumMember value="201" name="CODE_201"/>
+					<jaxb:typesafeEnumMember value="202" name="CODE_202"/>
+					<jaxb:typesafeEnumMember value="203" name="CODE_203"/>
+					<jaxb:typesafeEnumMember value="204" name="CODE_204"/>
+					<jaxb:typesafeEnumMember value="205" name="CODE_205"/>
+					<jaxb:typesafeEnumMember value="206" name="CODE_206"/>
+					<jaxb:typesafeEnumMember value="207" name="CODE_207"/>
+					<jaxb:typesafeEnumMember value="208" name="CODE_208"/>
+					<jaxb:typesafeEnumMember value="209" name="CODE_209"/>
+					<jaxb:typesafeEnumMember value="21" name="CODE_21"/>
+					<jaxb:typesafeEnumMember value="210" name="CODE_210"/>
+					<jaxb:typesafeEnumMember value="211" name="CODE_211"/>
+					<jaxb:typesafeEnumMember value="212" name="CODE_212"/>
+					<jaxb:typesafeEnumMember value="213" name="CODE_213"/>
+					<jaxb:typesafeEnumMember value="214" name="CODE_214"/>
+					<jaxb:typesafeEnumMember value="215" name="CODE_215"/>
+					<jaxb:typesafeEnumMember value="216" name="CODE_216"/>
+					<jaxb:typesafeEnumMember value="217" name="CODE_217"/>
+					<jaxb:typesafeEnumMember value="218" name="CODE_218"/>
+					<jaxb:typesafeEnumMember value="219" name="CODE_219"/>
+					<jaxb:typesafeEnumMember value="22" name="CODE_22"/>
+					<jaxb:typesafeEnumMember value="220" name="CODE_220"/>
+					<jaxb:typesafeEnumMember value="221" name="CODE_221"/>
+					<jaxb:typesafeEnumMember value="222" name="CODE_222"/>
+					<jaxb:typesafeEnumMember value="223" name="CODE_223"/>
+					<jaxb:typesafeEnumMember value="224" name="CODE_224"/>
+					<jaxb:typesafeEnumMember value="23" name="CODE_23"/>
+					<jaxb:typesafeEnumMember value="24" name="CODE_24"/>
+					<jaxb:typesafeEnumMember value="25" name="CODE_25"/>
+					<jaxb:typesafeEnumMember value="26" name="CODE_26"/>
+					<jaxb:typesafeEnumMember value="27" name="CODE_27"/>
+					<jaxb:typesafeEnumMember value="28" name="CODE_28"/>
+					<jaxb:typesafeEnumMember value="29" name="CODE_29"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="30" name="CODE_30"/>
+					<jaxb:typesafeEnumMember value="31" name="CODE_31"/>
+					<jaxb:typesafeEnumMember value="32" name="CODE_32"/>
+					<jaxb:typesafeEnumMember value="33" name="CODE_33"/>
+					<jaxb:typesafeEnumMember value="34" name="CODE_34"/>
+					<jaxb:typesafeEnumMember value="35" name="CODE_35"/>
+					<jaxb:typesafeEnumMember value="36" name="CODE_36"/>
+					<jaxb:typesafeEnumMember value="37" name="CODE_37"/>
+					<jaxb:typesafeEnumMember value="38" name="CODE_38"/>
+					<jaxb:typesafeEnumMember value="39" name="CODE_39"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+					<jaxb:typesafeEnumMember value="40" name="CODE_40"/>
+					<jaxb:typesafeEnumMember value="41" name="CODE_41"/>
+					<jaxb:typesafeEnumMember value="42" name="CODE_42"/>
+					<jaxb:typesafeEnumMember value="43" name="CODE_43"/>
+					<jaxb:typesafeEnumMember value="44" name="CODE_44"/>
+					<jaxb:typesafeEnumMember value="45" name="CODE_45"/>
+					<jaxb:typesafeEnumMember value="46" name="CODE_46"/>
+					<jaxb:typesafeEnumMember value="47" name="CODE_47"/>
+					<jaxb:typesafeEnumMember value="48" name="CODE_48"/>
+					<jaxb:typesafeEnumMember value="49" name="CODE_49"/>
+					<jaxb:typesafeEnumMember value="5" name="CODE_5"/>
+					<jaxb:typesafeEnumMember value="50" name="CODE_50"/>
+					<jaxb:typesafeEnumMember value="51" name="CODE_51"/>
+					<jaxb:typesafeEnumMember value="52" name="CODE_52"/>
+					<jaxb:typesafeEnumMember value="53" name="CODE_53"/>
+					<jaxb:typesafeEnumMember value="54" name="CODE_54"/>
+					<jaxb:typesafeEnumMember value="55" name="CODE_55"/>
+					<jaxb:typesafeEnumMember value="56" name="CODE_56"/>
+					<jaxb:typesafeEnumMember value="57" name="CODE_57"/>
+					<jaxb:typesafeEnumMember value="58" name="CODE_58"/>
+					<jaxb:typesafeEnumMember value="59" name="CODE_59"/>
+					<jaxb:typesafeEnumMember value="6" name="CODE_6"/>
+					<jaxb:typesafeEnumMember value="60" name="CODE_60"/>
+					<jaxb:typesafeEnumMember value="61" name="CODE_61"/>
+					<jaxb:typesafeEnumMember value="62" name="CODE_62"/>
+					<jaxb:typesafeEnumMember value="63" name="CODE_63"/>
+					<jaxb:typesafeEnumMember value="64" name="CODE_64"/>
+					<jaxb:typesafeEnumMember value="65" name="CODE_65"/>
+					<jaxb:typesafeEnumMember value="66" name="CODE_66"/>
+					<jaxb:typesafeEnumMember value="67" name="CODE_67"/>
+					<jaxb:typesafeEnumMember value="68" name="CODE_68"/>
+					<jaxb:typesafeEnumMember value="69" name="CODE_69"/>
+					<jaxb:typesafeEnumMember value="7" name="CODE_7"/>
+					<jaxb:typesafeEnumMember value="70" name="CODE_70"/>
+					<jaxb:typesafeEnumMember value="71" name="CODE_71"/>
+					<jaxb:typesafeEnumMember value="72" name="CODE_72"/>
+					<jaxb:typesafeEnumMember value="73" name="CODE_73"/>
+					<jaxb:typesafeEnumMember value="74" name="CODE_74"/>
+					<jaxb:typesafeEnumMember value="75" name="CODE_75"/>
+					<jaxb:typesafeEnumMember value="76" name="CODE_76"/>
+					<jaxb:typesafeEnumMember value="77" name="CODE_77"/>
+					<jaxb:typesafeEnumMember value="78" name="CODE_78"/>
+					<jaxb:typesafeEnumMember value="79" name="CODE_79"/>
+					<jaxb:typesafeEnumMember value="8" name="CODE_8"/>
+					<jaxb:typesafeEnumMember value="80" name="CODE_80"/>
+					<jaxb:typesafeEnumMember value="81" name="CODE_81"/>
+					<jaxb:typesafeEnumMember value="82" name="CODE_82"/>
+					<jaxb:typesafeEnumMember value="83" name="CODE_83"/>
+					<jaxb:typesafeEnumMember value="84" name="CODE_84"/>
+					<jaxb:typesafeEnumMember value="85" name="CODE_85"/>
+					<jaxb:typesafeEnumMember value="86" name="CODE_86"/>
+					<jaxb:typesafeEnumMember value="87" name="CODE_87"/>
+					<jaxb:typesafeEnumMember value="88" name="CODE_88"/>
+					<jaxb:typesafeEnumMember value="89" name="CODE_89"/>
+					<jaxb:typesafeEnumMember value="9" name="CODE_9"/>
+					<jaxb:typesafeEnumMember value="90" name="CODE_90"/>
+					<jaxb:typesafeEnumMember value="91" name="CODE_91"/>
+					<jaxb:typesafeEnumMember value="92" name="CODE_92"/>
+					<jaxb:typesafeEnumMember value="93" name="CODE_93"/>
+					<jaxb:typesafeEnumMember value="94" name="CODE_94"/>
+					<jaxb:typesafeEnumMember value="95" name="CODE_95"/>
+					<jaxb:typesafeEnumMember value="96" name="CODE_96"/>
+					<jaxb:typesafeEnumMember value="97" name="CODE_97"/>
+					<jaxb:typesafeEnumMember value="98" name="CODE_98"/>
+					<jaxb:typesafeEnumMember value="99" name="CODE_99"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="100"/>
+			<xs:enumeration value="101"/>
+			<xs:enumeration value="102"/>
+			<xs:enumeration value="103"/>
+			<xs:enumeration value="104"/>
+			<xs:enumeration value="105"/>
+			<xs:enumeration value="106"/>
+			<xs:enumeration value="107"/>
+			<xs:enumeration value="108"/>
+			<xs:enumeration value="109"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="110"/>
+			<xs:enumeration value="111"/>
+			<xs:enumeration value="112"/>
+			<xs:enumeration value="113"/>
+			<xs:enumeration value="114"/>
+			<xs:enumeration value="115"/>
+			<xs:enumeration value="116"/>
+			<xs:enumeration value="117"/>
+			<xs:enumeration value="118"/>
+			<xs:enumeration value="119"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="120"/>
+			<xs:enumeration value="121"/>
+			<xs:enumeration value="122"/>
+			<xs:enumeration value="123"/>
+			<xs:enumeration value="124"/>
+			<xs:enumeration value="125"/>
+			<xs:enumeration value="126"/>
+			<xs:enumeration value="127"/>
+			<xs:enumeration value="128"/>
+			<xs:enumeration value="129"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="130"/>
+			<xs:enumeration value="131"/>
+			<xs:enumeration value="132"/>
+			<xs:enumeration value="133"/>
+			<xs:enumeration value="134"/>
+			<xs:enumeration value="135"/>
+			<xs:enumeration value="136"/>
+			<xs:enumeration value="137"/>
+			<xs:enumeration value="138"/>
+			<xs:enumeration value="139"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="140"/>
+			<xs:enumeration value="141"/>
+			<xs:enumeration value="142"/>
+			<xs:enumeration value="143"/>
+			<xs:enumeration value="144"/>
+			<xs:enumeration value="145"/>
+			<xs:enumeration value="146"/>
+			<xs:enumeration value="147"/>
+			<xs:enumeration value="148"/>
+			<xs:enumeration value="149"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="150"/>
+			<xs:enumeration value="151"/>
+			<xs:enumeration value="152"/>
+			<xs:enumeration value="153"/>
+			<xs:enumeration value="154"/>
+			<xs:enumeration value="155"/>
+			<xs:enumeration value="156"/>
+			<xs:enumeration value="157"/>
+			<xs:enumeration value="158"/>
+			<xs:enumeration value="159"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="160"/>
+			<xs:enumeration value="161"/>
+			<xs:enumeration value="162"/>
+			<xs:enumeration value="163"/>
+			<xs:enumeration value="164"/>
+			<xs:enumeration value="165"/>
+			<xs:enumeration value="166"/>
+			<xs:enumeration value="167"/>
+			<xs:enumeration value="168"/>
+			<xs:enumeration value="169"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="170"/>
+			<xs:enumeration value="171"/>
+			<xs:enumeration value="172"/>
+			<xs:enumeration value="173"/>
+			<xs:enumeration value="174"/>
+			<xs:enumeration value="175"/>
+			<xs:enumeration value="176"/>
+			<xs:enumeration value="177"/>
+			<xs:enumeration value="178"/>
+			<xs:enumeration value="179"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="180"/>
+			<xs:enumeration value="181"/>
+			<xs:enumeration value="182"/>
+			<xs:enumeration value="183"/>
+			<xs:enumeration value="184"/>
+			<xs:enumeration value="185"/>
+			<xs:enumeration value="186"/>
+			<xs:enumeration value="187"/>
+			<xs:enumeration value="188"/>
+			<xs:enumeration value="189"/>
+			<xs:enumeration value="19"/>
+			<xs:enumeration value="190"/>
+			<xs:enumeration value="191"/>
+			<xs:enumeration value="192"/>
+			<xs:enumeration value="193"/>
+			<xs:enumeration value="194"/>
+			<xs:enumeration value="195"/>
+			<xs:enumeration value="196"/>
+			<xs:enumeration value="197"/>
+			<xs:enumeration value="198"/>
+			<xs:enumeration value="199"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="200"/>
+			<xs:enumeration value="201"/>
+			<xs:enumeration value="202"/>
+			<xs:enumeration value="203"/>
+			<xs:enumeration value="204"/>
+			<xs:enumeration value="205"/>
+			<xs:enumeration value="206"/>
+			<xs:enumeration value="207"/>
+			<xs:enumeration value="208"/>
+			<xs:enumeration value="209"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="210"/>
+			<xs:enumeration value="211"/>
+			<xs:enumeration value="212"/>
+			<xs:enumeration value="213"/>
+			<xs:enumeration value="214"/>
+			<xs:enumeration value="215"/>
+			<xs:enumeration value="216"/>
+			<xs:enumeration value="217"/>
+			<xs:enumeration value="218"/>
+			<xs:enumeration value="219"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="220"/>
+			<xs:enumeration value="221"/>
+			<xs:enumeration value="222"/>
+			<xs:enumeration value="223"/>
+			<xs:enumeration value="224"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
+			<xs:enumeration value="25"/>
+			<xs:enumeration value="26"/>
+			<xs:enumeration value="27"/>
+			<xs:enumeration value="28"/>
+			<xs:enumeration value="29"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="30"/>
+			<xs:enumeration value="31"/>
+			<xs:enumeration value="32"/>
+			<xs:enumeration value="33"/>
+			<xs:enumeration value="34"/>
+			<xs:enumeration value="35"/>
+			<xs:enumeration value="36"/>
+			<xs:enumeration value="37"/>
+			<xs:enumeration value="38"/>
+			<xs:enumeration value="39"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="40"/>
+			<xs:enumeration value="41"/>
+			<xs:enumeration value="42"/>
+			<xs:enumeration value="43"/>
+			<xs:enumeration value="44"/>
+			<xs:enumeration value="45"/>
+			<xs:enumeration value="46"/>
+			<xs:enumeration value="47"/>
+			<xs:enumeration value="48"/>
+			<xs:enumeration value="49"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="50"/>
+			<xs:enumeration value="51"/>
+			<xs:enumeration value="52"/>
+			<xs:enumeration value="53"/>
+			<xs:enumeration value="54"/>
+			<xs:enumeration value="55"/>
+			<xs:enumeration value="56"/>
+			<xs:enumeration value="57"/>
+			<xs:enumeration value="58"/>
+			<xs:enumeration value="59"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="60"/>
+			<xs:enumeration value="61"/>
+			<xs:enumeration value="62"/>
+			<xs:enumeration value="63"/>
+			<xs:enumeration value="64"/>
+			<xs:enumeration value="65"/>
+			<xs:enumeration value="66"/>
+			<xs:enumeration value="67"/>
+			<xs:enumeration value="68"/>
+			<xs:enumeration value="69"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="70"/>
+			<xs:enumeration value="71"/>
+			<xs:enumeration value="72"/>
+			<xs:enumeration value="73"/>
+			<xs:enumeration value="74"/>
+			<xs:enumeration value="75"/>
+			<xs:enumeration value="76"/>
+			<xs:enumeration value="77"/>
+			<xs:enumeration value="78"/>
+			<xs:enumeration value="79"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="80"/>
+			<xs:enumeration value="81"/>
+			<xs:enumeration value="82"/>
+			<xs:enumeration value="83"/>
+			<xs:enumeration value="84"/>
+			<xs:enumeration value="85"/>
+			<xs:enumeration value="86"/>
+			<xs:enumeration value="87"/>
+			<xs:enumeration value="88"/>
+			<xs:enumeration value="89"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="90"/>
+			<xs:enumeration value="91"/>
+			<xs:enumeration value="92"/>
+			<xs:enumeration value="93"/>
+			<xs:enumeration value="94"/>
+			<xs:enumeration value="95"/>
+			<xs:enumeration value="96"/>
+			<xs:enumeration value="97"/>
+			<xs:enumeration value="98"/>
+			<xs:enumeration value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeQualiteOccupant">
+		<xs:annotation>
+			<xs:documentation>Liste des qualités occupant de l'assuré où à eu lieu le sinistre (Proprietaire occupant
+                total, Locataire murs et fonds, ...) - Information rattachée à l'assuré - Onglet Assuré de TG
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="10" name="CODE_10"/>
+					<jaxb:typesafeEnumMember value="11" name="CODE_11"/>
+					<jaxb:typesafeEnumMember value="12" name="CODE_12"/>
+					<jaxb:typesafeEnumMember value="13" name="CODE_13"/>
+					<jaxb:typesafeEnumMember value="14" name="CODE_14"/>
+					<jaxb:typesafeEnumMember value="15" name="CODE_15"/>
+					<jaxb:typesafeEnumMember value="16" name="CODE_16"/>
+					<jaxb:typesafeEnumMember value="17" name="CODE_17"/>
+					<jaxb:typesafeEnumMember value="18" name="CODE_18"/>
+					<jaxb:typesafeEnumMember value="19" name="CODE_19"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="20" name="CODE_20"/>
+					<jaxb:typesafeEnumMember value="21" name="CODE_21"/>
+					<jaxb:typesafeEnumMember value="22" name="CODE_22"/>
+					<jaxb:typesafeEnumMember value="23" name="CODE_23"/>
+					<jaxb:typesafeEnumMember value="24" name="CODE_24"/>
+					<jaxb:typesafeEnumMember value="25" name="CODE_25"/>
+					<jaxb:typesafeEnumMember value="26" name="CODE_26"/>
+					<jaxb:typesafeEnumMember value="27" name="CODE_27"/>
+					<jaxb:typesafeEnumMember value="28" name="CODE_28"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+					<jaxb:typesafeEnumMember value="5" name="CODE_5"/>
+					<jaxb:typesafeEnumMember value="6" name="CODE_6"/>
+					<jaxb:typesafeEnumMember value="7" name="CODE_7"/>
+					<jaxb:typesafeEnumMember value="8" name="CODE_8"/>
+					<jaxb:typesafeEnumMember value="9" name="CODE_9"/>
+					<jaxb:typesafeEnumMember value="99" name="CODE_99"/>
+					<jaxb:typesafeEnumMember value="29" name="CODE_29"/>
+					<jaxb:typesafeEnumMember value="30" name="CODE_30"/>
+					<jaxb:typesafeEnumMember value="31" name="CODE_31"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="19"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
+			<xs:enumeration value="25"/>
+			<xs:enumeration value="26"/>
+			<xs:enumeration value="27"/>
+			<xs:enumeration value="28"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="99"/>
+			<xs:enumeration value="29"/>
+			<xs:enumeration value="30"/>
+			<xs:enumeration value="31"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeEvenement">
+		<xs:annotation>
+			<xs:documentation>Les des évenènements ponctuant la vie d'un dossier (Courrier reçu, Note d'information
+                envoyée, Relance LA, RDV pris par téléphone, ...)
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+					<jaxb:typesafeEnumMember value="5" name="CODE_5"/>
+					<jaxb:typesafeEnumMember value="6" name="CODE_6"/>
+					<jaxb:typesafeEnumMember value="7" name="CODE_7"/>
+					<jaxb:typesafeEnumMember value="8" name="CODE_8"/>
+					<jaxb:typesafeEnumMember value="9" name="CODE_9"/>
+					<jaxb:typesafeEnumMember value="10" name="CODE_10"/>
+					<jaxb:typesafeEnumMember value="11" name="CODE_11"/>
+					<jaxb:typesafeEnumMember value="12" name="CODE_12"/>
+					<jaxb:typesafeEnumMember value="13" name="CODE_13"/>
+					<jaxb:typesafeEnumMember value="14" name="CODE_14"/>
+					<jaxb:typesafeEnumMember value="16" name="CODE_16"/>
+					<jaxb:typesafeEnumMember value="17" name="CODE_17"/>
+					<jaxb:typesafeEnumMember value="18" name="CODE_18"/>
+					<jaxb:typesafeEnumMember value="19" name="CODE_19"/>
+					<jaxb:typesafeEnumMember value="20" name="CODE_20"/>
+					<jaxb:typesafeEnumMember value="21" name="CODE_21"/>
+					<jaxb:typesafeEnumMember value="22" name="CODE_22"/>
+					<jaxb:typesafeEnumMember value="23" name="CODE_23"/>
+					<jaxb:typesafeEnumMember value="24" name="CODE_24"/>
+					<jaxb:typesafeEnumMember value="25" name="CODE_25"/>
+					<jaxb:typesafeEnumMember value="26" name="CODE_26"/>
+					<jaxb:typesafeEnumMember value="27" name="CODE_27"/>
+					<jaxb:typesafeEnumMember value="28" name="CODE_28"/>
+					<jaxb:typesafeEnumMember value="29" name="CODE_29"/>
+					<jaxb:typesafeEnumMember value="30" name="CODE_30"/>
+					<jaxb:typesafeEnumMember value="31" name="CODE_31"/>
+					<jaxb:typesafeEnumMember value="32" name="CODE_32"/>
+					<jaxb:typesafeEnumMember value="33" name="CODE_33"/>
+					<jaxb:typesafeEnumMember value="35" name="CODE_35"/>
+					<jaxb:typesafeEnumMember value="36" name="CODE_36"/>
+					<jaxb:typesafeEnumMember value="37" name="CODE_37"/>
+					<jaxb:typesafeEnumMember value="38" name="CODE_38"/>
+					<jaxb:typesafeEnumMember value="39" name="CODE_39"/>
+					<jaxb:typesafeEnumMember value="40" name="CODE_40"/>
+					<jaxb:typesafeEnumMember value="41" name="CODE_41"/>
+					<jaxb:typesafeEnumMember value="42" name="CODE_42"/>
+					<jaxb:typesafeEnumMember value="43" name="CODE_43"/>
+					<jaxb:typesafeEnumMember value="44" name="CODE_44"/>
+					<jaxb:typesafeEnumMember value="45" name="CODE_45"/>
+					<jaxb:typesafeEnumMember value="46" name="CODE_46"/>
+					<jaxb:typesafeEnumMember value="47" name="CODE_47"/>
+					<jaxb:typesafeEnumMember value="48" name="CODE_48"/>
+					<jaxb:typesafeEnumMember value="49" name="CODE_49"/>
+					<jaxb:typesafeEnumMember value="50" name="CODE_50"/>
+					<jaxb:typesafeEnumMember value="51" name="CODE_51"/>
+					<jaxb:typesafeEnumMember value="52" name="CODE_52"/>
+					<jaxb:typesafeEnumMember value="53" name="CODE_53"/>
+					<jaxb:typesafeEnumMember value="54" name="CODE_54"/>
+					<jaxb:typesafeEnumMember value="55" name="CODE_55"/>
+					<jaxb:typesafeEnumMember value="56" name="CODE_56"/>
+					<jaxb:typesafeEnumMember value="57" name="CODE_57"/>
+					<jaxb:typesafeEnumMember value="58" name="CODE_58"/>
+					<jaxb:typesafeEnumMember value="59" name="CODE_59"/>
+					<jaxb:typesafeEnumMember value="60" name="CODE_60"/>
+					<jaxb:typesafeEnumMember value="61" name="CODE_61"/>
+					<jaxb:typesafeEnumMember value="62" name="CODE_62"/>
+					<jaxb:typesafeEnumMember value="63" name="CODE_63"/>
+					<jaxb:typesafeEnumMember value="64" name="CODE_64"/>
+					<jaxb:typesafeEnumMember value="65" name="CODE_65"/>
+					<jaxb:typesafeEnumMember value="66" name="CODE_66"/>
+					<jaxb:typesafeEnumMember value="67" name="CODE_67"/>
+					<jaxb:typesafeEnumMember value="68" name="CODE_68"/>
+					<jaxb:typesafeEnumMember value="69" name="CODE_69"/>
+					<jaxb:typesafeEnumMember value="70" name="CODE_70"/>
+					<jaxb:typesafeEnumMember value="71" name="CODE_71"/>
+					<jaxb:typesafeEnumMember value="72" name="CODE_72"/>
+					<jaxb:typesafeEnumMember value="73" name="CODE_73"/>
+					<jaxb:typesafeEnumMember value="74" name="CODE_74"/>
+					<jaxb:typesafeEnumMember value="75" name="CODE_75"/>
+					<jaxb:typesafeEnumMember value="77" name="CODE_77"/>
+					<jaxb:typesafeEnumMember value="78" name="CODE_78"/>
+					<jaxb:typesafeEnumMember value="94" name="CODE_94"/>
+					<jaxb:typesafeEnumMember value="111" name="CODE_111"/>
+					<jaxb:typesafeEnumMember value="666" name="CODE_666"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="19"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
+			<xs:enumeration value="25"/>
+			<xs:enumeration value="26"/>
+			<xs:enumeration value="27"/>
+			<xs:enumeration value="28"/>
+			<xs:enumeration value="29"/>
+			<xs:enumeration value="30"/>
+			<xs:enumeration value="31"/>
+			<xs:enumeration value="32"/>
+			<xs:enumeration value="33"/>
+			<xs:enumeration value="35"/>
+			<xs:enumeration value="36"/>
+			<xs:enumeration value="37"/>
+			<xs:enumeration value="38"/>
+			<xs:enumeration value="39"/>
+			<xs:enumeration value="40"/>
+			<xs:enumeration value="41"/>
+			<xs:enumeration value="42"/>
+			<xs:enumeration value="43"/>
+			<xs:enumeration value="44"/>
+			<xs:enumeration value="45"/>
+			<xs:enumeration value="46"/>
+			<xs:enumeration value="47"/>
+			<xs:enumeration value="48"/>
+			<xs:enumeration value="49"/>
+			<xs:enumeration value="50"/>
+			<xs:enumeration value="51"/>
+			<xs:enumeration value="52"/>
+			<xs:enumeration value="53"/>
+			<xs:enumeration value="54"/>
+			<xs:enumeration value="55"/>
+			<xs:enumeration value="56"/>
+			<xs:enumeration value="57"/>
+			<xs:enumeration value="58"/>
+			<xs:enumeration value="59"/>
+			<xs:enumeration value="60"/>
+			<xs:enumeration value="61"/>
+			<xs:enumeration value="62"/>
+			<xs:enumeration value="63"/>
+			<xs:enumeration value="64"/>
+			<xs:enumeration value="65"/>
+			<xs:enumeration value="66"/>
+			<xs:enumeration value="67"/>
+			<xs:enumeration value="68"/>
+			<xs:enumeration value="69"/>
+			<xs:enumeration value="70"/>
+			<xs:enumeration value="71"/>
+			<xs:enumeration value="72"/>
+			<xs:enumeration value="73"/>
+			<xs:enumeration value="74"/>
+			<xs:enumeration value="75"/>
+			<xs:enumeration value="77"/>
+			<xs:enumeration value="78"/>
+			<xs:enumeration value="94"/>
+			<xs:enumeration value="111"/>
+			<xs:enumeration value="666"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypePersonneFacture">
+		<xs:annotation>
+			<xs:documentation>Liste de choix de la personne (physique ou morale) à facturer (Assureur, l'intermédiaire,
+                l'assuré, ...) - Information rattachée à l'onglet Mission
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="ASSUREUR" name="CODE_ASSUREUR"/>
+					<jaxb:typesafeEnumMember value="INTERMEDIAIRE" name="CODE_INTERMEDIAIRE"/>
+					<jaxb:typesafeEnumMember value="CLIENT" name="CODE_CLIENT"/>
+					<jaxb:typesafeEnumMember value="ASSURE" name="CODE_ASSURE"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="ASSUREUR"/>
+			<xs:enumeration value="INTERMEDIAIRE"/>
+			<xs:enumeration value="CLIENT"/>
+			<xs:enumeration value="ASSURE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeHabitation">
+		<xs:annotation>
+			<xs:documentation>Liste des types d'habitation de l'assuré (Appartement, Immeuble, Maison, ... ) -
+                Information rattachée à l'assuré - Onglet Assuré de TG
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+					<jaxb:typesafeEnumMember value="5" name="CODE_5"/>
+					<jaxb:typesafeEnumMember value="6" name="CODE_6"/>
+					<jaxb:typesafeEnumMember value="7" name="CODE_7"/>
+					<jaxb:typesafeEnumMember value="8" name="CODE_8"/>
+					<jaxb:typesafeEnumMember value="9" name="CODE_9"/>
+					<jaxb:typesafeEnumMember value="10" name="CODE_10"/>
+					<jaxb:typesafeEnumMember value="11" name="CODE_11"/>
+					<jaxb:typesafeEnumMember value="12" name="CODE_12"/>
+					<jaxb:typesafeEnumMember value="13" name="CODE_13"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeMissionneur">
+		<xs:annotation>
+			<xs:documentation>Liste de choix de la personne (physique ou morale) ayant missionné Texa (Assureur,
+                l'intermédiaire, ...) - Information rattachée à l'onglet Mission
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="ASSUREUR" name="CODE_ASSUREUR"/>
+					<jaxb:typesafeEnumMember value="INTERMEDIAIRE" name="CODE_INTERMEDIAIRE"/>
+					<jaxb:typesafeEnumMember value="CLIENT" name="CODE_CLIENT"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="ASSUREUR"/>
+			<xs:enumeration value="INTERMEDIAIRE"/>
+			<xs:enumeration value="CLIENT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeMotifEvent">
+		<xs:annotation>
+			<xs:documentation>Liste de motifs liés au type d'évènement "Traitement à distance impossible" UNIQUEMENT
+                pour la télé-expertise - Information rattachée à l'onglet Evenement de TG
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="10" name="CODE_10"/>
+					<jaxb:typesafeEnumMember value="11" name="CODE_11"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+					<jaxb:typesafeEnumMember value="5" name="CODE_5"/>
+					<jaxb:typesafeEnumMember value="6" name="CODE_6"/>
+					<jaxb:typesafeEnumMember value="7" name="CODE_7"/>
+					<jaxb:typesafeEnumMember value="8" name="CODE_8"/>
+					<jaxb:typesafeEnumMember value="9" name="CODE_9"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeParticipantRDV">
+		<xs:annotation>
+			<xs:documentation>Liste des type de participants pouvant être convoqué au RDV (Assuré, L'emetteur, ...) -
+                Information rattaché à l'organisation du RDV
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="10" name="CODE_10"/>
+					<jaxb:typesafeEnumMember value="11" name="CODE_11"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+					<jaxb:typesafeEnumMember value="5" name="CODE_5"/>
+					<jaxb:typesafeEnumMember value="6" name="CODE_6"/>
+					<jaxb:typesafeEnumMember value="7" name="CODE_7"/>
+					<jaxb:typesafeEnumMember value="8" name="CODE_8"/>
+					<jaxb:typesafeEnumMember value="9" name="CODE_9"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypePersonne">
+		<xs:annotation>
+			<xs:documentation>Choix du type de la personne : Physique ou Moral - Information rattaché à l'assuré par
+                exemple
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="PART" name="CODE_PART"/>
+					<jaxb:typesafeEnumMember value="PROF" name="CODE_PROF"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="PART"/>
+			<xs:enumeration value="PROF"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeBranche">
+		<xs:annotation>
+			<xs:documentation>Liste des branches pour la création du dossier - Information rattachée à l'onglet Dossier
+                de TG
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="CONSTRUCTION" name="CODE_CONSTRUCTION"/>
+					<jaxb:typesafeEnumMember value="IARD" name="CODE_IARD"/>
+					<jaxb:typesafeEnumMember value="IARD_AGRI" name="CODE_IARD_AGRI"/>
+					<jaxb:typesafeEnumMember value="IARD_AVI_BUR" name="CODE_IARD_AVI_BUR"/>
+					<jaxb:typesafeEnumMember value="IARD_AVI_CNG" name="CODE_IARD_AVI_CNG"/>
+					<jaxb:typesafeEnumMember value="IARD_TEL" name="CODE_IARD_TEL"/>
+					<jaxb:typesafeEnumMember value="RC" name="CODE_RC"/>
+					<jaxb:typesafeEnumMember value="RC_AGRI" name="CODE_RC_AGRI"/>
+					<jaxb:typesafeEnumMember value="RC_AVI_BUR" name="CODE_RC_AVI_BUR"/>
+					<jaxb:typesafeEnumMember value="RC_AVI_CNG" name="CODE_RC_AVI_CNG"/>
+					<jaxb:typesafeEnumMember value="RC_TEL" name="CODE_RC_TEL"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="CONSTRUCTION"/>
+			<xs:enumeration value="IARD"/>
+			<xs:enumeration value="IARD_AGRI"/>
+			<xs:enumeration value="IARD_AVI_BUR"/>
+			<xs:enumeration value="IARD_AVI_CNG"/>
+			<xs:enumeration value="IARD_TEL"/>
+			<xs:enumeration value="RC"/>
+			<xs:enumeration value="RC_AGRI"/>
+			<xs:enumeration value="RC_AVI_BUR"/>
+			<xs:enumeration value="RC_AVI_CNG"/>
+			<xs:enumeration value="RC_TEL"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeCodeBureau">
+		<xs:annotation>
+			<xs:documentation>Liste des code bureaux Texa dans le référentiel Texa</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeCivilite">
+		<xs:annotation>
+			<xs:documentation>Liste des Civilités dans le référentiel Texa (Monsieur, Madame, SAS, ...)
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="SCA " name="CODE_SCA"/>
+					<jaxb:typesafeEnumMember value="GFA" name="CODE_GFA"/>
+					<jaxb:typesafeEnumMember value="DOCTEUR" name="CODE_DOCTEUR"/>
+					<jaxb:typesafeEnumMember value="MAITRE" name="CODE_MAITRE"/>
+					<jaxb:typesafeEnumMember value="CUMA" name="CODE_CUMA"/>
+					<jaxb:typesafeEnumMember value="COPROPRIETE" name="CODE_COPROPRIETE"/>
+					<jaxb:typesafeEnumMember value="COMMUNE" name="CODE_COMMUNE"/>
+					<jaxb:typesafeEnumMember value="VILLE" name="CODE_VILLE"/>
+					<jaxb:typesafeEnumMember value="LABORATOIRE" name="CODE_LABORATOIRE"/>
+					<jaxb:typesafeEnumMember value="SYNDICAT" name="CODE_SYNDICAT"/>
+					<jaxb:typesafeEnumMember value="SAS" name="CODE_SAS"/>
+					<jaxb:typesafeEnumMember value="SA" name="CODE_SA"/>
+					<jaxb:typesafeEnumMember value="SARL" name="CODE_SARL"/>
+					<jaxb:typesafeEnumMember value="SCEA" name="CODE_SCEA"/>
+					<jaxb:typesafeEnumMember value="SCI" name="CODE_SCI"/>
+					<jaxb:typesafeEnumMember value="SCP" name="CODE_SCP"/>
+					<jaxb:typesafeEnumMember value="SNC" name="CODE_SNC"/>
+					<jaxb:typesafeEnumMember value="SOCIETE" name="CODE_SOCIETE"/>
+					<jaxb:typesafeEnumMember value="SYNDIC" name="CODE_SYNDIC"/>
+					<jaxb:typesafeEnumMember value="ENTREPRISE" name="CODE_ENTREPRISE"/>
+					<jaxb:typesafeEnumMember value="EURL" name="CODE_EURL"/>
+					<jaxb:typesafeEnumMember value="GAEC" name="CODE_GAEC"/>
+					<jaxb:typesafeEnumMember value="GROUPE" name="CODE_GROUPE"/>
+					<jaxb:typesafeEnumMember value="INDIVISION" name="CODE_INDIVISION"/>
+					<jaxb:typesafeEnumMember value="OPHLM" name="CODE_OPHLM"/>
+					<jaxb:typesafeEnumMember value="ETABLISSEMENT" name="CODE_ETABLISSEMENT"/>
+					<jaxb:typesafeEnumMember value="EARL" name="CODE_EARL"/>
+					<jaxb:typesafeEnumMember value="CABINET" name="CODE_CABINET"/>
+					<jaxb:typesafeEnumMember value="ASSOCIATION" name="CODE_ASSOCIATION"/>
+					<jaxb:typesafeEnumMember value="AGENCE" name="CODE_AGENCE"/>
+					<jaxb:typesafeEnumMember value="ACCA" name="CODE_ACCA"/>
+					<jaxb:typesafeEnumMember value="MADEMOISELLE" name="CODE_MADEMOISELLE"/>
+					<jaxb:typesafeEnumMember value="MONSIEUR" name="CODE_MONSIEUR"/>
+					<jaxb:typesafeEnumMember value="MADAME" name="CODE_MADAME"/>
+					<jaxb:typesafeEnumMember value="SICA" name="CODE_SICA"/>
+					<jaxb:typesafeEnumMember value="SCOOP" name="CODE_SCOOP"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="SCA "/>
+			<xs:enumeration value="GFA"/>
+			<xs:enumeration value="DOCTEUR"/>
+			<xs:enumeration value="MAITRE"/>
+			<xs:enumeration value="CUMA"/>
+			<xs:enumeration value="COPROPRIETE"/>
+			<xs:enumeration value="COMMUNE"/>
+			<xs:enumeration value="VILLE"/>
+			<xs:enumeration value="LABORATOIRE"/>
+			<xs:enumeration value="SYNDICAT"/>
+			<xs:enumeration value="SAS"/>
+			<xs:enumeration value="SA"/>
+			<xs:enumeration value="SARL"/>
+			<xs:enumeration value="SCEA"/>
+			<xs:enumeration value="SCI"/>
+			<xs:enumeration value="SCP"/>
+			<xs:enumeration value="SNC"/>
+			<xs:enumeration value="SOCIETE"/>
+			<xs:enumeration value="SYNDIC"/>
+			<xs:enumeration value="ENTREPRISE"/>
+			<xs:enumeration value="EURL"/>
+			<xs:enumeration value="GAEC"/>
+			<xs:enumeration value="GROUPE"/>
+			<xs:enumeration value="INDIVISION"/>
+			<xs:enumeration value="OPHLM"/>
+			<xs:enumeration value="ETABLISSEMENT"/>
+			<xs:enumeration value="EARL"/>
+			<xs:enumeration value="CABINET"/>
+			<xs:enumeration value="ASSOCIATION"/>
+			<xs:enumeration value="AGENCE"/>
+			<xs:enumeration value="ACCA"/>
+			<xs:enumeration value="MADEMOISELLE"/>
+			<xs:enumeration value="MONSIEUR"/>
+			<xs:enumeration value="MADAME"/>
+			<xs:enumeration value="SICA"/>
+			<xs:enumeration value="SCOOP"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeExtensionAdresse">
+		<xs:annotation>
+			<xs:documentation>Liste des extension de numéro de rue dans le bloc adresse dans le référentiel Texa
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="BIS" name="CODE_BIS"/>
+					<jaxb:typesafeEnumMember value="TER" name="CODE_TER"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="BIS"/>
+			<xs:enumeration value="TER"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeMonnaie">
+		<xs:annotation>
+			<xs:documentation>Liste des monnaies dans le référentiel Texa</xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="EUR" name="CODE_EUR"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="EUR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeCodeVoie">
+		<xs:annotation>
+			<xs:documentation>Liste des types de voies dans le référentiel Texa</xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="RUE" name="CODE_RUE"/>
+					<jaxb:typesafeEnumMember value="AV" name="CODE_AV"/>
+					<jaxb:typesafeEnumMember value="BD" name="CODE_BD"/>
+					<jaxb:typesafeEnumMember value="PL" name="CODE_PL"/>
+					<jaxb:typesafeEnumMember value="SQ" name="CODE_SQ"/>
+					<jaxb:typesafeEnumMember value="RTE" name="CODE_RTE"/>
+					<jaxb:typesafeEnumMember value="COUR" name="CODE_COUR"/>
+					<jaxb:typesafeEnumMember value="CRS" name="CODE_CRS"/>
+					<jaxb:typesafeEnumMember value="ESP" name="CODE_ESP"/>
+					<jaxb:typesafeEnumMember value="LOT" name="CODE_LOT"/>
+					<jaxb:typesafeEnumMember value="COR" name="CODE_COR"/>
+					<jaxb:typesafeEnumMember value="IMP" name="CODE_IMP"/>
+					<jaxb:typesafeEnumMember value="PAS" name="CODE_PAS"/>
+					<jaxb:typesafeEnumMember value="RPT" name="CODE_RPT"/>
+					<jaxb:typesafeEnumMember value="TSE" name="CODE_TSE"/>
+					<jaxb:typesafeEnumMember value="PROM" name="CODE_PROM"/>
+					<jaxb:typesafeEnumMember value="QU" name="CODE_QU"/>
+					<jaxb:typesafeEnumMember value="ALL" name="CODE_ALL"/>
+					<jaxb:typesafeEnumMember value="ALLS" name="CODE_ALLS"/>
+					<jaxb:typesafeEnumMember value="GR" name="CODE_GR"/>
+					<jaxb:typesafeEnumMember value="GR2" name="CODE_GR2"/>
+					<jaxb:typesafeEnumMember value="GR3" name="CODE_GR3"/>
+					<jaxb:typesafeEnumMember value="PARC" name="CODE_PARC"/>
+					<jaxb:typesafeEnumMember value="FG" name="CODE_FG"/>
+					<jaxb:typesafeEnumMember value="CHE" name="CODE_CHE"/>
+					<jaxb:typesafeEnumMember value="VLA" name="CODE_VLA"/>
+					<jaxb:typesafeEnumMember value="MTE" name="CODE_MTE"/>
+					<jaxb:typesafeEnumMember value="GAL" name="CODE_GAL"/>
+					<jaxb:typesafeEnumMember value="CIT" name="CODE_CIT"/>
+					<jaxb:typesafeEnumMember value="VOI" name="CODE_VOI"/>
+					<jaxb:typesafeEnumMember value="PRV" name="CODE_PRV"/>
+					<jaxb:typesafeEnumMember value="VEN" name="CODE_VEN"/>
+					<jaxb:typesafeEnumMember value="ART" name="CODE_ART"/>
+					<jaxb:typesafeEnumMember value="QUA" name="CODE_QUA"/>
+					<jaxb:typesafeEnumMember value="BEL" name="CODE_BEL"/>
+					<jaxb:typesafeEnumMember value="MAIL" name="CODE_MAIL"/>
+					<jaxb:typesafeEnumMember value="EST" name="CODE_EST"/>
+					<jaxb:typesafeEnumMember value="CLOS" name="CODE_CLOS"/>
+					<jaxb:typesafeEnumMember value="ESPA" name="CODE_ESPA"/>
+					<jaxb:typesafeEnumMember value="ZONE" name="CODE_ZONE"/>
+					<jaxb:typesafeEnumMember value="CAR" name="CODE_CAR"/>
+					<jaxb:typesafeEnumMember value="TRA" name="CODE_TRA"/>
+					<jaxb:typesafeEnumMember value="SEN" name="CODE_SEN"/>
+					<jaxb:typesafeEnumMember value="CHS" name="CODE_CHS"/>
+					<jaxb:typesafeEnumMember value="ZAC" name="CODE_ZAC"/>
+					<jaxb:typesafeEnumMember value="RRT" name="CODE_RRT"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="RUE"/>
+			<xs:enumeration value="AV"/>
+			<xs:enumeration value="BD"/>
+			<xs:enumeration value="PL"/>
+			<xs:enumeration value="SQ"/>
+			<xs:enumeration value="RTE"/>
+			<xs:enumeration value="COUR"/>
+			<xs:enumeration value="CRS"/>
+			<xs:enumeration value="ESP"/>
+			<xs:enumeration value="LOT"/>
+			<xs:enumeration value="COR"/>
+			<xs:enumeration value="IMP"/>
+			<xs:enumeration value="PAS"/>
+			<xs:enumeration value="RPT"/>
+			<xs:enumeration value="TSE"/>
+			<xs:enumeration value="PROM"/>
+			<xs:enumeration value="QU"/>
+			<xs:enumeration value="ALL"/>
+			<xs:enumeration value="ALLS"/>
+			<xs:enumeration value="GR"/>
+			<xs:enumeration value="GR2"/>
+			<xs:enumeration value="GR3"/>
+			<xs:enumeration value="PARC"/>
+			<xs:enumeration value="FG"/>
+			<xs:enumeration value="CHE"/>
+			<xs:enumeration value="VLA"/>
+			<xs:enumeration value="MTE"/>
+			<xs:enumeration value="GAL"/>
+			<xs:enumeration value="CIT"/>
+			<xs:enumeration value="VOI"/>
+			<xs:enumeration value="PRV"/>
+			<xs:enumeration value="VEN"/>
+			<xs:enumeration value="ART"/>
+			<xs:enumeration value="QUA"/>
+			<xs:enumeration value="BEL"/>
+			<xs:enumeration value="MAIL"/>
+			<xs:enumeration value="EST"/>
+			<xs:enumeration value="CLOS"/>
+			<xs:enumeration value="ESPA"/>
+			<xs:enumeration value="ZONE"/>
+			<xs:enumeration value="CAR"/>
+			<xs:enumeration value="TRA"/>
+			<xs:enumeration value="SEN"/>
+			<xs:enumeration value="CHS"/>
+			<xs:enumeration value="ZAC"/>
+			<xs:enumeration value="RRT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeCodePaysInt">
+		<xs:annotation>
+			<xs:documentation>Liste des pays dans le référentiel Texa sans la France</xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+					<jaxb:typesafeEnumMember value="5" name="CODE_5"/>
+					<jaxb:typesafeEnumMember value="6" name="CODE_6"/>
+					<jaxb:typesafeEnumMember value="7" name="CODE_7"/>
+					<jaxb:typesafeEnumMember value="8" name="CODE_8"/>
+					<jaxb:typesafeEnumMember value="9" name="CODE_9"/>
+					<jaxb:typesafeEnumMember value="10" name="CODE_10"/>
+					<jaxb:typesafeEnumMember value="11" name="CODE_11"/>
+					<jaxb:typesafeEnumMember value="12" name="CODE_12"/>
+					<jaxb:typesafeEnumMember value="13" name="CODE_13"/>
+					<jaxb:typesafeEnumMember value="14" name="CODE_14"/>
+					<jaxb:typesafeEnumMember value="15" name="CODE_15"/>
+					<jaxb:typesafeEnumMember value="16" name="CODE_16"/>
+					<jaxb:typesafeEnumMember value="17" name="CODE_17"/>
+					<jaxb:typesafeEnumMember value="18" name="CODE_18"/>
+					<jaxb:typesafeEnumMember value="19" name="CODE_19"/>
+					<jaxb:typesafeEnumMember value="20" name="CODE_20"/>
+					<jaxb:typesafeEnumMember value="21" name="CODE_21"/>
+					<jaxb:typesafeEnumMember value="22" name="CODE_22"/>
+					<jaxb:typesafeEnumMember value="23" name="CODE_23"/>
+					<jaxb:typesafeEnumMember value="24" name="CODE_24"/>
+					<jaxb:typesafeEnumMember value="25" name="CODE_25"/>
+					<jaxb:typesafeEnumMember value="26" name="CODE_26"/>
+					<jaxb:typesafeEnumMember value="27" name="CODE_27"/>
+					<jaxb:typesafeEnumMember value="28" name="CODE_28"/>
+					<jaxb:typesafeEnumMember value="29" name="CODE_29"/>
+					<jaxb:typesafeEnumMember value="30" name="CODE_30"/>
+					<jaxb:typesafeEnumMember value="31" name="CODE_31"/>
+					<jaxb:typesafeEnumMember value="32" name="CODE_32"/>
+					<jaxb:typesafeEnumMember value="33" name="CODE_33"/>
+					<jaxb:typesafeEnumMember value="34" name="CODE_34"/>
+					<jaxb:typesafeEnumMember value="35" name="CODE_35"/>
+					<jaxb:typesafeEnumMember value="36" name="CODE_36"/>
+					<jaxb:typesafeEnumMember value="37" name="CODE_37"/>
+					<jaxb:typesafeEnumMember value="38" name="CODE_38"/>
+					<jaxb:typesafeEnumMember value="39" name="CODE_39"/>
+					<jaxb:typesafeEnumMember value="40" name="CODE_40"/>
+					<jaxb:typesafeEnumMember value="41" name="CODE_41"/>
+					<jaxb:typesafeEnumMember value="42" name="CODE_42"/>
+					<jaxb:typesafeEnumMember value="43" name="CODE_43"/>
+					<jaxb:typesafeEnumMember value="44" name="CODE_44"/>
+					<jaxb:typesafeEnumMember value="45" name="CODE_45"/>
+					<jaxb:typesafeEnumMember value="46" name="CODE_46"/>
+					<jaxb:typesafeEnumMember value="47" name="CODE_47"/>
+					<jaxb:typesafeEnumMember value="48" name="CODE_48"/>
+					<jaxb:typesafeEnumMember value="49" name="CODE_49"/>
+					<jaxb:typesafeEnumMember value="50" name="CODE_50"/>
+					<jaxb:typesafeEnumMember value="51" name="CODE_51"/>
+					<jaxb:typesafeEnumMember value="52" name="CODE_52"/>
+					<jaxb:typesafeEnumMember value="53" name="CODE_53"/>
+					<jaxb:typesafeEnumMember value="54" name="CODE_54"/>
+					<jaxb:typesafeEnumMember value="55" name="CODE_55"/>
+					<jaxb:typesafeEnumMember value="56" name="CODE_56"/>
+					<jaxb:typesafeEnumMember value="57" name="CODE_57"/>
+					<jaxb:typesafeEnumMember value="58" name="CODE_58"/>
+					<jaxb:typesafeEnumMember value="60" name="CODE_60"/>
+					<jaxb:typesafeEnumMember value="61" name="CODE_61"/>
+					<jaxb:typesafeEnumMember value="62" name="CODE_62"/>
+					<jaxb:typesafeEnumMember value="63" name="CODE_63"/>
+					<jaxb:typesafeEnumMember value="64" name="CODE_64"/>
+					<jaxb:typesafeEnumMember value="65" name="CODE_65"/>
+					<jaxb:typesafeEnumMember value="66" name="CODE_66"/>
+					<jaxb:typesafeEnumMember value="67" name="CODE_67"/>
+					<jaxb:typesafeEnumMember value="68" name="CODE_68"/>
+					<jaxb:typesafeEnumMember value="69" name="CODE_69"/>
+					<jaxb:typesafeEnumMember value="70" name="CODE_70"/>
+					<jaxb:typesafeEnumMember value="71" name="CODE_71"/>
+					<jaxb:typesafeEnumMember value="72" name="CODE_72"/>
+					<jaxb:typesafeEnumMember value="73" name="CODE_73"/>
+					<jaxb:typesafeEnumMember value="74" name="CODE_74"/>
+					<jaxb:typesafeEnumMember value="75" name="CODE_75"/>
+					<jaxb:typesafeEnumMember value="76" name="CODE_76"/>
+					<jaxb:typesafeEnumMember value="77" name="CODE_77"/>
+					<jaxb:typesafeEnumMember value="78" name="CODE_78"/>
+					<jaxb:typesafeEnumMember value="79" name="CODE_79"/>
+					<jaxb:typesafeEnumMember value="80" name="CODE_80"/>
+					<jaxb:typesafeEnumMember value="81" name="CODE_81"/>
+					<jaxb:typesafeEnumMember value="82" name="CODE_82"/>
+					<jaxb:typesafeEnumMember value="83" name="CODE_83"/>
+					<jaxb:typesafeEnumMember value="84" name="CODE_84"/>
+					<jaxb:typesafeEnumMember value="85" name="CODE_85"/>
+					<jaxb:typesafeEnumMember value="87" name="CODE_87"/>
+					<jaxb:typesafeEnumMember value="88" name="CODE_88"/>
+					<jaxb:typesafeEnumMember value="89" name="CODE_89"/>
+					<jaxb:typesafeEnumMember value="90" name="CODE_90"/>
+					<jaxb:typesafeEnumMember value="93" name="CODE_93"/>
+					<jaxb:typesafeEnumMember value="94" name="CODE_94"/>
+					<jaxb:typesafeEnumMember value="95" name="CODE_95"/>
+					<jaxb:typesafeEnumMember value="96" name="CODE_96"/>
+					<jaxb:typesafeEnumMember value="97" name="CODE_97"/>
+					<jaxb:typesafeEnumMember value="98" name="CODE_98"/>
+					<jaxb:typesafeEnumMember value="99" name="CODE_99"/>
+					<jaxb:typesafeEnumMember value="100" name="CODE_100"/>
+					<jaxb:typesafeEnumMember value="101" name="CODE_101"/>
+					<jaxb:typesafeEnumMember value="102" name="CODE_102"/>
+					<jaxb:typesafeEnumMember value="103" name="CODE_103"/>
+					<jaxb:typesafeEnumMember value="104" name="CODE_104"/>
+					<jaxb:typesafeEnumMember value="105" name="CODE_105"/>
+					<jaxb:typesafeEnumMember value="106" name="CODE_106"/>
+					<jaxb:typesafeEnumMember value="107" name="CODE_107"/>
+					<jaxb:typesafeEnumMember value="108" name="CODE_108"/>
+					<jaxb:typesafeEnumMember value="109" name="CODE_109"/>
+					<jaxb:typesafeEnumMember value="110" name="CODE_110"/>
+					<jaxb:typesafeEnumMember value="111" name="CODE_111"/>
+					<jaxb:typesafeEnumMember value="112" name="CODE_112"/>
+					<jaxb:typesafeEnumMember value="113" name="CODE_113"/>
+					<jaxb:typesafeEnumMember value="114" name="CODE_114"/>
+					<jaxb:typesafeEnumMember value="115" name="CODE_115"/>
+					<jaxb:typesafeEnumMember value="116" name="CODE_116"/>
+					<jaxb:typesafeEnumMember value="117" name="CODE_117"/>
+					<jaxb:typesafeEnumMember value="118" name="CODE_118"/>
+					<jaxb:typesafeEnumMember value="119" name="CODE_119"/>
+					<jaxb:typesafeEnumMember value="120" name="CODE_120"/>
+					<jaxb:typesafeEnumMember value="121" name="CODE_121"/>
+					<jaxb:typesafeEnumMember value="122" name="CODE_122"/>
+					<jaxb:typesafeEnumMember value="123" name="CODE_123"/>
+					<jaxb:typesafeEnumMember value="124" name="CODE_124"/>
+					<jaxb:typesafeEnumMember value="125" name="CODE_125"/>
+					<jaxb:typesafeEnumMember value="126" name="CODE_126"/>
+					<jaxb:typesafeEnumMember value="127" name="CODE_127"/>
+					<jaxb:typesafeEnumMember value="128" name="CODE_128"/>
+					<jaxb:typesafeEnumMember value="129" name="CODE_129"/>
+					<jaxb:typesafeEnumMember value="130" name="CODE_130"/>
+					<jaxb:typesafeEnumMember value="131" name="CODE_131"/>
+					<jaxb:typesafeEnumMember value="132" name="CODE_132"/>
+					<jaxb:typesafeEnumMember value="133" name="CODE_133"/>
+					<jaxb:typesafeEnumMember value="134" name="CODE_134"/>
+					<jaxb:typesafeEnumMember value="135" name="CODE_135"/>
+					<jaxb:typesafeEnumMember value="136" name="CODE_136"/>
+					<jaxb:typesafeEnumMember value="137" name="CODE_137"/>
+					<jaxb:typesafeEnumMember value="138" name="CODE_138"/>
+					<jaxb:typesafeEnumMember value="139" name="CODE_139"/>
+					<jaxb:typesafeEnumMember value="140" name="CODE_140"/>
+					<jaxb:typesafeEnumMember value="141" name="CODE_141"/>
+					<jaxb:typesafeEnumMember value="142" name="CODE_142"/>
+					<jaxb:typesafeEnumMember value="143" name="CODE_143"/>
+					<jaxb:typesafeEnumMember value="144" name="CODE_144"/>
+					<jaxb:typesafeEnumMember value="145" name="CODE_145"/>
+					<jaxb:typesafeEnumMember value="146" name="CODE_146"/>
+					<jaxb:typesafeEnumMember value="147" name="CODE_147"/>
+					<jaxb:typesafeEnumMember value="148" name="CODE_148"/>
+					<jaxb:typesafeEnumMember value="149" name="CODE_149"/>
+					<jaxb:typesafeEnumMember value="150" name="CODE_150"/>
+					<jaxb:typesafeEnumMember value="151" name="CODE_151"/>
+					<jaxb:typesafeEnumMember value="152" name="CODE_152"/>
+					<jaxb:typesafeEnumMember value="153" name="CODE_153"/>
+					<jaxb:typesafeEnumMember value="154" name="CODE_154"/>
+					<jaxb:typesafeEnumMember value="155" name="CODE_155"/>
+					<jaxb:typesafeEnumMember value="156" name="CODE_156"/>
+					<jaxb:typesafeEnumMember value="157" name="CODE_157"/>
+					<jaxb:typesafeEnumMember value="158" name="CODE_158"/>
+					<jaxb:typesafeEnumMember value="159" name="CODE_159"/>
+					<jaxb:typesafeEnumMember value="160" name="CODE_160"/>
+					<jaxb:typesafeEnumMember value="161" name="CODE_161"/>
+					<jaxb:typesafeEnumMember value="162" name="CODE_162"/>
+					<jaxb:typesafeEnumMember value="163" name="CODE_163"/>
+					<jaxb:typesafeEnumMember value="164" name="CODE_164"/>
+					<jaxb:typesafeEnumMember value="165" name="CODE_165"/>
+					<jaxb:typesafeEnumMember value="166" name="CODE_166"/>
+					<jaxb:typesafeEnumMember value="167" name="CODE_167"/>
+					<jaxb:typesafeEnumMember value="168" name="CODE_168"/>
+					<jaxb:typesafeEnumMember value="169" name="CODE_169"/>
+					<jaxb:typesafeEnumMember value="170" name="CODE_170"/>
+					<jaxb:typesafeEnumMember value="171" name="CODE_171"/>
+					<jaxb:typesafeEnumMember value="172" name="CODE_172"/>
+					<jaxb:typesafeEnumMember value="173" name="CODE_173"/>
+					<jaxb:typesafeEnumMember value="174" name="CODE_174"/>
+					<jaxb:typesafeEnumMember value="175" name="CODE_175"/>
+					<jaxb:typesafeEnumMember value="176" name="CODE_176"/>
+					<jaxb:typesafeEnumMember value="177" name="CODE_177"/>
+					<jaxb:typesafeEnumMember value="178" name="CODE_178"/>
+					<jaxb:typesafeEnumMember value="179" name="CODE_179"/>
+					<jaxb:typesafeEnumMember value="180" name="CODE_180"/>
+					<jaxb:typesafeEnumMember value="181" name="CODE_181"/>
+					<jaxb:typesafeEnumMember value="182" name="CODE_182"/>
+					<jaxb:typesafeEnumMember value="183" name="CODE_183"/>
+					<jaxb:typesafeEnumMember value="184" name="CODE_184"/>
+					<jaxb:typesafeEnumMember value="185" name="CODE_185"/>
+					<jaxb:typesafeEnumMember value="186" name="CODE_186"/>
+					<jaxb:typesafeEnumMember value="187" name="CODE_187"/>
+					<jaxb:typesafeEnumMember value="188" name="CODE_188"/>
+					<jaxb:typesafeEnumMember value="189" name="CODE_189"/>
+					<jaxb:typesafeEnumMember value="190" name="CODE_190"/>
+					<jaxb:typesafeEnumMember value="191" name="CODE_191"/>
+					<jaxb:typesafeEnumMember value="192" name="CODE_192"/>
+					<jaxb:typesafeEnumMember value="193" name="CODE_193"/>
+					<jaxb:typesafeEnumMember value="194" name="CODE_194"/>
+					<jaxb:typesafeEnumMember value="195" name="CODE_195"/>
+					<jaxb:typesafeEnumMember value="196" name="CODE_196"/>
+					<jaxb:typesafeEnumMember value="197" name="CODE_197"/>
+					<jaxb:typesafeEnumMember value="198" name="CODE_198"/>
+					<jaxb:typesafeEnumMember value="199" name="CODE_199"/>
+					<jaxb:typesafeEnumMember value="200" name="CODE_200"/>
+					<jaxb:typesafeEnumMember value="201" name="CODE_201"/>
+					<jaxb:typesafeEnumMember value="202" name="CODE_202"/>
+					<jaxb:typesafeEnumMember value="203" name="CODE_203"/>
+					<jaxb:typesafeEnumMember value="204" name="CODE_204"/>
+					<jaxb:typesafeEnumMember value="205" name="CODE_205"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1" id="CODE_1"/>
+			<xs:enumeration value="2" id="CODE_2"/>
+			<xs:enumeration value="3" id="CODE_3"/>
+			<xs:enumeration value="4" id="CODE_4"/>
+			<xs:enumeration value="5" id="CODE_5"/>
+			<xs:enumeration value="6" id="CODE_6"/>
+			<xs:enumeration value="7" id="CODE_7"/>
+			<xs:enumeration value="8" id="CODE_8"/>
+			<xs:enumeration value="9" id="CODE_9"/>
+			<xs:enumeration value="10" id="CODE_10"/>
+			<xs:enumeration value="11" id="CODE_11"/>
+			<xs:enumeration value="12" id="CODE_12"/>
+			<xs:enumeration value="13" id="CODE_13"/>
+			<xs:enumeration value="14" id="CODE_14"/>
+			<xs:enumeration value="15" id="CODE_15"/>
+			<xs:enumeration value="16" id="CODE_16"/>
+			<xs:enumeration value="17" id="CODE_17"/>
+			<xs:enumeration value="18" id="CODE_18"/>
+			<xs:enumeration value="19" id="CODE_19"/>
+			<xs:enumeration value="20" id="CODE_20"/>
+			<xs:enumeration value="21" id="CODE_21"/>
+			<xs:enumeration value="22" id="CODE_22"/>
+			<xs:enumeration value="23" id="CODE_23"/>
+			<xs:enumeration value="24" id="CODE_24"/>
+			<xs:enumeration value="25" id="CODE_25"/>
+			<xs:enumeration value="26" id="CODE_26"/>
+			<xs:enumeration value="27" id="CODE_27"/>
+			<xs:enumeration value="28" id="CODE_28"/>
+			<xs:enumeration value="29" id="CODE_29"/>
+			<xs:enumeration value="30" id="CODE_30"/>
+			<xs:enumeration value="31" id="CODE_31"/>
+			<xs:enumeration value="32" id="CODE_32"/>
+			<xs:enumeration value="33" id="CODE_33"/>
+			<xs:enumeration value="34" id="CODE_34"/>
+			<xs:enumeration value="35" id="CODE_35"/>
+			<xs:enumeration value="36" id="CODE_36"/>
+			<xs:enumeration value="37" id="CODE_37"/>
+			<xs:enumeration value="38" id="CODE_38"/>
+			<xs:enumeration value="39" id="CODE_39"/>
+			<xs:enumeration value="40" id="CODE_40"/>
+			<xs:enumeration value="41" id="CODE_41"/>
+			<xs:enumeration value="42" id="CODE_42"/>
+			<xs:enumeration value="43" id="CODE_43"/>
+			<xs:enumeration value="44" id="CODE_44"/>
+			<xs:enumeration value="45" id="CODE_45"/>
+			<xs:enumeration value="46" id="CODE_46"/>
+			<xs:enumeration value="47" id="CODE_47"/>
+			<xs:enumeration value="48" id="CODE_48"/>
+			<xs:enumeration value="49" id="CODE_49"/>
+			<xs:enumeration value="50" id="CODE_50"/>
+			<xs:enumeration value="51" id="CODE_51"/>
+			<xs:enumeration value="52" id="CODE_52"/>
+			<xs:enumeration value="53" id="CODE_53"/>
+			<xs:enumeration value="54" id="CODE_54"/>
+			<xs:enumeration value="55" id="CODE_55"/>
+			<xs:enumeration value="56" id="CODE_56"/>
+			<xs:enumeration value="57" id="CODE_57"/>
+			<xs:enumeration value="58" id="CODE_58"/>
+			<xs:enumeration value="60" id="CODE_60"/>
+			<xs:enumeration value="61" id="CODE_61"/>
+			<xs:enumeration value="62" id="CODE_62"/>
+			<xs:enumeration value="63" id="CODE_63"/>
+			<xs:enumeration value="64" id="CODE_64"/>
+			<xs:enumeration value="65" id="CODE_65"/>
+			<xs:enumeration value="66" id="CODE_66"/>
+			<xs:enumeration value="67" id="CODE_67"/>
+			<xs:enumeration value="68" id="CODE_68"/>
+			<xs:enumeration value="69" id="CODE_69"/>
+			<xs:enumeration value="70" id="CODE_70"/>
+			<xs:enumeration value="71" id="CODE_71"/>
+			<xs:enumeration value="72" id="CODE_72"/>
+			<xs:enumeration value="73" id="CODE_73"/>
+			<xs:enumeration value="74" id="CODE_74"/>
+			<xs:enumeration value="75" id="CODE_75"/>
+			<xs:enumeration value="76" id="CODE_76"/>
+			<xs:enumeration value="77" id="CODE_77"/>
+			<xs:enumeration value="78" id="CODE_78"/>
+			<xs:enumeration value="79" id="CODE_79"/>
+			<xs:enumeration value="80" id="CODE_80"/>
+			<xs:enumeration value="81" id="CODE_81"/>
+			<xs:enumeration value="82" id="CODE_82"/>
+			<xs:enumeration value="83" id="CODE_83"/>
+			<xs:enumeration value="84" id="CODE_84"/>
+			<xs:enumeration value="85" id="CODE_85"/>
+			<xs:enumeration value="87" id="CODE_87"/>
+			<xs:enumeration value="88" id="CODE_88"/>
+			<xs:enumeration value="89" id="CODE_89"/>
+			<xs:enumeration value="90" id="CODE_90"/>
+			<xs:enumeration value="93" id="CODE_93"/>
+			<xs:enumeration value="94" id="CODE_94"/>
+			<xs:enumeration value="95" id="CODE_95"/>
+			<xs:enumeration value="96" id="CODE_96"/>
+			<xs:enumeration value="97" id="CODE_97"/>
+			<xs:enumeration value="98" id="CODE_98"/>
+			<xs:enumeration value="99" id="CODE_99"/>
+			<xs:enumeration value="100" id="CODE_100"/>
+			<xs:enumeration value="101" id="CODE_101"/>
+			<xs:enumeration value="102" id="CODE_102"/>
+			<xs:enumeration value="103" id="CODE_103"/>
+			<xs:enumeration value="104" id="CODE_104"/>
+			<xs:enumeration value="105" id="CODE_105"/>
+			<xs:enumeration value="106" id="CODE_106"/>
+			<xs:enumeration value="107" id="CODE_107"/>
+			<xs:enumeration value="108" id="CODE_108"/>
+			<xs:enumeration value="109" id="CODE_109"/>
+			<xs:enumeration value="110" id="CODE_110"/>
+			<xs:enumeration value="111" id="CODE_111"/>
+			<xs:enumeration value="112" id="CODE_112"/>
+			<xs:enumeration value="113" id="CODE_113"/>
+			<xs:enumeration value="114" id="CODE_114"/>
+			<xs:enumeration value="115" id="CODE_115"/>
+			<xs:enumeration value="116" id="CODE_116"/>
+			<xs:enumeration value="117" id="CODE_117"/>
+			<xs:enumeration value="118" id="CODE_118"/>
+			<xs:enumeration value="119" id="CODE_119"/>
+			<xs:enumeration value="120" id="CODE_120"/>
+			<xs:enumeration value="121" id="CODE_121"/>
+			<xs:enumeration value="122" id="CODE_122"/>
+			<xs:enumeration value="123" id="CODE_123"/>
+			<xs:enumeration value="124" id="CODE_124"/>
+			<xs:enumeration value="125" id="CODE_125"/>
+			<xs:enumeration value="126" id="CODE_126"/>
+			<xs:enumeration value="127" id="CODE_127"/>
+			<xs:enumeration value="128" id="CODE_128"/>
+			<xs:enumeration value="129" id="CODE_129"/>
+			<xs:enumeration value="130" id="CODE_130"/>
+			<xs:enumeration value="131" id="CODE_131"/>
+			<xs:enumeration value="132" id="CODE_132"/>
+			<xs:enumeration value="133" id="CODE_133"/>
+			<xs:enumeration value="134" id="CODE_134"/>
+			<xs:enumeration value="135" id="CODE_135"/>
+			<xs:enumeration value="136" id="CODE_136"/>
+			<xs:enumeration value="137" id="CODE_137"/>
+			<xs:enumeration value="138" id="CODE_138"/>
+			<xs:enumeration value="139" id="CODE_139"/>
+			<xs:enumeration value="140" id="CODE_140"/>
+			<xs:enumeration value="141" id="CODE_141"/>
+			<xs:enumeration value="142" id="CODE_142"/>
+			<xs:enumeration value="143" id="CODE_143"/>
+			<xs:enumeration value="144" id="CODE_144"/>
+			<xs:enumeration value="145" id="CODE_145"/>
+			<xs:enumeration value="146" id="CODE_146"/>
+			<xs:enumeration value="147" id="CODE_147"/>
+			<xs:enumeration value="148" id="CODE_148"/>
+			<xs:enumeration value="149" id="CODE_149"/>
+			<xs:enumeration value="150" id="CODE_150"/>
+			<xs:enumeration value="151" id="CODE_151"/>
+			<xs:enumeration value="152" id="CODE_152"/>
+			<xs:enumeration value="153" id="CODE_153"/>
+			<xs:enumeration value="154" id="CODE_154"/>
+			<xs:enumeration value="155" id="CODE_155"/>
+			<xs:enumeration value="156" id="CODE_156"/>
+			<xs:enumeration value="157" id="CODE_157"/>
+			<xs:enumeration value="158" id="CODE_158"/>
+			<xs:enumeration value="159" id="CODE_159"/>
+			<xs:enumeration value="160" id="CODE_160"/>
+			<xs:enumeration value="161" id="CODE_161"/>
+			<xs:enumeration value="162" id="CODE_162"/>
+			<xs:enumeration value="163" id="CODE_163"/>
+			<xs:enumeration value="164" id="CODE_164"/>
+			<xs:enumeration value="165" id="CODE_165"/>
+			<xs:enumeration value="166" id="CODE_166"/>
+			<xs:enumeration value="167" id="CODE_167"/>
+			<xs:enumeration value="168" id="CODE_168"/>
+			<xs:enumeration value="169" id="CODE_169"/>
+			<xs:enumeration value="170" id="CODE_170"/>
+			<xs:enumeration value="171" id="CODE_171"/>
+			<xs:enumeration value="172" id="CODE_172"/>
+			<xs:enumeration value="173" id="CODE_173"/>
+			<xs:enumeration value="174" id="CODE_174"/>
+			<xs:enumeration value="175" id="CODE_175"/>
+			<xs:enumeration value="176" id="CODE_176"/>
+			<xs:enumeration value="177" id="CODE_177"/>
+			<xs:enumeration value="178" id="CODE_178"/>
+			<xs:enumeration value="179" id="CODE_179"/>
+			<xs:enumeration value="180" id="CODE_180"/>
+			<xs:enumeration value="181" id="CODE_181"/>
+			<xs:enumeration value="182" id="CODE_182"/>
+			<xs:enumeration value="183" id="CODE_183"/>
+			<xs:enumeration value="184" id="CODE_184"/>
+			<xs:enumeration value="185" id="CODE_185"/>
+			<xs:enumeration value="186" id="CODE_186"/>
+			<xs:enumeration value="187" id="CODE_187"/>
+			<xs:enumeration value="188" id="CODE_188"/>
+			<xs:enumeration value="189" id="CODE_189"/>
+			<xs:enumeration value="190" id="CODE_190"/>
+			<xs:enumeration value="191" id="CODE_191"/>
+			<xs:enumeration value="192" id="CODE_192"/>
+			<xs:enumeration value="193" id="CODE_193"/>
+			<xs:enumeration value="194" id="CODE_194"/>
+			<xs:enumeration value="195" id="CODE_195"/>
+			<xs:enumeration value="196" id="CODE_196"/>
+			<xs:enumeration value="197" id="CODE_197"/>
+			<xs:enumeration value="198" id="CODE_198"/>
+			<xs:enumeration value="199" id="CODE_199"/>
+			<xs:enumeration value="200" id="CODE_200"/>
+			<xs:enumeration value="201" id="CODE_201"/>
+			<xs:enumeration value="202" id="CODE_202"/>
+			<xs:enumeration value="203" id="CODE_203"/>
+			<xs:enumeration value="204" id="CODE_204"/>
+			<xs:enumeration value="205" id="CODE_205"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeCodePaysFr">
+		<xs:annotation>
+			<xs:documentation>Code pays de la France dans le référentiel Texa</xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="59" name="CODE_59"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="59"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeQualiteAssure">
+		<xs:annotation>
+			<xs:documentation>Liste des Qualifications du type de l'assuré (Particulier, Professionnel, Entreprise) -
+                Ratttaché à l'onglet Dossier de TG
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="ENTREPRISE" name="CODE_ENTREPRISE"/>
+					<jaxb:typesafeEnumMember value="PARTICULIER" name="CODE_PARTICULIER"/>
+					<jaxb:typesafeEnumMember value="PROFESSIONNEL" name="CODE_PROFESSIONNEL"/>
+					<jaxb:typesafeEnumMember value="COLLTERRITOR" name="CODE_COLLTERRITOR"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="ENTREPRISE"/>
+			<xs:enumeration value="PARTICULIER"/>
+			<xs:enumeration value="PROFESSIONNEL"/>
+			<xs:enumeration value="COLLTERRITOR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeSpecialite">
+		<xs:annotation>
+			<xs:documentation>Liste des Spécialités liés aux Branches du sinistre - Information a rattacher à l'onglet
+                dossier de TG
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="SECHER" name="CODE_SECHER"/>
+					<jaxb:typesafeEnumMember value="DOM_OUVRAGE" name="CODE_DOM_OUVRAGE"/>
+					<jaxb:typesafeEnumMember value="PJ_CONTRUC" name="CODE_PJ_CONTRUC"/>
+					<jaxb:typesafeEnumMember value="RESP_DECENNALE" name="CODE_RESP_DECENNALE"/>
+					<jaxb:typesafeEnumMember value="BAT" name="CODE_BAT"/>
+					<jaxb:typesafeEnumMember value="VOL" name="CODE_VOL"/>
+					<jaxb:typesafeEnumMember value="MAT" name="CODE_MAT"/>
+					<jaxb:typesafeEnumMember value="FIN" name="CODE_FIN"/>
+					<jaxb:typesafeEnumMember value="MAT_AGRI" name="CODE_MAT_AGRI"/>
+					<jaxb:typesafeEnumMember value="ELE" name="CODE_ELE"/>
+					<jaxb:typesafeEnumMember value="CUL" name="CODE_CUL"/>
+					<jaxb:typesafeEnumMember value="BAT_AGRI" name="CODE_BAT_AGRI"/>
+					<jaxb:typesafeEnumMember value="FIN_AGRI" name="CODE_FIN_AGRI"/>
+					<jaxb:typesafeEnumMember value="BAT_AVI_BUR" name="CODE_BAT_AVI_BUR"/>
+					<jaxb:typesafeEnumMember value="FIN_AVI_BUR" name="CODE_FIN_AVI_BUR"/>
+					<jaxb:typesafeEnumMember value="VOL_AVI_BUR" name="CODE_VOL_AVI_BUR"/>
+					<jaxb:typesafeEnumMember value="MAT_AVI_BUR" name="CODE_MAT_AVI_BUR"/>
+					<jaxb:typesafeEnumMember value="BAT_AVI_CNG" name="CODE_BAT_AVI_CNG"/>
+					<jaxb:typesafeEnumMember value="MAT_AVI_CNG" name="CODE_MAT_AVI_CNG"/>
+					<jaxb:typesafeEnumMember value="FIN_AVI_CNG" name="CODE_FIN_AVI_CNG"/>
+					<jaxb:typesafeEnumMember value="VOL_AVI_CNG" name="CODE_VOL_AVI_CNG"/>
+					<jaxb:typesafeEnumMember value="FIN_TEL" name="CODE_FIN_TEL"/>
+					<jaxb:typesafeEnumMember value="MAT_TEL" name="CODE_MAT_TEL"/>
+					<jaxb:typesafeEnumMember value="BAT_TEL" name="CODE_BAT_TEL"/>
+					<jaxb:typesafeEnumMember value="VOL_TEL" name="CODE_VOL_TEL"/>
+					<jaxb:typesafeEnumMember value="RCPART" name="CODE_RCPART"/>
+					<jaxb:typesafeEnumMember value="RCENT" name="CODE_RCENT"/>
+					<jaxb:typesafeEnumMember value="RCAGRO" name="CODE_RCAGRO"/>
+					<jaxb:typesafeEnumMember value="RCSTA" name="CODE_RCSTA"/>
+					<jaxb:typesafeEnumMember value="RCPART_AVI_BUR" name="CODE_RCPART_AVI_BUR"/>
+					<jaxb:typesafeEnumMember value="RCENT_AVI_BUR" name="CODE_RCENT_AVI_BUR"/>
+					<jaxb:typesafeEnumMember value="RCPART_AVI_CNG" name="CODE_RCPART_AVI_CNG"/>
+					<jaxb:typesafeEnumMember value="RCENT_AVI_CNG" name="CODE_RCENT_AVI_CNG"/>
+					<jaxb:typesafeEnumMember value="RCENT_TEL" name="CODE_RCENT_TEL"/>
+					<jaxb:typesafeEnumMember value="RCPART_TEL" name="CODE_RCPART_TEL"/>
+					<jaxb:typesafeEnumMember value="RC" name="CODE_RC"/>
+					<jaxb:typesafeEnumMember value="RC_AVI_CNG" name="CODE_RC_AVI_CNG"/>
+					<jaxb:typesafeEnumMember value="RC_AVI_BUR" name="CODE_RC_AVI_BUR"/>
+					<jaxb:typesafeEnumMember value="RC_TEL" name="CODE_RC_TEL"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="SECHER"/>
+			<xs:enumeration value="DOM_OUVRAGE"/>
+			<xs:enumeration value="PJ_CONTRUC"/>
+			<xs:enumeration value="RESP_DECENNALE"/>
+			<xs:enumeration value="BAT"/>
+			<xs:enumeration value="VOL"/>
+			<xs:enumeration value="MAT"/>
+			<xs:enumeration value="FIN"/>
+			<xs:enumeration value="MAT_AGRI"/>
+			<xs:enumeration value="ELE"/>
+			<xs:enumeration value="CUL"/>
+			<xs:enumeration value="BAT_AGRI"/>
+			<xs:enumeration value="FIN_AGRI"/>
+			<xs:enumeration value="BAT_AVI_BUR"/>
+			<xs:enumeration value="FIN_AVI_BUR"/>
+			<xs:enumeration value="VOL_AVI_BUR"/>
+			<xs:enumeration value="MAT_AVI_BUR"/>
+			<xs:enumeration value="BAT_AVI_CNG"/>
+			<xs:enumeration value="MAT_AVI_CNG"/>
+			<xs:enumeration value="FIN_AVI_CNG"/>
+			<xs:enumeration value="VOL_AVI_CNG"/>
+			<xs:enumeration value="FIN_TEL"/>
+			<xs:enumeration value="MAT_TEL"/>
+			<xs:enumeration value="BAT_TEL"/>
+			<xs:enumeration value="VOL_TEL"/>
+			<xs:enumeration value="RCPART"/>
+			<xs:enumeration value="RCENT"/>
+			<xs:enumeration value="RCAGRO"/>
+			<xs:enumeration value="RCSTA"/>
+			<xs:enumeration value="RCPART_AVI_BUR"/>
+			<xs:enumeration value="RCENT_AVI_BUR"/>
+			<xs:enumeration value="RCPART_AVI_CNG"/>
+			<xs:enumeration value="RCENT_AVI_CNG"/>
+			<xs:enumeration value="RCENT_TEL"/>
+			<xs:enumeration value="RCPART_TEL"/>
+			<xs:enumeration value="RC"/>
+			<xs:enumeration value="RC_AVI_CNG"/>
+			<xs:enumeration value="RC_AVI_BUR"/>
+			<xs:enumeration value="RC_TEL"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeModeOperatoire">
+		<xs:annotation>
+			<xs:documentation>Liste des mode opératoire pour la gestion d'un dossier TG (Expertise sur site,
+                téléexpertise, ...) - Table PROCESS du Refer.
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="AVIS_PIECES_BUR" name="CODE_AVIS_PIECES_BUR"/>
+					<jaxb:typesafeEnumMember value="AVIS_PIECES_CNG" name="CODE_AVIS_PIECES_CNG"/>
+					<jaxb:typesafeEnumMember value="TELEPHONE" name="CODE_TELEPHONE"/>
+					<jaxb:typesafeEnumMember value="VISITE" name="CODE_VISITE"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="AVIS_PIECES_BUR"/>
+			<xs:enumeration value="AVIS_PIECES_CNG"/>
+			<xs:enumeration value="TELEPHONE"/>
+			<xs:enumeration value="VISITE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeCloture">
+		<xs:annotation>
+			<xs:documentation>Liste des types de clôture pour la clôture d'un dossier TG</xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="NORMALE" name="CODE_NORMALE"/>
+					<jaxb:typesafeEnumMember value="ANNUL" name="CODE_ANNUL"/>
+					<jaxb:typesafeEnumMember value="MODEOP" name="CODE_MODEOP"/>
+					<jaxb:typesafeEnumMember value="CONNEX" name="CODE_CONNEX"/>
+					<jaxb:typesafeEnumMember value="ERREUR" name="CODE_ERREUR"/>
+					<jaxb:typesafeEnumMember value="REFUS" name="CODE_REFUS"/>
+					<jaxb:typesafeEnumMember value="DESSACORD" name="CODE_DESSACORD"/>
+					<jaxb:typesafeEnumMember value="HORSCADRE" name="CODE_HORSCADRE"/>
+					<jaxb:typesafeEnumMember value="NORMALESV" name="CODE_NORMALESV"/>
+					<jaxb:typesafeEnumMember value="ANNULASSU" name="CODE_ANNULASSU"/>
+					<jaxb:typesafeEnumMember value="ANNULAUTRE" name="CODE_ANNULAUTRE"/>
+					<jaxb:typesafeEnumMember value="TRANSFERTEXA" name="CODE_TRANSFERTEXA"/>
+					<jaxb:typesafeEnumMember value="TRANSFERAUTRE" name="CODE_TRANSFERAUTRE"/>
+					<jaxb:typesafeEnumMember value="RETOURMANDAT" name="CODE_RETOURMANDAT"/>
+					<jaxb:typesafeEnumMember value="RETOUR AGENT" name="CODE_RETOUR_AGENT"/>
+					<jaxb:typesafeEnumMember value="NORMALFORFAIT" name="CODE_NORMALFORFAIT"/>
+					<jaxb:typesafeEnumMember value="NORMALENT" name="CODE_NORMALENT"/>
+					<jaxb:typesafeEnumMember value="NORMALSS" name="CODE_NORMALSS"/>
+					<jaxb:typesafeEnumMember value="AVISPIECE" name="CODE_AVISPIECE"/>
+					<jaxb:typesafeEnumMember value="NORMALVISIT" name="CODE_NORMALVISIT"/>
+					<jaxb:typesafeEnumMember value="AVISPIECECONT" name="CODE_AVISPIECECONT"/>
+					<jaxb:typesafeEnumMember value="NORMALSSREG" name="CODE_NORMALSSREG"/>
+					<jaxb:typesafeEnumMember value="NORMALREG" name="CODE_NORMALREG"/>
+					<jaxb:typesafeEnumMember value="FORFAIT" name="CODE_FORFAIT"/>
+					<jaxb:typesafeEnumMember value="ENTREPRISE" name="CODE_ENTREPRISE"/>
+					<jaxb:typesafeEnumMember value="SANSSUITE" name="CODE_SANSSUITE"/>
+					<jaxb:typesafeEnumMember value="DEVIS" name="CODE_DEVIS"/>
+					<jaxb:typesafeEnumMember value="ENTASSURE" name="CODE_ENTASSURE"/>
+					<jaxb:typesafeEnumMember value="REPARATION" name="CODE_REPARATION"/>
+					<jaxb:typesafeEnumMember value="CHMISSIONNEUR" name="CODE_CHMISSIONNEUR"/>
+					<jaxb:typesafeEnumMember value="ERREURSAISIE" name="CODE_ERREURSAISIE"/>
+					<jaxb:typesafeEnumMember value="CARENCELESE" name="CODE_CARENCELESE"/>
+					<jaxb:typesafeEnumMember value="SANSINDEMNITE" name="CODE_SANSINDEMNITE"/>
+					<jaxb:typesafeEnumMember value="REPARATIONNATURE" name="CODE_REPARATIONNATURE"/>
+					<jaxb:typesafeEnumMember value="ERRMISSION" name="CODE_ERRMISSION"/>
+					<jaxb:typesafeEnumMember value="FORFAITAIRE" name="CODE_FORFAITAIRE"/>
+					<jaxb:typesafeEnumMember value="DEVISEXT" name="CODE_DEVISEXT"/>
+					<jaxb:typesafeEnumMember value="TARIFENT" name="CODE_TARIFENT"/>
+					<jaxb:typesafeEnumMember value="RETOUREMETT" name="CODE_RETOUREMETT"/>
+					<jaxb:typesafeEnumMember value="TREXPTEXA" name="CODE_TREXPTEXA"/>
+					<jaxb:typesafeEnumMember value="RENHTEXE" name="CODE_RENHTEXE"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="NORMALE"/>
+			<xs:enumeration value="ANNUL"/>
+			<xs:enumeration value="MODEOP"/>
+			<xs:enumeration value="CONNEX"/>
+			<xs:enumeration value="ERREUR"/>
+			<xs:enumeration value="REFUS"/>
+			<xs:enumeration value="DESSACORD"/>
+			<xs:enumeration value="HORSCADRE"/>
+			<xs:enumeration value="NORMALESV"/>
+			<xs:enumeration value="ANNULASSU"/>
+			<xs:enumeration value="ANNULAUTRE"/>
+			<xs:enumeration value="TRANSFERTEXA"/>
+			<xs:enumeration value="TRANSFERAUTRE"/>
+			<xs:enumeration value="RETOURMANDAT"/>
+			<xs:enumeration value="RETOUR AGENT"/>
+			<xs:enumeration value="NORMALFORFAIT"/>
+			<xs:enumeration value="NORMALENT"/>
+			<xs:enumeration value="NORMALSS"/>
+			<xs:enumeration value="AVISPIECE"/>
+			<xs:enumeration value="NORMALVISIT"/>
+			<xs:enumeration value="AVISPIECECONT"/>
+			<xs:enumeration value="NORMALSSREG"/>
+			<xs:enumeration value="NORMALREG"/>
+			<xs:enumeration value="FORFAIT"/>
+			<xs:enumeration value="ENTREPRISE"/>
+			<xs:enumeration value="SANSSUITE"/>
+			<xs:enumeration value="DEVIS"/>
+			<xs:enumeration value="ENTASSURE"/>
+			<xs:enumeration value="REPARATION"/>
+			<xs:enumeration value="CHMISSIONNEUR"/>
+			<xs:enumeration value="ERREURSAISIE"/>
+			<xs:enumeration value="CARENCELESE"/>
+			<xs:enumeration value="SANSINDEMNITE"/>
+			<xs:enumeration value="REPARATIONNATURE"/>
+			<xs:enumeration value="ERRMISSION"/>
+			<xs:enumeration value="FORFAITAIRE"/>
+			<xs:enumeration value="DEVISEXT"/>
+			<xs:enumeration value="TARIFENT"/>
+			<xs:enumeration value="RETOUREMETT"/>
+			<xs:enumeration value="TREXPTEXA"/>
+			<xs:enumeration value="RENHTEXE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypePiecesManquantes">
+		<xs:annotation>
+			<xs:documentation>Liste des pièces manquantes pouvant être demandé à l'assuré pour compléter le dossier TG
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+					<jaxb:typesafeEnumMember value="5" name="CODE_5"/>
+					<jaxb:typesafeEnumMember value="6" name="CODE_6"/>
+					<jaxb:typesafeEnumMember value="7" name="CODE_7"/>
+					<jaxb:typesafeEnumMember value="8" name="CODE_8"/>
+					<jaxb:typesafeEnumMember value="9" name="CODE_9"/>
+					<jaxb:typesafeEnumMember value="10" name="CODE_10"/>
+					<jaxb:typesafeEnumMember value="11" name="CODE_11"/>
+					<jaxb:typesafeEnumMember value="12" name="CODE_12"/>
+					<jaxb:typesafeEnumMember value="13" name="CODE_13"/>
+					<jaxb:typesafeEnumMember value="14" name="CODE_14"/>
+					<jaxb:typesafeEnumMember value="15" name="CODE_15"/>
+					<jaxb:typesafeEnumMember value="16" name="CODE_16"/>
+					<jaxb:typesafeEnumMember value="17" name="CODE_17"/>
+					<jaxb:typesafeEnumMember value="18" name="CODE_18"/>
+					<jaxb:typesafeEnumMember value="19" name="CODE_19"/>
+					<jaxb:typesafeEnumMember value="20" name="CODE_20"/>
+					<jaxb:typesafeEnumMember value="21" name="CODE_21"/>
+					<jaxb:typesafeEnumMember value="22" name="CODE_22"/>
+					<jaxb:typesafeEnumMember value="23" name="CODE_23"/>
+					<jaxb:typesafeEnumMember value="24" name="CODE_24"/>
+					<jaxb:typesafeEnumMember value="25" name="CODE_25"/>
+					<jaxb:typesafeEnumMember value="26" name="CODE_26"/>
+					<jaxb:typesafeEnumMember value="27" name="CODE_27"/>
+					<jaxb:typesafeEnumMember value="28" name="CODE_28"/>
+					<jaxb:typesafeEnumMember value="29" name="CODE_29"/>
+					<jaxb:typesafeEnumMember value="30" name="CODE_30"/>
+					<jaxb:typesafeEnumMember value="31" name="CODE_31"/>
+					<jaxb:typesafeEnumMember value="32" name="CODE_32"/>
+					<jaxb:typesafeEnumMember value="33" name="CODE_33"/>
+					<jaxb:typesafeEnumMember value="34" name="CODE_34"/>
+					<jaxb:typesafeEnumMember value="35" name="CODE_35"/>
+					<jaxb:typesafeEnumMember value="36" name="CODE_36"/>
+					<jaxb:typesafeEnumMember value="37" name="CODE_37"/>
+					<jaxb:typesafeEnumMember value="38" name="CODE_38"/>
+					<jaxb:typesafeEnumMember value="39" name="CODE_39"/>
+					<jaxb:typesafeEnumMember value="40" name="CODE_40"/>
+					<jaxb:typesafeEnumMember value="41" name="CODE_41"/>
+					<jaxb:typesafeEnumMember value="42" name="CODE_42"/>
+					<jaxb:typesafeEnumMember value="43" name="CODE_43"/>
+					<jaxb:typesafeEnumMember value="44" name="CODE_44"/>
+					<jaxb:typesafeEnumMember value="45" name="CODE_45"/>
+					<jaxb:typesafeEnumMember value="46" name="CODE_46"/>
+					<jaxb:typesafeEnumMember value="47" name="CODE_47"/>
+					<jaxb:typesafeEnumMember value="48" name="CODE_48"/>
+					<jaxb:typesafeEnumMember value="49" name="CODE_49"/>
+					<jaxb:typesafeEnumMember value="50" name="CODE_50"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="19"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
+			<xs:enumeration value="25"/>
+			<xs:enumeration value="26"/>
+			<xs:enumeration value="27"/>
+			<xs:enumeration value="28"/>
+			<xs:enumeration value="29"/>
+			<xs:enumeration value="30"/>
+			<xs:enumeration value="31"/>
+			<xs:enumeration value="32"/>
+			<xs:enumeration value="33"/>
+			<xs:enumeration value="34"/>
+			<xs:enumeration value="35"/>
+			<xs:enumeration value="36"/>
+			<xs:enumeration value="37"/>
+			<xs:enumeration value="38"/>
+			<xs:enumeration value="39"/>
+			<xs:enumeration value="40"/>
+			<xs:enumeration value="41"/>
+			<xs:enumeration value="42"/>
+			<xs:enumeration value="43"/>
+			<xs:enumeration value="44"/>
+			<xs:enumeration value="45"/>
+			<xs:enumeration value="46"/>
+			<xs:enumeration value="47"/>
+			<xs:enumeration value="48"/>
+			<xs:enumeration value="49"/>
+			<xs:enumeration value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeRisque">
+		<xs:annotation>
+			<xs:documentation>Les natures de risque pour un dossier TG (RST, RPNS, ...) - Information rattachée au
+                Dossier dans TG
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="RPNS" name="CODE_RPNS"/>
+					<jaxb:typesafeEnumMember value="RPS" name="CODE_RPS"/>
+					<jaxb:typesafeEnumMember value="RSS" name="CODE_RSS"/>
+					<jaxb:typesafeEnumMember value="RST" name="CODE_RST"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="RPNS"/>
+			<xs:enumeration value="RPS"/>
+			<xs:enumeration value="RSS"/>
+			<xs:enumeration value="RST"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeSinistre">
+		<xs:annotation>
+			<xs:documentation>Les des types de sinistres - Information rattachée au Dossier</xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="ALIMENTSBETAIL" name="CODE_ALIMENTSBETAIL"/>
+					<jaxb:typesafeEnumMember value="ATTENTAT" name="CODE_ATTENTAT"/>
+					<jaxb:typesafeEnumMember value="BRISFILIERES" name="CODE_BRISFILIERES"/>
+					<jaxb:typesafeEnumMember value="BRISGLACE" name="CODE_BRISGLACE"/>
+					<jaxb:typesafeEnumMember value="BRISMACHINE" name="CODE_BRISMACHINE"/>
+					<jaxb:typesafeEnumMember value="CATNAT" name="CODE_CATNAT"/>
+					<jaxb:typesafeEnumMember value="CATNATSECH" name="CODE_CATNATSECH"/>
+					<jaxb:typesafeEnumMember value="CHOCVEHICULE" name="CODE_CHOCVEHICULE"/>
+					<jaxb:typesafeEnumMember value="CHUTEAERONEF" name="CODE_CHUTEAERONEF"/>
+					<jaxb:typesafeEnumMember value="COMMERSEMENCES" name="CODE_COMMERSEMENCES"/>
+					<jaxb:typesafeEnumMember value="CONTAMINATION" name="CODE_CONTAMINATION"/>
+					<jaxb:typesafeEnumMember value="COULHYDROALC" name="CODE_COULHYDROALC"/>
+					<jaxb:typesafeEnumMember value="DEFRECOURS" name="CODE_DEFRECOURS"/>
+					<jaxb:typesafeEnumMember value="DEGATDESEAUX" name="CODE_DEGATDESEAUX"/>
+					<jaxb:typesafeEnumMember value="DERIVEPHYTO" name="CODE_DERIVEPHYTO"/>
+					<jaxb:typesafeEnumMember value="DIVAGATIANIMA" name="CODE_DIVAGATIANIMA"/>
+					<jaxb:typesafeEnumMember value="DIVERS" name="CODE_DIVERS"/>
+					<jaxb:typesafeEnumMember value="DOMELECT" name="CODE_DOMELECT"/>
+					<jaxb:typesafeEnumMember value="DOMMENAGERS" name="CODE_DOMMENAGERS"/>
+					<jaxb:typesafeEnumMember value="DOMOUVRAGES" name="CODE_DOMOUVRAGES"/>
+					<jaxb:typesafeEnumMember value="EFFONDREMENT" name="CODE_EFFONDREMENT"/>
+					<jaxb:typesafeEnumMember value="EMEUTE" name="CODE_EMEUTE"/>
+					<jaxb:typesafeEnumMember value="EXPLOSION" name="CODE_EXPLOSION"/>
+					<jaxb:typesafeEnumMember value="FOUDRE" name="CODE_FOUDRE"/>
+					<jaxb:typesafeEnumMember value="FUMEE" name="CODE_FUMEE"/>
+					<jaxb:typesafeEnumMember value="GEL" name="CODE_GEL"/>
+					<jaxb:typesafeEnumMember value="GLISSTERRAIN" name="CODE_GLISSTERRAIN"/>
+					<jaxb:typesafeEnumMember value="GRELE" name="CODE_GRELE"/>
+					<jaxb:typesafeEnumMember value="INCENDIE" name="CODE_INCENDIE"/>
+					<jaxb:typesafeEnumMember value="INONDBOUE" name="CODE_INONDBOUE"/>
+					<jaxb:typesafeEnumMember value="MARITIME" name="CODE_MARITIME"/>
+					<jaxb:typesafeEnumMember value="MORTALITE" name="CODE_MORTALITE"/>
+					<jaxb:typesafeEnumMember value="MRISQRECOLTE" name="CODE_MRISQRECOLTE"/>
+					<jaxb:typesafeEnumMember value="PANNEFROID" name="CODE_PANNEFROID"/>
+					<jaxb:typesafeEnumMember value="PERTEEXPLOIT" name="CODE_PERTEEXPLOIT"/>
+					<jaxb:typesafeEnumMember value="POIDSNEIGE" name="CODE_POIDSNEIGE"/>
+					<jaxb:typesafeEnumMember value="POLLUTION" name="CODE_POLLUTION"/>
+					<jaxb:typesafeEnumMember value="PREJECO" name="CODE_PREJECO"/>
+					<jaxb:typesafeEnumMember value="PROTJURIDIQUE" name="CODE_PROTJURIDIQUE"/>
+					<jaxb:typesafeEnumMember value="PUC" name="CODE_PUC"/>
+					<jaxb:typesafeEnumMember value="RC" name="CODE_RC"/>
+					<jaxb:typesafeEnumMember value="RCDECENALE" name="CODE_RCDECENALE"/>
+					<jaxb:typesafeEnumMember value="RCGIBIER" name="CODE_RCGIBIER"/>
+					<jaxb:typesafeEnumMember value="RCLIEVRES" name="CODE_RCLIEVRES"/>
+					<jaxb:typesafeEnumMember value="RCPRODLIVRES" name="CODE_RCPRODLIVRES"/>
+					<jaxb:typesafeEnumMember value="RCTRAVAUX" name="CODE_RCTRAVAUX"/>
+					<jaxb:typesafeEnumMember value="RECOURS" name="CODE_RECOURS"/>
+					<jaxb:typesafeEnumMember value="RISQSPECIAUX" name="CODE_RISQSPECIAUX"/>
+					<jaxb:typesafeEnumMember value="TEMPGRELNEIGE" name="CODE_TEMPGRELNEIGE"/>
+					<jaxb:typesafeEnumMember value="TEMPOURCYCL" name="CODE_TEMPOURCYCL"/>
+					<jaxb:typesafeEnumMember value="TRANSPORT" name="CODE_TRANSPORT"/>
+					<jaxb:typesafeEnumMember value="TRBLTERRERAZ" name="CODE_TRBLTERRERAZ"/>
+					<jaxb:typesafeEnumMember value="TRISQCHANTIER" name="CODE_TRISQCHANTIER"/>
+					<jaxb:typesafeEnumMember value="TRISQINFORM" name="CODE_TRISQINFORM"/>
+					<jaxb:typesafeEnumMember value="TRISQMONTAGE" name="CODE_TRISQMONTAGE"/>
+					<jaxb:typesafeEnumMember value="VANDALISME" name="CODE_VANDALISME"/>
+					<jaxb:typesafeEnumMember value="VOL" name="CODE_VOL"/>
+					<jaxb:typesafeEnumMember value="DOMBIEN" name="CODE_DOMBIEN"/>
+					<jaxb:typesafeEnumMember value="EVCLIMAT" name="CODE_EVCLIMAT"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="ALIMENTSBETAIL"/>
+			<xs:enumeration value="ATTENTAT"/>
+			<xs:enumeration value="BRISFILIERES"/>
+			<xs:enumeration value="BRISGLACE"/>
+			<xs:enumeration value="BRISMACHINE"/>
+			<xs:enumeration value="CATNAT"/>
+			<xs:enumeration value="CATNATSECH"/>
+			<xs:enumeration value="CHOCVEHICULE"/>
+			<xs:enumeration value="CHUTEAERONEF"/>
+			<xs:enumeration value="COMMERSEMENCES"/>
+			<xs:enumeration value="CONTAMINATION"/>
+			<xs:enumeration value="COULHYDROALC"/>
+			<xs:enumeration value="DEFRECOURS"/>
+			<xs:enumeration value="DEGATDESEAUX"/>
+			<xs:enumeration value="DERIVEPHYTO"/>
+			<xs:enumeration value="DIVAGATIANIMA"/>
+			<xs:enumeration value="DIVERS"/>
+			<xs:enumeration value="DOMELECT"/>
+			<xs:enumeration value="DOMMENAGERS"/>
+			<xs:enumeration value="DOMOUVRAGES"/>
+			<xs:enumeration value="EFFONDREMENT"/>
+			<xs:enumeration value="EMEUTE"/>
+			<xs:enumeration value="EXPLOSION"/>
+			<xs:enumeration value="FOUDRE"/>
+			<xs:enumeration value="FUMEE"/>
+			<xs:enumeration value="GEL"/>
+			<xs:enumeration value="GLISSTERRAIN"/>
+			<xs:enumeration value="GRELE"/>
+			<xs:enumeration value="INCENDIE"/>
+			<xs:enumeration value="INONDBOUE"/>
+			<xs:enumeration value="MARITIME"/>
+			<xs:enumeration value="MORTALITE"/>
+			<xs:enumeration value="MRISQRECOLTE"/>
+			<xs:enumeration value="PANNEFROID"/>
+			<xs:enumeration value="PERTEEXPLOIT"/>
+			<xs:enumeration value="POIDSNEIGE"/>
+			<xs:enumeration value="POLLUTION"/>
+			<xs:enumeration value="PREJECO"/>
+			<xs:enumeration value="PROTJURIDIQUE"/>
+			<xs:enumeration value="PUC"/>
+			<xs:enumeration value="RC"/>
+			<xs:enumeration value="RCDECENALE"/>
+			<xs:enumeration value="RCGIBIER"/>
+			<xs:enumeration value="RCLIEVRES"/>
+			<xs:enumeration value="RCPRODLIVRES"/>
+			<xs:enumeration value="RCTRAVAUX"/>
+			<xs:enumeration value="RECOURS"/>
+			<xs:enumeration value="RISQSPECIAUX"/>
+			<xs:enumeration value="TEMPGRELNEIGE"/>
+			<xs:enumeration value="TEMPOURCYCL"/>
+			<xs:enumeration value="TRANSPORT"/>
+			<xs:enumeration value="TRBLTERRERAZ"/>
+			<xs:enumeration value="TRISQCHANTIER"/>
+			<xs:enumeration value="TRISQINFORM"/>
+			<xs:enumeration value="TRISQMONTAGE"/>
+			<xs:enumeration value="VANDALISME"/>
+			<xs:enumeration value="VOL"/>
+			<xs:enumeration value="DOMBIEN"/>
+			<xs:enumeration value="EVCLIMAT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeFicheInstruction">
+		<xs:annotation>
+			<xs:documentation>Liste des fiches Instructions TG</xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="TEXA SAS" name="CODE_TEXA_SAS"/>
+					<jaxb:typesafeEnumMember value="TEXEUROP" name="CODE_TEXEUROP"/>
+					<jaxb:typesafeEnumMember value="ACE" name="CODE_ACE"/>
+					<jaxb:typesafeEnumMember value="ACM" name="CODE_ACM"/>
+					<jaxb:typesafeEnumMember value="ACMN" name="CODE_ACMN"/>
+					<jaxb:typesafeEnumMember value="AGF_A" name="CODE_AGF_A"/>
+					<jaxb:typesafeEnumMember value="AGF_C" name="CODE_AGF_C"/>
+					<jaxb:typesafeEnumMember value="AGPM" name="CODE_AGPM"/>
+					<jaxb:typesafeEnumMember value="AIGEURO" name="CODE_AIGEURO"/>
+					<jaxb:typesafeEnumMember value="AMF" name="CODE_AMF"/>
+					<jaxb:typesafeEnumMember value="AREAS" name="CODE_AREAS"/>
+					<jaxb:typesafeEnumMember value="ASSSUD" name="CODE_ASSSUD"/>
+					<jaxb:typesafeEnumMember value="ASSURFED" name="CODE_ASSURFED"/>
+					<jaxb:typesafeEnumMember value="AVIVA" name="CODE_AVIVA"/>
+					<jaxb:typesafeEnumMember value="AVIVATSA" name="CODE_AVIVATSA"/>
+					<jaxb:typesafeEnumMember value="AXACSA" name="CODE_AXACSA"/>
+					<jaxb:typesafeEnumMember value="AZUR" name="CODE_AZUR"/>
+					<jaxb:typesafeEnumMember value="CICASS" name="CODE_CICASS"/>
+					<jaxb:typesafeEnumMember value="EUROFIL" name="CODE_EUROFIL"/>
+					<jaxb:typesafeEnumMember value="GANEURO" name="CODE_GANEURO"/>
+					<jaxb:typesafeEnumMember value="GENERALI" name="CODE_GENERALI"/>
+					<jaxb:typesafeEnumMember value="GMF" name="CODE_GMF"/>
+					<jaxb:typesafeEnumMember value="GPA" name="CODE_GPA"/>
+					<jaxb:typesafeEnumMember value="GRAGEST" name="CODE_GRAGEST"/>
+					<jaxb:typesafeEnumMember value="LABRESSE" name="CODE_LABRESSE"/>
+					<jaxb:typesafeEnumMember value="MMAIARD" name="CODE_MMAIARD"/>
+					<jaxb:typesafeEnumMember value="COVEARISKS" name="CODE_COVEARISKS"/>
+					<jaxb:typesafeEnumMember value="COVEAFLEET" name="CODE_COVEAFLEET"/>
+					<jaxb:typesafeEnumMember value="MEDERIC" name="CODE_MEDERIC"/>
+					<jaxb:typesafeEnumMember value="CARMA" name="CODE_CARMA"/>
+					<jaxb:typesafeEnumMember value="PACIFAIX" name="CODE_PACIFAIX"/>
+					<jaxb:typesafeEnumMember value="PACIFICA" name="CODE_PACIFICA"/>
+					<jaxb:typesafeEnumMember value="SADA" name="CODE_SADA"/>
+					<jaxb:typesafeEnumMember value="SAGENA" name="CODE_SAGENA"/>
+					<jaxb:typesafeEnumMember value="SMABTP" name="CODE_SMABTP"/>
+					<jaxb:typesafeEnumMember value="SOGESSUR" name="CODE_SOGESSUR"/>
+					<jaxb:typesafeEnumMember value="AIL" name="CODE_AIL"/>
+					<jaxb:typesafeEnumMember value="ACCOR" name="CODE_ACCOR"/>
+					<jaxb:typesafeEnumMember value="AGFGSOPTIM" name="CODE_AGFGSOPTIM"/>
+					<jaxb:typesafeEnumMember value="APAVE" name="CODE_APAVE"/>
+					<jaxb:typesafeEnumMember value="ASF" name="CODE_ASF"/>
+					<jaxb:typesafeEnumMember value="ATAC" name="CODE_ATAC"/>
+					<jaxb:typesafeEnumMember value="AUCHAN" name="CODE_AUCHAN"/>
+					<jaxb:typesafeEnumMember value="BOUYGUES" name="CODE_BOUYGUES"/>
+					<jaxb:typesafeEnumMember value="BUT" name="CODE_BUT"/>
+					<jaxb:typesafeEnumMember value="CAMAIEU" name="CODE_CAMAIEU"/>
+					<jaxb:typesafeEnumMember value="CNHJ" name="CODE_CNHJ"/>
+					<jaxb:typesafeEnumMember value="COOP" name="CODE_COOP"/>
+					<jaxb:typesafeEnumMember value="LCL" name="CODE_LCL"/>
+					<jaxb:typesafeEnumMember value="FT" name="CODE_FT"/>
+					<jaxb:typesafeEnumMember value="GFF" name="CODE_GFF"/>
+					<jaxb:typesafeEnumMember value="INTERMARCHE" name="CODE_INTERMARCHE"/>
+					<jaxb:typesafeEnumMember value="IENA" name="CODE_IENA"/>
+					<jaxb:typesafeEnumMember value="JULES" name="CODE_JULES"/>
+					<jaxb:typesafeEnumMember value="LAPOSTE" name="CODE_LAPOSTE"/>
+					<jaxb:typesafeEnumMember value="LEROYMERLIN" name="CODE_LEROYMERLIN"/>
+					<jaxb:typesafeEnumMember value="LESAFFRE" name="CODE_LESAFFRE"/>
+					<jaxb:typesafeEnumMember value="MAXITOYS" name="CODE_MAXITOYS"/>
+					<jaxb:typesafeEnumMember value="MCDO" name="CODE_MCDO"/>
+					<jaxb:typesafeEnumMember value="OKAIDI" name="CODE_OKAIDI"/>
+					<jaxb:typesafeEnumMember value="PICARD" name="CODE_PICARD"/>
+					<jaxb:typesafeEnumMember value="PCTOTAL" name="CODE_PCTOTAL"/>
+					<jaxb:typesafeEnumMember value="PPRRED" name="CODE_PPRRED"/>
+					<jaxb:typesafeEnumMember value="QUINTON" name="CODE_QUINTON"/>
+					<jaxb:typesafeEnumMember value="RAPPSER" name="CODE_RAPPSER"/>
+					<jaxb:typesafeEnumMember value="RPA" name="CODE_RPA"/>
+					<jaxb:typesafeEnumMember value="SECURITENOUVELLE" name="CODE_SECURITENOUVELLE"/>
+					<jaxb:typesafeEnumMember value="SES" name="CODE_SES"/>
+					<jaxb:typesafeEnumMember value="SOCCRAMSOPAREC" name="CODE_SOCCRAMSOPAREC"/>
+					<jaxb:typesafeEnumMember value="SUEZ" name="CODE_SUEZ"/>
+					<jaxb:typesafeEnumMember value="SYSTEME U" name="CODE_SYSTEME_U"/>
+					<jaxb:typesafeEnumMember value="THIRIET" name="CODE_THIRIET"/>
+					<jaxb:typesafeEnumMember value="TROC" name="CODE_TROC"/>
+					<jaxb:typesafeEnumMember value="UCABAIL" name="CODE_UCABAIL"/>
+					<jaxb:typesafeEnumMember value="UNICIL" name="CODE_UNICIL"/>
+					<jaxb:typesafeEnumMember value="VIDEO" name="CODE_VIDEO"/>
+					<jaxb:typesafeEnumMember value="JACADI" name="CODE_JACADI"/>
+					<jaxb:typesafeEnumMember value="IDGROUPE" name="CODE_IDGROUPE"/>
+					<jaxb:typesafeEnumMember value="IMMOPLUS" name="CODE_IMMOPLUS"/>
+					<jaxb:typesafeEnumMember value="SAMSICINF" name="CODE_SAMSICINF"/>
+					<jaxb:typesafeEnumMember value="SAMSICSUP" name="CODE_SAMSICSUP"/>
+					<jaxb:typesafeEnumMember value="CARREFOURINT" name="CODE_CARREFOURINT"/>
+					<jaxb:typesafeEnumMember value="CARREFOURFR" name="CODE_CARREFOURFR"/>
+					<jaxb:typesafeEnumMember value="TOTALDIOTAZUR" name="CODE_TOTALDIOTAZUR"/>
+					<jaxb:typesafeEnumMember value="TOTALDIOT" name="CODE_TOTALDIOT"/>
+					<jaxb:typesafeEnumMember value="TOTALZURICH" name="CODE_TOTALZURICH"/>
+					<jaxb:typesafeEnumMember value="DALKIA" name="CODE_DALKIA"/>
+					<jaxb:typesafeEnumMember value="DARTY" name="CODE_DARTY"/>
+					<jaxb:typesafeEnumMember value="DECATHLON" name="CODE_DECATHLON"/>
+					<jaxb:typesafeEnumMember value="9TELECOM" name="CODE_9TELECOM"/>
+					<jaxb:typesafeEnumMember value="ESPMASTER1" name="CODE_ESPMASTER1"/>
+					<jaxb:typesafeEnumMember value="ESPMASTER2" name="CODE_ESPMASTER2"/>
+					<jaxb:typesafeEnumMember value="ESPMASTER3" name="CODE_ESPMASTER3"/>
+					<jaxb:typesafeEnumMember value="ESPMASTER4" name="CODE_ESPMASTER4"/>
+					<jaxb:typesafeEnumMember value="ESPMASTER5" name="CODE_ESPMASTER5"/>
+					<jaxb:typesafeEnumMember value="ESPMASTER6" name="CODE_ESPMASTER6"/>
+					<jaxb:typesafeEnumMember value="ESPMASTER7" name="CODE_ESPMASTER7"/>
+					<jaxb:typesafeEnumMember value="ESPMASTER8" name="CODE_ESPMASTER8"/>
+					<jaxb:typesafeEnumMember value="ESPMASTER9" name="CODE_ESPMASTER9"/>
+					<jaxb:typesafeEnumMember value="ESPMASTER10" name="CODE_ESPMASTER10"/>
+					<jaxb:typesafeEnumMember value="ESPMASTER11" name="CODE_ESPMASTER11"/>
+					<jaxb:typesafeEnumMember value="ESPMASTER12" name="CODE_ESPMASTER12"/>
+					<jaxb:typesafeEnumMember value="LAGARDERE" name="CODE_LAGARDERE"/>
+					<jaxb:typesafeEnumMember value="STARBUCKS" name="CODE_STARBUCKS"/>
+					<jaxb:typesafeEnumMember value="LETERROIR" name="CODE_LETERROIR"/>
+					<jaxb:typesafeEnumMember value="EDF" name="CODE_EDF"/>
+					<jaxb:typesafeEnumMember value="ACTRI" name="CODE_ACTRI"/>
+					<jaxb:typesafeEnumMember value="SGBD" name="CODE_SGBD"/>
+					<jaxb:typesafeEnumMember value="KINGFISHER" name="CODE_KINGFISHER"/>
+					<jaxb:typesafeEnumMember value="TERREAL" name="CODE_TERREAL"/>
+					<jaxb:typesafeEnumMember value="HOLDER" name="CODE_HOLDER"/>
+					<jaxb:typesafeEnumMember value="UNION_BRESSE_DOMBRES" name="CODE_UNION_BRESSE_DOMBRES"/>
+					<jaxb:typesafeEnumMember value="SECURITESOCIALE" name="CODE_SECURITESOCIALE"/>
+					<jaxb:typesafeEnumMember value="PNAS" name="CODE_PNAS"/>
+					<jaxb:typesafeEnumMember value="SHELL" name="CODE_SHELL"/>
+					<jaxb:typesafeEnumMember value="OGF" name="CODE_OGF"/>
+					<jaxb:typesafeEnumMember value="GANEUROSSPROTO" name="CODE_GANEUROSSPROTO"/>
+					<jaxb:typesafeEnumMember value="GANEUROPROTO" name="CODE_GANEUROPROTO"/>
+					<jaxb:typesafeEnumMember value="OBAIDI" name="CODE_OBAIDI"/>
+					<jaxb:typesafeEnumMember value="KIABI" name="CODE_KIABI"/>
+					<jaxb:typesafeEnumMember value="TAPEOEIL" name="CODE_TAPEOEIL"/>
+					<jaxb:typesafeEnumMember value="TOP OFFICE" name="CODE_TOP_OFFICE"/>
+					<jaxb:typesafeEnumMember value="MMA_SA(exAZUR)VIA_CNG" name="CODE_MMA_SAEXAZURVIA_CNG"/>
+					<jaxb:typesafeEnumMember value="MMA_SA(exAZUR)VIA DARVA" name="CODE_MMA_SAEXAZURVIA_DARVA"/>
+					<jaxb:typesafeEnumMember value="MMA_SA(exAZUR)HORSDARVA" name="CODE_MMA_SAEXAZURHORSDARVA"/>
+					<jaxb:typesafeEnumMember value="FRANCEPRINTEMPS" name="CODE_FRANCEPRINTEMPS"/>
+					<jaxb:typesafeEnumMember value="EUROFIL1" name="CODE_EUROFIL1"/>
+					<jaxb:typesafeEnumMember value="TEXAAVISSURPIECESCNG" name="CODE_TEXAAVISSURPIECESCNG"/>
+					<jaxb:typesafeEnumMember value="TEXAAVISSURPIECESBUR" name="CODE_TEXAAVISSURPIECESBUR"/>
+					<jaxb:typesafeEnumMember value="PGINVETSTISSEMENTS SERVYR" name="CODE_PGINVETSTISSEMENTS_SERVYR"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="TEXA SAS"/>
+			<xs:enumeration value="TEXEUROP"/>
+			<xs:enumeration value="ACE"/>
+			<xs:enumeration value="ACM"/>
+			<xs:enumeration value="ACMN"/>
+			<xs:enumeration value="AGF_A"/>
+			<xs:enumeration value="AGF_C"/>
+			<xs:enumeration value="AGPM"/>
+			<xs:enumeration value="AIGEURO"/>
+			<xs:enumeration value="AMF"/>
+			<xs:enumeration value="AREAS"/>
+			<xs:enumeration value="ASSSUD"/>
+			<xs:enumeration value="ASSURFED"/>
+			<xs:enumeration value="AVIVA"/>
+			<xs:enumeration value="AVIVATSA"/>
+			<xs:enumeration value="AXACSA"/>
+			<xs:enumeration value="AZUR"/>
+			<xs:enumeration value="CICASS"/>
+			<xs:enumeration value="EUROFIL"/>
+			<xs:enumeration value="GANEURO"/>
+			<xs:enumeration value="GENERALI"/>
+			<xs:enumeration value="GMF"/>
+			<xs:enumeration value="GPA"/>
+			<xs:enumeration value="GRAGEST"/>
+			<xs:enumeration value="LABRESSE"/>
+			<xs:enumeration value="MMAIARD"/>
+			<xs:enumeration value="COVEARISKS"/>
+			<xs:enumeration value="COVEAFLEET"/>
+			<xs:enumeration value="MEDERIC"/>
+			<xs:enumeration value="CARMA"/>
+			<xs:enumeration value="PACIFAIX"/>
+			<xs:enumeration value="PACIFICA"/>
+			<xs:enumeration value="SADA"/>
+			<xs:enumeration value="SAGENA"/>
+			<xs:enumeration value="SMABTP"/>
+			<xs:enumeration value="SOGESSUR"/>
+			<xs:enumeration value="AIL"/>
+			<xs:enumeration value="ACCOR"/>
+			<xs:enumeration value="AGFGSOPTIM"/>
+			<xs:enumeration value="APAVE"/>
+			<xs:enumeration value="ASF"/>
+			<xs:enumeration value="ATAC"/>
+			<xs:enumeration value="AUCHAN"/>
+			<xs:enumeration value="BOUYGUES"/>
+			<xs:enumeration value="BUT"/>
+			<xs:enumeration value="CAMAIEU"/>
+			<xs:enumeration value="CNHJ"/>
+			<xs:enumeration value="COOP"/>
+			<xs:enumeration value="LCL"/>
+			<xs:enumeration value="FT"/>
+			<xs:enumeration value="GFF"/>
+			<xs:enumeration value="INTERMARCHE"/>
+			<xs:enumeration value="IENA"/>
+			<xs:enumeration value="JULES"/>
+			<xs:enumeration value="LAPOSTE"/>
+			<xs:enumeration value="LEROYMERLIN"/>
+			<xs:enumeration value="LESAFFRE"/>
+			<xs:enumeration value="MAXITOYS"/>
+			<xs:enumeration value="MCDO"/>
+			<xs:enumeration value="OKAIDI"/>
+			<xs:enumeration value="PICARD"/>
+			<xs:enumeration value="PCTOTAL"/>
+			<xs:enumeration value="PPRRED"/>
+			<xs:enumeration value="QUINTON"/>
+			<xs:enumeration value="RAPPSER"/>
+			<xs:enumeration value="RPA"/>
+			<xs:enumeration value="SECURITENOUVELLE"/>
+			<xs:enumeration value="SES"/>
+			<xs:enumeration value="SOCCRAMSOPAREC"/>
+			<xs:enumeration value="SUEZ"/>
+			<xs:enumeration value="SYSTEME U"/>
+			<xs:enumeration value="THIRIET"/>
+			<xs:enumeration value="TROC"/>
+			<xs:enumeration value="UCABAIL"/>
+			<xs:enumeration value="UNICIL"/>
+			<xs:enumeration value="VIDEO"/>
+			<xs:enumeration value="JACADI"/>
+			<xs:enumeration value="IDGROUPE"/>
+			<xs:enumeration value="IMMOPLUS"/>
+			<xs:enumeration value="SAMSICINF"/>
+			<xs:enumeration value="SAMSICSUP"/>
+			<xs:enumeration value="CARREFOURINT"/>
+			<xs:enumeration value="CARREFOURFR"/>
+			<xs:enumeration value="TOTALDIOTAZUR"/>
+			<xs:enumeration value="TOTALDIOT"/>
+			<xs:enumeration value="TOTALZURICH"/>
+			<xs:enumeration value="DALKIA"/>
+			<xs:enumeration value="DARTY"/>
+			<xs:enumeration value="DECATHLON"/>
+			<xs:enumeration value="9TELECOM"/>
+			<xs:enumeration value="ESPMASTER1"/>
+			<xs:enumeration value="ESPMASTER2"/>
+			<xs:enumeration value="ESPMASTER3"/>
+			<xs:enumeration value="ESPMASTER4"/>
+			<xs:enumeration value="ESPMASTER5"/>
+			<xs:enumeration value="ESPMASTER6"/>
+			<xs:enumeration value="ESPMASTER7"/>
+			<xs:enumeration value="ESPMASTER8"/>
+			<xs:enumeration value="ESPMASTER9"/>
+			<xs:enumeration value="ESPMASTER10"/>
+			<xs:enumeration value="ESPMASTER11"/>
+			<xs:enumeration value="ESPMASTER12"/>
+			<xs:enumeration value="LAGARDERE"/>
+			<xs:enumeration value="STARBUCKS"/>
+			<xs:enumeration value="LETERROIR"/>
+			<xs:enumeration value="EDF"/>
+			<xs:enumeration value="ACTRI"/>
+			<xs:enumeration value="SGBD"/>
+			<xs:enumeration value="KINGFISHER"/>
+			<xs:enumeration value="TERREAL"/>
+			<xs:enumeration value="HOLDER"/>
+			<xs:enumeration value="UNION_BRESSE_DOMBRES"/>
+			<xs:enumeration value="SECURITESOCIALE"/>
+			<xs:enumeration value="PNAS"/>
+			<xs:enumeration value="SHELL"/>
+			<xs:enumeration value="OGF"/>
+			<xs:enumeration value="GANEUROSSPROTO"/>
+			<xs:enumeration value="GANEUROPROTO"/>
+			<xs:enumeration value="OBAIDI"/>
+			<xs:enumeration value="KIABI"/>
+			<xs:enumeration value="TAPEOEIL"/>
+			<xs:enumeration value="TOP OFFICE"/>
+			<xs:enumeration value="MMA_SA(exAZUR)VIA_CNG"/>
+			<xs:enumeration value="MMA_SA(exAZUR)VIA DARVA"/>
+			<xs:enumeration value="MMA_SA(exAZUR)HORSDARVA"/>
+			<xs:enumeration value="FRANCEPRINTEMPS"/>
+			<xs:enumeration value="EUROFIL1"/>
+			<xs:enumeration value="TEXAAVISSURPIECESCNG"/>
+			<xs:enumeration value="TEXAAVISSURPIECESBUR"/>
+			<xs:enumeration value="PGINVETSTISSEMENTS SERVYR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeNatureIntervenant">
+		<xs:annotation>
+			<xs:documentation>Liste des natures pour les intervenants d'un dossier TG (Architecte, Maître d'oeuvre,
+                Tiers lésé, ...) - Information rattachée à l'onglet Intervenant de TG
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="16" name="CODE_16"/>
+					<jaxb:typesafeEnumMember value="5" name="CODE_5"/>
+					<jaxb:typesafeEnumMember value="7" name="CODE_7"/>
+					<jaxb:typesafeEnumMember value="15" name="CODE_15"/>
+					<jaxb:typesafeEnumMember value="13" name="CODE_13"/>
+					<jaxb:typesafeEnumMember value="14" name="CODE_14"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="10" name="CODE_10"/>
+					<jaxb:typesafeEnumMember value="6" name="CODE_6"/>
+					<jaxb:typesafeEnumMember value="23" name="CODE_23"/>
+					<jaxb:typesafeEnumMember value="20" name="CODE_20"/>
+					<jaxb:typesafeEnumMember value="22" name="CODE_22"/>
+					<jaxb:typesafeEnumMember value="19" name="CODE_19"/>
+					<jaxb:typesafeEnumMember value="21" name="CODE_21"/>
+					<jaxb:typesafeEnumMember value="18" name="CODE_18"/>
+					<jaxb:typesafeEnumMember value="17" name="CODE_17"/>
+					<jaxb:typesafeEnumMember value="12" name="CODE_12"/>
+					<jaxb:typesafeEnumMember value="9" name="CODE_9"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="8" name="CODE_8"/>
+					<jaxb:typesafeEnumMember value="24" name="CODE_24"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="19"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="24"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypePrestation">
+		<xs:annotation>
+			<xs:documentation>Prestation d'un dossier TG - Rattachée à l'onglet Dossier de TG</xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="EXPSSIN" name="CODE_EXPSSIN"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EXPSSIN"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeCodeIntermediaire">
+		<xs:annotation>
+			<xs:documentation>Liste des code intemediaire - Utile pour différentier la nature du tiers gérés
+                Intermediaire (Cabinet/site)
+            </xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="AGENT" name="CODE_AGENT"/>
+					<jaxb:typesafeEnumMember value="AGENTCOURTIER" name="CODE_AGENTCOURTIER"/>
+					<jaxb:typesafeEnumMember value="COURTIER" name="CODE_COURTIER"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="AGENT"/>
+			<xs:enumeration value="AGENTCOURTIER"/>
+			<xs:enumeration value="COURTIER"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeSocieteTexa">
+		<xs:annotation>
+			<xs:documentation>Liste des sociétés Texa</xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="100" name="CODE_100"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="200" name="CODE_200"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+					<jaxb:typesafeEnumMember value="7" name="CODE_7"/>
+					<jaxb:typesafeEnumMember value="8" name="CODE_8"/>
+					<jaxb:typesafeEnumMember value="99" name="CODE_99"/>
+					<jaxb:typesafeEnumMember value="999" name="CODE_999"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="100"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="200"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="99"/>
+			<xs:enumeration value="999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeCodeEntite">
+		<xs:annotation>
+			<xs:documentation>Liste des types d'entité pour les tiers gérés entre autre ()</xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="ASSU" name="CODE_ASSU"/>
+					<jaxb:typesafeEnumMember value="BUR" name="CODE_BUR"/>
+					<jaxb:typesafeEnumMember value="CIE" name="CODE_CIE"/>
+					<jaxb:typesafeEnumMember value="CINT" name="CODE_CINT"/>
+					<jaxb:typesafeEnumMember value="CLI" name="CODE_CLI"/>
+					<jaxb:typesafeEnumMember value="DIV" name="CODE_DIV"/>
+					<jaxb:typesafeEnumMember value="EXP" name="CODE_EXP"/>
+					<jaxb:typesafeEnumMember value="SEC" name="CODE_SEC"/>
+					<jaxb:typesafeEnumMember value="SERV" name="CODE_SERV"/>
+					<jaxb:typesafeEnumMember value="SINT" name="CODE_SINT"/>
+					<jaxb:typesafeEnumMember value="SOC" name="CODE_SOC"/>
+					<jaxb:typesafeEnumMember value="TIERS" name="CODE_TIERS"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+			<xs:enumeration value="ASSU"/>
+			<xs:enumeration value="BUR"/>
+			<xs:enumeration value="CIE"/>
+			<xs:enumeration value="CINT"/>
+			<xs:enumeration value="CLI"/>
+			<xs:enumeration value="DIV"/>
+			<xs:enumeration value="EXP"/>
+			<xs:enumeration value="SEC"/>
+			<xs:enumeration value="SERV"/>
+			<xs:enumeration value="SINT"/>
+			<xs:enumeration value="SOC"/>
+			<xs:enumeration value="TIERS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeCirconstanceDetaillee">
+		<xs:annotation>
+			<xs:documentation>Liste des types de circonstance détaillé</xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="" name="NONE"/>
+					<jaxb:typesafeEnumMember value="DD01" name="CODE_DD01"/>
+					<jaxb:typesafeEnumMember value="DD02" name="CODE_DD02"/>
+					<jaxb:typesafeEnumMember value="DD03" name="CODE_DD03"/>
+					<jaxb:typesafeEnumMember value="DD04" name="CODE_DD04"/>
+					<jaxb:typesafeEnumMember value="DD05" name="CODE_DD05"/>
+					<jaxb:typesafeEnumMember value="DD06" name="CODE_DD06"/>
+					<jaxb:typesafeEnumMember value="DD07" name="CODE_DD07"/>
+					<jaxb:typesafeEnumMember value="DD08" name="CODE_DD08"/>
+					<jaxb:typesafeEnumMember value="DD09" name="CODE_DD09"/>
+					<jaxb:typesafeEnumMember value="DD10" name="CODE_DD10"/>
+					<jaxb:typesafeEnumMember value="DD11" name="CODE_DD11"/>
+					<jaxb:typesafeEnumMember value="DD12" name="CODE_DD12"/>
+					<jaxb:typesafeEnumMember value="DD13" name="CODE_DD13"/>
+					<jaxb:typesafeEnumMember value="DD14" name="CODE_DD14"/>
+					<jaxb:typesafeEnumMember value="DD15" name="CODE_DD15"/>
+					<jaxb:typesafeEnumMember value="DD16" name="CODE_DD16"/>
+					<jaxb:typesafeEnumMember value="DD18" name="CODE_DD18"/>
+					<jaxb:typesafeEnumMember value="DD19" name="CODE_DD19"/>
+					<jaxb:typesafeEnumMember value="DD20" name="CODE_DD20"/>
+					<jaxb:typesafeEnumMember value="DD21" name="CODE_DD21"/>
+					<jaxb:typesafeEnumMember value="DD22" name="CODE_DD22"/>
+					<jaxb:typesafeEnumMember value="DD23" name="CODE_DD23"/>
+					<jaxb:typesafeEnumMember value="DD24" name="CODE_DD24"/>
+					<jaxb:typesafeEnumMember value="DD25" name="CODE_DD25"/>
+					<jaxb:typesafeEnumMember value="DD26" name="CODE_DD26"/>
+					<jaxb:typesafeEnumMember value="DD31" name="CODE_DD31"/>
+					<jaxb:typesafeEnumMember value="DD32" name="CODE_DD32"/>
+					<jaxb:typesafeEnumMember value="DD33" name="CODE_DD33"/>
+					<jaxb:typesafeEnumMember value="DD34" name="CODE_DD34"/>
+					<jaxb:typesafeEnumMember value="DD35" name="CODE_DD35"/>
+					<jaxb:typesafeEnumMember value="DD36" name="CODE_DD36"/>
+					<jaxb:typesafeEnumMember value="DD37" name="CODE_DD37"/>
+					<jaxb:typesafeEnumMember value="DD38" name="CODE_DD38"/>
+					<jaxb:typesafeEnumMember value="DD39" name="CODE_DD39"/>
+					<jaxb:typesafeEnumMember value="DD40" name="CODE_DD40"/>
+					<jaxb:typesafeEnumMember value="DD41" name="CODE_DD41"/>
+					<jaxb:typesafeEnumMember value="DD42" name="CODE_DD42"/>
+					<jaxb:typesafeEnumMember value="DD43" name="CODE_DD43"/>
+					<jaxb:typesafeEnumMember value="DD44" name="CODE_DD44"/>
+					<jaxb:typesafeEnumMember value="DD45" name="CODE_DD45"/>
+					<jaxb:typesafeEnumMember value="IN01" name="CODE_IN01"/>
+					<jaxb:typesafeEnumMember value="IN02" name="CODE_IN02"/>
+					<jaxb:typesafeEnumMember value="IN03" name="CODE_IN03"/>
+					<jaxb:typesafeEnumMember value="IN04" name="CODE_IN04"/>
+					<jaxb:typesafeEnumMember value="IN05" name="CODE_IN05"/>
+					<jaxb:typesafeEnumMember value="IN06" name="CODE_IN06"/>
+					<jaxb:typesafeEnumMember value="IN07" name="CODE_IN07"/>
+					<jaxb:typesafeEnumMember value="EC01" name="CODE_EC01"/>
+					<jaxb:typesafeEnumMember value="EC02" name="CODE_EC02"/>
+					<jaxb:typesafeEnumMember value="EC03" name="CODE_EC03"/>
+					<jaxb:typesafeEnumMember value="EC04" name="CODE_EC04"/>
+					<jaxb:typesafeEnumMember value="EC05" name="CODE_EC05"/>
+					<jaxb:typesafeEnumMember value="EC06" name="CODE_EC06"/>
+					<jaxb:typesafeEnumMember value="EC07" name="CODE_EC07"/>
+					<jaxb:typesafeEnumMember value="BG01" name="CODE_BG01"/>
+					<jaxb:typesafeEnumMember value="BG02" name="CODE_BG02"/>
+					<jaxb:typesafeEnumMember value="BG03" name="CODE_BG03"/>
+					<jaxb:typesafeEnumMember value="BG04" name="CODE_BG04"/>
+					<jaxb:typesafeEnumMember value="BG05" name="CODE_BG05"/>
+					<jaxb:typesafeEnumMember value="BG06" name="CODE_BG06"/>
+					<jaxb:typesafeEnumMember value="BG07" name="CODE_BG07"/>
+					<jaxb:typesafeEnumMember value="BG08" name="CODE_BG08"/>
+					<jaxb:typesafeEnumMember value="BG09" name="CODE_BG09"/>
+					<jaxb:typesafeEnumMember value="BG10" name="CODE_BG10"/>
+					<jaxb:typesafeEnumMember value="BG11" name="CODE_BG11"/>
+					<jaxb:typesafeEnumMember value="VL01" name="CODE_VL01"/>
+					<jaxb:typesafeEnumMember value="VL02" name="CODE_VL02"/>
+					<jaxb:typesafeEnumMember value="VL03" name="CODE_VL03"/>
+					<jaxb:typesafeEnumMember value="RC01" name="CODE_RC01"/>
+					<jaxb:typesafeEnumMember value="AT01" name="CODE_AT01"/>
+					<jaxb:typesafeEnumMember value="DR01" name="CODE_DR01"/>
+					<jaxb:typesafeEnumMember value="DE01" name="CODE_DE01"/>
+					<jaxb:typesafeEnumMember value="DE02" name="CODE_DE02"/>
+					<jaxb:typesafeEnumMember value="DE03" name="CODE_DE03"/>
+					<jaxb:typesafeEnumMember value="AU01" name="CODE_AU01"/>
+					<jaxb:typesafeEnumMember value="10" name="CODE_10"/>
+					<jaxb:typesafeEnumMember value="11" name="CODE_11"/>
+					<jaxb:typesafeEnumMember value="12" name="CODE_12"/>
+					<jaxb:typesafeEnumMember value="13" name="CODE_13"/>
+					<jaxb:typesafeEnumMember value="14" name="CODE_14"/>
+					<jaxb:typesafeEnumMember value="15" name="CODE_15"/>
+					<jaxb:typesafeEnumMember value="16" name="CODE_16"/>
+					<jaxb:typesafeEnumMember value="17" name="CODE_17"/>
+					<jaxb:typesafeEnumMember value="18" name="CODE_18"/>
+					<jaxb:typesafeEnumMember value="19" name="CODE_19"/>
+					<jaxb:typesafeEnumMember value="1A" name="CODE_1A"/>
+					<jaxb:typesafeEnumMember value="1B" name="CODE_1B"/>
+					<jaxb:typesafeEnumMember value="1C" name="CODE_1C"/>
+					<jaxb:typesafeEnumMember value="1D" name="CODE_1D"/>
+					<jaxb:typesafeEnumMember value="1E" name="CODE_1E"/>
+					<jaxb:typesafeEnumMember value="1F" name="CODE_1F"/>
+					<jaxb:typesafeEnumMember value="1G" name="CODE_1G"/>
+					<jaxb:typesafeEnumMember value="1H" name="CODE_1H"/>
+					<jaxb:typesafeEnumMember value="1I" name="CODE_1I"/>
+					<jaxb:typesafeEnumMember value="1J" name="CODE_1J"/>
+					<jaxb:typesafeEnumMember value="1K" name="CODE_1K"/>
+					<jaxb:typesafeEnumMember value="1Y" name="CODE_1Y"/>
+					<jaxb:typesafeEnumMember value="1Z" name="CODE_1Z"/>
+					<jaxb:typesafeEnumMember value="20" name="CODE_20"/>
+					<jaxb:typesafeEnumMember value="21" name="CODE_21"/>
+					<jaxb:typesafeEnumMember value="22" name="CODE_22"/>
+					<jaxb:typesafeEnumMember value="23" name="CODE_23"/>
+					<jaxb:typesafeEnumMember value="24" name="CODE_24"/>
+					<jaxb:typesafeEnumMember value="25" name="CODE_25"/>
+					<jaxb:typesafeEnumMember value="26" name="CODE_26"/>
+					<jaxb:typesafeEnumMember value="27" name="CODE_27"/>
+					<jaxb:typesafeEnumMember value="28" name="CODE_28"/>
+					<jaxb:typesafeEnumMember value="29" name="CODE_29"/>
+					<jaxb:typesafeEnumMember value="2A" name="CODE_2A"/>
+					<jaxb:typesafeEnumMember value="2B" name="CODE_2B"/>
+					<jaxb:typesafeEnumMember value="2C" name="CODE_2C"/>
+					<jaxb:typesafeEnumMember value="2D" name="CODE_2D"/>
+					<jaxb:typesafeEnumMember value="2E" name="CODE_2E"/>
+					<jaxb:typesafeEnumMember value="2F" name="CODE_2F"/>
+					<jaxb:typesafeEnumMember value="2G" name="CODE_2G"/>
+					<jaxb:typesafeEnumMember value="2H" name="CODE_2H"/>
+					<jaxb:typesafeEnumMember value="2I" name="CODE_2I"/>
+					<jaxb:typesafeEnumMember value="2J" name="CODE_2J"/>
+					<jaxb:typesafeEnumMember value="2K" name="CODE_2K"/>
+					<jaxb:typesafeEnumMember value="2L" name="CODE_2L"/>
+					<jaxb:typesafeEnumMember value="2M" name="CODE_2M"/>
+					<jaxb:typesafeEnumMember value="2N" name="CODE_2N"/>
+					<jaxb:typesafeEnumMember value="2P" name="CODE_2P"/>
+					<jaxb:typesafeEnumMember value="2Q" name="CODE_2Q"/>
+					<jaxb:typesafeEnumMember value="2R" name="CODE_2R"/>
+					<jaxb:typesafeEnumMember value="2S" name="CODE_2S"/>
+					<jaxb:typesafeEnumMember value="2T" name="CODE_2T"/>
+					<jaxb:typesafeEnumMember value="2U" name="CODE_2U"/>
+					<jaxb:typesafeEnumMember value="2V" name="CODE_2V"/>
+					<jaxb:typesafeEnumMember value="2W" name="CODE_2W"/>
+					<jaxb:typesafeEnumMember value="2X" name="CODE_2X"/>
+					<jaxb:typesafeEnumMember value="2Y" name="CODE_2Y"/>
+					<jaxb:typesafeEnumMember value="2Z" name="CODE_2Z"/>
+					<jaxb:typesafeEnumMember value="30" name="CODE_30"/>
+					<jaxb:typesafeEnumMember value="31" name="CODE_31"/>
+					<jaxb:typesafeEnumMember value="32" name="CODE_32"/>
+					<jaxb:typesafeEnumMember value="33" name="CODE_33"/>
+					<jaxb:typesafeEnumMember value="34" name="CODE_34"/>
+					<jaxb:typesafeEnumMember value="35" name="CODE_35"/>
+					<jaxb:typesafeEnumMember value="36" name="CODE_36"/>
+					<jaxb:typesafeEnumMember value="37" name="CODE_37"/>
+					<jaxb:typesafeEnumMember value="38" name="CODE_38"/>
+					<jaxb:typesafeEnumMember value="39" name="CODE_39"/>
+					<jaxb:typesafeEnumMember value="3A" name="CODE_3A"/>
+					<jaxb:typesafeEnumMember value="3B" name="CODE_3B"/>
+					<jaxb:typesafeEnumMember value="3C" name="CODE_3C"/>
+					<jaxb:typesafeEnumMember value="3D" name="CODE_3D"/>
+					<jaxb:typesafeEnumMember value="3E" name="CODE_3E"/>
+					<jaxb:typesafeEnumMember value="3F" name="CODE_3F"/>
+					<jaxb:typesafeEnumMember value="3G" name="CODE_3G"/>
+					<jaxb:typesafeEnumMember value="3Y" name="CODE_3Y"/>
+					<jaxb:typesafeEnumMember value="3Z" name="CODE_3Z"/>
+					<jaxb:typesafeEnumMember value="40" name="CODE_40"/>
+					<jaxb:typesafeEnumMember value="50" name="CODE_50"/>
+					<jaxb:typesafeEnumMember value="51" name="CODE_51"/>
+					<jaxb:typesafeEnumMember value="52" name="CODE_52"/>
+					<jaxb:typesafeEnumMember value="53" name="CODE_53"/>
+					<jaxb:typesafeEnumMember value="54" name="CODE_54"/>
+					<jaxb:typesafeEnumMember value="55" name="CODE_55"/>
+					<jaxb:typesafeEnumMember value="56" name="CODE_56"/>
+					<jaxb:typesafeEnumMember value="57" name="CODE_57"/>
+					<jaxb:typesafeEnumMember value="58" name="CODE_58"/>
+					<jaxb:typesafeEnumMember value="5Y" name="CODE_5Y"/>
+					<jaxb:typesafeEnumMember value="60" name="CODE_60"/>
+					<jaxb:typesafeEnumMember value="61" name="CODE_61"/>
+					<jaxb:typesafeEnumMember value="62" name="CODE_62"/>
+					<jaxb:typesafeEnumMember value="63" name="CODE_63"/>
+					<jaxb:typesafeEnumMember value="64" name="CODE_64"/>
+					<jaxb:typesafeEnumMember value="65" name="CODE_65"/>
+					<jaxb:typesafeEnumMember value="69" name="CODE_69"/>
+					<jaxb:typesafeEnumMember value="70" name="CODE_70"/>
+					<jaxb:typesafeEnumMember value="71" name="CODE_71"/>
+					<jaxb:typesafeEnumMember value="72" name="CODE_72"/>
+					<jaxb:typesafeEnumMember value="73" name="CODE_73"/>
+					<jaxb:typesafeEnumMember value="74" name="CODE_74"/>
+					<jaxb:typesafeEnumMember value="75" name="CODE_75"/>
+					<jaxb:typesafeEnumMember value="76" name="CODE_76"/>
+					<jaxb:typesafeEnumMember value="77" name="CODE_77"/>
+					<jaxb:typesafeEnumMember value="79" name="CODE_79"/>
+					<jaxb:typesafeEnumMember value="7A" name="CODE_7A"/>
+					<jaxb:typesafeEnumMember value="7B" name="CODE_7B"/>
+					<jaxb:typesafeEnumMember value="7C" name="CODE_7C"/>
+					<jaxb:typesafeEnumMember value="7D" name="CODE_7D"/>
+					<jaxb:typesafeEnumMember value="7E" name="CODE_7E"/>
+					<jaxb:typesafeEnumMember value="7F" name="CODE_7F"/>
+					<jaxb:typesafeEnumMember value="7G" name="CODE_7G"/>
+					<jaxb:typesafeEnumMember value="7H" name="CODE_7H"/>
+					<jaxb:typesafeEnumMember value="7Y" name="CODE_7Y"/>
+					<jaxb:typesafeEnumMember value="80" name="CODE_80"/>
+					<jaxb:typesafeEnumMember value="81" name="CODE_81"/>
+					<jaxb:typesafeEnumMember value="82" name="CODE_82"/>
+					<jaxb:typesafeEnumMember value="83" name="CODE_83"/>
+					<jaxb:typesafeEnumMember value="84" name="CODE_84"/>
+					<jaxb:typesafeEnumMember value="85" name="CODE_85"/>
+					<jaxb:typesafeEnumMember value="89" name="CODE_89"/>
+					<jaxb:typesafeEnumMember value="8Y" name="CODE_8Y"/>
+					<jaxb:typesafeEnumMember value="90" name="CODE_90"/>
+					<jaxb:typesafeEnumMember value="91" name="CODE_91"/>
+					<jaxb:typesafeEnumMember value="92" name="CODE_92"/>
+					<jaxb:typesafeEnumMember value="93" name="CODE_93"/>
+					<jaxb:typesafeEnumMember value="94" name="CODE_94"/>
+					<jaxb:typesafeEnumMember value="99" name="CODE_99"/>
+					<jaxb:typesafeEnumMember value="A0" name="CODE_A0"/>
+					<jaxb:typesafeEnumMember value="B0" name="CODE_B0"/>
+					<jaxb:typesafeEnumMember value="B1" name="CODE_B1"/>
+					<jaxb:typesafeEnumMember value="B2" name="CODE_B2"/>
+					<jaxb:typesafeEnumMember value="B3" name="CODE_B3"/>
+					<jaxb:typesafeEnumMember value="B4" name="CODE_B4"/>
+					<jaxb:typesafeEnumMember value="B5" name="CODE_B5"/>
+					<jaxb:typesafeEnumMember value="B6" name="CODE_B6"/>
+					<jaxb:typesafeEnumMember value="B7" name="CODE_B7"/>
+					<jaxb:typesafeEnumMember value="B8" name="CODE_B8"/>
+					<jaxb:typesafeEnumMember value="B9" name="CODE_B9"/>
+					<jaxb:typesafeEnumMember value="BA" name="CODE_BA"/>
+					<jaxb:typesafeEnumMember value="BB" name="CODE_BB"/>
+					<jaxb:typesafeEnumMember value="BC" name="CODE_BC"/>
+					<jaxb:typesafeEnumMember value="BD" name="CODE_BD"/>
+					<jaxb:typesafeEnumMember value="C1" name="CODE_C1"/>
+					<jaxb:typesafeEnumMember value="C2" name="CODE_C2"/>
+					<jaxb:typesafeEnumMember value="C3" name="CODE_C3"/>
+					<jaxb:typesafeEnumMember value="C9" name="CODE_C9"/>
+					<jaxb:typesafeEnumMember value="CY" name="CODE_CY"/>
+					<jaxb:typesafeEnumMember value="D0" name="CODE_D0"/>
+					<jaxb:typesafeEnumMember value="D1" name="CODE_D1"/>
+					<jaxb:typesafeEnumMember value="D2" name="CODE_D2"/>
+					<jaxb:typesafeEnumMember value="D3" name="CODE_D3"/>
+					<jaxb:typesafeEnumMember value="D4" name="CODE_D4"/>
+					<jaxb:typesafeEnumMember value="D5" name="CODE_D5"/>
+					<jaxb:typesafeEnumMember value="D6" name="CODE_D6"/>
+					<jaxb:typesafeEnumMember value="D7" name="CODE_D7"/>
+					<jaxb:typesafeEnumMember value="D8" name="CODE_D8"/>
+					<jaxb:typesafeEnumMember value="D9" name="CODE_D9"/>
+					<jaxb:typesafeEnumMember value="DA" name="CODE_DA"/>
+					<jaxb:typesafeEnumMember value="DB" name="CODE_DB"/>
+					<jaxb:typesafeEnumMember value="DC" name="CODE_DC"/>
+					<jaxb:typesafeEnumMember value="DD" name="CODE_DD"/>
+					<jaxb:typesafeEnumMember value="DE" name="CODE_DE"/>
+					<jaxb:typesafeEnumMember value="DF" name="CODE_DF"/>
+					<jaxb:typesafeEnumMember value="DG" name="CODE_DG"/>
+					<jaxb:typesafeEnumMember value="DH" name="CODE_DH"/>
+					<jaxb:typesafeEnumMember value="DI" name="CODE_DI"/>
+					<jaxb:typesafeEnumMember value="DJ" name="CODE_DJ"/>
+					<jaxb:typesafeEnumMember value="E0" name="CODE_E0"/>
+					<jaxb:typesafeEnumMember value="E1" name="CODE_E1"/>
+					<jaxb:typesafeEnumMember value="E2" name="CODE_E2"/>
+					<jaxb:typesafeEnumMember value="E3" name="CODE_E3"/>
+					<jaxb:typesafeEnumMember value="E4" name="CODE_E4"/>
+					<jaxb:typesafeEnumMember value="E5" name="CODE_E5"/>
+					<jaxb:typesafeEnumMember value="E6" name="CODE_E6"/>
+					<jaxb:typesafeEnumMember value="E7" name="CODE_E7"/>
+					<jaxb:typesafeEnumMember value="F0" name="CODE_F0"/>
+					<jaxb:typesafeEnumMember value="G0" name="CODE_G0"/>
+					<jaxb:typesafeEnumMember value="G1" name="CODE_G1"/>
+					<jaxb:typesafeEnumMember value="H0" name="CODE_H0"/>
+					<jaxb:typesafeEnumMember value="H1" name="CODE_H1"/>
+					<jaxb:typesafeEnumMember value="I0" name="CODE_I0"/>
+					<jaxb:typesafeEnumMember value="I1" name="CODE_I1"/>
+					<jaxb:typesafeEnumMember value="I2" name="CODE_I2"/>
+					<jaxb:typesafeEnumMember value="J0" name="CODE_J0"/>
+					<jaxb:typesafeEnumMember value="K0" name="CODE_K0"/>
+					<jaxb:typesafeEnumMember value="L0" name="CODE_L0"/>
+					<jaxb:typesafeEnumMember value="M0" name="CODE_M0"/>
+					<jaxb:typesafeEnumMember value="N0" name="CODE_N0"/>
+					<jaxb:typesafeEnumMember value="P1" name="CODE_P1"/>
+					<jaxb:typesafeEnumMember value="Q0" name="CODE_Q0"/>
+					<jaxb:typesafeEnumMember value="R0" name="CODE_R0"/>
+					<jaxb:typesafeEnumMember value="R1" name="CODE_R1"/>
+					<jaxb:typesafeEnumMember value="R2" name="CODE_R2"/>
+					<jaxb:typesafeEnumMember value="R3" name="CODE_R3"/>
+					<jaxb:typesafeEnumMember value="R4" name="CODE_R4"/>
+					<jaxb:typesafeEnumMember value="R5" name="CODE_R5"/>
+					<jaxb:typesafeEnumMember value="S0" name="CODE_S0"/>
+					<jaxb:typesafeEnumMember value="S1" name="CODE_S1"/>
+					<jaxb:typesafeEnumMember value="T0" name="CODE_T0"/>
+					<jaxb:typesafeEnumMember value="Z1" name="CODE_Z1"/>
+					<jaxb:typesafeEnumMember value="Z2" name="CODE_Z2"/>
+					<jaxb:typesafeEnumMember value="ZZ" name="CODE_ZZ"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DD01"/>
+			<xs:enumeration value="DD02"/>
+			<xs:enumeration value="DD03"/>
+			<xs:enumeration value="DD04"/>
+			<xs:enumeration value="DD05"/>
+			<xs:enumeration value="DD06"/>
+			<xs:enumeration value="DD07"/>
+			<xs:enumeration value="DD08"/>
+			<xs:enumeration value="DD09"/>
+			<xs:enumeration value="DD10"/>
+			<xs:enumeration value="DD11"/>
+			<xs:enumeration value="DD12"/>
+			<xs:enumeration value="DD13"/>
+			<xs:enumeration value="DD14"/>
+			<xs:enumeration value="DD15"/>
+			<xs:enumeration value="DD16"/>
+			<xs:enumeration value="DD18"/>
+			<xs:enumeration value="DD19"/>
+			<xs:enumeration value="DD20"/>
+			<xs:enumeration value="DD21"/>
+			<xs:enumeration value="DD22"/>
+			<xs:enumeration value="DD23"/>
+			<xs:enumeration value="DD24"/>
+			<xs:enumeration value="DD25"/>
+			<xs:enumeration value="DD26"/>
+			<xs:enumeration value="DD31"/>
+			<xs:enumeration value="DD32"/>
+			<xs:enumeration value="DD33"/>
+			<xs:enumeration value="DD34"/>
+			<xs:enumeration value="DD35"/>
+			<xs:enumeration value="DD36"/>
+			<xs:enumeration value="DD37"/>
+			<xs:enumeration value="DD38"/>
+			<xs:enumeration value="DD39"/>
+			<xs:enumeration value="DD40"/>
+			<xs:enumeration value="DD41"/>
+			<xs:enumeration value="DD42"/>
+			<xs:enumeration value="DD43"/>
+			<xs:enumeration value="DD44"/>
+			<xs:enumeration value="DD45"/>
+			<xs:enumeration value="IN01"/>
+			<xs:enumeration value="IN02"/>
+			<xs:enumeration value="IN03"/>
+			<xs:enumeration value="IN04"/>
+			<xs:enumeration value="IN05"/>
+			<xs:enumeration value="IN06"/>
+			<xs:enumeration value="IN07"/>
+			<xs:enumeration value="EC01"/>
+			<xs:enumeration value="EC02"/>
+			<xs:enumeration value="EC03"/>
+			<xs:enumeration value="EC04"/>
+			<xs:enumeration value="EC05"/>
+			<xs:enumeration value="EC06"/>
+			<xs:enumeration value="EC07"/>
+			<xs:enumeration value="BG01"/>
+			<xs:enumeration value="BG02"/>
+			<xs:enumeration value="BG03"/>
+			<xs:enumeration value="BG04"/>
+			<xs:enumeration value="BG05"/>
+			<xs:enumeration value="BG06"/>
+			<xs:enumeration value="BG07"/>
+			<xs:enumeration value="BG08"/>
+			<xs:enumeration value="BG09"/>
+			<xs:enumeration value="BG10"/>
+			<xs:enumeration value="BG11"/>
+			<xs:enumeration value="VL01"/>
+			<xs:enumeration value="VL02"/>
+			<xs:enumeration value="VL03"/>
+			<xs:enumeration value="RC01"/>
+			<xs:enumeration value="AT01"/>
+			<xs:enumeration value="DR01"/>
+			<xs:enumeration value="DE01"/>
+			<xs:enumeration value="DE02"/>
+			<xs:enumeration value="DE03"/>
+			<xs:enumeration value="AU01"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="19"/>
+			<xs:enumeration value="1A"/>
+			<xs:enumeration value="1B"/>
+			<xs:enumeration value="1C"/>
+			<xs:enumeration value="1D"/>
+			<xs:enumeration value="1E"/>
+			<xs:enumeration value="1F"/>
+			<xs:enumeration value="1G"/>
+			<xs:enumeration value="1H"/>
+			<xs:enumeration value="1I"/>
+			<xs:enumeration value="1J"/>
+			<xs:enumeration value="1K"/>
+			<xs:enumeration value="1Y"/>
+			<xs:enumeration value="1Z"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
+			<xs:enumeration value="24"/>
+			<xs:enumeration value="25"/>
+			<xs:enumeration value="26"/>
+			<xs:enumeration value="27"/>
+			<xs:enumeration value="28"/>
+			<xs:enumeration value="29"/>
+			<xs:enumeration value="2A"/>
+			<xs:enumeration value="2B"/>
+			<xs:enumeration value="2C"/>
+			<xs:enumeration value="2D"/>
+			<xs:enumeration value="2E"/>
+			<xs:enumeration value="2F"/>
+			<xs:enumeration value="2G"/>
+			<xs:enumeration value="2H"/>
+			<xs:enumeration value="2I"/>
+			<xs:enumeration value="2J"/>
+			<xs:enumeration value="2K"/>
+			<xs:enumeration value="2L"/>
+			<xs:enumeration value="2M"/>
+			<xs:enumeration value="2N"/>
+			<xs:enumeration value="2P"/>
+			<xs:enumeration value="2Q"/>
+			<xs:enumeration value="2R"/>
+			<xs:enumeration value="2S"/>
+			<xs:enumeration value="2T"/>
+			<xs:enumeration value="2U"/>
+			<xs:enumeration value="2V"/>
+			<xs:enumeration value="2W"/>
+			<xs:enumeration value="2X"/>
+			<xs:enumeration value="2Y"/>
+			<xs:enumeration value="2Z"/>
+			<xs:enumeration value="30"/>
+			<xs:enumeration value="31"/>
+			<xs:enumeration value="32"/>
+			<xs:enumeration value="33"/>
+			<xs:enumeration value="34"/>
+			<xs:enumeration value="35"/>
+			<xs:enumeration value="36"/>
+			<xs:enumeration value="37"/>
+			<xs:enumeration value="38"/>
+			<xs:enumeration value="39"/>
+			<xs:enumeration value="3A"/>
+			<xs:enumeration value="3B"/>
+			<xs:enumeration value="3C"/>
+			<xs:enumeration value="3D"/>
+			<xs:enumeration value="3E"/>
+			<xs:enumeration value="3F"/>
+			<xs:enumeration value="3G"/>
+			<xs:enumeration value="3Y"/>
+			<xs:enumeration value="3Z"/>
+			<xs:enumeration value="40"/>
+			<xs:enumeration value="50"/>
+			<xs:enumeration value="51"/>
+			<xs:enumeration value="52"/>
+			<xs:enumeration value="53"/>
+			<xs:enumeration value="54"/>
+			<xs:enumeration value="55"/>
+			<xs:enumeration value="56"/>
+			<xs:enumeration value="57"/>
+			<xs:enumeration value="58"/>
+			<xs:enumeration value="5Y"/>
+			<xs:enumeration value="60"/>
+			<xs:enumeration value="61"/>
+			<xs:enumeration value="62"/>
+			<xs:enumeration value="63"/>
+			<xs:enumeration value="64"/>
+			<xs:enumeration value="65"/>
+			<xs:enumeration value="69"/>
+			<xs:enumeration value="70"/>
+			<xs:enumeration value="71"/>
+			<xs:enumeration value="72"/>
+			<xs:enumeration value="73"/>
+			<xs:enumeration value="74"/>
+			<xs:enumeration value="75"/>
+			<xs:enumeration value="76"/>
+			<xs:enumeration value="77"/>
+			<xs:enumeration value="79"/>
+			<xs:enumeration value="7A"/>
+			<xs:enumeration value="7B"/>
+			<xs:enumeration value="7C"/>
+			<xs:enumeration value="7D"/>
+			<xs:enumeration value="7E"/>
+			<xs:enumeration value="7F"/>
+			<xs:enumeration value="7G"/>
+			<xs:enumeration value="7H"/>
+			<xs:enumeration value="7Y"/>
+			<xs:enumeration value="80"/>
+			<xs:enumeration value="81"/>
+			<xs:enumeration value="82"/>
+			<xs:enumeration value="83"/>
+			<xs:enumeration value="84"/>
+			<xs:enumeration value="85"/>
+			<xs:enumeration value="89"/>
+			<xs:enumeration value="8Y"/>
+			<xs:enumeration value="90"/>
+			<xs:enumeration value="91"/>
+			<xs:enumeration value="92"/>
+			<xs:enumeration value="93"/>
+			<xs:enumeration value="94"/>
+			<xs:enumeration value="99"/>
+			<xs:enumeration value="A0"/>
+			<xs:enumeration value="B0"/>
+			<xs:enumeration value="B1"/>
+			<xs:enumeration value="B2"/>
+			<xs:enumeration value="B3"/>
+			<xs:enumeration value="B4"/>
+			<xs:enumeration value="B5"/>
+			<xs:enumeration value="B6"/>
+			<xs:enumeration value="B7"/>
+			<xs:enumeration value="B8"/>
+			<xs:enumeration value="B9"/>
+			<xs:enumeration value="BA"/>
+			<xs:enumeration value="BB"/>
+			<xs:enumeration value="BC"/>
+			<xs:enumeration value="BD"/>
+			<xs:enumeration value="C1"/>
+			<xs:enumeration value="C2"/>
+			<xs:enumeration value="C3"/>
+			<xs:enumeration value="C9"/>
+			<xs:enumeration value="CY"/>
+			<xs:enumeration value="D0"/>
+			<xs:enumeration value="D1"/>
+			<xs:enumeration value="D2"/>
+			<xs:enumeration value="D3"/>
+			<xs:enumeration value="D4"/>
+			<xs:enumeration value="D5"/>
+			<xs:enumeration value="D6"/>
+			<xs:enumeration value="D7"/>
+			<xs:enumeration value="D8"/>
+			<xs:enumeration value="D9"/>
+			<xs:enumeration value="DA"/>
+			<xs:enumeration value="DB"/>
+			<xs:enumeration value="DC"/>
+			<xs:enumeration value="DD"/>
+			<xs:enumeration value="DE"/>
+			<xs:enumeration value="DF"/>
+			<xs:enumeration value="DG"/>
+			<xs:enumeration value="DH"/>
+			<xs:enumeration value="DI"/>
+			<xs:enumeration value="DJ"/>
+			<xs:enumeration value="E0"/>
+			<xs:enumeration value="E1"/>
+			<xs:enumeration value="E2"/>
+			<xs:enumeration value="E3"/>
+			<xs:enumeration value="E4"/>
+			<xs:enumeration value="E5"/>
+			<xs:enumeration value="E6"/>
+			<xs:enumeration value="E7"/>
+			<xs:enumeration value="F0"/>
+			<xs:enumeration value="G0"/>
+			<xs:enumeration value="G1"/>
+			<xs:enumeration value="H0"/>
+			<xs:enumeration value="H1"/>
+			<xs:enumeration value="I0"/>
+			<xs:enumeration value="I1"/>
+			<xs:enumeration value="I2"/>
+			<xs:enumeration value="J0"/>
+			<xs:enumeration value="K0"/>
+			<xs:enumeration value="L0"/>
+			<xs:enumeration value="M0"/>
+			<xs:enumeration value="N0"/>
+			<xs:enumeration value="P1"/>
+			<xs:enumeration value="Q0"/>
+			<xs:enumeration value="R0"/>
+			<xs:enumeration value="R1"/>
+			<xs:enumeration value="R2"/>
+			<xs:enumeration value="R3"/>
+			<xs:enumeration value="R4"/>
+			<xs:enumeration value="R5"/>
+			<xs:enumeration value="S0"/>
+			<xs:enumeration value="S1"/>
+			<xs:enumeration value="T0"/>
+			<xs:enumeration value="Z1"/>
+			<xs:enumeration value="Z2"/>
+			<xs:enumeration value="ZZ"/>
+			<xs:enumeration value="M5"/>
+			<xs:enumeration value="T"/>
+			<xs:enumeration value="Z"/>
+			<xs:enumeration value="B6"/>
+			<xs:enumeration value="1L"/>
+			<xs:enumeration value="1M"/>
+			<xs:enumeration value="1N"/>
+			<xs:enumeration value="1O"/>
+			<xs:enumeration value="1P"/>
+			<xs:enumeration value="1Q"/>
+			<xs:enumeration value="1R"/>
+			<xs:enumeration value="1S"/>
+			<xs:enumeration value="1T"/>
+			<xs:enumeration value="1U"/>
+			<xs:enumeration value="1V"/>
+			<xs:enumeration value="1W"/>
+			<xs:enumeration value="1X"/>
+			<xs:enumeration value="1Y"/>
+			<xs:enumeration value="3H"/>
+			<xs:enumeration value="3I"/>
+			<xs:enumeration value="3J"/>
+			<xs:enumeration value="3K"/>
+			<xs:enumeration value="3L"/>
+			<xs:enumeration value="3M"/>
+			<xs:enumeration value="3N"/>
+			<xs:enumeration value="3O"/>
+			<xs:enumeration value="3P"/>
+			<xs:enumeration value="3Q"/>
+			<xs:enumeration value="3R"/>
+			<xs:enumeration value="3S"/>
+			<xs:enumeration value="3T"/>
+			<xs:enumeration value="3U"/>
+			<xs:enumeration value="3V"/>
+			<xs:enumeration value="3W"/>
+			<xs:enumeration value="3X"/>
+			<xs:enumeration value="59"/>
+			<xs:enumeration value="5Y"/>
+			<xs:enumeration value="5Z"/>
+			<xs:enumeration value="86"/>
+			<xs:enumeration value="87"/>
+			<xs:enumeration value="88"/>
+			<xs:enumeration value="95"/>
+			<xs:enumeration value="96"/>
+			<xs:enumeration value="97"/>
+			<xs:enumeration value="98"/>
+			<xs:enumeration value="DK"/>
+			<xs:enumeration value="DL"/>
+			<xs:enumeration value="DZ"/>
+			<xs:enumeration value="DM"/>
+			<xs:enumeration value="E8"/>
+			<xs:enumeration value="E9"/>
+			<xs:enumeration value="EA"/>
+			<xs:enumeration value="EB"/>
+			<xs:enumeration value="EC"/>
+			<xs:enumeration value="ED"/>
+			<xs:enumeration value="EE"/>
+			<xs:enumeration value="G2"/>
+			<xs:enumeration value="G3"/>
+			<xs:enumeration value="G4"/>
+			<xs:enumeration value="G5"/>
+			<xs:enumeration value="G6"/>
+			<xs:enumeration value="G7"/>
+			<xs:enumeration value="G8"/>
+			<xs:enumeration value="G9"/>
+			<xs:enumeration value="GA"/>
+			<xs:enumeration value="GB"/>
+			<xs:enumeration value="GC"/>
+			<xs:enumeration value="GD"/>
+			<xs:enumeration value="GE"/>
+			<xs:enumeration value="GF"/>
+			<xs:enumeration value="GH"/>
+			<xs:enumeration value="GK"/>
+			<xs:enumeration value="GL"/>
+			<xs:enumeration value="GM"/>
+			<xs:enumeration value="GN"/>
+			<xs:enumeration value="GO"/>
+			<xs:enumeration value="GP"/>
+			<xs:enumeration value="GQ"/>
+			<xs:enumeration value="GR"/>
+			<xs:enumeration value="GS"/>
+			<xs:enumeration value="GT"/>
+			<xs:enumeration value="GU"/>
+			<xs:enumeration value="GV"/>
+			<xs:enumeration value="GW"/>
+			<xs:enumeration value="GX"/>
+			<xs:enumeration value="GY"/>
+			<xs:enumeration value="GY"/>
+			<xs:enumeration value="H2"/>
+			<xs:enumeration value="J1"/>
+			<xs:enumeration value="K1"/>
+			<xs:enumeration value="K2"/>
+			<xs:enumeration value="K3"/>
+			<xs:enumeration value="K4"/>
+			<xs:enumeration value="M1"/>
+			<xs:enumeration value="M2"/>
+			<xs:enumeration value="M3"/>
+			<xs:enumeration value="M4"/>
+			<xs:enumeration value="M6"/>
+			<xs:enumeration value="M7"/>
+			<xs:enumeration value="M8"/>
+			<xs:enumeration value="M9"/>
+			<xs:enumeration value="MA"/>
+			<xs:enumeration value="MB"/>
+			<xs:enumeration value="MC"/>
+			<xs:enumeration value="MD"/>
+			<xs:enumeration value="ME"/>
+			<xs:enumeration value="MF"/>
+			<xs:enumeration value="MG"/>
+			<xs:enumeration value="MH"/>
+			<xs:enumeration value="MI"/>
+			<xs:enumeration value="MJ"/>
+			<xs:enumeration value="MK"/>
+			<xs:enumeration value="MZ"/>
+			<xs:enumeration value="P1"/>
+			<xs:enumeration value="P2"/>
+			<xs:enumeration value="Q0"/>
+			<xs:enumeration value="Q1"/>
+			<xs:enumeration value="Q2"/>
+			<xs:enumeration value="U0"/>
+			<xs:enumeration value="U1"/>
+			<xs:enumeration value="U2"/>
+			<xs:enumeration value="U3"/>
+			<xs:enumeration value="V0"/>
+			<xs:enumeration value="V1"/>
+			<xs:enumeration value="V2"/>
+			<xs:enumeration value="V3"/>
+			<xs:enumeration value="V4"/>
+			<xs:enumeration value="V5"/>
+			<xs:enumeration value="W0"/>
+			<xs:enumeration value="W1"/>
+			<xs:enumeration value="W2"/>
+			<xs:enumeration value="W3"/>
+			<xs:enumeration value="W4"/>
+			<xs:enumeration value="W5"/>
+			<xs:enumeration value="W6"/>
+			<xs:enumeration value="W7"/>
+			<xs:enumeration value="X0"/>
+			<xs:enumeration value="X1"/>
+			<xs:enumeration value="X2"/>
+			<xs:enumeration value="X3"/>
+			<xs:enumeration value="X4"/>
+			<xs:enumeration value="X5"/>
+			<xs:enumeration value="X6"/>
+			<xs:enumeration value="X7"/>
+			<xs:enumeration value="X8"/>
+			<xs:enumeration value="XA"/>
+			<xs:enumeration value="XB"/>
+			<xs:enumeration value="XC"/>
+			<xs:enumeration value="XD"/>
+			<xs:enumeration value="XE"/>
+			<xs:enumeration value="XF"/>
+			<xs:enumeration value="XJ"/>
+			<xs:enumeration value="XG"/>
+			<xs:enumeration value="XH"/>
+			<xs:enumeration value="XI"/>
+			<xs:enumeration value="XK"/>
+			<xs:enumeration value="XL"/>
+			<xs:enumeration value="XM"/>
+			<xs:enumeration value="XN"/>
+			<xs:enumeration value="XO"/>
+			<xs:enumeration value="XP"/>
+			<xs:enumeration value="XQ"/>
+			<xs:enumeration value="XR"/>
+			<xs:enumeration value="XS"/>
+			<xs:enumeration value="XT"/>
+			<xs:enumeration value="XU"/>
+			<xs:enumeration value="XV"/>
+			<xs:enumeration value="XW"/>
+			<xs:enumeration value="XX"/>
+			<xs:enumeration value="XY"/>
+			<xs:enumeration value="XZ"/>
+			<xs:enumeration value="Z3"/>
+			<xs:enumeration value="Z4"/>
+			<xs:enumeration value=""/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeActionManuelle">
+		<xs:annotation>
+			<xs:documentation>Liste des types d'actions manuelles</xs:documentation>
+			<xs:appinfo>
+				<jaxb:typesafeEnumClass>
+					<jaxb:typesafeEnumMember value="1" name="CODE_1"/>
+					<jaxb:typesafeEnumMember value="2" name="CODE_2"/>
+					<jaxb:typesafeEnumMember value="3" name="CODE_3"/>
+					<jaxb:typesafeEnumMember value="4" name="CODE_4"/>
+					<jaxb:typesafeEnumMember value="7" name="CODE_7"/>
+					<jaxb:typesafeEnumMember value="8" name="CODE_8"/>
+					<jaxb:typesafeEnumMember value="9" name="CODE_9"/>
+					<jaxb:typesafeEnumMember value="10" name="CODE_10"/>
+					<jaxb:typesafeEnumMember value="11" name="CODE_11"/>
+					<jaxb:typesafeEnumMember value="12" name="CODE_12"/>
+					<jaxb:typesafeEnumMember value="14" name="CODE_14"/>
+					<jaxb:typesafeEnumMember value="15" name="CODE_15"/>
+					<jaxb:typesafeEnumMember value="16" name="CODE_16"/>
+					<jaxb:typesafeEnumMember value="17" name="CODE_17"/>
+					<jaxb:typesafeEnumMember value="38" name="CODE_38"/>
+					<jaxb:typesafeEnumMember value="41" name="CODE_41"/>
+					<jaxb:typesafeEnumMember value="28" name="CODE_28"/>
+				</jaxb:typesafeEnumClass>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="38"/>
+			<xs:enumeration value="41"/>
+			<xs:enumeration value="28"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

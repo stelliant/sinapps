@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 rel. 3 sp1 (http://www.altova.com) by fabrice evrard (TEXA) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cart="http://www.texa.fr/edi-texi/cartoucheEntete" targetNamespace="http://www.texa.fr/edi-texi/cartoucheEntete" elementFormDefault="qualified" attributeFormDefault="qualified">
+	<xs:complexType name="cartoucheEntete">
+		<xs:annotation>
+			<xs:documentation xml:lang="FR">Element entête commun à l'ensemble des XSD TexiGestion (Dossier, Mission, ...). 
+			La cartouche d'entête qui contient l'ensemble des informations pour indentifer le dossier côté TexiGestion ainsi que la nature du contenu</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="typeAction">
+				<xs:annotation>
+					<xs:documentation>Type de l'action (Création, Modification, ...)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="creation"/>
+						<xs:enumeration value="modification"/>
+						<xs:enumeration value="cloture"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="natureFlux">
+				<xs:annotation>
+					<xs:documentation>Ajouter au cas où .... nature du flux (dossier, rdv, actes de gestion, ...)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="dossier"/>
+						<xs:enumeration value="rdv"/>
+						<xs:enumeration value="acteGestion"/>
+						<xs:enumeration value="rapport"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="concentrateur">
+				<xs:annotation>
+					<xs:documentation>Identité du concentrateur pour les missionneur (ex ; DARVA, ...) Optionnel</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value=""/>
+						<xs:enumeration value="DARVA"/>
+						<xs:enumeration value="GROUPAMA"/>
+						<xs:enumeration value="SOGESSUR"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="missionneur">
+				<xs:annotation>
+					<xs:documentation>Informations du Missionneur</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="nomMissionneur">
+							<xs:annotation>
+								<xs:documentation>Nom du missionneur. Correspond au LIBELLE_LONG dans le Réf. Texa</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:token">
+									<xs:maxLength value="64"/>
+									<xs:minLength value="1"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="codeMissionneur">
+							<xs:annotation>
+								<xs:documentation>Identifiant du missionneur dans le Ref. Texa. Constitue avec le numerroDossierMissionneur la PK pour l'injecteur TexiGestion.</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="16"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="numeroDossierMissionneur">
+							<xs:annotation>
+								<xs:documentation>Numero de dossier chez le Missionneur. Constitue avec le CodeMissionneur la PK pour l'injecteur TexiGestion. </xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="64"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ID_Mission_EDI">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="64"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="idMessage" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

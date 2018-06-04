@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 rel. 3 (http://www.altova.com) by saidou ba (TEXA) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:edi="http://www.texa.fr/edi-texi" xmlns:cart="http://www.texa.fr/edi-texi/cartoucheEntete" xmlns:tg="http://www.texa.fr/edi-texi/typeTG" targetNamespace="http://www.texa.fr/edi-texi" elementFormDefault="qualified" attributeFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="fr">
+			 XSD de création de Mission/dossier sous TexiGestion
+		</xs:documentation>
+	</xs:annotation>
+	<xs:import namespace="http://www.texa.fr/edi-texi/typeTG" schemaLocation="TypeTexi.xsd"/>
+	<xs:import namespace="http://www.texa.fr/edi-texi/cartoucheEntete" schemaLocation="CartoucheEntete.xsd"/>
+	<xs:element name="CreationDossier">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="entete" type="cart:cartoucheEntete"/>
+				<xs:element name="mission" type="edi:Mission"/>
+				<xs:element name="dossier" type="edi:Dossier"/>
+				<xs:element name="contrat" type="edi:Contrat" minOccurs="0"/>
+				<xs:element name="sinistre" type="edi:Sinistre" minOccurs="0"/>
+				<xs:element name="assure" type="edi:Assure" minOccurs="0"/>
+				<xs:element name="intervenant" type="edi:Intervenant" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="creationPDF" type="edi:creationPDF" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="Mission">
+		<xs:sequence>
+			<xs:element name="nom">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="32"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="dateReception" type="tg:TypeDate"/>
+			<xs:element name="supportOrdreMission" type="xs:string"/>
+			<xs:element name="societeReceptionnaire" type="xs:string"/>
+			<xs:element name="bureauReceptionnaire">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="assureur" type="tg:TiersGeres" minOccurs="0"/>
+			<xs:element name="Intermediaire" type="tg:TypeIntermediaire" minOccurs="0"/>
+			<xs:element name="clientProgramme" type="tg:TiersGeres" minOccurs="0"/>
+			<xs:element name="missionneur" type="xs:string"/>
+			<xs:element name="codeExpertMission" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="9"/>
+						<xs:pattern value="[0-9]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="facture" type="xs:string" minOccurs="0"/>
+			<xs:element name="numeroAbonne" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="32"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="numeroAbonneMandant" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="64"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="typeMission" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Dossier">
+		<xs:sequence>
+			<xs:element name="societeGestionnaire" type="xs:string"/>
+			<xs:element name="bureauGestionnaire">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="prestation" type="xs:string"/>
+			<xs:element name="modeOperatoire" type="xs:string"/>
+			<xs:element name="branche" type="xs:string"/>
+			<xs:element name="specialite" type="xs:string"/>
+			<xs:element name="typeSinistre" type="xs:string"/>
+			<xs:element name="circonstanceDetaillee" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="15"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="qualiteAssure" type="xs:string"/>
+			<xs:element name="montantCreation" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:nonNegativeInteger">
+						<xs:totalDigits value="12"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="VIP">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="5"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="codeFicheInstruction" type="xs:string"/>
+			<xs:element name="statut" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="256"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="positiondossier" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="32"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="anterioriteAssureur" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Contrat">
+		<xs:sequence>
+			<xs:element name="numPolice" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="64"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="referenceCG" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="natureContrat" type="xs:string" minOccurs="0"/>
+			<xs:element name="dateEffet" type="tg:TypeDate" minOccurs="0"/>
+			<xs:element name="numClient" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="64"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="nbrePieces" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:nonNegativeInteger">
+						<xs:totalDigits value="5"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="superficie" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:nonNegativeInteger">
+						<xs:totalDigits value="8"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="designationContrat" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="garantie" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Sinistre">
+		<xs:sequence>
+			<xs:element name="referenceMissionneur" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="numeroSinistre" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="dateSinistre" type="tg:TypeDate" minOccurs="0"/>
+			<xs:element name="heureSinistre" type="tg:TypeHeure" minOccurs="0"/>
+			<xs:element name="etageOrigineSinistre" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:nonNegativeInteger">
+						<xs:totalDigits value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="causeSinistresupprime" type="xs:string" minOccurs="0"/>
+			<xs:element name="cidre" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="5"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="J0" type="tg:TypeDate" minOccurs="0"/>
+			<xs:element name="DROC" type="tg:TypeDate" minOccurs="0"/>
+			<xs:element name="dateRecepChantier" type="tg:TypeDate" minOccurs="0"/>
+			<xs:element name="origine" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="32"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="descriptif" type="xs:string" minOccurs="0"/>
+			<xs:element name="adresseSinistre" minOccurs="0">
+				<xs:complexType>
+					<xs:choice minOccurs="0">
+						<xs:element name="Adresse1" type="tg:TypeAdresseFR"/>
+						<xs:element name="Adresse2" type="tg:TypeAdresseInt"/>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="caractereExpertise" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="64"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Assure">
+		<xs:sequence>
+			<xs:element name="typePersonne" type="xs:string"/>
+			<xs:element name="qualificationAPE" type="xs:string" minOccurs="0"/>
+			<xs:element name="titre" type="xs:string" minOccurs="0"/>
+			<xs:element name="nom">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="80"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="prenom" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="32"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="qualiteOccupant" type="xs:string" minOccurs="0"/>
+			<xs:element name="habitation" type="xs:string" minOccurs="0"/>
+			<xs:element name="reference" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="adresseAssure" minOccurs="0">
+				<xs:complexType>
+					<xs:choice minOccurs="0">
+						<xs:element name="Adresse1" type="tg:TypeAdresseFR"/>
+						<xs:element name="Adresse2" type="tg:TypeAdresseInt"/>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="telephone" type="tg:TypeNumeroTel" minOccurs="0"/>
+			<xs:element name="telephonePortable" type="tg:TypeNumeroTel" minOccurs="0"/>
+			<xs:element name="fax" type="tg:TypeNumeroTel" minOccurs="0"/>
+			<xs:element name="email" type="tg:TypeEmail" minOccurs="0"/>
+			<xs:element name="contact" type="tg:Contact" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Intervenant">
+		<xs:sequence>
+			<xs:element name="natureIntervenant" type="xs:string"/>
+			<xs:element name="typePersonne" type="xs:string"/>
+			<xs:element name="titre" type="xs:string"/>
+			<xs:element name="nom">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="32"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="prenom" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="32"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="division" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="service" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="description" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="256"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="adresseIntervenant" minOccurs="0">
+				<xs:complexType>
+					<xs:choice minOccurs="0">
+						<xs:element name="Adresse1" type="tg:TypeAdresseFR"/>
+						<xs:element name="Adresse2" type="tg:TypeAdresseInt"/>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="telephone1" type="tg:TypeNumeroTel" minOccurs="0"/>
+			<xs:element name="telephone2" type="tg:TypeNumeroTel" minOccurs="0"/>
+			<xs:element name="fax" type="tg:TypeNumeroTel" minOccurs="0"/>
+			<xs:element name="email" type="tg:TypeEmail" minOccurs="0"/>
+			<xs:element name="qualite" type="xs:string" minOccurs="0"/>
+			<xs:element name="contact" type="tg:Contact" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="creationPDF">
+		<xs:sequence>
+			<xs:element name="nomXML" type="xs:string"/>
+			<xs:element name="nomXSL" type="xs:string" maxOccurs="unbounded"/>
+			<xs:element name="nameSpace" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
