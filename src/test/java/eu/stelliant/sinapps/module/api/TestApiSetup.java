@@ -1,6 +1,5 @@
 package eu.stelliant.sinapps.module.api;
 
-import eu.stelliant.sinapps.SinappsApplication;
 import eu.stelliant.sinapps.module.api.config.ApiProperties;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -12,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @Ignore
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {SinappsApplication.class})
+@SpringBootTest
 @ActiveProfiles("test")
 public class TestApiSetup {
 

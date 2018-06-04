@@ -20,7 +20,7 @@ spring:
 
 sinapps:
     api:
-      baseUrl: https://sinapps-ird-v2.demo.darva.com
-      loginPath: /core/api/login
-      login: 28953sinapps
-      password: bb*1xSZO
+        baseUrl: https://sinapps-ird-v2.demo.darva.com
+        loginPath: /core/api/login
+        login: 28953sinapps
+        password: bb*1xSZO
