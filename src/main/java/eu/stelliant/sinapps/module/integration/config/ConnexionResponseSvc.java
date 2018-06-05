@@ -6,10 +6,10 @@ import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ConnexionHandler {
+public class ConnexionResponseSvc {
 
   @ServiceActivator
-  public String handle(Message<InlineResponse200> msg) {
+  public String get(Message<InlineResponse200> msg) {
 
     return msg.getPayload().toString();
   }

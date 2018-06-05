@@ -4,6 +4,7 @@ import io.swagger.sinapps.api.client.transverse.model.Body;
 import io.swagger.sinapps.api.client.transverse.model.InlineResponse200;
 import io.swagger.sinapps.api.client.transverse.model.InlineResponse2001;
 import io.swagger.sinapps.api.client.transverse.model.LinksInner;
+import io.swagger.sinapps.api.client.transverse.model.ListeRessources;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,16 +78,18 @@ public class ApiDiscoveryTest extends TestApiSetup {
       log.info("Retour API sinapps {}", inlineResponse2001);
 
       // Make the HTTP POST request, marshaling the request to JSON, and the response to a String
-      inlineResponse2001.getBody().getLinks().forEach(linksInner -> {
-        final RestTemplate lambdaRestTemplate = new RestTemplate();
-        log.info("Calling {}", apiProperties.getApi().getBaseUrl() + linksInner.getHref());
-        ResponseEntity<String> response = lambdaRestTemplate
-            .exchange(apiProperties.getApi().getBaseUrl() + linksInner.getHref(),
-                      HttpMethod.GET,
-                      requestEntity,
-                      String.class);
-        log.info("Retour API sinapps {}", response);
-      });
+      String missionsPath = inlineResponse2001.getBody().getLinks().stream()
+          .filter(linksInner -> "abstractMissions".equals(linksInner.getRel()))
+          .map(LinksInner::getHref)
+          .findFirst()
+          .orElse("");
+      log.info("Calling {}", apiProperties.getApi().getBaseUrl() + missionsPath);
+      ResponseEntity<ListeRessources> listeRessources = restTemplate
+          .exchange(apiProperties.getApi().getBaseUrl() + missionsPath,
+                    HttpMethod.GET,
+                    requestEntity,
+                    ListeRessources.class);
+      log.info("Retour API sinapps {}", listeRessources);
 
     } catch (Exception e) {
       log.error("####", e);

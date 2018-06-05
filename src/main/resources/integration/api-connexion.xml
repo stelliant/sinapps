@@ -9,21 +9,73 @@
     http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
     http://www.springframework.org/schema/integration/stream http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd">
 
-  <int:inbound-channel-adapter channel="connexion.channel" expression="''">
-    <int:poller fixed-delay="60000"></int:poller>
+  <!-- Connexion Poller -->
+  <int:inbound-channel-adapter channel="connexion" expression="''">
+    <int:poller fixed-delay="5000"></int:poller>
   </int:inbound-channel-adapter>
 
-  <!-- Pantages Theater request -->
-  <int:chain input-channel="connexion.channel">
-    <int:transformer ref="connexionTransformer"/>
+  <!-- Connexion -->
+  <int:chain input-channel="connexion">
+    <int:transformer ref="connexionPayload"/>
     <int-http:outbound-gateway
-      url="#{apiConfig.properties.api.baseUrl}#{apiConfig.properties.api.loginPath}"
+      url-expression="headers['url']"
       http-method="POST"
       reply-timeout="5000"
+      transfer-cookies="true"
       expected-response-type="io.swagger.sinapps.api.client.transverse.model.InlineResponse200">
     </int-http:outbound-gateway>
-    <int:service-activator ref="connexionHandler"/>
+    <!--<int:service-activator ref="connexionResponseSvc"/>
+    <int-stream:stdout-channel-adapter id="consoleOut" append-newline="true"/>-->
+    <!--<int:gateway request-channel="partenaire"/>-->
+    <int:transformer ref="partenairePayload"/>
+    <int-http:outbound-gateway
+      url-expression="headers['url']"
+      http-method="GET"
+      reply-timeout="5000"
+      transfer-cookies="true"
+      expected-response-type="io.swagger.sinapps.api.client.transverse.model.InlineResponse2001">
+    </int-http:outbound-gateway>
+    <!--<int:service-activator ref="partenaireResponseSvc"/>
+    <int-stream:stdout-channel-adapter id="consoleOut" append-newline="true"/>-->
+    <!--<int:gateway request-channel="missions"/>-->
+    <int:transformer ref="missionsPayload"/>
+    <int-http:outbound-gateway
+      url-expression="headers['url']"
+      http-method="GET"
+      reply-timeout="5000"
+      transfer-cookies="true"
+      expected-response-type="io.swagger.sinapps.api.client.transverse.model.ListeRessources">
+    </int-http:outbound-gateway>
+    <int:service-activator ref="missionsResponseSvc"/>
     <int-stream:stdout-channel-adapter id="consoleOut" append-newline="true"/>
   </int:chain>
+
+  <!-- Partenaire -->
+  <!--<int:chain input-channel="partenaire">
+    <int:transformer ref="partenairePayload"/>
+    <int-http:outbound-gateway
+      url-expression="headers['url']"
+      http-method="GET"
+      reply-timeout="5000"
+      transfer-cookies="true"
+      expected-response-type="io.swagger.sinapps.api.client.transverse.model.InlineResponse2001">
+    </int-http:outbound-gateway>
+    <int:service-activator ref="partenaireResponseSvc"/>
+    <int-stream:stdout-channel-adapter id="consoleOut" append-newline="true"/>
+  </int:chain>-->
+
+  <!-- Missions -->
+  <!--<int:chain input-channel="missions">
+    <int:transformer ref="missionsPayload"/>
+    <int-http:outbound-gateway
+      url-expression="headers['url']"
+      http-method="GET"
+      reply-timeout="5000"
+      transfer-cookies="true"
+      expected-response-type="io.swagger.sinapps.api.client.transverse.model.ListeRessources">
+    </int-http:outbound-gateway>
+    <int:service-activator ref="missionsResponseSvc"/>
+    <int-stream:stdout-channel-adapter id="consoleOut" append-newline="true"/>
+  </int:chain>-->
 
 </beans>
