@@ -1,7 +1,10 @@
 # ===================================================================
-# Spring Boot configuration for the "dev" profile.
+# Spring Boot configuration for the "local" profile.
 #
 # This configuration overrides the application.yaml file.
+#
+#         TO BE USED FOR LOCAL DEVELOPMENTS
+#
 # ===================================================================
 # ===================================================================
 # Standard Spring Boot properties.
@@ -12,6 +15,7 @@
 spring:
     profiles:
         active: test
+        
     devtools:
         restart:
             enabled: true

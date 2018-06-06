@@ -1,0 +1,16 @@
+# ===================================================================
+# Spring Boot configuration for the "test" profile.
+#
+# This configuration overrides the application.yaml file and
+# inherit/extend the application-local.yaml.
+# ===================================================================
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+spring:
+    profiles:
+        active: test
+        include: local
