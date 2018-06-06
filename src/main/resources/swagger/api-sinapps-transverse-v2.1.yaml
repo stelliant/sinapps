@@ -681,3 +681,9 @@ definitions:
           type: "string"
         label:
           type: "string"
+  DataTypes:
+    type: "object"
+    properties:
+      dateType:
+        type: "string"
+        format: "date-time"
