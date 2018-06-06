@@ -2,7 +2,7 @@ package eu.stelliant.sinapps.module.api.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "sinapps", ignoreUnknownFields = false)
+@ConfigurationProperties(prefix = "sinapps")
 public class ApiProperties {
 
   private Api api;

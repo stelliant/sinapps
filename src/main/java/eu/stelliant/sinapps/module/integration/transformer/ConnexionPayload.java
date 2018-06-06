@@ -1,7 +1,7 @@
-package eu.stelliant.sinapps.module.integration.config;
+package eu.stelliant.sinapps.module.integration.transformer;
 
 import eu.stelliant.sinapps.module.api.config.ApiProperties;
-import io.swagger.sinapps.api.client.transverse.model.Body;
+import com.darva.sinapps.api.client.transverse.model.Body;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.integration.annotation.Transformer;

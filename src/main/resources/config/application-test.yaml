@@ -18,6 +18,12 @@ spring:
     jackson:
         serialization.indent_output: true
 
+logging:
+  level:
+    eu.stelliant: DEBUG
+    org.springframework: INFO
+    org.springframework.integration: DEBUG
+
 sinapps:
     api:
         baseUrl: https://sinapps-ird-v2.demo.darva.com

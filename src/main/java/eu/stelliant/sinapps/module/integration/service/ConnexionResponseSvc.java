@@ -1,15 +1,15 @@
-package eu.stelliant.sinapps.module.integration.config;
+package eu.stelliant.sinapps.module.integration.service;
 
-import io.swagger.sinapps.api.client.transverse.model.ListeRessources;
+import com.darva.sinapps.api.client.transverse.model.InlineResponse200;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MissionsResponseSvc {
+public class ConnexionResponseSvc {
 
   @ServiceActivator
-  public String get(Message<ListeRessources> msg) {
+  public String get(Message<InlineResponse200> msg) {
 
     return msg.getPayload().toString();
   }

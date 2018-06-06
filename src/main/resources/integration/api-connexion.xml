@@ -9,73 +9,52 @@
     http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
     http://www.springframework.org/schema/integration/stream http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd">
 
+  <!-- Global Wiretap -->
+  <int:wire-tap pattern="channel.*" channel="channel.consoleOut"/>
+  <int-stream:stdout-channel-adapter id="channel.consoleOut" append-newline="true"/>
+
   <!-- Connexion Poller -->
-  <int:inbound-channel-adapter channel="connexion" expression="''">
-    <int:poller fixed-delay="5000"></int:poller>
+  <int:inbound-channel-adapter channel="channel.connexion" expression="''">
+    <!-- for batch processing -->
+    <int:poller fixed-delay="1000"></int:poller>
   </int:inbound-channel-adapter>
 
   <!-- Connexion -->
-  <int:chain input-channel="connexion">
+  <int:chain input-channel="channel.connexion">
     <int:transformer ref="connexionPayload"/>
     <int-http:outbound-gateway
       url-expression="headers['url']"
       http-method="POST"
       reply-timeout="5000"
       transfer-cookies="true"
-      expected-response-type="io.swagger.sinapps.api.client.transverse.model.InlineResponse200">
+      expected-response-type="com.darva.sinapps.api.client.transverse.model.InlineResponse200">
     </int-http:outbound-gateway>
-    <!--<int:service-activator ref="connexionResponseSvc"/>
-    <int-stream:stdout-channel-adapter id="consoleOut" append-newline="true"/>-->
-    <!--<int:gateway request-channel="partenaire"/>-->
-    <int:transformer ref="partenairePayload"/>
-    <int-http:outbound-gateway
-      url-expression="headers['url']"
-      http-method="GET"
-      reply-timeout="5000"
-      transfer-cookies="true"
-      expected-response-type="io.swagger.sinapps.api.client.transverse.model.InlineResponse2001">
-    </int-http:outbound-gateway>
-    <!--<int:service-activator ref="partenaireResponseSvc"/>
-    <int-stream:stdout-channel-adapter id="consoleOut" append-newline="true"/>-->
-    <!--<int:gateway request-channel="missions"/>-->
-    <int:transformer ref="missionsPayload"/>
-    <int-http:outbound-gateway
-      url-expression="headers['url']"
-      http-method="GET"
-      reply-timeout="5000"
-      transfer-cookies="true"
-      expected-response-type="io.swagger.sinapps.api.client.transverse.model.ListeRessources">
-    </int-http:outbound-gateway>
-    <int:service-activator ref="missionsResponseSvc"/>
-    <int-stream:stdout-channel-adapter id="consoleOut" append-newline="true"/>
+    <int:gateway request-channel="channel.partenaire"/>
   </int:chain>
 
   <!-- Partenaire -->
-  <!--<int:chain input-channel="partenaire">
+  <int:chain input-channel="channel.partenaire">
     <int:transformer ref="partenairePayload"/>
     <int-http:outbound-gateway
       url-expression="headers['url']"
       http-method="GET"
       reply-timeout="5000"
       transfer-cookies="true"
-      expected-response-type="io.swagger.sinapps.api.client.transverse.model.InlineResponse2001">
+      expected-response-type="com.darva.sinapps.api.client.transverse.model.InlineResponse2001">
     </int-http:outbound-gateway>
-    <int:service-activator ref="partenaireResponseSvc"/>
-    <int-stream:stdout-channel-adapter id="consoleOut" append-newline="true"/>
-  </int:chain>-->
+    <int:gateway request-channel="channel.missions"/>
+  </int:chain>
 
   <!-- Missions -->
-  <!--<int:chain input-channel="missions">
+  <int:chain input-channel="channel.missions">
     <int:transformer ref="missionsPayload"/>
     <int-http:outbound-gateway
       url-expression="headers['url']"
       http-method="GET"
       reply-timeout="5000"
       transfer-cookies="true"
-      expected-response-type="io.swagger.sinapps.api.client.transverse.model.ListeRessources">
+      expected-response-type="com.darva.sinapps.api.client.transverse.model.InlineResponse2002">
     </int-http:outbound-gateway>
-    <int:service-activator ref="missionsResponseSvc"/>
-    <int-stream:stdout-channel-adapter id="consoleOut" append-newline="true"/>
-  </int:chain>-->
+  </int:chain>
 
 </beans>
