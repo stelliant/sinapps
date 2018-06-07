@@ -1,5 +1,8 @@
 package eu.stelliant.sinapps.module.api;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+
 import com.darva.sinapps.api.client.transverse.model.DataTypes;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,21 +23,22 @@ public class ApiDataTypesTest {
     mapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
   }
 
-  @Test(expected = InvalidFormatException.class)
-  public void should_throw_jackson_invalidFormatException() throws IOException {
+  @Test
+  public void date_should_throw_jackson_invalidFormatException() throws IOException {
 
     // Given
     String jsonDataTypes = "{\"dateType\": \"2018-05-17T10:57:47+0200\"}";
 
     // When
-    DataTypes dataTypes = mapper.readValue(jsonDataTypes, DataTypes.class);
+    Throwable exception = catchThrowable(() -> mapper.readValue(jsonDataTypes, DataTypes.class));
 
-    // Then @see expected
-
+    // Then
+    assertThat(exception).isInstanceOf(InvalidFormatException.class)
+        .hasMessageContaining("could not be parsed at index 19");
   }
 
   @Test
-  public void should_be_parsed() throws IOException {
+  public void date_should_be_parsed() throws IOException {
 
     // Given
     String jsonDataTypes = "{\"dateType\": \"2018-05-17T10:57:47+02:00\"}";
@@ -43,6 +47,6 @@ public class ApiDataTypesTest {
     DataTypes dataTypes = mapper.readValue(jsonDataTypes, DataTypes.class);
 
     // Then
-    //ZoneOffset zoneOffset = new ZoneOffset();
+    assertThat(dataTypes.getDateType().getOffset().toString()).isEqualTo("+02:00");
   }
 }
