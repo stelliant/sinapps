@@ -3,12 +3,12 @@ package eu.stelliant.sinapps.module.api;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-import com.darva.sinapps.api.client.transverse.model.DataTypes;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import eu.stelliant.model.DataTypes;
 import java.io.IOException;
 import org.junit.BeforeClass;
 import org.junit.Test;

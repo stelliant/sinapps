@@ -213,7 +213,9 @@ paths:
                     href:
                       type: "string"
                     properties:
-                      type: "#/definitions/MissionGenerique"
+                      $ref: "#/definitions/MissionGenerique"
+                    links:
+                      $ref: "#/definitions/Links"
               links:
                 $ref: "#/definitions/Links"
   /lienVersUneListeDeRessources:
@@ -523,6 +525,12 @@ definitions:
           $ref: "#/definitions/Item"
       links:
         $ref: "#/definitions/Links"
+      #filters:
+      #  type: "array"
+      #  description: "Liste des filtres qu'il est possible d'appliquer sur le service\
+      #    \ de recherche. Ces filtres sont à transmettre au service en query parameter."
+      #  items:
+      #    type: "object"
   MissionGenerique:
     type: "object"
     required:
@@ -530,8 +538,8 @@ definitions:
     - "assureurId"
     - "cause"
     - "cloture"
-    - "dateCreation"
-    - "dateDeMissionnement"
+    #- "dateCreation"
+    #- "dateDeMissionnement"
     - "difficulteBloquante"
     - "difficulteNonBloquante"
     - "etapeMission"
@@ -576,9 +584,9 @@ definitions:
       numero:
         type: "string"
         description: "Numéro de la mission chez l'assureur"
-      dateDeMissionnement:
-        type: "string"
-        format: "date-time"
+      #dateDeMissionnement:
+      #  type: "string"
+      #  format: "date-time"
       difficulteNonBloquante:
         type: "boolean"
       etapeMission:
@@ -623,24 +631,37 @@ definitions:
       id:
         type: "string"
         description: "ID de la mission dans Sinapps"
-      dateCreation:
-        type: "string"
-        format: "date-time"
+      #dateCreation:
+      #  type: "string"
+      #  format: "date-time"
     description: "Description d'une mission IRD, tous domaines confondus. Les informations\
       \ spécifiques au domaine de la mission (REN, Expertise, Urgence Habitation)\
       \ ne sont pas indiqués ici."
   Partenaire:
+    type: "object"
     required:
-    - "id"
+    #- "href"
+    #- "properties"
+    #properties:
+    #  href:
+    #    type: "string"
+    #  properties:
+    #    required:
     - "nom"
     - "numeroClient"
-    type: "object"
+    #    - "typePartenaire"
+    #    type: "object"
     properties:
       numeroClient:
         type: "integer"
       nom:
         type: "string"
       typePartenaire:
+            #type: "string"
+            #enum:
+            #- "Assureur"
+            #- "Darva"
+            #- "Reparateur"
         type: "object"
         properties:
           name:
@@ -655,6 +676,12 @@ definitions:
         type: "string"
       version:
         type: "integer"
+          #dateDeCreation:
+          #  type: "string"
+          #  format: "date-time"
+          #dateDeDerniereModification:
+          #  type: "string"
+          #  format: "date-time"
   Personne:
     type: "object"
     properties:
@@ -681,9 +708,3 @@ definitions:
           type: "string"
         label:
           type: "string"
-  DataTypes:
-    type: "object"
-    properties:
-      dateType:
-        type: "string"
-        format: "date-time"

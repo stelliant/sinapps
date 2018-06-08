@@ -1,0 +1,2247 @@
+---
+swagger: "2.0"
+info:
+  description: "Les commandes décrites ci-dessous sont disponibles à partir des liens\
+    \ présents sur les types de ressources auxquelles elles s'appliquent, si l'état\
+    \ de la ressource et les habilitations de l'utilisateur connecté le permettent.\n\
+    \nLes services de recherches ci-dessous sont également disponibles à partir des\
+    \ liens présents sur les types de ressources auxquelles ils s'appliquent et les\
+    \ instances retournées varient en fonction de l'utilisateur connecté (étanché\
+    ité des données entres les acteurs).\n\n**Les structures de données décrites ici\
+    \ prennent en compte les spécificités du contexte \"IRD Expertise\".**"
+  version: "1.0.0"
+  title: "Sinapps IRD Expertise v1"
+  contact: {}
+consumes:
+- "application/json"
+produces:
+- "application/json"
+security:
+- Custom: []
+paths:
+  /consulter lien expertiseMissions:
+    get:
+      tags:
+      - "Services Expert - Partenaires"
+      summary: "Lien \"expertiseMissions\" : rechercher des missions d'expertises\
+        \ liées au partenaire de l'utilisateur connecté."
+      parameters:
+      - name: "fullText"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "typePrestation"
+        in: "query"
+        required: false
+        type: "array"
+        description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Typedeprestation)"
+        items:
+          $ref: "#/definitions/EnumTypePrestation"
+      - name: "mandant"
+        in: "query"
+        required: false
+        type: "array"
+        items:
+          $ref: "#/definitions/BSONObjectID"
+      - name: "prestataire"
+        in: "query"
+        required: false
+        type: "array"
+        items:
+          $ref: "#/definitions/BSONObjectID"
+      - name: "etatMission"
+        in: "query"
+        required: false
+        type: "string"
+        description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Etatdelamission)"
+      - name: "prestationCloturee"
+        in: "query"
+        required: false
+        type: "boolean"
+      - name: "departementRisque"
+        in: "query"
+        required: false
+        type: "string"
+        description: "Numéro de département où se trouve le risque"
+      - name: "dateDebutMissionnement"
+        in: "query"
+        required: false
+        type: "string"
+        format: "date"
+        description: "date au format \"aaaa-mm-jj\""
+      - name: "dateFinMissionnement"
+        in: "query"
+        required: false
+        type: "string"
+        format: "date"
+        description: "date au format \"aaaa-mm-jj\""
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            type: "array"
+            description: "Liste de missions d'expertise"
+            items:
+              $ref: "#/definitions/Mission"
+  /exécuter commande MissionnerExpert:
+    put:
+      tags:
+      - "Services Assureur - Partenaires"
+      summary: "Missionner un expert"
+      description: "L'expert peut prendre un premier rendez-vous avec l'assuré lorsque\
+        \ l'état de la prestation est PrestationQualifiee. \nTout nouveau rendez-vous\
+        \ peut-être pris à partir de l'état de la prestation \"rendezVousPris\" et\
+        \ à tout moment du dossier.\n## Rôles habilités\nAssureur\n## Regles de gestion\n\
+        A compléter\n\n## Evénement généré\nMissionCreee\nPrestationCreee\nCommandeAcceptee\n\
+        \n## Exemple\n[Voir un exemple de flux JSON](https://wiki.apps.darva.com/display/SPCFAQ/Commande+missionnerCoveaExpert)"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "prestataire"
+          properties:
+            prestataire:
+              $ref: "#/definitions/Prestataire"
+            mission:
+              $ref: "#/definitions/Mission"
+            dossier:
+              $ref: "#/definitions/Dossier"
+            prestation:
+              $ref: "#/definitions/Prestation"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/ResultatCommande"
+  /consulter ressource prestation:
+    get:
+      tags:
+      - "Services Assureur - Prestations"
+      - "Services Expert - Prestations"
+      summary: "Ressource Prestation"
+      description: "## Rôles habilités\nAssureur, Expert\n\n## Exemple\n[Voir un exemple\
+        \ de flux JSON](https://wiki.apps.darva.com/display/REFDOC/Ressource+Prestation)"
+      operationId: "prestations"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/RessourcePrestation"
+  /consulter lien rendezVous:
+    get:
+      tags:
+      - "Services Expert - Prestations"
+      - "Services Assureur - Prestations"
+      summary: "Lien \"rendezVous\" : rechercher les rendez-vous pris par l'expert"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            required:
+            - "href"
+            - "properties"
+            type: "object"
+            properties:
+              href:
+                type: "string"
+              properties:
+                $ref: "#/definitions/ListeProperties"
+              links:
+                $ref: "#/definitions/Links"
+  /exécuter commande qualifierPrestation:
+    put:
+      tags:
+      - "Services Expert - Prestations"
+      summary: "Qualifier la prestation"
+      description: "## Rôles habilités\nExpert\n\n## Règles de gestion\n| Code | Description\
+        \ | \n| -------- | -------- | \n|RG_PRESTATION_MISSION_STATUS|Il n'est pas\
+        \ possible de qualifier la prestation si la mission est bloquée, terminée\
+        \ ou annulée.|\n|RG_PRESTATION_TYPE_ESS|Pour une expertise sur site si le\
+        \ contrat est professionel, la prestation doit être complexe.|\n|RG_PRESTATION_CONVENTION|Si\
+        \ le complément prend la valeur Contradictoire alors la convention est obligatoire|\n\
+        |RG_PRESTATION_TYPE_EAD|Pour une expertise à distance, il est obligatoire\
+        \ de préciser le canal ainsi que la nature des dommages|\n|RG_PRESTATION_TYPE_ESS|Pour\
+        \ une expertise sur site, alors le canal ne prend pas de valeur TeleExpertise,\
+        \ VisioExpertise et la natureDommages ne prend pas Mobilier ou Immobilier|\n\
+        \n## Evénement généré\nPrestationQualifee\n\n## Exemple\n[Voir un exemple\
+        \ de flux JSON](https://wiki.apps.darva.com/display/REFDOC/Commande+qualifierPrestation)"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "typeDePrestation"
+          properties:
+            typeDePrestation:
+              $ref: "#/definitions/TypePrestation"
+            complexe:
+              type: "boolean"
+              description: "Prestation complexe (Oui/Non) ?"
+            convention:
+              $ref: "#/definitions/Convention"
+            criticite:
+              $ref: "#/definitions/Criticite"
+            urgence:
+              type: "object"
+              description: "Si la criticité est urgente"
+              properties:
+                motif:
+                  $ref: "#/definitions/MotifUrgence"
+                complement:
+                  type: "string"
+                  description: "Commentaire libre"
+            intervenant:
+              required:
+              - "reference"
+              type: "object"
+              description: "Liste des intervenants sur la prestation"
+              properties:
+                nom:
+                  type: "string"
+                  description: "Nom de l'intervenant"
+                prenom:
+                  type: "string"
+                  description: "Prénom de l'intervenant"
+                telephone:
+                  type: "string"
+                  description: "Coordonnées de l'intervenant"
+                reference:
+                  type: "string"
+                  description: "Référence de l'intervenant"
+            contradictoire:
+              type: "boolean"
+              description: "L'expertise est-elle contradictoire (Oui/Non) ?"
+            judiciaire:
+              type: "boolean"
+              description: "L’expertise est-elle judiciaire (Oui/Non) ?"
+            canal:
+              $ref: "#/definitions/Canal"
+            natureDesDommages:
+              $ref: "#/definitions/NatureDesDommages"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/ResultatCommande"
+  /exécuter commande demanderFinPrestation:
+    put:
+      tags:
+      - "Services Expert - Prestations"
+      summary: "Demander une fin de prestation"
+      description: "## Rôles habilités\nExpert\n\n## Règles de gestion\n| Code | Description\
+        \ | \n| -------- | -------- | \n|RG_PRESTATION_COMPLEMENT|Le complement est\
+        \ obligatoire si le motif est Autre|\n\n## Evénement généré\nCommandeAcceptee\n\
+        StatutModifie\nFinDePrestationDemandee\n\n## Exemple\n[Voir un exemple de\
+        \ flux JSON](https://wiki.apps.darva.com/display/REFDOC/Commande+demanderFinPrestation)"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "motif"
+          properties:
+            motif:
+              $ref: "#/definitions/MotifFinPrestation"
+            commentaire:
+              type: "string"
+              description: "Devient obligatoire si le motif est Autre"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/ResultatCommande"
+  /exécuter commande prendreRendezVousExpert:
+    put:
+      tags:
+      - "Services Expert - Prestations"
+      summary: "Prendre un rendez-vous"
+      description: "L'expert peut prendre un premier rendez-vous avec l'assuré lorsque\
+        \ l'état de la prestation est PrestationQualifiee. \nTout nouveau rendez-vous\
+        \ peut-être pris à partir de l'état de la prestation \"rendezVousPris\" et\
+        \ à tout moment du dossier.\n## Rôles habilités\nExpert\n## Règles de gestion\n\
+        | Code | Description | \n| -------- | -------- | \n|RG_RENDEZVOUS_EXP_0001\"\
+        | La date de rendez-vous doit être postérieure à la date du sinistre |\n|RG_RENDEZVOUS_EXP_0002\"\
+        | La date de rendez-vous doit être postérieure à la date du sinistre |\n|RG_RENDEZVOUS_EXP_0003\"\
+        | Le type de rendez vous doit être \"Telephonique\" ou \"Visio\" pour une\
+        \ expertise à distance |\n\n## Evénement généré\nRendezVousPris\n\n## Exemple\n\
+        [Voir un exemple de flux JSON](https://wiki.apps.darva.com/display/SPCFAQ/Commande+prendreRendezVousExpert)"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "horaire"
+          - "nomIntervenant"
+          - "referenceIntervenant"
+          - "typeRendezVous"
+          properties:
+            horaire:
+              $ref: "#/definitions/Horaire"
+            tempsInterventionApproximatif:
+              $ref: "#/definitions/FiniteDuration"
+            commentaire:
+              $ref: "#/definitions/NonEmptyString"
+            typeRendezVous:
+              $ref: "#/definitions/TypeRendezVous"
+            nomIntervenant:
+              type: "string"
+            prenomIntervenant:
+              type: "string"
+            telephoneIntervenant:
+              type: "string"
+            referenceIntervenant:
+              type: "string"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/ResultatCommande"
+  /consulter Ressource missions:
+    get:
+      tags:
+      - "Services Expert - Missions"
+      - "Services Assureur - Missions"
+      summary: "Lien vers une mission d'expertise"
+      description: "Consultation du détail d'une mission d'expertise.\n\nCe type de\
+        \ lien peut se trouver dans des listes de missions, dans les sous-ressources\
+        \ de la mission, dans des événements, ...\n\n## Exemple\n[Voir un exemple\
+        \ de flux JSON](https://wiki.apps.darva.com/display/REFDOC/Ressource+Missions)"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            required:
+            - "href"
+            - "properties"
+            type: "object"
+            properties:
+              href:
+                type: "string"
+              properties:
+                required:
+                - "dossier"
+                - "mission"
+                type: "object"
+                properties:
+                  dossier:
+                    $ref: "#/definitions/DossierRepresentation"
+                  mission:
+                    required:
+                    - "assureurId"
+                    #- "dateDeMissionnement"
+                    - "dossierId"
+                    - "numero"
+                    - "prestataireId"
+                    - "statut"
+                    - "typeMission"
+                    type: "object"
+                    properties:
+                      prestataireId:
+                        $ref: "#/definitions/BSONObjectID"
+                      assureurId:
+                        $ref: "#/definitions/BSONObjectID"
+                      dossierId:
+                        $ref: "#/definitions/BSONObjectID"
+                      #dateDeMissionnement:
+                      #  type: "string"
+                      #  format: "date-time"
+                      numero:
+                        type: "string"
+                      commentaires:
+                        type: "array"
+                        items:
+                          $ref: "#/definitions/NonEmptyString"
+                      statut:
+                        $ref: "#/definitions/StatutMission"
+                      typeMission:
+                        $ref: "#/definitions/TypeMission"
+                      annulationMission:
+                        $ref: "#/definitions/AnnulationMission"
+  /exécuter commande ajouterActeur:
+    put:
+      tags:
+      - "Services Assureur - Missions"
+      - "Services Expert - Missions"
+      summary: "Ajouter un acteur"
+      description: "L'expert peut à tout moment ajouter un acteur à la mission.\n\
+        ## Rôles habilités\nExpert\n\n## Règles de gestion\n| Code | Description |\
+        \ \n| -------- | -------- | \n|RG_ACTEUR_CXP_0001|Il existe déjà un acteur\
+        \ de type Assure.|\n|RG_ACTEUR_CXP_0002|Le champs informationAssure doit ê\
+        tre remplis pour une acteur Assure.|\n|RG_ACTEUR_CXP_0003|Le champs intervenantDe\
+        \ est obligatoire pour un acteur intervenant.|\n\n\n## Evénement généré\n\
+        ActeurAjoute"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "typeActeur"
+          properties:
+            typeActeur:
+              $ref: "#/definitions/TypeActeur"
+            informationsAssure:
+              type: "object"
+              properties:
+                dateAnciennete:
+                  type: "string"
+                  format: "date"
+                profession:
+                  type: "string"
+                particulariteClient:
+                  $ref: "#/definitions/ParticulariteClient"
+                precisionParticulariteClient:
+                  type: "string"
+                situationComptable:
+                  type: "string"
+            personne:
+              $ref: "#/definitions/Personne"
+            acteurConvoque:
+              type: "boolean"
+            acteurPresent:
+              type: "boolean"
+            responsableSinistre:
+              type: "boolean"
+            misEnCause:
+              type: "boolean"
+            references:
+              $ref: "#/definitions/TypeReference"
+            relationAuRisque:
+              $ref: "#/definitions/RelationAuRisque"
+            representants:
+              $ref: "#/definitions/Representants"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/ResultatCommande"
+  /exécuter commande modifierActeur:
+    put:
+      tags:
+      - "Services Assureur - Missions"
+      - "Services Expert - Missions"
+      summary: "Modifier un acteur"
+      description: "L'expert peut à tout moment modifier un acteur de la mission.\n\
+        ## Rôles habilités\nExpert\n\n## Règles de gestion\n| Code | Description |\
+        \ \n| -------- | -------- | \n|RG_MODIFACTEUR_CXP_0001|La modification doit\
+        \ obligatoirement provoquer un changement à l'acteur.|\n|RG_MODIFACTEUR_CXP_0002|La\
+        \ particularité client ne peut pas être Autre sans avoir de précision.|\n\
+        |RG_MODIFACTEUR_CXP_0003|Un seul acteur de type Assuré est permis.|\n|RG_MODIFACTEUR_CXP_0004|Un\
+        \ acteur supprimé ne peux être modifier.|\n|RG_MODIFACTEUR_CXP_0005|Un acteur\
+        \ intervenant doit avoir un intervenantDe|\n|RG_MODIFACTEUR_CXP_0006|L'acteur\
+        \ correspondant à l'id du payload doit exister|\n\n## Evénement généré\nActeurModifie"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "id"
+          - "typeActeur"
+          properties:
+            id:
+              $ref: "#/definitions/BSONObjectID"
+            typeActeur:
+              $ref: "#/definitions/TypeActeur"
+            informationsAssure:
+              type: "object"
+              properties:
+                profession:
+                  $ref: "#/definitions/Modification String"
+                particulariteClient:
+                  type: "object"
+                  properties:
+                    name:
+                      type: "string"
+                      enum:
+                      - "Remove"
+                      - "ReplaceWith"
+                    label:
+                      type: "string"
+                      enum:
+                      - "Remove"
+                      - "ReplaceWith"
+                    value:
+                      $ref: "#/definitions/ParticulariteClient"
+                precisionParticulariteClient:
+                  $ref: "#/definitions/Modification String"
+            personne:
+              $ref: "#/definitions/Personne"
+            acteurConvoque:
+              $ref: "#/definitions/Modification Boolean"
+            acteurPresent:
+              $ref: "#/definitions/Modification Boolean"
+            responsableSinistre:
+              $ref: "#/definitions/Modification Boolean"
+            misEnCause:
+              $ref: "#/definitions/Modification Boolean"
+            nouvellesReferences:
+              type: "array"
+              items:
+                $ref: "#/definitions/TypeReference"
+            referencesASupprimer:
+              type: "array"
+              items:
+                $ref: "#/definitions/TypeReference"
+            relationAuRisque:
+              type: "object"
+              properties:
+                name:
+                  type: "string"
+                  enum:
+                  - "Remove"
+                  - "ReplaceWith"
+                label:
+                  type: "string"
+                  enum:
+                  - "Remove"
+                  - "ReplaceWith"
+                value:
+                  $ref: "#/definitions/RelationAuRisque"
+            nouveauxRepresentants:
+              type: "object"
+              description: "TO DO"
+              properties:
+                informationsComplementaires:
+                  type: "string"
+                personne:
+                  $ref: "#/definitions/Personne"
+                qualite:
+                  $ref: "#/definitions/Qualite"
+            representantsASupprimer:
+              type: "object"
+              properties:
+                informationsComplementaires:
+                  type: "string"
+                personne:
+                  $ref: "#/definitions/Personne"
+                qualite:
+                  $ref: "#/definitions/Qualite"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/ResultatCommande"
+  /exécuter commande modifierSinistre:
+    put:
+      tags:
+      - "Services Assureur - Missions"
+      summary: "Modifier les caractéristiques du sinistre"
+      description: "L'expert peut à tout moment modifier les informations liées au\
+        \ sinistre.\n## Rôles habilités\nExpert\n\n## Règles de gestion\n| Code |\
+        \ Description | \n| -------- | -------- | \n|RG_MODIFSINISTRE_CXP_0001|La\
+        \ date du sinistre ne doit pas être postérieure à la date de création du dossier.|\n\
+        |RG_MODIFSINISTRE_CXP_0002|Le motif de la non suppression de cause est obligatoire\
+        \ si la nature du sinistre est \\\"Dégâts des eaux\\\".|\n|RG_MODIFSINISTRE_CXP_0003|La\
+        \ modification doit obligatoirement provoquer un changement au sinistre.|\n\
+        \n## Evénement généré\nSinistreModifie\n## Exemple\n[Voir un exemple de flux\
+        \ JSON](https://wiki.apps.darva.com/display/SPCFAQ/Commande+modifierSinistre)\n"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          type: "object"
+          properties:
+            caracteristiques:
+              $ref: "#/definitions/CaracteristiqueSinistre"
+            date:
+              $ref: "#/definitions/Modification String"
+            heure:
+              $ref: "#/definitions/Modification String"
+            adresse:
+              $ref: "#/definitions/Adresse"
+            dommagesConstates:
+              $ref: "#/definitions/Modification String"
+            circonstances:
+              $ref: "#/definitions/Modification String"
+            rappelMesuresConservatoires:
+              $ref: "#/definitions/Modification String"
+      responses:
+        200:
+          description: "Status 200"
+  /exécuter commande modifierRisque:
+    put:
+      tags:
+      - "Services Assureur - Missions"
+      summary: "Modifier le risque"
+      description: "## Rôles habilités\nExpert\n## Règles de gestion\nRAS\n\n## Evé\
+        nement généré\nRisqueModifie"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Risque"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/ResultatCommande"
+  /exécuter commande annulerMission:
+    put:
+      tags:
+      - "Services Assureur - Missions"
+      summary: "Annuler la mission"
+      description: "## Rôles habilités\nAssureur\n\n## Règles de gestion\n| Code |\
+        \ Description | \n| -------- | -------- | \n|N°RG|Libellé|\n\n\n## Evénement\
+        \ généré\nPrestationCloturee\nMissionAnnulee\n\n## Exemple\n[Voir un exemple\
+        \ de flux JSON](https://wiki.apps.darva.com/display/SPCFAQ/Commande+qualifierPrestation)"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "motif"
+          properties:
+            motif:
+              type: "string"
+              enum:
+              - "Indetermine"
+            commentaire:
+              $ref: "#/definitions/Commentaire"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/ResultatCommande"
+  /exécuter commande modifierExpert:
+    put:
+      tags:
+      - "Services Expert - Missions"
+      summary: "Modifier l'expert chargé de la mission"
+      description: "L'expert peut, à tout moment, modifier les informations liées\
+        \ à l'expert physique d'un dossier.\n\n## Rôles habilités\nExpert\n## Règles\
+        \ de gestion\nRAS\n\n## Evénement généré\nExpertModifie"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/ExpertPhysique"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/ResultatCommande"
+  /consulter ressource rendezVous:
+    get:
+      tags:
+      - "Services Expert - RendezVous"
+      summary: "Ressource \"rendezVous\" : consulter un rendez-vous pris par l'expert"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            required:
+            - "horaire"
+            - "prestationId"
+            - "typeRendezVous"
+            type: "object"
+            properties:
+              prestationId:
+                $ref: "#/definitions/BSONObjectID"
+              horaire:
+                $ref: "#/definitions/Horaire"
+              dureeRendezVous:
+                $ref: "#/definitions/FiniteDuration"
+              notes:
+                $ref: "#/definitions/NonEmptyString"
+              typeRendezVous:
+                $ref: "#/definitions/TypeRendezVous"
+              acteurALOrigineModification:
+                $ref: "#/definitions/TypeActeurRendezVous"
+  /exécuter commande modifierRendezVous:
+    put:
+      tags:
+      - "Services Expert - RendezVous"
+      summary: "Modifier un rendez-vous"
+      description: "L'expert peut modifier le dernier rendez-vous avec l'assuré.\n\
+        ## Rôles habilités\nExpert\n## Règles de gestion\n| Code | Description | \n\
+        | -------- | -------- | \n|RG_RENDEZVOUS_EXP_0001\"| La date de rendez-vous\
+        \ doit être postérieure à la date du sinistre |\n|RG_RENDEZVOUS_EXP_0002\"\
+        | L'heure de rendez-vous doit être postérieure à l'heure du sinistre |\n|RG_RENDEZVOUS_EXP_0003\"\
+        | Le type de rendez vous doit être \"Telephonique\" ou \"Visio\" pour une\
+        \ expertise à distance |\n|RG_RENDEZVOUS_EXP_0005\"| L'heure de fin doit ê\
+        tre supérieure à l'heure du début |\n|RG_MODIFIERRENDEZVOUS_EXP_0004\"| Impossible\
+        \ de modifier un rendez-vous si la mission est Annulée |\n|RG_MODIFIERRENDEZVOUS_EXP_0007\"\
+        | Impossible de modifier un rendez-vous si ce n'est pas le dernier |\n\n##\
+        \ Evénement généré\nRendezVousExpertModifie\n\n## Exemple\n[Voir un exemple\
+        \ de flux JSON](https://wiki.apps.darva.com/display/SPCFAQ/Commande+prendreRendezVousExpert)"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "acteurALOrigineModification"
+          - "horaire"
+          - "nomIntervenant"
+          - "referenceIntervenant"
+          - "typeRendezVous"
+          properties:
+            acteurALOrigineModification:
+              $ref: "#/definitions/TypeActeurRendezVous"
+            horaire:
+              $ref: "#/definitions/Horaire"
+            tempsInterventionApproximatif:
+              $ref: "#/definitions/FiniteDuration"
+            commentaire:
+              $ref: "#/definitions/NonEmptyString"
+            typeRendezVous:
+              $ref: "#/definitions/TypeRendezVous"
+            nomIntervenant:
+              type: "string"
+            prenomIntervenant:
+              type: "string"
+            telephoneIntervenant:
+              type: "string"
+            referenceIntervenant:
+              type: "string"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/ResultatCommande"
+securityDefinitions:
+  Custom:
+    type: "apiKey"
+    name: "Cookie"
+    in: "header"
+definitions:
+  Acteur:
+    type: "object"
+    properties:
+      representants:
+        $ref: "#/definitions/Representants"
+      typeActeur:
+        $ref: "#/definitions/TypeActeur"
+      informationsAssure:
+        type: "string"
+      personne:
+        $ref: "#/definitions/Personne"
+      relationAuRisque:
+        $ref: "#/definitions/RelationAuRisque"
+      references:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            typeReference:
+              $ref: "#/definitions/TypeReference"
+      lese:
+        type: "boolean"
+      responsableSinistre:
+        $ref: "#/definitions/Boolean"
+      misEnCause:
+        type: "boolean"
+      intervenantDe:
+        $ref: "#/definitions/BSONObjectID"
+  AnnulationMission:
+    type: "object"
+    required:
+    - "motifAnnulation"
+    properties:
+      motifAnnulation:
+        $ref: "#/definitions/MotifAnnulation"
+      commentaire:
+        $ref: "#/definitions/NonEmptyString"
+  Apporteur:
+    type: "object"
+    required:
+    - "adresse"
+    - "coordonnees"
+    - "nom"
+    properties:
+      nom:
+        type: "string"
+        minLength: 1
+      prenom:
+        type: "string"
+      civilite:
+        $ref: "#/definitions/Civilite"
+      adresse:
+        $ref: "#/definitions/Adresse"
+      coordonnees:
+        $ref: "#/definitions/Coordonnees"
+  ContactAssureur:
+    type: "object"
+    required:
+    - "label"
+    - "name"
+    properties:
+      name:
+        type: "string"
+        enum:
+        - "Agent"
+        - "Gestionnaire"
+      label:
+        type: "string"
+        enum:
+        - "Agent"
+        - "Gestionnaire"
+      value:
+        required:
+        - "personne"
+        type: "object"
+        properties:
+          code:
+            type: "string"
+            description: "Code du gestionnaire (si name=\"Gestionnaire\").\n\nObligatoire\
+              \ dans la cas d'un gestionnaire"
+            minLength: 1
+          entite:
+            type: "string"
+            description: "Nom de l'entité à laquelle est rattaché le gestionnaire\
+              \ (si name=\"Gestionnaire\")"
+          personne:
+            $ref: "#/definitions/Personne"
+    description: "Un contact assureur est soit un Agent, soir un Gestionnaire.\n\n\
+      Selon le cas, la structure du flux varie.\n\nDans cette documentation, les libellé\
+      s indiqués dans la donnée “label” sont dans le même ordre que les codes indiqué\
+      s dans “name”."
+  Contrat:
+    type: "object"
+    required:
+    - "numero"
+    - "professionnel"
+    - "type"
+    properties:
+      numero:
+        type: "string"
+        description: "Numéro du contrat assuré"
+        minLength: 1
+      type:
+        type: "string"
+        description: "Type de contrat"
+        minLength: 1
+      professionnel:
+        type: "boolean"
+      dateSouscription:
+        type: "string"
+        format: "date"
+        description: "Date de souscription du contrat"
+      dateModification:
+        type: "string"
+        format: "date"
+        description: "Date de modification du contrat"
+      clausesParticulieres:
+        type: "string"
+      indiceSouscription:
+        type: "string"
+      dateValeur:
+        type: "string"
+        format: "date"
+      conventionsSouscrites:
+        type: "string"
+      activitesSouscrites:
+        type: "string"
+      numeroAccord:
+        type: "string"
+      informationsSpecifiques:
+        type: "string"
+      sinistralites:
+        type: "array"
+        items:
+          $ref: "#/definitions/Sinistralite"
+      franchise:
+        $ref: "#/definitions/Franchise"
+      intermediaire:
+        $ref: "#/definitions/Intermediaire"
+      apporteur:
+        $ref: "#/definitions/Apporteur"
+      dateResiliation:
+        type: "string"
+        format: "date"
+      formule:
+        $ref: "#/definitions/NonEmptyString"
+      garanties:
+        type: "array"
+        items:
+          $ref: "#/definitions/Garantie"
+  Prestataire:
+    type: "object"
+    properties:
+      prestataire:
+        type: "object"
+        properties:
+          numeroClient:
+            type: "string"
+            description: "Numéro de client DARVA sur 5 positions"
+            minLength: 5
+            maxLength: 5
+            pattern: "\\d"
+            example: "28936"
+          referenceChezMandant:
+            type: "string"
+          numeroAgrement:
+            type: "string"
+  Mission:
+    type: "object"
+    required:
+    #- "dateDeMissionnement"
+    - "numero"
+    properties:
+      numero:
+        type: "string"
+        description: "Numéro de la mission"
+        minLength: 1
+      #dateDeMissionnement:
+      #  type: "string"
+      #  format: "date-time"
+        description: "Date de missionnement chez le mandant"
+      franchiseApplicable:
+        $ref: "#/definitions/Franchise"
+      contactAssureur:
+        $ref: "#/definitions/ContactAssureur"
+      commentaires:
+        type: "array"
+        items:
+          $ref: "#/definitions/Commentaire"
+  Dossier:
+    type: "object"
+    required:
+    - "acteurs"
+    - "contrat"
+    - "risques"
+    - "sinistre"
+    properties:
+      sinistre:
+        $ref: "#/definitions/Sinistre"
+      risques:
+        type: "array"
+        items:
+          $ref: "#/definitions/Risque"
+      contrat:
+        $ref: "#/definitions/Contrat"
+      acteurs:
+        type: "array"
+        items:
+          $ref: "#/definitions/Acteur"
+  DossierRepresentation:
+    type: "object"
+    required:
+    - "contrat"
+    - "risques"
+    - "sinistre"
+    properties:
+      sinistre:
+        $ref: "#/definitions/SinistreRepresentation"
+      risques:
+        type: "array"
+        items:
+          $ref: "#/definitions/RisqueRepresentation"
+      contrat:
+        $ref: "#/definitions/ContratRepresentation"
+      acteurs:
+        type: "array"
+        items:
+          $ref: "#/definitions/ActeurRepresentation"
+  Prestation:
+    type: "object"
+    properties:
+      avecDelegation:
+        type: "boolean"
+      typeDePrestation:
+        $ref: "#/definitions/TypePrestation"
+  Sinistre:
+    type: "object"
+    required:
+    - "adresse"
+    - "caracteristiques"
+    - "date"
+    - "reference"
+    properties:
+      caracteristiques:
+        $ref: "#/definitions/CaracteristiqueSinistre"
+      reference:
+        type: "string"
+        description: "Référence sinistre du dossier chez l'assureur"
+        minLength: 1
+      date:
+        type: "string"
+        format: "date"
+        description: "Date du sinistre"
+      heure:
+        type: "string"
+        #format: "date"
+        format: "time"
+        description: "Heure du sinistre"
+      adresse:
+        $ref: "#/definitions/Adresse"
+      dommagesConstates:
+        type: "string"
+        description: "Dommages constatés"
+      circonstances:
+        type: "string"
+        description: "Circonstances du sinistre"
+      nonSuppressionDeCause:
+        $ref: "#/definitions/NonSuppressionDeCause"
+      pointDepartDeclare:
+        type: "string"
+      rappelMesuresConservatoires:
+        type: "string"
+      piecesEndommagees:
+        type: "array"
+        items:
+          type: "string"
+      vitresEndommagees:
+        type: "array"
+        items:
+          type: "string"
+  Risque:
+    type: "object"
+    required:
+    - "description"
+    - "risqueConcerne"
+    - "typeRisque"
+    - "usageAssure"
+    properties:
+      risqueConcerne:
+        type: "boolean"
+        description: "Risque concerné par le sinistre"
+      typeRisque:
+        $ref: "#/definitions/TypeRisque"
+      risqueAtypique:
+        type: "boolean"
+      usageAssure:
+        $ref: "#/definitions/TypeUsageAssure"
+      description:
+        type: "string"
+      mesures:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            typeMesure:
+              $ref: "#/definitions/TypeMesure"
+            valeur:
+              type: "number"
+      indicateurs:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            typeIndicateur:
+              $ref: "#/definitions/TypeIndicateur"
+            valeur:
+              type: "number"
+      adresse:
+        $ref: "#/definitions/Adresse"
+      anneeConstruction:
+        type: "number"
+      niveauProtection:
+        type: "string"
+      risquesAggraves:
+        type: "array"
+        items:
+          type: "string"
+      risqueMoins2ans:
+        type: "boolean"
+  ContratRepresentation:
+    type: "object"
+    required:
+    - "numero"
+    - "professionnel"
+    - "type"
+    properties:
+      numero:
+        type: "string"
+        description: "Numéro du contrat assuré"
+        minLength: 1
+      type:
+        type: "string"
+        description: "Type de contrat"
+        minLength: 1
+      professionnel:
+        type: "boolean"
+      dateSouscription:
+        type: "string"
+        format: "date"
+        description: "Date de souscription du contrat"
+      dateModification:
+        type: "string"
+        format: "date"
+        description: "Date de modification du contrat"
+      clausesParticulieres:
+        type: "string"
+      indiceSouscription:
+        type: "string"
+      dateValeur:
+        type: "string"
+        format: "date"
+      conventionsSouscrites:
+        type: "string"
+      #activitesSouscrites:
+      #  type: "string"
+      numeroAccord:
+        type: "string"
+      informationsSpecifiques:
+        type: "string"
+      sinistralites:
+        type: "array"
+        items:
+          $ref: "#/definitions/Sinistralite"
+      franchise:
+        $ref: "#/definitions/Franchise"
+      intermediaire:
+        $ref: "#/definitions/Intermediaire"
+      apporteur:
+        $ref: "#/definitions/Apporteur"
+      dateResiliation:
+        type: "string"
+        format: "date"
+      formule:
+        $ref: "#/definitions/NonEmptyString"
+      garanties:
+        type: "array"
+        items:
+          $ref: "#/definitions/Garantie"
+      preventionRisque:
+        $ref: "#/definitions/PreventionRisque"
+  FiniteDuration:
+    type: "object"
+  Garantie:
+    type: "object"
+    required:
+    - "typeGarantie"
+    properties:
+      typeGarantie:
+        #type: "string"
+        $ref: "#/definitions/TypeGarantie"
+      typeGarantieComplementaire:
+        #$ref: "#/definitions/TypeGarantieComplementaire"
+        $ref: "#/definitions/TypeGarantie"
+      plafonds:
+        type: "array"
+        items:
+          $ref: "#/definitions/TypePlafond"
+      franchises:
+        type: "array"
+        items:
+          $ref: "#/definitions/Franchise"
+      reserveGarantie:
+        $ref: "#/definitions/ReserveGarantie"
+      commentaire:
+        $ref: "#/definitions/NonEmptyString"
+  GarantieRepresentation:
+    type: "object"
+    required:
+    - "id"
+    - "typeGarantie"
+    properties:
+      id:
+        $ref: "#/definitions/BSONObjectID"
+      typeGarantie:
+        #type: "string"
+        $ref: "#/definitions/TypeGarantie"
+      typeGarantieComplementaire:
+        #$ref: "#/definitions/TypeGarantieComplementaire"
+        $ref: "#/definitions/TypeGarantie"
+      plafonds:
+        type: "array"
+        items:
+          $ref: "#/definitions/TypePlafond"
+      franchises:
+        type: "array"
+        items:
+          $ref: "#/definitions/Franchise"
+      reserveGarantie:
+        $ref: "#/definitions/ReserveGarantie"
+      commentaire:
+        $ref: "#/definitions/NonEmptyString"
+  MotifAnnulation:
+    type: "string"
+    enum:
+    - "Indetermine"
+  RendezVous:
+    type: "object"
+    required:
+    - "horaire"
+    - "prestationId"
+    - "typeRendezVous"
+    properties:
+      prestationId:
+        $ref: "#/definitions/BSONObjectID"
+      horaire:
+        $ref: "#/definitions/Horaire"
+      dureeRendezVous:
+        $ref: "#/definitions/FiniteDuration"
+      notes:
+        $ref: "#/definitions/NonEmptyString"
+      typeRendezVous:
+        $ref: "#/definitions/TypeRendezVous"
+      acteurALOrigineModification:
+        $ref: "#/definitions/TypeActeurRendezVous"
+  RessourcePrestation:
+    type: "object"
+    required:
+    - "href"
+    - "links"
+    - "properties"
+    properties:
+      href:
+        type: "string"
+      properties:
+        required:
+        - "avecDelegation"
+        - "cloturee"
+        - "complexe"
+        - "criticite"
+        #- "dateDeCreation"
+        #- "dateDeDerniereModification"
+        #- "datePrestation"
+        - "etat"
+        - "id"
+        - "missionId"
+        - "typePrestation"
+        - "version"
+        type: "object"
+        properties:
+          id:
+            $ref: "#/definitions/BSONObjectID"
+          missionId:
+            $ref: "#/definitions/BSONObjectID"
+          #datePrestation:
+          #  type: "string"
+          #  format: "date-time"
+          #  description: "La date de la prestation correspond à la date du missionnement"
+          etat:
+            $ref: "#/definitions/EtatPrestation"
+          typePrestation:
+            $ref: "#/definitions/TypePrestation"
+          criticite:
+            $ref: "#/definitions/Criticite"
+          avecDelegation:
+            type: "boolean"
+            description: "Indique si le prestataire possède une délégation de paiement"
+          resteAFaire:
+            $ref: "#/definitions/ResteAFaire"
+          complexe:
+            type: "boolean"
+            description: "Définit la complexité du sinistre sur la prestation"
+          cloturee:
+            type: "boolean"
+            description: "Indique si la prestation est terminée"
+          version:
+            type: "integer"
+          #dateDeCreation:
+          #  type: "string"
+          #  format: "date-time"
+          #dateDeDerniereModification:
+          #  type: "string"
+          #  format: "date-time"
+      links:
+        type: "array"
+        items:
+          required:
+          - "href"
+          - "rel"
+          type: "object"
+          properties:
+            rel:
+              type: "string"
+              enum:
+              - "commands"
+              - "events"
+              - "linked-events"
+              - "eventsNotCreatedByMe"
+              - "rendezVous"
+              - "current"
+              - "first"
+              - "last"
+              - "next"
+            href:
+              type: "string"
+  StatutMission:
+    type: "string"
+    enum:
+    - "Ouverte"
+    - "EnCours"
+    - "EnAttente"
+    - "Terminee"
+    - "Bloquee"
+    - "Annulee"
+  TypeMission:
+    type: "string"
+    enum:
+    - "RenDirecte"
+    - "RenSuiteExpertise"
+    - "Expertise"
+    - "UrgenceHabitation"
+  #TypeGarantieComplementaire:
+  TypeGarantie:
+    type: "object"
+  TypePlafond:
+    type: "object"
+  ReserveGarantie:
+    type: "object"
+  Sinistralite:
+    type: "object"
+    required:
+    #- "date"
+    - "nature"
+    - "reference"
+    properties:
+      reference:
+        type: "string"
+      #date:
+      #  type: "string"
+      #  format: "date-time"
+      nature:
+        $ref: "#/definitions/NatureSinistre"
+  RisqueRepresentation:
+    type: "object"
+    required:
+    - "description"
+    - "risqueConcerne"
+    - "typeRisque"
+    - "usageAssure"
+    properties:
+      risqueConcerne:
+        type: "boolean"
+        description: "Risque concerné par le sinistre"
+      typeRisque:
+        $ref: "#/definitions/TypeRisque"
+      risqueAtypique:
+        type: "boolean"
+      usageAssure:
+        $ref: "#/definitions/TypeUsageAssure"
+      description:
+        type: "string"
+      mesures:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            typeMesure:
+              $ref: "#/definitions/TypeMesure"
+            valeur:
+              type: "number"
+      indicateurs:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            typeIndicateur:
+              $ref: "#/definitions/TypeIndicateur"
+            valeur:
+              type: "number"
+      adresse:
+        $ref: "#/definitions/Adresse"
+      anneeConstruction:
+        type: "number"
+      niveauProtection:
+        type: "string"
+      risquesAggraves:
+        type: "array"
+        items:
+          type: "string"
+      risqueMoins2ans:
+        type: "boolean"
+      conformiteRisque:
+        $ref: "#/definitions/ConformiteRisqueRepresentation"
+  ConformiteRisqueRepresentation:
+    type: "object"
+    required:
+    - "risqueVerifie"
+    properties:
+      risqueVerifie:
+        type: "boolean"
+      motifNonVerificationRisque:
+        $ref: "#/definitions/MotifNonVerificationRisque"
+      commentaireNonVerificationRisque:
+        $ref: "#/definitions/NonEmptyString"
+      risqueConforme:
+        type: "boolean"
+      descriptionRisqueErronee:
+        type: "boolean"
+      garantieCapitauxInsuffisants:
+        type: "boolean"
+      descriptifGarantieCapitauxInsuffisants:
+        $ref: "#/definitions/NonEmptyString"
+      autresMotifs:
+        $ref: "#/definitions/AutresMotifs"
+      descriptifAutresMotifs:
+        $ref: "#/definitions/NonEmptyString"
+      conformiteVol:
+        $ref: "#/definitions/ConformiteVol"
+  MotifNonVerificationRisque:
+    type: "object"
+  AutresMotifs:
+    type: "object"
+  ConformiteVol:
+    type: "object"
+    required:
+    - "motifNonVerificationProtectionVol"
+    properties:
+      motifNonVerificationProtectionVol:
+        $ref: "#/definitions/MotifNonVerificationRisque"
+  SinistreRepresentation:
+    type: "object"
+    required:
+    - "adresse"
+    - "caracteristiques"
+    - "date"
+    - "reference"
+    properties:
+      caracteristiques:
+        $ref: "#/definitions/CaracteristiqueSinistre"
+      reference:
+        type: "string"
+        description: "Référence sinistre du dossier chez l'assureur"
+        minLength: 1
+      date:
+        type: "string"
+        format: "date"
+        description: "Date du sinistre"
+      heure:
+        type: "string"
+        #format: "date"
+        format: "time"
+        description: "Heure du sinistre"
+      adresse:
+        $ref: "#/definitions/Adresse"
+      dommagesConstates:
+        type: "string"
+        description: "Dommages constatés"
+      circonstances:
+        type: "string"
+        description: "Circonstances du sinistre"
+      nonSuppressionDeCause:
+        $ref: "#/definitions/NonSuppressionDeCause"
+      pointDepartDeclare:
+        type: "string"
+      rappelMesuresConservatoires:
+        type: "string"
+      conformiteSinistre:
+        $ref: "#/definitions/ConformiteSinistre"
+      piecesEndommagees:
+        type: "array"
+        items:
+          type: "string"
+      vitresEndommagees:
+        type: "array"
+        items:
+          type: "string"
+  ActeurRepresentation:
+    type: "object"
+    required:
+    - "archive"
+    properties:
+      representants:
+        $ref: "#/definitions/Representants"
+      typeActeur:
+        $ref: "#/definitions/TypeActeur"
+      #informationsAssure:
+      #  type: "string"
+      personne:
+        $ref: "#/definitions/Personne"
+      relationAuRisque:
+        $ref: "#/definitions/RelationAuRisque"
+      references:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            typeReference:
+              $ref: "#/definitions/TypeReference"
+      lese:
+        type: "boolean"
+      responsableSinistre:
+        #$ref: "#/definitions/Boolean"
+        type: "boolean"
+      misEnCause:
+        type: "boolean"
+      intervenantDe:
+        $ref: "#/definitions/BSONObjectID"
+      archive:
+        type: "boolean"
+        default: false
+  Adresse:
+    type: "object"
+    properties:
+      adresse1:
+        type: "string"
+      adresse2:
+        type: "string"
+      adresse3:
+        type: "string"
+      adresse4:
+        type: "string"
+      codePostal:
+        type: "string"
+      localite:
+        type: "string"
+      codePays:
+        type: "string"
+      nomPays:
+        type: "string"
+  CaracteristiqueSinistre:
+    type: "object"
+    required:
+    - "nature"
+    properties:
+      nature:
+        $ref: "#/definitions/NatureSinistre"
+      cause:
+        $ref: "#/definitions/CauseSinistre"
+      detail:
+        $ref: "#/definitions/DetailCauseSinistre"
+    description: "[Liste exhaustive des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Caract%C3%A9ristiqueSinistre)"
+  Commentaire:
+    type: "object"
+    required:
+    #- "date"
+    - "message"
+    properties:
+      message:
+        type: "string"
+        minLength: 1
+      #date:
+      #  type: "string"
+      #  format: "date-time"
+      auteurId:
+        type: "string"
+  ConformiteRisque:
+    type: "object"
+    required:
+    - "risqueConforme"
+    - "risqueVerifie"
+    properties:
+      risqueConforme:
+        type: "boolean"
+      risqueVerifie:
+        type: "boolean"
+      protectionVolConforme:
+        type: "boolean"
+        description: "Si la nature du sinistre et vol ou vandalisme"
+      pretectionVolVerifee:
+        type: "boolean"
+        description: "Si la nature du sinistre et vol ou vandalisme"
+  ConformiteSinistre:
+    type: "object"
+    required:
+    - "sinistreConforme"
+    - "sinistreVerifie"
+    properties:
+      sinistreConforme:
+        type: "boolean"
+      sinistreVerifie:
+        type: "boolean"
+  Coordonnees:
+    type: "object"
+    properties:
+      telPersonnel:
+        type: "string"
+      telProfessionnel:
+        type: "string"
+      telPortable:
+        type: "string"
+      email:
+        type: "string"
+      fax:
+        type: "string"
+  ExpertPhysique:
+    type: "object"
+    required:
+    - "expert"
+    - "expertSalarie"
+    - "reference"
+    properties:
+      expert:
+        $ref: "#/definitions/Personne"
+      reference:
+        type: "string"
+      expertSalarie:
+        type: "boolean"
+  Franchise:
+    type: "object"
+    required:
+    - "name"
+    - "value"
+    properties:
+      name:
+        type: "string"
+        enum:
+        - "Fixe"
+        - "Proportionnelle"
+      label:
+        type: "string"
+        description: "En mise à jour la \"label\" est ignoré. \n\nIl est toujours\
+          \ présent en consultation."
+        enum:
+        - "Fixe"
+        - "Proportionnelle"
+      value:
+        type: "object"
+        description: "Si la franchise est Fixe alors le champ montant est présent\
+          \ sinon les champs \"taux\", \"plancher\" et \"plafond\" sont présents"
+        properties:
+          montant:
+            type: "number"
+            description: "Présent si la franchise est \"Fixe\""
+            example: 50
+          taux:
+            type: "number"
+            description: "Présent si la franchise est \"Proportionnelle\""
+          plancher:
+            type: "number"
+            description: "Présent si la franchise est \"Proportionnelle\""
+          plafond:
+            type: "number"
+            description: "Présent si la franchise est \"Proportionnelle\""
+        example: "{ montant: 50 }"
+    description: "La franchise est soit un montant fixe, soit un pourcentage du montant\
+      \ du sinistre. \n\nAttention : la structure du flux contenu dans \"value\" varie\
+      \ selon le type de franchise."
+  FranchiseFixe:
+    type: "object"
+    properties:
+      montant:
+        $ref: "#/definitions/Montant"
+  Intermediaire:
+    type: "object"
+    required:
+    - "personne"
+    properties:
+      referenceInterneSinistre:
+        type: "string"
+      personne:
+        $ref: "#/definitions/Personne"
+  Links:
+    type: "array"
+    items:
+      required:
+      - "href"
+      - "rel"
+      type: "object"
+      properties:
+        rel:
+          type: "string"
+        href:
+          type: "string"
+  ListeProperties:
+    type: "object"
+    required:
+    - "firstPage"
+    - "lastPage"
+    - "nbElementsPerPage"
+    - "noPage"
+    - "totalNumberOfElements"
+    properties:
+      totalNumberOfElements:
+        type: "number"
+      noPage:
+        type: "number"
+      nbElementsPerPage:
+        type: "number"
+      firstPage:
+        type: "string"
+      lastPage:
+        type: "string"
+  Montant:
+    type: "object"
+  Personne:
+    type: "object"
+    required:
+    - "adresse"
+    - "coordonnees"
+    - "nom"
+    properties:
+      nom:
+        type: "string"
+        minLength: 1
+      prenom:
+        type: "string"
+      civilite:
+        $ref: "#/definitions/Civilite"
+      adresse:
+        $ref: "#/definitions/Adresse"
+      coordonnees:
+        $ref: "#/definitions/Coordonnees"
+  PreventionRisque:
+    type: "object"
+    required:
+    - "suggestionVisitePreventeur"
+    properties:
+      environnementRisqueNonSignale:
+        $ref: "#/definitions/TypeEnvironnementRisqueNonSignale"
+      preventionRisqueAggrave:
+        $ref: "#/definitions/TypePreventionRisqueAggrave"
+      preventionAnomalieProtectionVol:
+        $ref: "#/definitions/TypePreventionAnomalieProtectionVol"
+      suggestionVisitePreventeur:
+        type: "boolean"
+  Representants:
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        qualite:
+          $ref: "#/definitions/Qualite"
+        personne:
+          $ref: "#/definitions/Personne"
+        informationsComplementaires:
+          type: "string"
+        references:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              typeReference:
+                $ref: "#/definitions/TypeReference"
+              valeur:
+                type: "string"
+  ResultatCommande:
+    type: "object"
+    required:
+    - "href"
+    - "links"
+    - "properties"
+    properties:
+      href:
+        type: "string"
+        description: "URL du résultat de la commande"
+      properties:
+        required:
+        - "checksum"
+        - "id"
+        - "name"
+        type: "object"
+        properties:
+          id:
+            type: "string"
+          name:
+            type: "string"
+          checksum:
+            type: "string"
+      links:
+        type: "array"
+        items:
+          required:
+          - "href"
+          - "rel"
+          type: "object"
+          properties:
+            rel:
+              type: "string"
+              description: "Type de ressource liée à la commande (l'utilisateur à\
+                \ l'origine, ou l'événement généré par la commande)"
+              enum:
+              - "user"
+              - "event"
+            href:
+              type: "string"
+              description: "Url de la ressource liée à la commande accessible avec\
+                \ un GET Http."
+  Canal:
+    type: "object"
+    properties:
+      name:
+        $ref: "#/definitions/EnumCanal"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+  CauseSinistre:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        $ref: "#/definitions/EnumCauseSinistre"
+      label:
+        type: "string"
+        description: "En mise à jour la \"label\" est ignoré. \n\nIl est toujours\
+          \ présent en consultation."
+  Civilite:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+        enum:
+        - "M"
+        - "Mme"
+      label:
+        type: "string"
+        description: "En mise à jour la \"label\" est ignoré. \n\nIl est toujours\
+          \ présent en consultation."
+        enum:
+        - "M"
+        - "Mme"
+    description: "Les civilités sont décrites par le couple \"name\" + \"label\".\
+      \ \n\nDans cette documentation, les libellés indiqués dans la donnée \"label\"\
+      \ sont dans le même ordre que les codes indiqués dans \"name\"."
+  Criticite:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        enum:
+        - "Urgente"
+        - "Normale"
+      label:
+        type: "string"
+        description: "En mise à jour la \"label\" est ignoré. \n\nIl est toujours\
+          \ présent en consultation."
+        enum:
+        - "Urgente"
+        - "Normale"
+    description: "Les criticités sont décrites par le couple \"name\" + \"label\"\
+      . \n\nDans cette documentation, les libellés indiqués dans la donnée \"label\"\
+      \ sont dans le même ordre que les codes indiqués dans \"name\"."
+  Convention:
+    type: "object"
+    properties:
+      name:
+        $ref: "#/definitions/EnumConvention"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+  DetailCauseSinistre:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        $ref: "#/definitions/EnumDetailCauseSinistre"
+      label:
+        type: "string"
+        description: "En mise à jour la \"label\" est ignoré. \n\nIl est toujours\
+          \ présent en consultation."
+  EtatMission:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        $ref: "#/definitions/EnumEtatMission"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+  Horaire:
+    type: "object"
+    properties:
+      name:
+        $ref: "#/definitions/EnumHoraire"
+      value:
+        type: "object"
+        properties:
+          date:
+            type: "string"
+            format: "date"
+          heure:
+            type: "string"
+            format: "time"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+  Qualite:
+    type: "object"
+    properties:
+      name:
+        $ref: "#/definitions/EnumQualite"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+  Modification Boolean:
+    type: "object"
+    properties:
+      name:
+        $ref: "#/definitions/EnumModification"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+      value:
+        type: "boolean"
+        description: "à renseigner si \"name\" = ReplaceWith"
+    description: "Liste des valeurs possibles des \"name\" en cas de modification\
+      \ d'un champ"
+  Modification String:
+    type: "object"
+    properties:
+      name:
+        $ref: "#/definitions/EnumModification"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+      value:
+        type: "string"
+        description: "à renseigner si “name” = ReplaceWith"
+    description: "Liste des valeurs possibles des \"name\" en cas de modification\
+      \ d'un champ"
+  MotifDeModificationRendezVous:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        $ref: "#/definitions/EnumMotifDeModificationRendezVous"
+      label:
+        type: "string"
+  MotifFinPrestation:
+    type: "object"
+    required:
+    - "name"
+    - "value"
+    properties:
+      name:
+        $ref: "#/definitions/EnumMotifFinPrestation"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+      value:
+        type: "string"
+  MotifUrgence:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        $ref: "#/definitions/EnumMotifUrgence"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+  NatureDesDommages:
+    type: "object"
+    properties:
+      name:
+        $ref: "#/definitions/EnumNatureDesDommages"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+  NatureSinistre:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        $ref: "#/definitions/EnumNatureSinistre"
+      label:
+        type: "string"
+        description: "En mise à jour la \"label\" est ignoré. \n\nIl est toujours\
+          \ présent en consultation."
+  NonSuppressionDeCause:
+    type: "object"
+    required:
+    - "motif"
+    properties:
+      motif:
+        required:
+        - "name"
+        type: "object"
+        properties:
+          name:
+            $ref: "#/definitions/EnumNonSuppressionDeCause"
+          label:
+            type: "string"
+            description: "En mise à jour la “label” est ignoré.\n\nIl est toujours\
+              \ présent en consultation."
+      precision:
+        type: "string"
+    description: "Cause non supprimée"
+  ParticulariteClient:
+    type: "object"
+    properties:
+      name:
+        $ref: "#/definitions/ParticulariteClient"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+  RelationAuRisque:
+    type: "object"
+    properties:
+      name:
+        $ref: "#/definitions/EnumRelationAuRisque"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+  ResteAFaire:
+    $ref: "#/definitions/EnumResteAFaire"
+  TypeActeur:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        $ref: "#/definitions/EnumTypeActeur"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+  TypeActeurRendezVous:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        $ref: "#/definitions/EnumTypeActeurRendezVous"
+      label:
+        type: "string"
+  TypeEnvironnementRisqueNonSignale:
+    type: "object"
+    properties:
+      environnementRisqueNonSignale:
+        type: "object"
+        properties:
+          name:
+            $ref: "#/definitions/EnumTypeEnvironnementRisqueAggraveNonSignale"
+          label:
+            type: "string"
+            description: "En mise à jour la “label” est ignoré.\n\nIl est toujours\
+              \ présent en consultation."
+      commentaire:
+        type: "string"
+  TypeIndicateur:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        $ref: "#/definitions/EnumTypeIndicateur"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+  TypeMesure:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        $ref: "#/definitions/EnumTypeMesure"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+  TypePrestation:
+    type: "object"
+    properties:
+      name:
+        $ref: "#/definitions/EnumTypePrestation"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+  TypePreventionAnomalieProtectionVol:
+    type: "object"
+    properties:
+      preventionAnomalieProtectionVol:
+        type: "object"
+        properties:
+          name:
+            $ref: "#/definitions/EnumPreventionAnomalieProtectionVol"
+          label:
+            type: "string"
+            description: "En mise à jour la “label” est ignoré.\n\nIl est toujours\
+              \ présent en consultation."
+      commentaire:
+        type: "string"
+  TypePreventionRisqueAggrave:
+    type: "object"
+    properties:
+      preventionRisqueAggrave:
+        type: "object"
+        properties:
+          name:
+            $ref: "#/definitions/EnumPreventionAnomalieProtectionVol"
+          label:
+            type: "string"
+            description: "En mise à jour la “label” est ignoré.\n\nIl est toujours\
+              \ présent en consultation."
+      commentaire:
+        type: "string"
+  TypeReference:
+    type: "object"
+    properties:
+      name:
+        $ref: "#/definitions/EnumTypeReference"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+  TypeRendezVous:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        $ref: "#/definitions/EnumTypeRendezVous"
+      label:
+        type: "string"
+  TypeRisque:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        $ref: "#/definitions/EnumTypeRisque"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+  TypeUsageAssure:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        $ref: "#/definitions/EnumTypeUsageAssure"
+      label:
+        type: "string"
+        description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
+          sent en consultation."
+  EtatPrestation:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        $ref: "#/definitions/EnumEtatPrestation"
+      label:
+        type: "string"
+  EnumCanal:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Canal)"
+  EnumCauseSinistre:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Caract%C3%A9ristiqueSinistre)"
+  EnumConvention:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Convention)"
+  EnumDetailCauseSinistre:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Caract%C3%A9ristiqueSinistre)"
+  EnumEtatMission:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Etatdelamission)"
+  EnumEtatPrestation:
+    type: "object"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Etatdelaprestation)"
+  EnumHoraire:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Horaire)"
+  EnumLiensPrestation:
+    type: "object"
+    description: "* commands\n* events\n* linked-events\n* eventsNotCreatedByMe\n\
+      * **rendezVous**\n* current\n* first\n* last\n* next"
+  EnumQualite:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Qualit%C3%A9delapersonne)"
+  EnumResteAFaire:
+    type: "object"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-reste+a+faire)"
+  EnumModification:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Modification)"
+  EnumMotifDeModificationRendezVous:
+    type: "object"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-MotifDeModificationRendezVous)"
+  EnumMotifFinPrestation:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Motifdefindeprestation)"
+  EnumMotifUrgence:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Motifdel'urgence)"
+  EnumNatureDesDommages:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Naturedesdommages)"
+  EnumNatureSinistre:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Caract%C3%A9ristiqueSinistre)\n"
+  EnumNonSuppressionDeCause:
+    type: "string"
+    description: "[Voir les valeurs possible pour le motif de non suppression de cause](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Motifdenonsuppressiondecause)"
+  EnumParticulariteClient:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-ParticulariteClient)"
+  EnumRelationAuRisque:
+    type: "string"
+  EnumTypeActeur:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Typed'acteur)"
+  EnumTypeActeurRendezVous:
+    type: "object"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Typed'acteur%C3%A0l'originedelamodification)"
+  EnumTypeEnvironnementRisqueAggraveNonSignale:
+    type: "string"
+    description: "[Voir les valeurs possibles pour l'environnement du risque non signalé\
+      ](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Environnementdurisquenonsignal%C3%A9)"
+  EnumTypeIndicateur:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Typeindicateur)"
+  EnumTypeMesure:
+    type: "string"
+  EnumTypePrestation:
+    type: "string"
+    description: "L'expert doit saisir une des prestations proposées dans la liste\
+      \ :\n[Voir les valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Typedeprestation)"
+  EnumTypeRendezVous:
+    type: "object"
+    description: "L’expert doit saisir une des prestations proposées dans la liste\
+      \ : \n[Voir les valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Typedurendez-vous)"
+  EnumPreventionAnomalieProtectionVol:
+    type: "string"
+    description: "[Voir la liste des valeurs possible pour la prévention anomalie\
+      \ protection vol](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Pr%C3%A9ventionanomalieprotectionvol)"
+  EnumPreventionRisqueAggrave:
+    type: "string"
+    description: "[Voir les valeurs possibles pour prévention du risque aggravé](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Pr%C3%A9ventiondurisqueaggrav%C3%A9)"
+  EnumTypeReference:
+    type: "string"
+    description: "\n[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Typeder%C3%A9f%C3%A9rence)"
+  EnumTypeRisque:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Typederisque)"
+  EnumTypeUsageAssure:
+    type: "string"
+    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-UsageAssur%C3%A9)"
+  Boolean:
+    type: "object"
+  BSONObjectID:
+    type: "string"
+  NonEmptyString:
+    type: "object"

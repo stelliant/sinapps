@@ -1,0 +1,21 @@
+---
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: "Data Types check"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+
+definitions:
+  DataTypes:
+    type: "object"
+    properties:
+      dateType:
+        type: "string"
+        format: "date-time"
+      arrayType:
+        type: "array"
+        items:
+          type: "object"
