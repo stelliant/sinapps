@@ -25,6 +25,7 @@ public class ConnexionPayload {
     return MessageBuilder.withPayload(body)
         .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
         .setHeader("url", properties.getApi().getBaseUrl() + properties.getApi().getLoginPath())
+        .setHeader("response", "com.darva.sinapps.api.client.transverse.model.InlineResponse200")
         .build();
   }
 }

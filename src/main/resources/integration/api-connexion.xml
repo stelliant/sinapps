@@ -3,31 +3,25 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:int="http://www.springframework.org/schema/integration"
   xmlns:int-http="http://www.springframework.org/schema/integration/http"
-  xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
-    http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
-    http://www.springframework.org/schema/integration/stream http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd">
-
-  <!-- Global Wiretap -->
-  <int:wire-tap pattern="channel.*" channel="channel.consoleOut"/>
-  <int-stream:stdout-channel-adapter id="channel.consoleOut" append-newline="true"/>
+    http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd">
 
   <!-- Connexion Poller -->
-  <int:inbound-channel-adapter channel="channel.connexion" expression="''">
+  <int:inbound-channel-adapter channel="channel.login" expression="''">
     <!-- for batch processing -->
     <int:poller fixed-delay="1000"></int:poller>
   </int:inbound-channel-adapter>
 
   <!-- Connexion -->
-  <int:chain input-channel="channel.connexion">
+  <int:chain input-channel="channel.login">
     <int:transformer ref="connexionPayload"/>
     <int-http:outbound-gateway
-      url-expression="headers['url']"
       http-method="POST"
+      url-expression="headers['url']"
+      expected-response-type-expression="headers['response']"
       reply-timeout="5000"
-      transfer-cookies="true"
-      expected-response-type="com.darva.sinapps.api.client.transverse.model.InlineResponse200">
+      transfer-cookies="true">
     </int-http:outbound-gateway>
     <int:gateway request-channel="channel.partenaire"/>
   </int:chain>
@@ -36,11 +30,11 @@
   <int:chain input-channel="channel.partenaire">
     <int:transformer ref="partenairePayload"/>
     <int-http:outbound-gateway
-      url-expression="headers['url']"
-      http-method="GET"
       reply-timeout="5000"
-      transfer-cookies="true"
-      expected-response-type="com.darva.sinapps.api.client.transverse.model.InlineResponse2001">
+      url-expression="headers['url']"
+      expected-response-type-expression="headers['response']"
+      http-method="GET"
+      transfer-cookies="true">
     </int-http:outbound-gateway>
     <int:gateway request-channel="channel.missions"/>
   </int:chain>
@@ -49,11 +43,11 @@
   <int:chain input-channel="channel.missions">
     <int:transformer ref="missionsPayload"/>
     <int-http:outbound-gateway
-      url-expression="headers['url']"
       http-method="GET"
+      url-expression="headers['url']"
+      expected-response-type-expression="headers['response']"
       reply-timeout="5000"
-      transfer-cookies="true"
-      expected-response-type="com.darva.sinapps.api.client.transverse.model.InlineResponse2002">
+      transfer-cookies="true">
     </int-http:outbound-gateway>
   </int:chain>
 
