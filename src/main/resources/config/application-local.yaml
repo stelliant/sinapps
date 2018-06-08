@@ -13,14 +13,14 @@
 # ===================================================================
 
 spring:
-    profiles:
-        active: test
-        
-    devtools:
-        restart:
-            enabled: true
-    jackson:
-        serialization.indent_output: true
+  profiles:
+    active: test
+
+  devtools:
+    restart:
+      enabled: true
+  jackson:
+    serialization.indent_output: true
 
 logging:
   level:
@@ -29,8 +29,13 @@ logging:
     org.springframework.integration: DEBUG
 
 sinapps:
-    api:
-        baseUrl: https://sinapps-ird-v2.demo.darva.com
-        loginPath: /core/api/login
-        login: 28953sinapps
-        password: bb*1xSZO
+  api:
+    baseUrl: https://sinapps-ird-v2.demo.darva.com
+    loginPath: /core/api/login
+    login: 28953sinapps
+    password: bb*1xSZO
+
+itex:
+  file:
+    path: /Users/guytou/TBOX/WORK/STELLIANT/itex
+    name: output.log
