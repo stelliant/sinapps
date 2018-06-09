@@ -4,6 +4,7 @@ import com.darva.sinapps.api.client.transverse.model.Body;
 import com.darva.sinapps.api.client.transverse.model.InlineResponse200;
 import com.darva.sinapps.api.client.transverse.model.InlineResponse2001;
 import com.darva.sinapps.api.client.transverse.model.InlineResponse2002;
+import com.darva.sinapps.api.client.transverse.model.InlineResponse2002Items;
 import com.darva.sinapps.api.client.transverse.model.LinksInner;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -74,6 +75,16 @@ public class ApiDiscoveryTest extends TestApiSetup {
                     HttpMethod.GET,
                     requestEntity,
                     InlineResponse2002.class);
+
+      for (InlineResponse2002Items items:
+          listeRessources.getBody().getItems()) {
+        restTemplate = getRestTemplate();
+        ResponseEntity<String> responseEntity = restTemplate
+            .exchange(apiProperties.getApi().getBaseUrl() + items.getHref(),
+                      HttpMethod.GET,
+                      requestEntity,
+                      String.class);
+      }
 
     } catch (Exception e) {
       log.error("####", e);

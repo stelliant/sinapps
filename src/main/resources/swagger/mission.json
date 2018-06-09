@@ -1,0 +1,72 @@
+{
+  "href": "/core/api/partenaire/users/5afd440b1100001f015d8854",
+  "properties": {
+    "partenaireId": "5afd440b20000017014fe8ef",
+    "personne": {
+      "nom": "SINAPPS TEXA",
+      "prenom": "",
+      "adresse": {},
+      "coordonnees": {
+        "telPersonnel": " ",
+        "email": "accompagnement_client@darva.com"
+      }
+    },
+    "login": "28953sinapps",
+    "roles": [
+      {
+        "name": "Qualifieur",
+        "label": "Prestataire Qualifieur"
+      },
+      {
+        "name": "Chiffreur",
+        "label": "Prestataire Chiffreur"
+      },
+      {
+        "name": "Planificateur",
+        "label": "Prestataire Planificateur"
+      },
+      {
+        "name": "Comptable",
+        "label": "Prestataire Comptable"
+      }
+    ],
+    "id": "5afd440b1100001f015d8854",
+    "version": 1,
+    "dateDeCreation": "2018-05-17T10:57:47+0200",
+    "dateDeDerniereModification": "2018-05-17T10:57:47+0200"
+  },
+  "links": [
+    {
+      "rel": "commands",
+      "href": "/core/api/partenaire/users/5afd440b1100001f015d8854/commands?referer=commands"
+    },
+    {
+      "rel": "events",
+      "href": "/core/api/partenaire/users/5afd440b1100001f015d8854/events?referer=events"
+    },
+    {
+      "rel": "linked-events",
+      "href": "/core/api/partenaire/users/5afd440b1100001f015d8854/linkedEvents?referer=linked-events"
+    },
+    {
+      "rel": "eventsNotCreatedByMe",
+      "href": "/core/api/partenaire/users/5afd440b1100001f015d8854/othersEvents?referer=eventsNotCreatedByMe"
+    },
+    {
+      "rel": "partenaire",
+      "href": "/core/api/partenaire/partenaires/5afd440b20000017014fe8ef?referer=partenaire"
+    },
+    {
+      "rel": "abstractMissions",
+      "href": "/core/api/common/missions?prestataireId=5afd440b20000017014fe8ef&etatMission=MissionRecue&etatMission=RendezVousChiffragePris&etatMission=ChiffrageEnAttenteDeValidation&etatMission=ChiffrageValide&etatMission=TravauxPlanifies&etatMission=FactureTravauxDeposee&etatMission=FactureGestionDeposee&referer=abstractMissions"
+    },
+    {
+      "rel": "missions",
+      "href": "/core/api/covea/missions?prestataireId=5afd440b20000017014fe8ef&etatMission=MissionRecue&etatMission=RendezVousChiffragePris&etatMission=ChiffrageEnAttenteDeValidation&etatMission=ChiffrageValide&etatMission=TravauxPlanifies&etatMission=FactureTravauxDeposee&etatMission=FactureGestionDeposee&referer=missions"
+    },
+    {
+      "rel": "marcheRenMissions",
+      "href": "/core/api/marche-ren/missions?prestataireId=5afd440b20000017014fe8ef&etatMission=MissionRecue&etatMission=RendezVousChiffragePris&etatMission=ChiffrageEnAttenteDeValidation&etatMission=ChiffrageValide&etatMission=TravauxPlanifies&etatMission=FactureTravauxDeposee&etatMission=FactureGestionDeposee&referer=marcheRenMissions"
+    }
+  ]
+}

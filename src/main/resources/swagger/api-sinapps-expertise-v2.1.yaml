@@ -328,7 +328,6 @@ paths:
           schema:
             required:
             - "href"
-            - "properties"
             type: "object"
             properties:
               href:
@@ -339,6 +338,12 @@ paths:
                 - "mission"
                 type: "object"
                 properties:
+                  #dateDeCreation:
+                  #  type: "string"
+                  #  format: "date-time"
+                  #dateDeDerniereModification:
+                  #  type: "string"
+                  #  format: "date-time"
                   dossier:
                     $ref: "#/definitions/DossierRepresentation"
                   mission:
@@ -371,8 +376,10 @@ paths:
                         $ref: "#/definitions/StatutMission"
                       typeMission:
                         $ref: "#/definitions/TypeMission"
-                      annulationMission:
-                        $ref: "#/definitions/AnnulationMission"
+#                      annulationMission:
+#                        $ref: "#/definitions/AnnulationMission"
+                  id:
+                    type: "string"
   /exécuter commande ajouterActeur:
     put:
       tags:
