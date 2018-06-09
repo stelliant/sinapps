@@ -27,7 +27,7 @@ public class MissionsPayload {
     return MessageBuilder.withPayload("")
         .copyHeaders(msg.getHeaders())
         .setHeader("url", properties.getApi().getBaseUrl() + missionsPath)
-        .setHeader("response", "com.darva.sinapps.api.client.transverse.model.InlineResponse2002")
+        .setHeader("expected-response-type", com.darva.sinapps.api.client.transverse.model.InlineResponse2002.class)
         .build();
   }
 }

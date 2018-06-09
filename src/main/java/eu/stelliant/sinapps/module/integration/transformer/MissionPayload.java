@@ -4,6 +4,7 @@ import com.darva.sinapps.api.client.transverse.model.InlineResponse2002Items;
 import eu.stelliant.sinapps.module.api.config.ApiProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.annotation.Transformer;
+import org.springframework.integration.file.FileHeaders;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,8 @@ public class MissionPayload {
     return MessageBuilder.withPayload("")
         .copyHeaders(msg.getHeaders())
         .setHeader("url", properties.getApi().getBaseUrl() + missionPath)
-        .setHeader("response", "com.darva.sinapps.api.client.expertise.model.InlineResponse2001")
+        .setHeader("expected-response-type", com.darva.sinapps.api.client.expertise.model.InlineResponse2001.class)
+        .setHeader(FileHeaders.FILENAME, msg.getPayload().getProperties().getId())
         .build();
   }
 }

@@ -27,7 +27,7 @@ public class PartenairePayload {
     return MessageBuilder.withPayload("")
         .copyHeaders(msg.getHeaders())
         .setHeader("url", properties.getApi().getBaseUrl() + partenairePath)
-        .setHeader("response", "com.darva.sinapps.api.client.transverse.model.InlineResponse2001")
+        .setHeader("expected-response-type", com.darva.sinapps.api.client.transverse.model.InlineResponse2001.class)
         .build();
   }
 }
