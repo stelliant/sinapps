@@ -23,10 +23,12 @@ spring:
     serialization.indent_output: true
 
 logging:
+  file: sinapps.log
+  path: /Users/guytou/TBOX/WORK/STELLIANT/sinapps
   level:
-    eu.stelliant: DEBUG
-    org.springframework: INFO
-    #org.springframework.integration: DEBUG
+    eu.stelliant: ERROR
+    org.springframework: ERROR
+    org.springframework.integration: DEBUG
     #org.springframework.web.client: DEBUG
 
 sinapps:
