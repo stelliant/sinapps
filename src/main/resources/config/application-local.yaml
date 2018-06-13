@@ -26,14 +26,18 @@ logging:
   level:
     eu.stelliant: DEBUG
     org.springframework: INFO
-    org.springframework.integration: DEBUG
+    #org.springframework.integration: DEBUG
+    #org.springframework.web.client: DEBUG
 
 sinapps:
   api:
+    truststore: classpath:security/keystore.pks
+    storepass: storepass
     baseUrl: https://sinapps-ird-v2.demo.darva.com
     loginPath: /core/api/login
     login: 28953sinapps
     password: bb*1xSZO
+    debugging: true
 
 itex:
   file:

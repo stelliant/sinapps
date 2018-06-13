@@ -19,6 +19,7 @@
   <int:chain id="channel.connexion" input-channel="sinapps.channel.connexion" output-channel="sinapps.channel.partenaire">
     <int:transformer ref="connexionPayload"/>
     <int-http:outbound-gateway
+      rest-template="restTemplate"
       http-method="POST"
       url-expression="headers['url']"
       expected-response-type-expression="headers['expected-response-type']"
@@ -32,6 +33,7 @@
     output-channel="sinapps.channel.abstractMissions">
     <int:transformer ref="partenairePayload"/>
     <int-http:outbound-gateway
+      rest-template="restTemplate"
       reply-timeout="1000"
       url-expression="headers['url']"
       expected-response-type-expression="headers['expected-response-type']"
@@ -45,6 +47,7 @@
     output-channel="sinapps.channel.mission">
     <int:transformer ref="missionsPayload"/>
     <int-http:outbound-gateway
+      rest-template="restTemplate"
       http-method="GET"
       url-expression="headers['url']"
       expected-response-type-expression="headers['expected-response-type']"
@@ -58,6 +61,7 @@
   <int:chain id="channel.mission" input-channel="sinapps.channel.mission" output-channel="itex.channel.file">
     <int:transformer ref="missionPayload"/>
     <int-http:outbound-gateway
+      rest-template="restTemplate"
       http-method="GET"
       url-expression="headers['url']"
       expected-response-type-expression="headers['expected-response-type']"

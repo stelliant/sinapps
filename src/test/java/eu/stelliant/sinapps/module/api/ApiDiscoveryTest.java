@@ -9,6 +9,7 @@ import com.darva.sinapps.api.client.transverse.model.LinksInner;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -20,10 +21,12 @@ public class ApiDiscoveryTest extends TestApiSetup {
 
   private static final Logger log = LoggerFactory.getLogger(ApiDiscoveryTest.class);
 
+  @Autowired
+  RestTemplate restTemplate;
+
   @Test
   public void login() {
 
-    RestTemplate restTemplate;
     HttpHeaders requestHeaders;
 
     try {
@@ -37,7 +40,6 @@ public class ApiDiscoveryTest extends TestApiSetup {
       body.setPassword(apiProperties.getApi().getPassword());
       HttpEntity<Body> bodyEntity = new HttpEntity<>(body, requestHeaders);
 
-      restTemplate = getRestTemplate();
       ResponseEntity<InlineResponse200> inlineResponse200 = restTemplate
           .exchange(
               apiProperties.getApi().getBaseUrl() + apiProperties.getApi().getLoginPath(),
@@ -56,7 +58,6 @@ public class ApiDiscoveryTest extends TestApiSetup {
           .map(LinksInner::getHref)
           .findFirst()
           .orElse("");
-      restTemplate = getRestTemplate();
       ResponseEntity<InlineResponse2001> inlineResponse2001 = restTemplate
           .exchange(apiProperties.getApi().getBaseUrl() + partenairePath,
                     HttpMethod.GET,
@@ -69,16 +70,14 @@ public class ApiDiscoveryTest extends TestApiSetup {
           .map(LinksInner::getHref)
           .findFirst()
           .orElse("");
-      restTemplate = getRestTemplate();
       ResponseEntity<InlineResponse2002> listeRessources = restTemplate
           .exchange(apiProperties.getApi().getBaseUrl() + missionsPath,
                     HttpMethod.GET,
                     requestEntity,
                     InlineResponse2002.class);
 
-      for (InlineResponse2002Items items:
+      for (InlineResponse2002Items items :
           listeRessources.getBody().getItems()) {
-        restTemplate = getRestTemplate();
         ResponseEntity<String> responseEntity = restTemplate
             .exchange(apiProperties.getApi().getBaseUrl() + items.getHref(),
                       HttpMethod.GET,

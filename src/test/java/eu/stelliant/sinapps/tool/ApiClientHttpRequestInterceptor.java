@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map.Entry;
@@ -30,7 +29,7 @@ public class ApiClientHttpRequestInterceptor implements ClientHttpRequestInterce
     return response;
   }
 
-  private void logRequest(HttpRequest request, byte[] body) throws UnsupportedEncodingException {
+  private void logRequest(HttpRequest request, byte[] body) {
     log.info("URI: " + request.getURI());
     log.info("HTTP Method: " + request.getMethod());
     log.info("HTTP Headers: " + headersToString(request.getHeaders()));

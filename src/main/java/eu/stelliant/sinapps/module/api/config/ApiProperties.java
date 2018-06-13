@@ -17,10 +17,28 @@ public class ApiProperties {
 
   public static class Api {
 
+    private String truststore;
+    private String storepass;
     private String baseUrl;
     private String loginPath;
     private String login;
     private String password;
+
+    public String getTruststore() {
+      return truststore;
+    }
+
+    public void setTruststore(String truststore) {
+      this.truststore = truststore;
+    }
+
+    public String getStorepass() {
+      return storepass;
+    }
+
+    public void setStorepass(String storepass) {
+      this.storepass = storepass;
+    }
 
     public String getBaseUrl() {
       return baseUrl;
