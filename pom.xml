@@ -26,7 +26,7 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <swagger-annotations-version>1.5.8</swagger-annotations-version>
-    <jackson-version>2.9.5</jackson-version>
+    <jackson-version>2.9.6</jackson-version>
   </properties>
 
   <dependencyManagement>
@@ -147,6 +147,12 @@
                 <java8>true</java8>
                 <modelPackage>com.darva.sinapps.api.client.transverse.model</modelPackage>
               </configOptions>
+              <typeMappings>
+                <typeMapping>OffsetDateTime=ZonedDateTime</typeMapping>
+              </typeMappings>
+              <importMappings>
+                <importMapping>java.time.OffsetDateTime=java.time.ZonedDateTime</importMapping>
+              </importMappings>
             </configuration>
           </execution>
           <execution>
@@ -175,6 +181,12 @@
                 <java8>true</java8>
                 <modelPackage>com.darva.sinapps.api.client.expertise.model</modelPackage>
               </configOptions>
+              <typeMappings>
+                <typeMapping>OffsetDateTime=ZonedDateTime</typeMapping>
+              </typeMappings>
+              <importMappings>
+                <importMapping>java.time.OffsetDateTime=java.time.ZonedDateTime</importMapping>
+              </importMappings>
             </configuration>
           </execution>
           <execution>
@@ -201,6 +213,12 @@
                 <java8>true</java8>
                 <modelPackage>eu.stelliant.model</modelPackage>
               </configOptions>
+              <typeMappings>
+                <typeMapping>OffsetDateTime=ZonedDateTime</typeMapping>
+              </typeMappings>
+              <importMappings>
+                <importMapping>java.time.OffsetDateTime=java.time.ZonedDateTime</importMapping>
+              </importMappings>
             </configuration>
           </execution>
         </executions>
