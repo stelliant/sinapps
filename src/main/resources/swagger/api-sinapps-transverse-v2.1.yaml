@@ -538,8 +538,8 @@ definitions:
     - "assureurId"
     - "cause"
     - "cloture"
-    #- "dateCreation"
-    #- "dateDeMissionnement"
+    - "dateCreation"
+    - "dateDeMissionnement"
     - "difficulteBloquante"
     - "difficulteNonBloquante"
     - "etapeMission"
@@ -584,9 +584,9 @@ definitions:
       numero:
         type: "string"
         description: "Numéro de la mission chez l'assureur"
-      #dateDeMissionnement:
-      #  type: "string"
-      #  format: "date-time"
+      dateDeMissionnement:
+        type: "string"
+        format: "date-time"
       difficulteNonBloquante:
         type: "boolean"
       etapeMission:
@@ -631,9 +631,9 @@ definitions:
       id:
         type: "string"
         description: "ID de la mission dans Sinapps"
-      #dateCreation:
-      #  type: "string"
-      #  format: "date-time"
+      dateCreation:
+        type: "string"
+        format: "date-time"
     description: "Description d'une mission IRD, tous domaines confondus. Les informations\
       \ spécifiques au domaine de la mission (REN, Expertise, Urgence Habitation)\
       \ ne sont pas indiqués ici."
@@ -676,12 +676,12 @@ definitions:
         type: "string"
       version:
         type: "integer"
-          #dateDeCreation:
-          #  type: "string"
-          #  format: "date-time"
-          #dateDeDerniereModification:
-          #  type: "string"
-          #  format: "date-time"
+      dateDeCreation:
+        type: "string"
+        format: "date-time"
+      dateDeDerniereModification:
+        type: "string"
+        format: "date-time"
   Personne:
     type: "object"
     properties:

@@ -338,18 +338,18 @@ paths:
                 - "mission"
                 type: "object"
                 properties:
-                  #dateDeCreation:
-                  #  type: "string"
-                  #  format: "date-time"
-                  #dateDeDerniereModification:
-                  #  type: "string"
-                  #  format: "date-time"
+                  dateDeCreation:
+                    type: "string"
+                    format: "date-time"
+                  dateDeDerniereModification:
+                    type: "string"
+                    format: "date-time"
                   dossier:
                     $ref: "#/definitions/DossierRepresentation"
                   mission:
                     required:
                     - "assureurId"
-                    #- "dateDeMissionnement"
+                    - "dateDeMissionnement"
                     - "dossierId"
                     - "numero"
                     - "prestataireId"
@@ -363,9 +363,9 @@ paths:
                         $ref: "#/definitions/BSONObjectID"
                       dossierId:
                         $ref: "#/definitions/BSONObjectID"
-                      #dateDeMissionnement:
-                      #  type: "string"
-                      #  format: "date-time"
+                      dateDeMissionnement:
+                        type: "string"
+                        format: "date-time"
                       numero:
                         type: "string"
                       commentaires:
@@ -915,16 +915,16 @@ definitions:
   Mission:
     type: "object"
     required:
-    #- "dateDeMissionnement"
+    - "dateDeMissionnement"
     - "numero"
     properties:
       numero:
         type: "string"
         description: "Numéro de la mission"
         minLength: 1
-      #dateDeMissionnement:
-      #  type: "string"
-      #  format: "date-time"
+      dateDeMissionnement:
+        type: "string"
+        format: "date-time"
         description: "Date de missionnement chez le mandant"
       franchiseApplicable:
         $ref: "#/definitions/Franchise"
@@ -1224,9 +1224,9 @@ definitions:
         - "cloturee"
         - "complexe"
         - "criticite"
-        #- "dateDeCreation"
-        #- "dateDeDerniereModification"
-        #- "datePrestation"
+        - "dateDeCreation"
+        - "dateDeDerniereModification"
+        - "datePrestation"
         - "etat"
         - "id"
         - "missionId"
@@ -1238,10 +1238,10 @@ definitions:
             $ref: "#/definitions/BSONObjectID"
           missionId:
             $ref: "#/definitions/BSONObjectID"
-          #datePrestation:
-          #  type: "string"
-          #  format: "date-time"
-          #  description: "La date de la prestation correspond à la date du missionnement"
+          datePrestation:
+            type: "string"
+            format: "date-time"
+            description: "La date de la prestation correspond à la date du missionnement"
           etat:
             $ref: "#/definitions/EtatPrestation"
           typePrestation:
@@ -1261,12 +1261,12 @@ definitions:
             description: "Indique si la prestation est terminée"
           version:
             type: "integer"
-          #dateDeCreation:
-          #  type: "string"
-          #  format: "date-time"
-          #dateDeDerniereModification:
-          #  type: "string"
-          #  format: "date-time"
+          dateDeCreation:
+            type: "string"
+            format: "date-time"
+          dateDeDerniereModification:
+            type: "string"
+            format: "date-time"
       links:
         type: "array"
         items:
@@ -1321,9 +1321,9 @@ definitions:
     properties:
       reference:
         type: "string"
-      #date:
-      #  type: "string"
-      #  format: "date-time"
+      date:
+        type: "string"
+        format: "date-time"
       nature:
         $ref: "#/definitions/NatureSinistre"
   RisqueRepresentation:
@@ -1528,15 +1528,15 @@ definitions:
   Commentaire:
     type: "object"
     required:
-    #- "date"
+    - "date"
     - "message"
     properties:
       message:
         type: "string"
         minLength: 1
-      #date:
-      #  type: "string"
-      #  format: "date-time"
+      date:
+        type: "string"
+        format: "date-time"
       auteurId:
         type: "string"
   ConformiteRisque:
