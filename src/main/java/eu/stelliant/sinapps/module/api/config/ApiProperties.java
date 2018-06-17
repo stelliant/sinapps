@@ -1,75 +1,41 @@
 package eu.stelliant.sinapps.module.api.config;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
+@Component
 @ConfigurationProperties(prefix = "sinapps")
+@Getter
+@Setter
 public class ApiProperties {
 
   private Api api;
 
-  public Api getApi() {
-    return api;
-  }
-
-  public void setApi(Api api) {
-    this.api = api;
-  }
-
+  @Getter
+  @Setter
   public static class Api {
 
-    private String truststore;
-    private String storepass;
-    private String baseUrl;
-    private String loginPath;
-    private String login;
-    private String password;
+    private String host;
+    private Ssl ssl;
+    private Login login;
 
-    public String getTruststore() {
-      return truststore;
+    @Getter
+    @Setter
+    public static class Ssl {
+
+      private String truststore;
+      private String storepass;
     }
 
-    public void setTruststore(String truststore) {
-      this.truststore = truststore;
-    }
+    @Getter
+    @Setter
+    public static class Login {
 
-    public String getStorepass() {
-      return storepass;
-    }
-
-    public void setStorepass(String storepass) {
-      this.storepass = storepass;
-    }
-
-    public String getBaseUrl() {
-      return baseUrl;
-    }
-
-    public void setBaseUrl(String baseUrl) {
-      this.baseUrl = baseUrl;
-    }
-
-    public String getLoginPath() {
-      return loginPath;
-    }
-
-    public void setLoginPath(String loginPath) {
-      this.loginPath = loginPath;
-    }
-
-    public String getLogin() {
-      return login;
-    }
-
-    public void setLogin(String login) {
-      this.login = login;
-    }
-
-    public String getPassword() {
-      return password;
-    }
-
-    public void setPassword(String password) {
-      this.password = password;
+      private String mapping;
+      private String username;
+      private String password;
     }
   }
 }

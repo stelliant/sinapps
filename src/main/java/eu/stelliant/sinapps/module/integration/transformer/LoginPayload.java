@@ -10,21 +10,25 @@ import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ConnexionPayload {
+public class LoginPayload {
+
+  private final ApiProperties properties;
 
   @Autowired
-  ApiProperties properties;
+  public LoginPayload(ApiProperties properties) {
+    this.properties = properties;
+  }
 
   @Transformer
   public Message<?> get(Message<String> msg) {
 
     Body body = new Body();
-    body.setLogin(properties.getApi().getLogin());
-    body.setPassword(properties.getApi().getPassword());
+    body.setLogin(properties.getApi().getLogin().getUsername());
+    body.setPassword(properties.getApi().getLogin().getPassword());
 
     return MessageBuilder.withPayload(body)
         .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
-        .setHeader("url", properties.getApi().getBaseUrl() + properties.getApi().getLoginPath())
+        .setHeader("url", properties.getApi().getHost() + properties.getApi().getLogin().getMapping())
         .setHeader("expected-response-type", com.darva.sinapps.api.client.transverse.model.InlineResponse200.class)
         .build();
   }

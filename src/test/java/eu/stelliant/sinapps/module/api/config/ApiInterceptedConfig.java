@@ -3,6 +3,7 @@ package eu.stelliant.sinapps.module.api.config;
 import eu.stelliant.sinapps.tool.ApiClientHttpRequestInterceptor;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,11 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 @Profile("test")
 public class ApiInterceptedConfig extends ApiConfig {
+
+  @Autowired
+  public ApiInterceptedConfig(ApiProperties properties) {
+    super(properties);
+  }
 
   @Bean
   @Primary

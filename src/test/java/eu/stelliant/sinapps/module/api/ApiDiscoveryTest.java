@@ -1,5 +1,8 @@
 package eu.stelliant.sinapps.module.api;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+
 import com.darva.sinapps.api.client.transverse.model.Body;
 import com.darva.sinapps.api.client.transverse.model.InlineResponse200;
 import com.darva.sinapps.api.client.transverse.model.InlineResponse2001;
@@ -25,24 +28,24 @@ public class ApiDiscoveryTest extends TestApiSetup {
   RestTemplate restTemplate;
 
   @Test
-  public void login() {
+  public void should_not_fail() {
 
-    HttpHeaders requestHeaders;
+    // Given
 
-    try {
-
+    // When
+    Throwable exception = catchThrowable(() -> {
       // Set the Content-Type header
-      requestHeaders = new HttpHeaders();
+      HttpHeaders requestHeaders = new HttpHeaders();
       requestHeaders.setContentType(new MediaType("application", "json"));
 
       Body body = new Body();
-      body.setLogin(apiProperties.getApi().getLogin());
-      body.setPassword(apiProperties.getApi().getPassword());
+      body.setLogin(apiProperties.getApi().getLogin().getUsername());
+      body.setPassword(apiProperties.getApi().getLogin().getPassword());
       HttpEntity<Body> bodyEntity = new HttpEntity<>(body, requestHeaders);
 
       ResponseEntity<InlineResponse200> inlineResponse200 = restTemplate
           .exchange(
-              apiProperties.getApi().getBaseUrl() + apiProperties.getApi().getLoginPath(),
+              apiProperties.getApi().getHost() + apiProperties.getApi().getLogin().getMapping(),
               HttpMethod.POST,
               bodyEntity,
               InlineResponse200.class);
@@ -59,7 +62,7 @@ public class ApiDiscoveryTest extends TestApiSetup {
           .findFirst()
           .orElse("");
       ResponseEntity<InlineResponse2001> inlineResponse2001 = restTemplate
-          .exchange(apiProperties.getApi().getBaseUrl() + partenairePath,
+          .exchange(apiProperties.getApi().getHost() + partenairePath,
                     HttpMethod.GET,
                     requestEntity,
                     InlineResponse2001.class);
@@ -71,7 +74,7 @@ public class ApiDiscoveryTest extends TestApiSetup {
           .findFirst()
           .orElse("");
       ResponseEntity<InlineResponse2002> listeRessources = restTemplate
-          .exchange(apiProperties.getApi().getBaseUrl() + missionsPath,
+          .exchange(apiProperties.getApi().getHost() + missionsPath,
                     HttpMethod.GET,
                     requestEntity,
                     InlineResponse2002.class);
@@ -79,14 +82,14 @@ public class ApiDiscoveryTest extends TestApiSetup {
       for (InlineResponse2002Items items :
           listeRessources.getBody().getItems()) {
         ResponseEntity<String> responseEntity = restTemplate
-            .exchange(apiProperties.getApi().getBaseUrl() + items.getHref(),
+            .exchange(apiProperties.getApi().getHost() + items.getHref(),
                       HttpMethod.GET,
                       requestEntity,
                       String.class);
       }
+    });
 
-    } catch (Exception e) {
-      log.error("####", e);
-    }
+    // Then
+    assertThat(exception).isNull();
   }
 }

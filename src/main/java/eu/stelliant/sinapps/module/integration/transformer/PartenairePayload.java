@@ -12,8 +12,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class PartenairePayload {
 
+  private final ApiProperties properties;
+
   @Autowired
-  ApiProperties properties;
+  public PartenairePayload(ApiProperties properties) {
+    this.properties = properties;
+  }
 
   @Transformer
   public Message<?> get(Message<InlineResponse200> msg) {
@@ -26,7 +30,7 @@ public class PartenairePayload {
 
     return MessageBuilder.withPayload("")
         .copyHeaders(msg.getHeaders())
-        .setHeader("url", properties.getApi().getBaseUrl() + partenairePath)
+        .setHeader("url", properties.getApi().getHost() + partenairePath)
         .setHeader("expected-response-type", com.darva.sinapps.api.client.transverse.model.InlineResponse2001.class)
         .build();
   }

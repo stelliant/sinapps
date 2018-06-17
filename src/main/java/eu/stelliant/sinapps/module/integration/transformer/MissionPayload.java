@@ -12,8 +12,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class MissionPayload {
 
+  private final ApiProperties properties;
+
   @Autowired
-  ApiProperties properties;
+  public MissionPayload(ApiProperties properties) {
+    this.properties = properties;
+  }
 
   @Transformer
   public Message<?> get(Message<InlineResponse2002Items> msg) {
@@ -22,7 +26,7 @@ public class MissionPayload {
 
     return MessageBuilder.withPayload("")
         .copyHeaders(msg.getHeaders())
-        .setHeader("url", properties.getApi().getBaseUrl() + missionPath)
+        .setHeader("url", properties.getApi().getHost() + missionPath)
         .setHeader("expected-response-type", com.darva.sinapps.api.client.expertise.model.InlineResponse2001.class)
         .setHeader(FileHeaders.FILENAME, msg.getPayload().getProperties().getId())
         .build();

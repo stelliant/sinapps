@@ -12,13 +12,9 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ApiDataTypesTest extends TestApiSetup {
-
-  private static final Logger log = LoggerFactory.getLogger(ApiDataTypesTest.class);
 
   @Autowired
   ObjectMapper objectMapper;

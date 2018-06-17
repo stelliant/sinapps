@@ -32,13 +32,14 @@ logging:
 
 sinapps:
   api:
-    truststore: classpath:security/keystore.pks
-    storepass: storepass
-    baseUrl: https://sinapps-ird-v2.demo.darva.com
-    loginPath: /core/api/login
-    login: 28953sinapps
-    password: bb*1xSZO
-    debugging: true
+    host: https://sinapps-ird-v2.demo.darva.com
+    ssl:
+      truststore: classpath:security/keystore.pks
+      storepass: storepass
+    login:
+      mapping: /core/api/login
+      username: 28953sinapps
+      password: bb*1xSZO
 
 itex:
   file:
