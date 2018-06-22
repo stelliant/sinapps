@@ -1,7 +1,7 @@
 package eu.stelliant.sinapps.module.integration.transformer;
 
+import com.darva.sinapps.api.client.expertise.model.Body;
 import eu.stelliant.sinapps.module.api.config.ApiProperties;
-import com.darva.sinapps.api.client.transverse.model.Body;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.integration.annotation.Transformer;
@@ -29,7 +29,7 @@ public class LoginPayload {
     return MessageBuilder.withPayload(body)
         .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
         .setHeader("url", properties.getApi().getHost() + properties.getApi().getLogin().getMapping())
-        .setHeader("expected-response-type", com.darva.sinapps.api.client.transverse.model.InlineResponse200.class)
+        .setHeader("expected-response-type", com.darva.sinapps.api.client.expertise.model.RessourceUser.class)
         .build();
   }
 }

@@ -1,6 +1,6 @@
 package eu.stelliant.sinapps.module.integration.transformer;
 
-import com.darva.sinapps.api.client.transverse.model.InlineResponse2002Items;
+import com.darva.sinapps.api.client.expertise.model.RessourceAbstractMissions;
 import eu.stelliant.sinapps.module.api.config.ApiProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.annotation.Transformer;
@@ -20,14 +20,14 @@ public class MissionPayload {
   }
 
   @Transformer
-  public Message<?> get(Message<InlineResponse2002Items> msg) {
+  public Message<?> get(Message<RessourceAbstractMissions> msg) {
 
     String missionPath = msg.getPayload().getHref();
 
     return MessageBuilder.withPayload("")
         .copyHeaders(msg.getHeaders())
         .setHeader("url", properties.getApi().getHost() + missionPath)
-        .setHeader("expected-response-type", com.darva.sinapps.api.client.expertise.model.InlineResponse2001.class)
+        .setHeader("expected-response-type", com.darva.sinapps.api.client.expertise.model.RessourceMission.class)
         .setHeader(FileHeaders.FILENAME, msg.getPayload().getProperties().getId())
         .build();
   }

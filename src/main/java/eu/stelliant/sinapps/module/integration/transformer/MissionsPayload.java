@@ -1,8 +1,8 @@
 package eu.stelliant.sinapps.module.integration.transformer;
 
+import com.darva.sinapps.api.client.transverse.model.LinksPartenaireInner;
+import com.darva.sinapps.api.client.transverse.model.RessourcePartenaire;
 import eu.stelliant.sinapps.module.api.config.ApiProperties;
-import com.darva.sinapps.api.client.transverse.model.InlineResponse2001;
-import com.darva.sinapps.api.client.transverse.model.LinksInner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.annotation.Transformer;
 import org.springframework.integration.support.MessageBuilder;
@@ -20,18 +20,18 @@ public class MissionsPayload {
   }
 
   @Transformer
-  public Message<?> get(Message<InlineResponse2001> msg) {
+  public Message<?> get(Message<RessourcePartenaire> msg) {
 
     String missionsPath = msg.getPayload().getLinks().stream()
-        .filter(linksInner -> "abstractMissions".equals(linksInner.getRel()))
-        .map(LinksInner::getHref)
+        .filter(link -> LinksPartenaireInner.RelEnum.ABSTRACTMISSIONS == link.getRel())
+        .map(LinksPartenaireInner::getHref)
         .findFirst()
         .orElse("");
 
     return MessageBuilder.withPayload("")
         .copyHeaders(msg.getHeaders())
         .setHeader("url", properties.getApi().getHost() + missionsPath)
-        .setHeader("expected-response-type", com.darva.sinapps.api.client.transverse.model.InlineResponse2002.class)
+        .setHeader("expected-response-type", com.darva.sinapps.api.client.expertise.model.InlineResponse2001.class)
         .build();
   }
 }
