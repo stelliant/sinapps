@@ -1,3 +1,4 @@
+##
 ## Example CSV import. Use ## for comments and # for configuration. Paste CSV below.
 ## The following names are reserved and should not be used (or ignored):
 ## id, tooltip, placeholder(s), link and label (see below)
@@ -11,7 +12,7 @@
 ## Node style (placeholders are replaced once).
 ## Default is the current style for nodes.
 #
-# style: label;whiteSpace=wrap;html=1;%shape%;fillColor=%fill%;strokeColor=%stroke%;spacingLeft=0;align=center;verticalAlign=bottom;fontSize=11;
+# style: label;whiteSpace=wrap;html=1;%shape%;fillColor=%fill%;strokeColor=%stroke%;align=center;verticalAlign=bottom;fontSize=11;spacingLeft=0;
 #
 ## Uses the given column name as the identity for cells (updates existing cells).
 ## Default is no identity (empty value or -).
@@ -55,12 +56,12 @@
 ## Node width. Possible value is a number (in px), auto or an @ sign followed by a column
 ## name that contains the value for the width. Default is auto.
 #
-# width: auto
+# width: @width
 #
 ## Node height. Possible value is a number (in px), auto or an @ sign followed by a column
 ## name that contains the value for the height. Default is auto.
 #
-# height: auto
+# height: @height
 #
 ## Padding for autosize. Default is 0.
 #
@@ -69,7 +70,7 @@
 ## Comma-separated list of ignored columns for metadata. (These can be
 ## used for connections and styles but will not be added as metadata.)
 #
-# ignore: id,shape,fill,stroke
+# ignore: id,shape,height,width,fill,stroke
 #
 ## Column to be renamed to link attribute (used as link).
 #
@@ -77,11 +78,11 @@
 #
 ## Spacing between nodes. Default is 40.
 #
-# nodespacing: 40
+# nodespacing: 30
 #
 ## Spacing between parallel edges. Default is 40.
 #
-# edgespacing: 40
+# edgespacing: 30
 #
 ## Name of layout. Possible values are auto, none, verticaltree, horizontaltree,
 ## verticalflow, horizontalflow, organic, circle. Default is auto.
