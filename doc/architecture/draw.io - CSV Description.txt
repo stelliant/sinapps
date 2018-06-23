@@ -33,14 +33,14 @@
 ## The target column may contain a comma-separated list of values.
 ## Multiple connect entries are allowed.
 #
-## Accessed
-# connect: {"from": "accessed", "to": "id", "invert": true, \
+## Accessed Up
+# connect: {"from": "accessed_up", "to": "id", "invert": true, \
 #   "style": "edgeStyle=elbowEdgeStyle;html=1;endArrow=open;elbow=vertical;endFill=0;dashed=1;startArrow=open;startFill=0;dashPattern=1 4;curved=1;noEdgeStyle=1;orthogonal=1;"}
-## Served
-# connect: {"from": "serve", "to": "id", "invert": true, \
+## Serve Up
+# connect: {"from": "serve_up", "to": "id", "invert": true, \
 #   "style": "edgeStyle=elbowEdgeStyle;html=1;endArrow=none;elbow=vertical;endFill=0;startArrow=open;startFill=0;curved=1;noEdgeStyle=1;orthogonal=1;"}
-## Flow
-# connect: {"from": "flow", "to": "id", \
+## Flow Down
+# connect: {"from": "flow_down", "to": "id", \
 #   "style": "edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;dashed=1;elbow=vertical;endFill=1;dashPattern=6 4;startArrow=block;startFill=1;curved=1;noEdgeStyle=1;orthogonal=1;"}
 #
 ## Node x-coordinate. Possible value is a column name. Default is empty. Layouts will

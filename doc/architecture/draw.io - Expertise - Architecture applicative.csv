@@ -1,51 +1,51 @@
-name,type,id,category,function,accessed,serve,flow,shape,width,height,fill,stroke
+name,type,id,category,function,accessed_up,serve_up,flow_down,shape,width,height,fill,stroke
 2PDF,LiveCycle,2pdf_livecycle,soft,-,,,itex_back,rhombus;rounded=0;,120,40,#ffffff,#000000
-Assistant,-,assistant,actor,-,,,,shape=actor,70,70,#ffffff,#000000
-Assure,-,assure,actor,-,,,,shape=actor,70,70,#ffffff,#000000
-Assureur,-,assureur,actor,-,,,,shape=actor,70,70,#ffffff,#000000
+Assistant,-,assistant,actor,-,,,,shape=actor;,70,70,#ffffff,#000000
+Assure,-,assure,actor,-,,,,shape=actor;,70,70,#ffffff,#000000
+Assureur,-,assureur,actor,-,,,,shape=actor;,70,70,#ffffff,#000000
 AX,MSDyn,ax_msdyn,soft,-,assistant,,itex_fs,rhombus;rounded=0;,120,40,#ffffff,#000000
 BDoc,-,bdoc,soft,-,,,,rhombus;rounded=0;,120,40,#ffffff,#000000
 CapAdresse,-,capadresse,soft,-,,itex_front,,rhombus;rounded=0;,120,40,#ffffff,#000000
-Digiclaims,Back,digiclaims_back,back,-,,"digiclaims_front,digiclaims_pro_front","itex_back,generation_livecycle",shape=hexagon;perimeter=hexagonPerimeter2;rounded=0;,100,35,#ffffff,#000000
-Digiclaims,DB,digiclaims_db,db,-,digiclaims_back,,,shape=cylinder,100,45,#ffffff,#000000
-Digiclaims,Front,digiclaims_front,front,-,assure,,,ellipse,110,40,#ffffff,#000000
-Digiclaims,FS,digiclaims_fs,fs,-,digiclaims_back,,,rounded=0,100,35,#ffffff,#000000
-Digiclaims Pro,Front,digiclaims_pro_front,front,-,assureur,,,ellipse,110,40,#ffffff,#000000
-EDI,DB,edi_db,db,-,"odi,tradexpress",,,shape=cylinder,100,45,#ffffff,#000000
-Editique,DB,editique_db,db,-,"fusionword,bdoc",,,shape=cylinder,100,45,#ffffff,#000000
+Digiclaims,Back,digiclaims_back,back,-,,"digiclaims_front,digiclaims_pro_front","itex_back,digiclaims_fs,generation_livecycle",shape=hexagon;perimeter=hexagonPerimeter2;rounded=0;,100,35,#ffffff,#000000
+Digiclaims,DB,digiclaims_db,db,-,,digiclaims_back,,shape=cylinder;spacingBottom=-2;,100,45,#ffffff,#000000
+Digiclaims,Front,digiclaims_front,front,-,assure,,,ellipse;,110,40,#ffffff,#000000
+Digiclaims,FS,digiclaims_fs,fs,-,,,,rounded=0;,100,35,#ffffff,#000000
+Digiclaims Pro,Front,digiclaims_pro_front,front,-,assureur,,,ellipse;,110,40,#ffffff,#000000
+EDI,DB,edi_db,db,-,,"odi,tradexpress",,shape=cylinder;spacingBottom=-2;,100,45,#ffffff,#000000
+Editique,DB,editique_db,db,-,,"fusionword,bdoc",,shape=cylinder;spacingBottom=-2;,100,45,#ffffff,#000000
 ERSKER,-,ersker,soft,-,,,,rhombus;rounded=0;,120,40,#ffffff,#000000
-Expert,-,expert,actor,-,,,,shape=actor,70,70,#ffffff,#000000
+Expert,-,expert,actor,-,,,,shape=actor;,70,70,#ffffff,#000000
 Explorer,MSWin,explorer_mswin,plugin,-,"assistant,expert",,itex_fs,rounded=1,100,35,#ffffff,#000000
 Extranet,Back,extranet_back,back,-,,"extranet_assure_front,extranet_assureur_front,texadoc_front","itex_back,2pdf_livecycle,ifs",shape=hexagon;perimeter=hexagonPerimeter2;rounded=0;,100,35,#ffffff,#000000
-Extranet,DB,extranet_db,db,-,extranet_back,,"tradexpress,talend",shape=cylinder,100,45,#ffffff,#000000
-Extranet Assure,Front,extranet_assure_front,front,-,assure,,,ellipse,110,40,#ffffff,#000000
-Extranet Assureur,Front,extranet_assureur_front,front,-,assureur,,,ellipse,110,40,#ffffff,#000000
+Extranet,DB,extranet_db,db,-,,extranet_back,"tradexpress,talend",shape=cylinder;spacingBottom=-2;,100,45,#ffffff,#000000
+Extranet Assure,Front,extranet_assure_front,front,-,assure,,,ellipse;,110,40,#ffffff,#000000
+Extranet Assureur,Front,extranet_assureur_front,front,-,assureur,,,ellipse;,110,40,#ffffff,#000000
 FileReceiver,-,filereceiver,soft,-,,,itex_fs,rhombus;rounded=0;,120,40,#ffffff,#000000
 FusionWord,-,fusionword,soft,-,,,itex_fs,rhombus;rounded=0;,120,40,#ffffff,#000000
-GED,FS,ged_fs,fs,-,,,,rounded=0,100,35,#ffffff,#000000
+GED,FS,ged_fs,fs,-,,,,rounded=0;,100,35,#ffffff,#000000
 Generation,LiveCycle,generation_livecycle,soft,-,,,itex_fs,rhombus;rounded=0;,120,40,#ffffff,#000000
 GREN,ERP,gren_erp,soft,-,reneur,,"itex_back,sinapps_back",rhombus;rounded=0;,120,40,#ffffff,#000000
-GREN,DB,gren_db,db,-,"gren_robot,gren_erp",,,shape=cylinder,100,45,#ffffff,#000000
+GREN,DB,gren_db,db,-,,"gren_robot,gren_erp",,shape=cylinder;spacingBottom=-2;,100,45,#ffffff,#000000
 GREN,Robot,gren_robot,soft,-,,,sinapps_back,rhombus;rounded=0;,120,40,#ffffff,#000000
 IFS,-,ifs,soft,-,,,itex_fs,rhombus;rounded=0;,120,40,#ffffff,#000000
 IRDWEB,EDI,irdweb_edi,soft,-,,irdweb_front,"odi,tradexpress",rhombus;rounded=0;,120,40,#ffffff,#000000
-IRDWEB,Front,irdweb_front,front,-,assistant,,,ellipse,110,40,#ffffff,#000000
+IRDWEB,Front,irdweb_front,front,-,assistant,,,ellipse;,110,40,#ffffff,#000000
 iTex,Back,itex_back,back,-,,"itex_front,itexmobile_electron,rdv_msexchange","itex_fs,ifs",shape=hexagon;perimeter=hexagonPerimeter2;rounded=0;,100,35,#ffffff,#000000
-iTex,DB,itex_db,db,-,itex_back,,editique_db,shape=cylinder,100,45,#ffffff,#000000
-iTex,Front,itex_front,front,-,"assistant,expert",,,ellipse,110,40,#ffffff,#000000
-iTex,FS,itex_fs,fs,-,,,"odi,tradexpress,ged_fs",rounded=0,100,35,#ffffff,#000000
-iTexMobile,Electron,itexmobile_electron,front,-,expert,,filereceiver,ellipse,110,40,#ffffff,#000000
+iTex,DB,itex_db,db,-,,itex_back,editique_db,shape=cylinder;spacingBottom=-2;,100,45,#ffffff,#000000
+iTex,Front,itex_front,front,-,"assistant,expert",,,ellipse;,110,40,#ffffff,#000000
+iTex,FS,itex_fs,fs,-,,,"odi,tradexpress,ged_fs",rounded=0;,100,35,#ffffff,#000000
+iTexMobile,Electron,itexmobile_electron,front,-,expert,,filereceiver,ellipse;,110,40,#ffffff,#000000
 ODI,-,odi,soft,-,,,,rhombus;rounded=0;,120,40,#ffffff,#000000
 ClickDroit,Outlook,clickdroit_outlook,plugin,-,"assistant,expert",,itex_fs,rounded=1,100,35,#ffffff,#000000
 PagesJaunes,-,pagesjaunes,soft,-,,itex_front,,rhombus;rounded=0;,120,40,#ffffff,#000000
-Paragon,-,paragon,soft,-,,simplissimo,tradexpress,rhombus;rounded=0;,120,40,#ffffff,#000000
+Paragon,-,paragon,soft,-,,,tradexpress,rhombus;rounded=0;,120,40,#ffffff,#000000
 RDV,MSExchange,rdv_msexchange,plugin,-,expert,,,rounded=1,100,35,#ffffff,#000000
-Reneur,-,reneur,actor,-,,,,shape=actor,70,70,#ffffff,#000000
-Simplissimo,-,simplissimo,plugin,-,assistant,,,rounded=1,100,35,#ffffff,#000000
+Reneur,-,reneur,actor,-,,,,shape=actor;,70,70,#ffffff,#000000
+Simplissimo,-,simplissimo,plugin,-,assistant,,paragon,rounded=1,100,35,#ffffff,#000000
 Sinapps,Back,sinapps_back,back,-,,,,shape=hexagon;perimeter=hexagonPerimeter2;rounded=0;,100,35,#ffffff,#000000
 Talend,-,talend,soft,-,,,itex_db,rhombus;rounded=0;,120,40,#ffffff,#000000
-TexaDoc,Front,texadoc_front,front,-,assure,,,ellipse,110,40,#ffffff,#000000
-TexiPhone,Mobile,texiphone_mobile,front,-,expert,,"rdv_msexchange,filereceiver",ellipse,110,40,#ffffff,#000000
+TexaDoc,Front,texadoc_front,front,-,assure,,,ellipse;,110,40,#ffffff,#000000
+TexiPhone,Mobile,texiphone_mobile,front,-,expert,,"rdv_msexchange,filereceiver",ellipse;,110,40,#ffffff,#000000
 TradeXpress,-,tradexpress,soft,-,,ersker,,rhombus;rounded=0;,120,40,#ffffff,#000000
-Visio Assure,Mobile,visio_assure_mobile,front,-,assure,,,ellipse,110,40,#ffffff,#000000
-Webexpert,Mobile,webexpert_mobile,front,-,expert,,,ellipse,110,40,#ffffff,#000000
+Visio Assure,Mobile,visio_assure_mobile,front,-,assure,,,ellipse;,110,40,#ffffff,#000000
+Webexpert,Mobile,webexpert_mobile,front,-,expert,,,ellipse;,110,40,#ffffff,#000000
