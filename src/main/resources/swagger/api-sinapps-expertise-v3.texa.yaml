@@ -30,20 +30,21 @@ paths:
         in: "body"
         required: true
         schema:
-          type: "object"
-          required:
-          - "login"
-          - "password"
-          properties:
-            login:
-              type: "string"
-            password:
-              type: "string"
+          $ref: "#/definitions/RequeteConnexion"
       responses:
         200:
           description: "Status 200"
           schema:
             $ref: "#/definitions/RessourceUser"
+  /logout:
+    put:
+      tags:
+      - "Services Commun"
+      summary: "Deconnexion"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
   /consulter lien expertiseMissions:
     get:
       tags:
@@ -101,163 +102,8 @@ paths:
         200:
           description: "Status 200"
           schema:
-            required:
-            - "href"
-            - "items"
-            - "properties"
-            type: "object"
-            description: "Liste de missions d'expertise"
-            properties:
-              href:
-                type: "string"
-              properties:
-                $ref: "#/definitions/propertiesItems"
-              items:
-                type: "array"
-                items:
-                  $ref: "#/definitions/RessourceMission"
-              links:
-                type: "array"
-                items:
-                  required:
-                  - "href"
-                  - "rel"
-                  type: "object"
-                  properties:
-                    rel:
-                      type: "string"
-                      enum:
-                      - "firstPage"
-                      - "lastPage"
-                    href:
-                      type: "string"
-                      example: "/core/api/covea-expert/missions?assureurId=5b1a6c451300005c00470ac1&nbPage=1&nbElements=16&referer=firstPage"
-              filters:
-                required:
-                - "assureurId"
-                - "contentQuery"
-                - "createdAfter"
-                - "createdBefore"
-                - "numero"
-                - "prestataireId"
-                - "reference"
-                - "type"
-                type: "object"
-                properties:
-                  assureurId:
-                    required:
-                    - "optional"
-                    - "type"
-                    type: "object"
-                    properties:
-                      type:
-                        required:
-                        - "array"
-                        - "type"
-                        type: "object"
-                        properties:
-                          array:
-                            type: "object"
-                          type:
-                            type: "string"
-                            enum:
-                            - "BSONObjectID"
-                      optional:
-                        type: "boolean"
-                        default: true
-                  prestataireId:
-                    required:
-                    - "optional"
-                    - "type"
-                    type: "object"
-                    properties:
-                      type:
-                        required:
-                        - "array"
-                        type: "object"
-                        properties:
-                          array:
-                            required:
-                            - "type"
-                            type: "object"
-                            properties:
-                              type:
-                                type: "string"
-                                enum:
-                                - "BSONObjectID"
-                      optional:
-                        type: "boolean"
-                        default: true
-                  numero:
-                    required:
-                    - "optional"
-                    - "type"
-                    type: "object"
-                    properties:
-                      type:
-                        type: "string"
-                        default: "String"
-                      optional:
-                        type: "boolean"
-                        default: true
-                  reference:
-                    required:
-                    - "optional"
-                    - "type"
-                    type: "object"
-                    properties:
-                      type:
-                        type: "string"
-                        default: "String"
-                      optional:
-                        type: "boolean"
-                        default: true
-                  contentQuery:
-                    $ref: "#/definitions/FilterString"
-                  type:
-                    required:
-                    - "type"
-                    type: "object"
-                    properties:
-                      type:
-                        required:
-                        - "array"
-                        type: "object"
-                        properties:
-                          array:
-                            required:
-                            - "oneOf"
-                            type: "object"
-                            properties:
-                              oneOf:
-                                type: "array"
-                                items:
-                                  required:
-                                  - "label"
-                                  - "name"
-                                  type: "object"
-                                  properties:
-                                    name:
-                                      type: "string"
-                                      enum:
-                                      - "RenDirecte"
-                                      - "RenSuiteExpertise"
-                                      - "RechercheDeFuite"
-                                      - "UrgenceHabitation"
-                                      - "ExpertiseCovea"
-                                    label:
-                                      type: "string"
-                                      enum:
-                                      - "REN Directe"
-                                      - "REN suite à expertise"
-                                      - "Recherche de fuite"
-                                      - "Urgence Habitation"
-                                      - "Expertise"
-                  createdAfter:
-                    $ref: "#/definitions/FilterDateTime"
-                  createdBefore:
-                    $ref: "#/definitions/FilterDateTime"
-  /Consulter lien events:
+            $ref: "#/definitions/RessourceListeMissionsExpert"
+  /consulter lien events:
     get:
       tags:
       - "Services Expert - Evénements"
@@ -282,7 +128,7 @@ paths:
           description: "Status 200"
           schema:
             $ref: "#/definitions/EvenementsPartenaire"
-  /Consulter lien linked-events:
+  /consulter lien linked-events:
     get:
       tags:
       - "Services Expert - Evénements"
@@ -307,7 +153,7 @@ paths:
           description: "Status 200"
           schema:
             $ref: "#/definitions/EvenementsPartenaire"
-  /Consulter lien eventsNotCreatedByMe:
+  /consulter lien eventsNotCreatedByMe:
     get:
       tags:
       - "Services Expert - Evénements"
@@ -332,40 +178,6 @@ paths:
           description: "Status 200"
           schema:
             $ref: "#/definitions/EvenementsPartenaire"
-  /exécuter commande MissionnerExpert:
-    put:
-      tags:
-      - "Services Assureur - Partenaires"
-      summary: "Missionner un expert"
-      description: "L'expert peut prendre un premier rendez-vous avec l'assuré lorsque\
-        \ l'état de la prestation est PrestationQualifiee. \nTout nouveau rendez-vous\
-        \ peut-être pris à partir de l'état de la prestation \"rendezVousPris\" et\
-        \ à tout moment du dossier.\n## Rôles habilités\nAssureur\n## Regles de gestion\n\
-        A compléter\n\n## Evénement généré\nMissionCreee\nPrestationCreee\nCommandeAcceptee\n\
-        \n## Exemple\n[Voir un exemple de flux JSON](https://wiki.apps.darva.com/display/SPCFAQ/Commande+missionnerCoveaExpert)"
-      consumes: []
-      parameters:
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          type: "object"
-          required:
-          - "prestataire"
-          properties:
-            prestataire:
-              $ref: "#/definitions/Prestataire"
-            mission:
-              $ref: "#/definitions/Mission"
-            dossier:
-              $ref: "#/definitions/Dossier"
-            prestation:
-              $ref: "#/definitions/PrestationMissionner"
-      responses:
-        200:
-          description: "Status 200"
-          schema:
-            $ref: "#/definitions/ResultatCommande"
   /consulter lien abstractMissions:
     get:
       tags:
@@ -460,39 +272,41 @@ paths:
         200:
           description: "Status 200"
           schema:
-            required:
-            - "href"
-            - "items"
-            - "properties"
-            type: "object"
-            description: "Liste de missions avec uniquement les données communes"
-            properties:
-              href:
-                type: "string"
-              properties:
-                $ref: "#/definitions/propertiesItems"
-              items:
-                type: "array"
-                items:
-                  $ref: "#/definitions/RessourceAbstractMissions"
-              links:
-                type: "array"
-                items:
-                  required:
-                  - "href"
-                  - "rel"
-                  type: "object"
-                  properties:
-                    rel:
-                      type: "string"
-                      enum:
-                      - "firstPage"
-                      - "lastPage"
-                    href:
-                      type: "string"
-                      example: "/core/api/common/missions?prestataireId=5b1a6ddc100000c800d6f359&nbPage=1&nbElements=16"
-              filters:
-                $ref: "#/definitions/FilterAbstractMissions"
+            $ref: "#/definitions/RessourceListeAbstractMissions"
+  /exécuter commande MissionnerExpert:
+    put:
+      tags:
+      - "Services Assureur - Partenaires"
+      summary: "Missionner un expert"
+      description: "L'expert peut prendre un premier rendez-vous avec l'assuré lorsque\
+        \ l'état de la prestation est PrestationQualifiee. \nTout nouveau rendez-vous\
+        \ peut-être pris à partir de l'état de la prestation \"rendezVousPris\" et\
+        \ à tout moment du dossier.\n## Rôles habilités\nAssureur\n## Regles de gestion\n\
+        A compléter\n\n## Evénement généré\nMissionCreee\nPrestationCreee\nCommandeAcceptee\n\
+        \n## Exemple\n[Voir un exemple de flux JSON](https://wiki.apps.darva.com/display/SPCFAQ/Commande+missionnerCoveaExpert)"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/CommandeMissionnerExpert"
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/ResultatCommande"
+  /consulter lien partenaire:
+    get:
+      tags:
+      - "Services CommServices Commun"
+      summary: "Lien \"partenaire\""
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/RessourceListePartenaire"
   /missions/{idMission}:
     get:
       tags:
@@ -526,19 +340,7 @@ paths:
         200:
           description: "Status 200"
           schema:
-            required:
-            - "href"
-            - "items"
-            type: "object"
-            properties:
-              href:
-                type: "string"
-              properties:
-                type: "object"
-              items:
-                type: "array"
-                items:
-                  $ref: "#/definitions/CommandsMission"
+            $ref: "#/definitions/ListeCommandesMissionExpert"
   /exécuter commande verifierGarantie:
     put:
       tags:
@@ -557,25 +359,7 @@ paths:
         in: "body"
         required: true
         schema:
-          type: "object"
-          required:
-          - "garanties"
-          properties:
-            garanties:
-              type: "array"
-              items:
-                required:
-                - "id"
-                type: "object"
-                properties:
-                  id:
-                    $ref: "#/definitions/BSONObjectID"
-                  positionGarantie:
-                    type: "string"
-                  montant:
-                    $ref: "#/definitions/Montant"
-                  commentaire:
-                    $ref: "#/definitions/NonEmptyString"
+          $ref: "#/definitions/CommandeVerifierGarantie"
       responses:
         200:
           description: "Status 200"
@@ -608,99 +392,7 @@ paths:
         in: "body"
         required: true
         schema:
-          type: "object"
-          required:
-          - "autresMotifs"
-          - "descriptionRisqueErronee"
-          - "garantieCapitauxInsuffisants"
-          - "risqueConforme"
-          - "risqueVerifie"
-          properties:
-            risqueVerifie:
-              type: "boolean"
-              example: true
-            motifNonVerificationRisque:
-              $ref: "#/definitions/MotifNonVerificationRisque"
-            commentaireNonVerificationRisque:
-              $ref: "#/definitions/NonEmptyString"
-            risqueConforme:
-              type: "boolean"
-              example: true
-            descriptionRisqueErronee:
-              type: "boolean"
-              example: true
-            garantieCapitauxInsuffisants:
-              type: "boolean"
-              example: true
-            descriptifGarantieCapitauxInsuffisants:
-              $ref: "#/definitions/NonEmptyString"
-            autresMotifs:
-              type: "boolean"
-              example: true
-            descriptifAutresMotifs:
-              $ref: "#/definitions/NonEmptyString"
-            modificationRisque:
-              type: "object"
-              properties:
-                typeRisque:
-                  $ref: "#/definitions/TypeRisque"
-                risqueAtypique:
-                  $ref: "#/definitions/ModificationBoolean"
-                usageAssure:
-                  $ref: "#/definitions/TypeUsageAssure"
-                description:
-                  $ref: "#/definitions/NonEmptyString"
-                nouvellesMesures:
-                  type: "array"
-                  items:
-                    required:
-                    - "typeMesure"
-                    - "valeur"
-                    type: "object"
-                    properties:
-                      typeMesure:
-                        $ref: "#/definitions/TypeMesure"
-                      valeur:
-                        $ref: "#/definitions/Montant"
-                mesuresASupprimer:
-                  type: "array"
-                  items:
-                    required:
-                    - "typeMesure"
-                    - "valeur"
-                    type: "object"
-                    properties:
-                      typeMesure:
-                        $ref: "#/definitions/TypeMesure"
-                      valeur:
-                        $ref: "#/definitions/Montant"
-                nouveauxIndicateurs:
-                  type: "array"
-                  items:
-                    required:
-                    - "typeIndicateur"
-                    - "valeur"
-                    type: "object"
-                    properties:
-                      typeIndicateur:
-                        $ref: "#/definitions/TypeIndicateur"
-                      valeur:
-                        $ref: "#/definitions/Montant"
-                indicateursASupprimer:
-                  type: "array"
-                  items:
-                    required:
-                    - "typeIndicateur"
-                    - "valeur"
-                    type: "object"
-                    properties:
-                      typeIndicateur:
-                        $ref: "#/definitions/TypeIndicateur"
-                      valeur:
-                        $ref: "#/definitions/Montant"
-                anneeConstruction:
-                  type: "string"
-                  example: "1990"
+          $ref: "#/definitions/CommandeQualifierRisque"
       responses:
         200:
           description: "Status 200"
@@ -726,58 +418,7 @@ paths:
         in: "body"
         required: true
         schema:
-          type: "object"
-          required:
-          - "conformiteSinistre"
-          properties:
-            conformiteSinistre:
-              required:
-              - "sinistreConforme"
-              type: "object"
-              properties:
-                sinistreConforme:
-                  type: "boolean"
-            modificationSinistreExpertise:
-              type: "object"
-              properties:
-                date:
-                  type: "string"
-                  format: "date"
-                heure:
-                  type: "string"
-                caracteristiques:
-                  $ref: "#/definitions/CaracteristiqueSinistre"
-                adresse:
-                  $ref: "#/definitions/Adresse"
-                nonSuppressionDeCause:
-                  required:
-                  - "name"
-                  - "value"
-                  type: "object"
-                  properties:
-                    name:
-                      type: "string"
-                      enum:
-                      - "Remove"
-                      - "ReplaceWith"
-                    value:
-                      required:
-                      - "motif"
-                      type: "object"
-                      description: "Obligatoire si name = RemplaceWith"
-                      properties:
-                        motif:
-                          $ref: "#/definitions/NonSuppressionDeCause"
-                        precision:
-                          type: "string"
-                rappelMesuresConservatoires:
-                  $ref: "#/definitions/ModificationString"
-                analyseResponsabilites:
-                  $ref: "#/definitions/ModificationString"
-                circonstances:
-                  $ref: "#/definitions/ModificationString"
-                dommagesConstates:
-                  $ref: "#/definitions/ModificationString"
+          $ref: "#/definitions/CommandeQualifierSinistre"
       responses:
         200:
           description: "Status 200"
@@ -807,43 +448,7 @@ paths:
         in: "body"
         required: true
         schema:
-          type: "object"
-          properties:
-            environnementRisqueNonSignale:
-              required:
-              - "typeEnvironnementRisqueNonSignale"
-              type: "object"
-              properties:
-                typeEnvironnementRisqueNonSignale:
-                  type: "array"
-                  items:
-                    $ref: "#/definitions/TypeEnvironnementRisqueNonSignale"
-                commentaire:
-                  $ref: "#/definitions/NonEmptyString"
-            preventionRisqueAggrave:
-              required:
-              - "typePreventionRisqueAggrave"
-              type: "object"
-              properties:
-                typePreventionRisqueAggrave:
-                  type: "array"
-                  items:
-                    $ref: "#/definitions/TypePreventionRisqueAggrave"
-                commentaire:
-                  $ref: "#/definitions/NonEmptyString"
-            preventionAnomalieProtectionVol:
-              required:
-              - "typePreventionAnomalieProtectionVol"
-              type: "object"
-              properties:
-                typePreventionAnomalieProtectionVol:
-                  type: "array"
-                  items:
-                    $ref: "#/definitions/TypePreventionAnomalieProtectionVol"
-                commentaire:
-                  $ref: "#/definitions/NonEmptyString"
-            suggestionVisitePreventeur:
-              type: "boolean"
+          $ref: "#/definitions/CommandeQualifierPreventionRisque"
       responses:
         200:
           description: "Status 200"
@@ -878,85 +483,7 @@ paths:
         in: "body"
         required: true
         schema:
-          type: "object"
-          required:
-          - "acteurId"
-          - "dommages"
-          - "franchise"
-          - "tvaRecuperable"
-          properties:
-            acteurId:
-              $ref: "#/definitions/BSONObjectID"
-            tvaRecuperable:
-              type: "boolean"
-            positionIndemnite:
-              $ref: "#/definitions/PositionIndemnite"
-            modeIndemnite:
-              $ref: "#/definitions/ModeIndemnite"
-            franchise:
-              $ref: "#/definitions/Montant"
-            acompteVerse:
-              $ref: "#/definitions/Montant"
-            penaliteAppliquee:
-              $ref: "#/definitions/Montant"
-            applicationPenalite:
-              $ref: "#/definitions/NonEmptyString"
-            dommages:
-              type: "array"
-              items:
-                required:
-                - "garantieId"
-                - "natureDommages"
-                - "typeLigne"
-                type: "object"
-                properties:
-                  garantieId:
-                    $ref: "#/definitions/BSONObjectID"
-                  natureDommages:
-                    $ref: "#/definitions/NatureDesDommages"
-                  plafond:
-                    $ref: "#/definitions/Montant"
-                  typeLigne:
-                    $ref: "#/definitions/TypeLigne"
-                  montantHT:
-                    $ref: "#/definitions/Montant"
-                  montantTVA:
-                    $ref: "#/definitions/Montant"
-                  montantVetuste:
-                    $ref: "#/definitions/Montant"
-                  montantVetusteMax:
-                    $ref: "#/definitions/Montant"
-                  detailDommages:
-                    type: "array"
-                    items:
-                      required:
-                      - "detailNature"
-                      - "montantHT"
-                      - "tauxTVA"
-                      type: "object"
-                      properties:
-                        detailNature:
-                          $ref: "#/definitions/DetailNature"
-                        descriptif:
-                          $ref: "#/definitions/NonEmptyString"
-                        montantHT:
-                          $ref: "#/definitions/Montant"
-                        tauxTVA:
-                          required:
-                          - "application"
-                          - "type"
-                          type: "object"
-                          properties:
-                            type:
-                              $ref: "#/definitions/TypeTauxTVA"
-                            application:
-                              $ref: "#/definitions/ApplicationTauxTVA"
-                            taux:
-                              $ref: "#/definitions/Montant"
-                        tauxVetuste:
-                          type: "integer"
-                        tauxVetusteMax:
-                          type: "integer"
+          $ref: "#/definitions/CommandeEstimerDommages"
       responses:
         200:
           description: "Status 200"
@@ -981,7 +508,7 @@ paths:
         in: "body"
         required: true
         schema:
-          type: "object"
+          $ref: "#/definitions/CommandeDeposerCompteRendu"
       responses:
         200:
           description: "Status 200"
@@ -1003,16 +530,7 @@ paths:
         in: "body"
         required: true
         schema:
-          type: "object"
-          required:
-          - "motif"
-          properties:
-            motif:
-              type: "string"
-              enum:
-              - "Indetermine"
-            commentaire:
-              $ref: "#/definitions/Commentaire"
+          $ref: "#/definitions/CommandeAnnulerMission"
       responses:
         200:
           description: "Status 200"
@@ -1032,7 +550,7 @@ paths:
         in: "body"
         required: true
         schema:
-          $ref: "#/definitions/Risque"
+          $ref: "#/definitions/CommandeModifierRisque"
       responses:
         200:
           description: "Status 200"
@@ -1059,22 +577,7 @@ paths:
         in: "body"
         required: true
         schema:
-          type: "object"
-          properties:
-            caracteristiques:
-              $ref: "#/definitions/CaracteristiqueSinistre"
-            date:
-              $ref: "#/definitions/ModificationString"
-            heure:
-              $ref: "#/definitions/ModificationString"
-            adresse:
-              $ref: "#/definitions/Adresse"
-            dommagesConstates:
-              $ref: "#/definitions/ModificationString"
-            circonstances:
-              $ref: "#/definitions/ModificationString"
-            rappelMesuresConservatoires:
-              $ref: "#/definitions/ModificationString"
+          $ref: "#/definitions/CommandeModifierSinistreExpert"
       responses:
         200:
           description: "Status 200"
@@ -1098,30 +601,7 @@ paths:
         in: "body"
         required: true
         schema:
-          type: "object"
-          required:
-          - "typeActeur"
-          properties:
-            typeActeur:
-              $ref: "#/definitions/TypeActeur"
-            informationsAssure:
-              $rel: "#/definitions/InformationsAssure"
-            personne:
-              $ref: "#/definitions/Personne"
-            acteurConvoque:
-              type: "boolean"
-            acteurPresent:
-              type: "boolean"
-            responsableSinistre:
-              type: "boolean"
-            misEnCause:
-              type: "boolean"
-            references:
-              $ref: "#/definitions/TypeReference"
-            relationAuRisque:
-              $ref: "#/definitions/RelationAuRisque"
-            representants:
-              $ref: "#/definitions/Representants"
+          $ref: "#/definitions/CommandeAjouterActeur"
       responses:
         200:
           description: "Status 200"
@@ -1149,94 +629,27 @@ paths:
         in: "body"
         required: true
         schema:
-          type: "object"
-          required:
-          - "id"
-          - "typeActeur"
-          properties:
-            id:
-              $ref: "#/definitions/BSONObjectID"
-            typeActeur:
-              $ref: "#/definitions/TypeActeur"
-            informationsAssure:
-              type: "object"
-              properties:
-                profession:
-                  $ref: "#/definitions/ModificationString"
-                particulariteClient:
-                  type: "object"
-                  properties:
-                    name:
-                      type: "string"
-                      enum:
-                      - "Remove"
-                      - "ReplaceWith"
-                    label:
-                      type: "string"
-                      enum:
-                      - "Remove"
-                      - "ReplaceWith"
-                    value:
-                      $ref: "#/definitions/ParticulariteClient"
-                precisionParticulariteClient:
-                  $ref: "#/definitions/ModificationString"
-            personne:
-              $ref: "#/definitions/Personne"
-            acteurConvoque:
-              $ref: "#/definitions/ModificationBoolean"
-            acteurPresent:
-              $ref: "#/definitions/ModificationBoolean"
-            responsableSinistre:
-              $ref: "#/definitions/ModificationBoolean"
-            misEnCause:
-              $ref: "#/definitions/ModificationBoolean"
-            nouvellesReferences:
-              type: "array"
-              items:
-                $ref: "#/definitions/TypeReference"
-            referencesASupprimer:
-              type: "array"
-              items:
-                $ref: "#/definitions/TypeReference"
-            relationAuRisque:
-              type: "object"
-              properties:
-                name:
-                  type: "string"
-                  enum:
-                  - "Remove"
-                  - "ReplaceWith"
-                label:
-                  type: "string"
-                  enum:
-                  - "Remove"
-                  - "ReplaceWith"
-                value:
-                  $ref: "#/definitions/RelationAuRisque"
-            nouveauxRepresentants:
-              type: "object"
-              description: "TO DO"
-              properties:
-                informationsComplementaires:
-                  type: "string"
-                personne:
-                  $ref: "#/definitions/Personne"
-                qualite:
-                  $ref: "#/definitions/Qualite"
-            representantsASupprimer:
-              type: "object"
-              properties:
-                informationsComplementaires:
-                  type: "string"
-                personne:
-                  $ref: "#/definitions/Personne"
-                qualite:
-                  $ref: "#/definitions/Qualite"
+          $ref: "#/definitions/CommandeModifierActeur"
       responses:
         200:
           description: "Status 200"
           schema:
             $ref: "#/definitions/ResultatCommande"
+  /exécuter commande signalerUneDifficulte:
+    put:
+      tags:
+      - "Services Expert - Missions"
+      summary: "Signaler une difficulté"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/CommandeSignalerUneDifficute"
+      responses:
+        200:
+          description: "Status 200"
   /consulter ressource prestation:
     get:
       tags:
@@ -1263,17 +676,7 @@ paths:
         200:
           description: "Status 200"
           schema:
-            required:
-            - "href"
-            - "properties"
-            type: "object"
-            properties:
-              href:
-                type: "string"
-              properties:
-                $ref: "#/definitions/ListeProperties"
-              links:
-                $ref: "#/definitions/Links"
+            $ref: "#/definitions/ListeRendezVousExpert"
   /exécuter commande qualifierPrestation:
     put:
       tags:
@@ -1298,52 +701,7 @@ paths:
         in: "body"
         required: true
         schema:
-          type: "object"
-          required:
-          - "caracterePrestation"
-          - "complexe"
-          - "typeDePrestation"
-          properties:
-            typeDePrestation:
-              $ref: "#/definitions/TypePrestation"
-            complexe:
-              type: "boolean"
-              description: "Prestation complexe (Oui/Non) ?"
-            convention:
-              $ref: "#/definitions/ConventionAppliquee"
-            criticite:
-              $ref: "#/definitions/Criticite"
-            urgence:
-              type: "object"
-              description: "Si la criticité est urgente"
-              properties:
-                motif:
-                  $ref: "#/definitions/MotifUrgence"
-                complement:
-                  type: "string"
-                  description: "Commentaire libre"
-            intervenant:
-              type: "object"
-              description: "Liste des intervenants sur la prestation"
-              properties:
-                nom:
-                  type: "string"
-                  description: "Nom de l'intervenant"
-                prenom:
-                  type: "string"
-                  description: "Prénom de l'intervenant"
-                telephone:
-                  type: "string"
-                  description: "Coordonnées de l'intervenant"
-                reference:
-                  type: "string"
-                  description: "Référence de l'intervenant"
-            caracterePrestation:
-              $ref: "#/definitions/CaracterePrestation"
-            canal:
-              $ref: "#/definitions/CanalPrestation"
-            natureDesDommages:
-              $ref: "#/definitions/NatureDommage"
+          $ref: "#/definitions/CommandeQualifierPrestation"
       responses:
         200:
           description: "Status 200"
@@ -1366,15 +724,7 @@ paths:
         in: "body"
         required: true
         schema:
-          type: "object"
-          required:
-          - "motif"
-          properties:
-            motif:
-              $ref: "#/definitions/MotifFinPrestation"
-            commentaire:
-              type: "string"
-              description: "Devient obligatoire si le motif est Autre"
+          $ref: "#/definitions/CommandeDemanderFinPrestation"
       responses:
         200:
           description: "Status 200"
@@ -1402,31 +752,7 @@ paths:
         in: "body"
         required: true
         schema:
-          type: "object"
-          required:
-          - "horaire"
-          - "nomIntervenant"
-          - "prenomIntervenant"
-          - "referenceIntervenant"
-          - "telephoneIntervenant"
-          - "typeRendezVous"
-          properties:
-            horaire:
-              $ref: "#/definitions/Horaire"
-            dureeRendezVous:
-              $ref: "#/definitions/FiniteDuration"
-            notes:
-              $ref: "#/definitions/NonEmptyString"
-            typeRendezVous:
-              $ref: "#/definitions/TypeRendezVous"
-            nomIntervenant:
-              type: "string"
-            prenomIntervenant:
-              type: "string"
-            telephoneIntervenant:
-              type: "string"
-            referenceIntervenant:
-              type: "string"
+          $ref: "#/definitions/CommandePrendreRendezVous"
       responses:
         200:
           description: "Status 200"
@@ -1447,7 +773,7 @@ paths:
         in: "body"
         required: true
         schema:
-          $ref: "#/definitions/ExpertPhysique"
+          $ref: "#/definitions/CommandeModifierExpert"
       responses:
         200:
           description: "Status 200"
@@ -1536,12 +862,24 @@ paths:
           description: "Status 200"
           schema:
             $ref: "#/definitions/ResultatCommande"
-  /consulter ressource difficulte:
+  /consulter ressource Difficulte:
     get:
       tags:
       - "Services Assureur - Difficulté"
       - "Services Expert - Difficulté"
       summary: "Consulter une Difficulté"
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/RessourceDifficulte"
+  /consulter liste ressource Difficulte:
+    get:
+      tags:
+      - "Services Assureur - Difficulté"
+      - "Services Expert - Difficulté"
+      summary: "Consulter la liste des Difficultés d'une mission"
       parameters:
       - name: "missionId"
         in: "query"
@@ -1552,73 +890,248 @@ paths:
         200:
           description: "Status 200"
           schema:
-            required:
-            - "href"
-            - "properties"
-            type: "object"
-            properties:
-              href:
-                type: "string"
-              properties:
-                $ref: "#/definitions/propertiesItems"
-              items:
-                type: "array"
-                items:
-                  $ref: "#/definitions/RessourceDifficulte"
-              links:
-                type: "array"
-                items:
-                  $ref: "#/definitions/Links"
+            $ref: "#/definitions/ListeRessourceDifficulte"
 securityDefinitions:
   Custom:
     type: "apiKey"
     name: "Cookie"
     in: "header"
 definitions:
-  RessourceUser:
+  RessourceListePartenaire:
     type: "object"
     required:
     - "href"
-    - "links"
     - "properties"
     properties:
       href:
         type: "string"
       properties:
         required:
-        - "login"
-        - "partenaireId"
+        - "firstPage"
+        - "lastPage"
+        - "nbElementPerPage"
+        - "nbElements"
+        - "nextPage"
+        - "noPage"
+        - "totalNumberOfElements"
         type: "object"
         properties:
-          partenaireId:
+          totalNumberOfElements:
+            type: "number"
+          noPage:
+            type: "number"
+          nbElementPerPage:
+            type: "number"
+          nbElements:
+            type: "number"
+          firstPage:
             type: "string"
-          personne:
+          lastPage:
+            type: "string"
+          nextPage:
+            type: "string"
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/RessourcePartenaire"
+      filters:
+        type: "object"
+        properties:
+          /numeroClient:
             type: "object"
             properties:
-              nom:
+              type:
                 type: "string"
-              prenom:
-                type: "string"
-              adresse:
-                type: "object"
-              coordonnees:
+              optional:
+                type: "boolean"
+          /ids:
+            type: "object"
+            properties:
+              type:
                 type: "object"
                 properties:
-                  telPersonnel:
-                    type: "string"
-                  email:
-                    type: "string"
-          login:
-            type: "string"
-          roles:
+                  array:
+                    type: "object"
+                    properties:
+                      type:
+                        type: "string"
+              optional:
+                type: "boolean"
+          /typePartenaire:
+            type: "object"
+            properties:
+              type:
+                type: "object"
+                properties:
+                  array:
+                    type: "object"
+                    properties:
+                      oneOf:
+                        type: "array"
+                        items:
+                          type: "object"
+                          properties:
+                            name:
+                              type: "string"
+                            label:
+                              type: "string"
+              optional:
+                type: "boolean"
+          /agreePar:
+            type: "object"
+            properties:
+              type:
+                type: "string"
+              optional:
+                type: "boolean"
+          /children:
+            type: "object"
+            properties:
+              type:
+                type: "string"
+              optional:
+                type: "boolean"
+    example: "{\n    \"href\": \"/core/api/partenaire/partenaires?nbPage=1&nbElements=16\"\
+      ,\n    \"properties\": {\n        \"totalNumberOfElements\": 20,\n        \"\
+      noPage\": 1,\n        \"nbElementPerPage\": 16,\n        \"nbElements\": 16,\n\
+      \        \"firstPage\": \"/core/api/partenaire/partenaires?nbPage=1&nbElements=16\"\
+      ,\n        \"lastPage\": \"/core/api/partenaire/partenaires?nbPage=2&nbElements=16\"\
+      ,\n        \"nextPage\": \"/core/api/partenaire/partenaires?nbPage=2&nbElements=16\"\
+      \n    },\n    \"items\": [     \n        {\n            \"href\": \"/core/api/partenaire/partenaires/5b2c96ed130000d816dcbeea\"\
+      ,\n            \"properties\": {\n                \"numeroClient\": \"28933\"\
+      ,\n                \"nom\": \"POLYEXPERT SA\",\n                \"typePartenaire\"\
+      : {\n                    \"name\": \"Expert\",\n                    \"label\"\
+      : \"Expert\"\n                },\n                \"adresse\": {\n         \
+      \           \"adresse1\": \"16 RUE D'INKERMANN\",\n                    \"codePostal\"\
+      : \"69626\",\n                    \"localite\": \"VILLEURBANNE CEDEX\",\n  \
+      \                  \"codePays\": \"FR\"\n                },\n              \
+      \  \"agrement\": [\n                    {\n                        \"name\"\
+      : \"Covea\",\n                        \"label\": \"Covea\"\n               \
+      \     }\n                ],\n                \"telephone\": \"0472745600\",\n\
+      \                \"agreePar\": [\n                    \"5b2bbcb41000005900be190c\"\
+      ,\n                    \"5b2bbcb31000005b00be1909\",\n                    \"\
+      5b2bbcb41000005a00be1919\",\n                    \"5b2bbcb41000005a00be1911\"\
+      ,\n                    \"5b2bbcb41000005800be190f\",\n                    \"\
+      5b2bbcb41000005b00be1917\",\n                    \"5b2bbcb41000005a00be1914\"\
+      \n                ],\n                \"id\": \"5b2c96ed130000d816dcbeea\",\n\
+      \                \"version\": 0,\n                \"dateDeCreation\": \"2018-06-25T14:13:57+0200\"\
+      ,\n                \"dateDeDerniereModification\": \"2018-06-25T14:13:57+0200\"\
+      \n            },\n            \"links\": [\n                {\n            \
+      \        \"rel\": \"commands\",\n                    \"href\": \"/core/api/partenaire/partenaires/5b2c96ed130000d816dcbeea/commands?referer=commands\"\
+      \n                },\n                {\n                    \"rel\": \"events\"\
+      ,\n                    \"href\": \"/core/api/partenaire/partenaires/5b2c96ed130000d816dcbeea/events?referer=events\"\
+      \n                },\n                {\n                    \"rel\": \"linked-events\"\
+      ,\n                    \"href\": \"/core/api/partenaire/partenaires/5b2c96ed130000d816dcbeea/linkedEvents?referer=linked-events\"\
+      \n                },\n                {\n                    \"rel\": \"eventsNotCreatedByMe\"\
+      ,\n                    \"href\": \"/core/api/partenaire/partenaires/5b2c96ed130000d816dcbeea/othersEvents?referer=eventsNotCreatedByMe\"\
+      \n                },\n                {\n                    \"rel\": \"expertMissions\"\
+      ,\n                    \"href\": \"/core/api/covea-expert/missions?prestataireId=5b2c96ed130000d816dcbeea&referer=expertMissions\"\
+      \n                },\n                {\n                    \"rel\": \"abstractMissions\"\
+      ,\n                    \"href\": \"/core/api/common/missions?prestataireId=5b2c96ed130000d816dcbeea&referer=abstractMissions\"\
+      \n                },\n                {\n                    \"rel\": \"users\"\
+      ,\n                    \"href\": \"/core/api/partenaire/users?partenaireId=5b2c96ed130000d816dcbeea&referer=users\"\
+      \n                },\n                {\n                    \"rel\": \"profilPublic\"\
+      ,\n                    \"href\": \"/core/api/partenaire/partenaires/5b2c96ed130000d816dcbeea/public?referer=profilPublic\"\
+      \n                },\n                {\n                    \"rel\": \"partenairesAvecAgrement\"\
+      ,\n                    \"href\": \"/core/api/partenaire/partenaires/5b2c96ed130000d816dcbeea/partenairesAvecAgrement?referer=partenairesAvecAgrement\"\
+      \n                }\n            ]\n        },\n        {\n            \"href\"\
+      : \"/core/api/partenaire/partenaires/5b2bbcb41000005800be190f\",\n         \
+      \   \"properties\": {\n                \"numeroClient\": \"30062\",\n      \
+      \          \"nom\": \"PROTEC BTP\",\n                \"typePartenaire\": {\n\
+      \                    \"name\": \"Assureur\",\n                    \"label\"\
+      : \"Assureur\"\n                },\n                \"adresse\": {\n       \
+      \             \"adresse1\": \"CHAURAY\",\n                    \"codePostal\"\
+      : \"79036\",\n                    \"localite\": \"NIORT CEDEX\",\n         \
+      \           \"codePays\": \"FR\"\n                },\n                \"agrement\"\
+      : [\n                    {\n                        \"name\": \"Covea\",\n \
+      \                       \"label\": \"Covea\"\n                    }\n      \
+      \          ],\n                \"telephone\": \"0000000000\",\n            \
+      \    \"codeAssureur\": {\n                    \"codeSociete\": \"0402\",\n \
+      \                   \"codeActivite\": \"1290\"\n                },\n       \
+      \         \"agreePar\": [],\n                \"id\": \"5b2bbcb41000005800be190f\"\
+      ,\n                \"version\": 0,\n                \"dateDeCreation\": \"2018-06-25T14:13:57+0200\"\
+      ,\n                \"dateDeDerniereModification\": \"2018-06-25T14:13:57+0200\"\
+      \n            },\n            \"links\": [\n                {\n            \
+      \        \"rel\": \"commands\",\n                    \"href\": \"/core/api/partenaire/partenaires/5b2bbcb41000005800be190f/commands?referer=commands\"\
+      \n                },\n                {\n                    \"rel\": \"events\"\
+      ,\n                    \"href\": \"/core/api/partenaire/partenaires/5b2bbcb41000005800be190f/events?referer=events\"\
+      \n                },\n                {\n                    \"rel\": \"linked-events\"\
+      ,\n                    \"href\": \"/core/api/partenaire/partenaires/5b2bbcb41000005800be190f/linkedEvents?referer=linked-events\"\
+      \n                },\n                {\n                    \"rel\": \"eventsNotCreatedByMe\"\
+      ,\n                    \"href\": \"/core/api/partenaire/partenaires/5b2bbcb41000005800be190f/othersEvents?referer=eventsNotCreatedByMe\"\
+      \n                },\n                {\n                    \"rel\": \"missions\"\
+      ,\n                    \"href\": \"/core/api/covea/missions?assureurId=5b2bbcb41000005800be190f&referer=missions\"\
+      \n                },\n                {\n                    \"rel\": \"expertMissions\"\
+      ,\n                    \"href\": \"/core/api/covea-expert/missions?assureurId=5b2bbcb41000005800be190f&referer=expertMissions\"\
+      \n                },\n                {\n                    \"rel\": \"abstractMissions\"\
+      ,\n                    \"href\": \"/core/api/common/missions?assureurId=5b2bbcb41000005800be190f&referer=abstractMissions\"\
+      \n                },\n                {\n                    \"rel\": \"users\"\
+      ,\n                    \"href\": \"/core/api/partenaire/users?partenaireId=5b2bbcb41000005800be190f&referer=users\"\
+      \n                },\n                {\n                    \"rel\": \"profilPublic\"\
+      ,\n                    \"href\": \"/core/api/partenaire/partenaires/5b2bbcb41000005800be190f/public?referer=profilPublic\"\
+      \n                },\n                {\n                    \"rel\": \"partenairesAvecAgrement\"\
+      ,\n                    \"href\": \"/core/api/partenaire/partenaires/5b2bbcb41000005800be190f/partenairesAvecAgrement?referer=partenairesAvecAgrement\"\
+      \n                }\n            ]\n        }\n    ],\n    \"filters\": {\n\
+      \        \"/numeroClient\": {\n            \"type\": \"string\",\n         \
+      \   \"optional\": true\n        },\n        \"/ids\": {\n            \"type\"\
+      : {\n                \"array\": {\n                    \"type\": \"BSONObjectID\"\
+      \n                }\n            },\n            \"optional\": true\n      \
+      \  },\n        \"/typePartenaire\": {\n            \"type\": {\n           \
+      \     \"array\": {\n                    \"oneOf\": [\n                     \
+      \   {\n                            \"name\": \"Darva\",\n                  \
+      \          \"label\": \"Darva\"\n                        },\n              \
+      \          {\n                            \"name\": \"Reparateur\",\n      \
+      \                      \"label\": \"Reparateur\"\n                        },\n\
+      \                        {\n                            \"name\": \"Assureur\"\
+      ,\n                            \"label\": \"Assureur\"\n                   \
+      \     },\n                        {\n                            \"name\": \"\
+      Expert\",\n                            \"label\": \"Expert\"\n             \
+      \           }\n                    ]\n                }\n            },\n  \
+      \          \"optional\": true\n        },\n        \"/agreePar\": {\n      \
+      \      \"type\": \"BSONObjectID\",\n            \"optional\": true\n       \
+      \ },\n        \"/children\": {\n            \"type\": \"BSONObjectID\",\n  \
+      \          \"optional\": true\n        }\n    }\n}"
+  RessourcePartenaire:
+    type: "object"
+    required:
+    - "href"
+    - "properties"
+    properties:
+      href:
+        type: "string"
+      properties:
+        required:
+        - "agrement"
+        - "nom"
+        - "numeroClient"
+        - "telephone"
+        type: "object"
+        properties:
+          numeroClient:
+            $ref: "#/definitions/NonEmptyString"
+          nom:
+            $ref: "#/definitions/NonEmptyString"
+          typePartenaire:
+            $ref: "#/definitions/TypePartenaire"
+          adresse:
+            $ref: "#/definitions/Adresse"
+          agrement:
             type: "array"
             items:
-              type: "object"
-              properties:
-                name:
-                  type: "string"
-                label:
-                  type: "string"
+              $ref: "#/definitions/ModelePartenaire"
+          telephone:
+            type: "string"
+          codeAssureur:
+            type: "object"
+            properties:
+              codeSociete:
+                type: "string"
+              codeActivite:
+                type: "string"
+          agreePar:
+            type: "array"
+            items:
+              type: "string"
           id:
             type: "string"
           version:
@@ -1628,167 +1141,65 @@ definitions:
           dateDeDerniereModification:
             type: "string"
       links:
-        type: "array"
-        items:
-          required:
-          - "rel"
-          type: "object"
-          properties:
-            rel:
-              type: "string"
-              enum:
-              - "commands"
-              - "events"
-              - "linked-events"
-              - "eventsNotCreatedByMe"
-              - "partenaire"
-              - "abstractMissions"
-              - "missions"
-              - "marcheRenMissions"
-            href:
-              type: "string"
-    example: "{\n    \"href\": \"/core/api/partenaire/users/5b1a6ddc21000047002db11c\"\
-      ,\n    \"properties\": {\n        \"partenaireId\": \"5b1a6ddc100000c800d6f359\"\
-      ,\n        \"personne\": {\n            \"nom\": \"SINAPPS\",\n            \"\
-      prenom\": \"\",\n            \"adresse\": {},\n            \"coordonnees\":\
-      \ {\n                \"telPersonnel\": \"               \",\n              \
-      \  \"email\": \"jonathan.moreau@darva.com\"\n            }\n        },\n   \
-      \     \"login\": \"99999sinapps\",\n        \"roles\": [\n            {\n  \
-      \              \"name\": \"Qualifieur\",\n                \"label\": \"Prestataire\
-      \ Qualifieur\"\n            },\n            {\n                \"name\": \"\
-      Chiffreur\",\n                \"label\": \"Prestataire Chiffreur\"\n       \
-      \     },\n            {\n                \"name\": \"Planificateur\",\n    \
-      \            \"label\": \"Prestataire Planificateur\"\n            },\n    \
-      \        {\n                \"name\": \"Comptable\",\n                \"label\"\
-      : \"Prestataire Comptable\"\n            }\n        ],\n        \"id\": \"5b1a6ddc21000047002db11c\"\
-      ,\n        \"version\": 1,\n        \"dateDeCreation\": \"2018-06-08T13:51:56+0200\"\
-      ,\n        \"dateDeDerniereModification\": \"2018-06-08T13:51:56+0200\"\n  \
+        $ref: "#/definitions/LinksPartenaire"
+    example: "{\n    \"href\": \"/core/api/partenaire/partenaires/5b2cb5ad280000600054f674\"\
+      ,\n    \"properties\": {\n        \"numeroClient\": \"28966\",\n        \"nom\"\
+      : \"MMA\",\n        \"typePartenaire\": {\n            \"name\": \"Assureur\"\
+      ,\n            \"label\": \"Assureur\"\n        },\n        \"adresse\": {\n\
+      \            \"adresse1\": \"test\",\n            \"codePostal\": \"72000\"\
+      ,\n            \"localite\": \"LE MANS\",\n            \"codePays\": \"FR\"\n\
+      \        },\n        \"agrement\": [\n            {\n                \"name\"\
+      : \"Covea\",\n                \"label\": \"Covea\"\n            }\n        ],\n\
+      \        \"telephone\": \"0000000000\",\n        \"codeAssureur\": {\n     \
+      \       \"codeSociete\": \"0403\",\n            \"codeActivite\": \"0424\"\n\
+      \        },\n        \"agreePar\": [],\n        \"id\": \"5b2cb5ad280000600054f674\"\
+      ,\n        \"version\": 0,\n        \"dateDeCreation\": \"2018-06-25T15:44:55+0200\"\
+      ,\n        \"dateDeDerniereModification\": \"2018-06-25T15:44:55+0200\"\n  \
       \  },\n    \"links\": [\n        {\n            \"rel\": \"commands\",\n   \
-      \         \"href\": \"/core/api/partenaire/users/5b1a6ddc21000047002db11c/commands?referer=commands\"\
+      \         \"href\": \"/core/api/partenaire/partenaires/5b2cb5ad280000600054f674/commands?referer=commands\"\
       \n        },\n        {\n            \"rel\": \"events\",\n            \"href\"\
-      : \"/core/api/partenaire/users/5b1a6ddc21000047002db11c/events?referer=events\"\
+      : \"/core/api/partenaire/partenaires/5b2cb5ad280000600054f674/events?referer=events\"\
       \n        },\n        {\n            \"rel\": \"linked-events\",\n         \
-      \   \"href\": \"/core/api/partenaire/users/5b1a6ddc21000047002db11c/linkedEvents?referer=linked-events\"\
+      \   \"href\": \"/core/api/partenaire/partenaires/5b2cb5ad280000600054f674/linkedEvents?referer=linked-events\"\
       \n        },\n        {\n            \"rel\": \"eventsNotCreatedByMe\",\n  \
-      \          \"href\": \"/core/api/partenaire/users/5b1a6ddc21000047002db11c/othersEvents?referer=eventsNotCreatedByMe\"\
-      \n        },\n        {\n            \"rel\": \"partenaire\",\n            \"\
-      href\": \"/core/api/partenaire/partenaires/5b1a6ddc100000c800d6f359?referer=partenaire\"\
-      \n        },\n        {\n            \"rel\": \"abstractMissions\",\n      \
-      \      \"href\": \"/core/api/common/missions?prestataireId=5b1a6ddc100000c800d6f359&etatMission=MissionRecue&etatMission=RendezVousChiffragePris&etatMission=ChiffrageEnAttenteDeValidation&etatMission=ChiffrageValide&etatMission=TravauxPlanifies&etatMission=FactureTravauxDeposee&etatMission=FactureGestionDeposee&referer=abstractMissions\"\
+      \          \"href\": \"/core/api/partenaire/partenaires/5b2cb5ad280000600054f674/othersEvents?referer=eventsNotCreatedByMe\"\
       \n        },\n        {\n            \"rel\": \"missions\",\n            \"\
-      href\": \"/core/api/covea/missions?prestataireId=5b1a6ddc100000c800d6f359&etatMission=MissionRecue&etatMission=RendezVousChiffragePris&etatMission=ChiffrageEnAttenteDeValidation&etatMission=ChiffrageValide&etatMission=TravauxPlanifies&etatMission=FactureTravauxDeposee&etatMission=FactureGestionDeposee&referer=missions\"\
-      \n        },\n        {\n            \"rel\": \"marcheRenMissions\",\n     \
-      \       \"href\": \"/core/api/marche-ren/missions?prestataireId=5b1a6ddc100000c800d6f359&etatMission=MissionRecue&etatMission=RendezVousChiffragePris&etatMission=ChiffrageEnAttenteDeValidation&etatMission=ChiffrageValide&etatMission=TravauxPlanifies&etatMission=FactureTravauxDeposee&etatMission=FactureGestionDeposee&referer=marcheRenMissions\"\
+      href\": \"/core/api/covea/missions?assureurId=5b2cb5ad280000600054f674&referer=missions\"\
+      \n        },\n        {\n            \"rel\": \"expertMissions\",\n        \
+      \    \"href\": \"/core/api/covea-expert/missions?assureurId=5b2cb5ad280000600054f674&referer=expertMissions\"\
+      \n        },\n        {\n            \"rel\": \"abstractMissions\",\n      \
+      \      \"href\": \"/core/api/common/missions?assureurId=5b2cb5ad280000600054f674&referer=abstractMissions\"\
+      \n        },\n        {\n            \"rel\": \"users\",\n            \"href\"\
+      : \"/core/api/partenaire/users?partenaireId=5b2cb5ad280000600054f674&referer=users\"\
+      \n        },\n        {\n            \"rel\": \"profilPublic\",\n          \
+      \  \"href\": \"/core/api/partenaire/partenaires/5b2cb5ad280000600054f674/public?referer=profilPublic\"\
+      \n        },\n        {\n            \"rel\": \"partenairesAvecAgrement\",\n\
+      \            \"href\": \"/core/api/partenaire/partenaires/5b2cb5ad280000600054f674/partenairesAvecAgrement?referer=partenairesAvecAgrement\"\
+      \n        },\n        {\n            \"rel\": \"current\",\n            \"href\"\
+      : \"/core/api/partenaire/partenaires/5b2cb5ad280000600054f674?referer=current\"\
+      \n        },\n        {\n            \"rel\": \"last\",\n            \"href\"\
+      : \"/core/api/covea/partenaires/5b2cb5ad280000600054f674/versions/0?referer=last\"\
+      \n        },\n        {\n            \"rel\": \"first\",\n            \"href\"\
+      : \"/core/api/covea/partenaires/5b2cb5ad280000600054f674/versions/0?referer=first\"\
       \n        }\n    ]\n}"
-  EvenementsPartenaire:
+  TypePartenaire:
     type: "object"
-    required:
-    - "href"
-    properties:
-      href:
-        type: "string"
-      properties:
-        $ref: "#/definitions/propertiesItems"
-      items:
-        type: "array"
-        items:
-          $ref: "#/definitions/RessourceEvenements"
-      filters:
-        $ref: "#/definitions/FiltreEvenement"
-    example: "{\n    \"href\": \"/core/api/partenaire/partenaires/5b1a6ddc100000c800d6f359/linkedEvents?since=0&maxEvents=15\"\
-      ,\n    \"properties\": {},\n    \"items\": [\n        {\n            \"href\"\
-      : \"/core/api/events/2\",\n            \"properties\": {\n                \"\
-      id\": 2\n            },\n            \"items\": [\n                {\n     \
-      \               \"href\": \"/core/api/events/2/CB78ED72B7DA73D4A9FADD3E9B791E01BBEE801D\"\
-      ,\n                    \"properties\": {\n                        \"ontologyId\"\
-      : \"common\",\n                        \"resourceType\": \"commands\",\n   \
-      \                     \"name\": \"CommandeAcceptee\",\n                    \
-      \    \"userId\": \"5b1a6e5b21000017012db13a\"\n                    },\n    \
-      \                \"links\": [\n                        {\n                 \
-      \           \"rel\": \"user\",\n                            \"href\": \"/core/api/partenaire/users/5b1a6e5b21000017012db13a?referer=user\"\
-      \n                        },\n                        {\n                  \
-      \          \"rel\": \"resource\",\n                            \"href\": \"\
-      /core/api/covea-expert/partenaires/5b1a6c451300005c00470ac1/commands/missionnerCoveaExpert/5b1a6e90120000b3015390f9?referer=resource\"\
-      \n                        },\n                        {\n                  \
-      \          \"rel\": \"commandEvent\",\n                            \"href\"\
-      : \"/core/api/events/2?referer=commandEvent\"\n                        }\n \
-      \                   ]\n                }\n              ]\n        }\n     \
-      \ ],\n    \"filters\": {\n        \"/since\": {\n            \"type\": \"long\"\
-      ,\n            \"optional\": true\n        },\n        \"/maxEvents\": {\n \
-      \           \"type\": \"long\",\n            \"optional\": true\n        },\n\
-      \        \"/eventNames\": {\n            \"type\": {\n                \"array\"\
-      : {\n                    \"type\": \"string\"\n                }\n         \
-      \   },\n            \"optional\": true\n        }\n    }\n}"
-  RessourceEvenements:
+  ModelePartenaire:
+    type: "object"
+  ListeCommandesMissionExpert:
     type: "object"
     required:
     - "href"
     - "items"
-    - "properties"
     properties:
       href:
         type: "string"
       properties:
-        required:
-        - "id"
         type: "object"
-        properties:
-          id:
-            type: "number"
       items:
         type: "array"
         items:
-          required:
-          - "href"
-          - "properties"
-          type: "object"
-          properties:
-            href:
-              type: "string"
-            properties:
-              required:
-              - "name"
-              - "ontologyId"
-              - "resourceType"
-              - "userId"
-              type: "object"
-              properties:
-                ontologyId:
-                  type: "string"
-                resourceType:
-                  type: "string"
-                name:
-                  type: "string"
-                userId:
-                  type: "string"
-            links:
-              type: "array"
-              items:
-                type: "object"
-                properties:
-                  rel:
-                    type: "string"
-                  href:
-                    type: "string"
-    example: "        {\r\n            \"href\": \"/core/api/events/2\",\r\n     \
-      \       \"properties\": {\r\n                \"id\": 2\r\n            },\r\n\
-      \            \"items\": [\r\n                {\r\n                    \"href\"\
-      : \"/core/api/events/2/CB78ED72B7DA73D4A9FADD3E9B791E01BBEE801D\",\r\n     \
-      \               \"properties\": {\r\n                        \"ontologyId\"\
-      : \"common\",\r\n                        \"resourceType\": \"commands\",\r\n\
-      \                        \"name\": \"CommandeAcceptee\",\r\n               \
-      \         \"userId\": \"5b1a6e5b21000017012db13a\"\r\n                    },\r\
-      \n                    \"links\": [\r\n                        {\r\n        \
-      \                    \"rel\": \"user\",\r\n                            \"href\"\
-      : \"/core/api/partenaire/users/5b1a6e5b21000017012db13a?referer=user\"\r\n \
-      \                       },\r\n                        {\r\n                \
-      \            \"rel\": \"resource\",\r\n                            \"href\"\
-      : \"/core/api/covea-expert/partenaires/5b1a6c451300005c00470ac1/commands/missionnerCoveaExpert/5b1a6e90120000b3015390f9?referer=resource\"\
-      \r\n                        },\r\n                        {\r\n            \
-      \                \"rel\": \"commandEvent\",\r\n                            \"\
-      href\": \"/core/api/events/2?referer=commandEvent\"\r\n                    \
-      \    }\r\n                    ]\r\n                }\r\n              ]\r\n\
-      \        }"
+          $ref: "#/definitions/CommandsMission"
   RessourceRendezVous:
     type: "object"
     required:
@@ -2465,6 +1876,425 @@ definitions:
         $ref: "#/definitions/StatutPvExpertise"
       complement:
         $ref: "#/definitions/NonEmptyString"
+  RessourceUser:
+    type: "object"
+    required:
+    - "href"
+    - "links"
+    - "properties"
+    properties:
+      href:
+        type: "string"
+      properties:
+        required:
+        - "login"
+        - "partenaireId"
+        type: "object"
+        properties:
+          partenaireId:
+            type: "string"
+          personne:
+            type: "object"
+            properties:
+              nom:
+                type: "string"
+              prenom:
+                type: "string"
+              adresse:
+                type: "object"
+              coordonnees:
+                type: "object"
+                properties:
+                  telPersonnel:
+                    type: "string"
+                  email:
+                    type: "string"
+          login:
+            type: "string"
+          roles:
+            type: "array"
+            items:
+              type: "object"
+              properties:
+                name:
+                  type: "string"
+                label:
+                  type: "string"
+          id:
+            type: "string"
+          version:
+            type: "number"
+          dateDeCreation:
+            type: "string"
+          dateDeDerniereModification:
+            type: "string"
+      links:
+        type: "array"
+        items:
+          required:
+          - "rel"
+          type: "object"
+          properties:
+            rel:
+              type: "string"
+              enum:
+              - "commands"
+              - "events"
+              - "linked-events"
+              - "eventsNotCreatedByMe"
+              - "partenaire"
+              - "abstractMissions"
+              - "missions"
+              - "marcheRenMissions"
+            href:
+              type: "string"
+    example: "{\n    \"href\": \"/core/api/partenaire/users/5b1a6ddc21000047002db11c\"\
+      ,\n    \"properties\": {\n        \"partenaireId\": \"5b1a6ddc100000c800d6f359\"\
+      ,\n        \"personne\": {\n            \"nom\": \"SINAPPS\",\n            \"\
+      prenom\": \"\",\n            \"adresse\": {},\n            \"coordonnees\":\
+      \ {\n                \"telPersonnel\": \"               \",\n              \
+      \  \"email\": \"jonathan.moreau@darva.com\"\n            }\n        },\n   \
+      \     \"login\": \"99999sinapps\",\n        \"roles\": [\n            {\n  \
+      \              \"name\": \"Qualifieur\",\n                \"label\": \"Prestataire\
+      \ Qualifieur\"\n            },\n            {\n                \"name\": \"\
+      Chiffreur\",\n                \"label\": \"Prestataire Chiffreur\"\n       \
+      \     },\n            {\n                \"name\": \"Planificateur\",\n    \
+      \            \"label\": \"Prestataire Planificateur\"\n            },\n    \
+      \        {\n                \"name\": \"Comptable\",\n                \"label\"\
+      : \"Prestataire Comptable\"\n            }\n        ],\n        \"id\": \"5b1a6ddc21000047002db11c\"\
+      ,\n        \"version\": 1,\n        \"dateDeCreation\": \"2018-06-08T13:51:56+0200\"\
+      ,\n        \"dateDeDerniereModification\": \"2018-06-08T13:51:56+0200\"\n  \
+      \  },\n    \"links\": [\n        {\n            \"rel\": \"commands\",\n   \
+      \         \"href\": \"/core/api/partenaire/users/5b1a6ddc21000047002db11c/commands?referer=commands\"\
+      \n        },\n        {\n            \"rel\": \"events\",\n            \"href\"\
+      : \"/core/api/partenaire/users/5b1a6ddc21000047002db11c/events?referer=events\"\
+      \n        },\n        {\n            \"rel\": \"linked-events\",\n         \
+      \   \"href\": \"/core/api/partenaire/users/5b1a6ddc21000047002db11c/linkedEvents?referer=linked-events\"\
+      \n        },\n        {\n            \"rel\": \"eventsNotCreatedByMe\",\n  \
+      \          \"href\": \"/core/api/partenaire/users/5b1a6ddc21000047002db11c/othersEvents?referer=eventsNotCreatedByMe\"\
+      \n        },\n        {\n            \"rel\": \"partenaire\",\n            \"\
+      href\": \"/core/api/partenaire/partenaires/5b1a6ddc100000c800d6f359?referer=partenaire\"\
+      \n        },\n        {\n            \"rel\": \"abstractMissions\",\n      \
+      \      \"href\": \"/core/api/common/missions?prestataireId=5b1a6ddc100000c800d6f359&etatMission=MissionRecue&etatMission=RendezVousChiffragePris&etatMission=ChiffrageEnAttenteDeValidation&etatMission=ChiffrageValide&etatMission=TravauxPlanifies&etatMission=FactureTravauxDeposee&etatMission=FactureGestionDeposee&referer=abstractMissions\"\
+      \n        },\n        {\n            \"rel\": \"missions\",\n            \"\
+      href\": \"/core/api/covea/missions?prestataireId=5b1a6ddc100000c800d6f359&etatMission=MissionRecue&etatMission=RendezVousChiffragePris&etatMission=ChiffrageEnAttenteDeValidation&etatMission=ChiffrageValide&etatMission=TravauxPlanifies&etatMission=FactureTravauxDeposee&etatMission=FactureGestionDeposee&referer=missions\"\
+      \n        },\n        {\n            \"rel\": \"marcheRenMissions\",\n     \
+      \       \"href\": \"/core/api/marche-ren/missions?prestataireId=5b1a6ddc100000c800d6f359&etatMission=MissionRecue&etatMission=RendezVousChiffragePris&etatMission=ChiffrageEnAttenteDeValidation&etatMission=ChiffrageValide&etatMission=TravauxPlanifies&etatMission=FactureTravauxDeposee&etatMission=FactureGestionDeposee&referer=marcheRenMissions\"\
+      \n        }\n    ]\n}"
+  ListeRendezVousExpert:
+    type: "object"
+    required:
+    - "href"
+    - "properties"
+    properties:
+      href:
+        type: "string"
+      properties:
+        $ref: "#/definitions/ListeProperties"
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/RessourceRendezVous"
+      links:
+        $ref: "#/definitions/Links"
+  RessourceListeMissionsExpert:
+    type: "object"
+    required:
+    - "href"
+    - "items"
+    - "properties"
+    properties:
+      href:
+        type: "string"
+      properties:
+        $ref: "#/definitions/propertiesItems"
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/RessourceMission"
+      links:
+        type: "array"
+        items:
+          required:
+          - "href"
+          - "rel"
+          type: "object"
+          properties:
+            rel:
+              type: "string"
+              enum:
+              - "firstPage"
+              - "lastPage"
+            href:
+              type: "string"
+              example: "/core/api/covea-expert/missions?assureurId=5b1a6c451300005c00470ac1&nbPage=1&nbElements=16&referer=firstPage"
+      filters:
+        required:
+        - "assureurId"
+        - "contentQuery"
+        - "createdAfter"
+        - "createdBefore"
+        - "numero"
+        - "prestataireId"
+        - "reference"
+        - "type"
+        type: "object"
+        properties:
+          assureurId:
+            required:
+            - "optional"
+            - "type"
+            type: "object"
+            properties:
+              type:
+                required:
+                - "array"
+                - "type"
+                type: "object"
+                properties:
+                  array:
+                    type: "object"
+                  type:
+                    type: "string"
+                    enum:
+                    - "BSONObjectID"
+              optional:
+                type: "boolean"
+                default: true
+          prestataireId:
+            required:
+            - "optional"
+            - "type"
+            type: "object"
+            properties:
+              type:
+                required:
+                - "array"
+                type: "object"
+                properties:
+                  array:
+                    required:
+                    - "type"
+                    type: "object"
+                    properties:
+                      type:
+                        type: "string"
+                        enum:
+                        - "BSONObjectID"
+              optional:
+                type: "boolean"
+                default: true
+          numero:
+            required:
+            - "optional"
+            - "type"
+            type: "object"
+            properties:
+              type:
+                type: "string"
+                default: "String"
+              optional:
+                type: "boolean"
+                default: true
+          reference:
+            required:
+            - "optional"
+            - "type"
+            type: "object"
+            properties:
+              type:
+                type: "string"
+                default: "String"
+              optional:
+                type: "boolean"
+                default: true
+          contentQuery:
+            $ref: "#/definitions/FilterString"
+          type:
+            required:
+            - "type"
+            type: "object"
+            properties:
+              type:
+                required:
+                - "array"
+                type: "object"
+                properties:
+                  array:
+                    required:
+                    - "oneOf"
+                    type: "object"
+                    properties:
+                      oneOf:
+                        type: "array"
+                        items:
+                          required:
+                          - "label"
+                          - "name"
+                          type: "object"
+                          properties:
+                            name:
+                              type: "string"
+                              enum:
+                              - "RenDirecte"
+                              - "RenSuiteExpertise"
+                              - "RechercheDeFuite"
+                              - "UrgenceHabitation"
+                              - "ExpertiseCovea"
+                            label:
+                              type: "string"
+                              enum:
+                              - "REN Directe"
+                              - "REN suite à expertise"
+                              - "Recherche de fuite"
+                              - "Urgence Habitation"
+                              - "Expertise"
+          createdAfter:
+            $ref: "#/definitions/FilterDateTime"
+          createdBefore:
+            $ref: "#/definitions/FilterDateTime"
+  RessourceListeAbstractMissions:
+    type: "object"
+    required:
+    - "href"
+    - "items"
+    - "properties"
+    properties:
+      href:
+        type: "string"
+      properties:
+        $ref: "#/definitions/propertiesItems"
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/RessourceAbstractMissions"
+      links:
+        type: "array"
+        items:
+          required:
+          - "href"
+          - "rel"
+          type: "object"
+          properties:
+            rel:
+              type: "string"
+              enum:
+              - "firstPage"
+              - "lastPage"
+            href:
+              type: "string"
+              example: "/core/api/common/missions?prestataireId=5b1a6ddc100000c800d6f359&nbPage=1&nbElements=16"
+      filters:
+        $ref: "#/definitions/FilterAbstractMissions"
+  RessourceEvenements:
+    type: "object"
+    required:
+    - "href"
+    - "items"
+    - "properties"
+    properties:
+      href:
+        type: "string"
+      properties:
+        required:
+        - "id"
+        type: "object"
+        properties:
+          id:
+            type: "number"
+      items:
+        type: "array"
+        items:
+          required:
+          - "href"
+          - "properties"
+          type: "object"
+          properties:
+            href:
+              type: "string"
+            properties:
+              required:
+              - "name"
+              - "ontologyId"
+              - "resourceType"
+              - "userId"
+              type: "object"
+              properties:
+                ontologyId:
+                  type: "string"
+                resourceType:
+                  type: "string"
+                name:
+                  type: "string"
+                userId:
+                  type: "string"
+            links:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  rel:
+                    type: "string"
+                  href:
+                    type: "string"
+    example: "        {\r\n            \"href\": \"/core/api/events/2\",\r\n     \
+      \       \"properties\": {\r\n                \"id\": 2\r\n            },\r\n\
+      \            \"items\": [\r\n                {\r\n                    \"href\"\
+      : \"/core/api/events/2/CB78ED72B7DA73D4A9FADD3E9B791E01BBEE801D\",\r\n     \
+      \               \"properties\": {\r\n                        \"ontologyId\"\
+      : \"common\",\r\n                        \"resourceType\": \"commands\",\r\n\
+      \                        \"name\": \"CommandeAcceptee\",\r\n               \
+      \         \"userId\": \"5b1a6e5b21000017012db13a\"\r\n                    },\r\
+      \n                    \"links\": [\r\n                        {\r\n        \
+      \                    \"rel\": \"user\",\r\n                            \"href\"\
+      : \"/core/api/partenaire/users/5b1a6e5b21000017012db13a?referer=user\"\r\n \
+      \                       },\r\n                        {\r\n                \
+      \            \"rel\": \"resource\",\r\n                            \"href\"\
+      : \"/core/api/covea-expert/partenaires/5b1a6c451300005c00470ac1/commands/missionnerCoveaExpert/5b1a6e90120000b3015390f9?referer=resource\"\
+      \r\n                        },\r\n                        {\r\n            \
+      \                \"rel\": \"commandEvent\",\r\n                            \"\
+      href\": \"/core/api/events/2?referer=commandEvent\"\r\n                    \
+      \    }\r\n                    ]\r\n                }\r\n              ]\r\n\
+      \        }"
+  EvenementsPartenaire:
+    type: "object"
+    required:
+    - "href"
+    properties:
+      href:
+        type: "string"
+      properties:
+        $ref: "#/definitions/propertiesItems"
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/RessourceEvenements"
+      filters:
+        $ref: "#/definitions/FiltreEvenement"
+    example: "{\n    \"href\": \"/core/api/partenaire/partenaires/5b1a6ddc100000c800d6f359/linkedEvents?since=0&maxEvents=15\"\
+      ,\n    \"properties\": {},\n    \"items\": [\n        {\n            \"href\"\
+      : \"/core/api/events/2\",\n            \"properties\": {\n                \"\
+      id\": 2\n            },\n            \"items\": [\n                {\n     \
+      \               \"href\": \"/core/api/events/2/CB78ED72B7DA73D4A9FADD3E9B791E01BBEE801D\"\
+      ,\n                    \"properties\": {\n                        \"ontologyId\"\
+      : \"common\",\n                        \"resourceType\": \"commands\",\n   \
+      \                     \"name\": \"CommandeAcceptee\",\n                    \
+      \    \"userId\": \"5b1a6e5b21000017012db13a\"\n                    },\n    \
+      \                \"links\": [\n                        {\n                 \
+      \           \"rel\": \"user\",\n                            \"href\": \"/core/api/partenaire/users/5b1a6e5b21000017012db13a?referer=user\"\
+      \n                        },\n                        {\n                  \
+      \          \"rel\": \"resource\",\n                            \"href\": \"\
+      /core/api/covea-expert/partenaires/5b1a6c451300005c00470ac1/commands/missionnerCoveaExpert/5b1a6e90120000b3015390f9?referer=resource\"\
+      \n                        },\n                        {\n                  \
+      \          \"rel\": \"commandEvent\",\n                            \"href\"\
+      : \"/core/api/events/2?referer=commandEvent\"\n                        }\n \
+      \                   ]\n                }\n              ]\n        }\n     \
+      \ ],\n    \"filters\": {\n        \"/since\": {\n            \"type\": \"long\"\
+      ,\n            \"optional\": true\n        },\n        \"/maxEvents\": {\n \
+      \           \"type\": \"long\",\n            \"optional\": true\n        },\n\
+      \        \"/eventNames\": {\n            \"type\": {\n                \"array\"\
+      : {\n                    \"type\": \"string\"\n                }\n         \
+      \   },\n            \"optional\": true\n        }\n    }\n}"
   CommandsMission:
     type: "object"
     required:
@@ -2594,212 +2424,6 @@ definitions:
               description: "Url de la commande"
             format:
               type: "object"
-  FormatSignalerUneDifficulte:
-    type: "object"
-    properties:
-      motif:
-        type: "object"
-        properties:
-          oneOf:
-            type: "array"
-            items:
-              type: "object"
-              properties:
-                name:
-                  type: "string"
-                label:
-                  type: "string"
-                value:
-                  type: "object"
-          optional:
-            type: "boolean"
-      etape:
-        type: "object"
-        properties:
-          oneOf:
-            type: "array"
-            items:
-              type: "object"
-              properties:
-                name:
-                  type: "string"
-                label:
-                  type: "string"
-                value:
-                  type: "object"
-          optional:
-            type: "boolean"
-      datePrevisionnelleReprise:
-        type: "object"
-        properties:
-          type:
-            type: "string"
-          optional:
-            type: "boolean"
-      complement:
-        type: "object"
-        properties:
-          type:
-            type: "string"
-          optional:
-            type: "boolean"
-      verifying:
-        type: "array"
-        items:
-          type: "object"
-          properties:
-            Default Valide Rule:
-              type: "string"
-    example: "{\r\n    \"motif\": {\r\n        \"oneOf\": [\r\n            {\r\n \
-      \               \"name\": \"ClientIndisponible\",\r\n                \"label\"\
-      : \"Client indisponible\",\r\n                \"value\": {}\r\n            },\r\
-      \n            {\r\n                \"name\": \"RdvValideTardivement\",\r\n \
-      \               \"label\": \"RDV tardif validé avec assuré\",\r\n          \
-      \      \"value\": {}\r\n            },\r\n            {\r\n                \"\
-      name\": \"RechercheFuite\",\r\n                \"label\": \"Recherche fuite\
-      \ en cours\",\r\n                \"value\": {}\r\n            },\r\n       \
-      \     {\r\n                \"name\": \"IdentificationRecours\",\r\n        \
-      \        \"label\": \"Recours en cours d’identification\",\r\n             \
-      \   \"value\": {}\r\n            },\r\n            {\r\n                \"name\"\
-      : \"Assechement\",\r\n                \"label\": \"Assèchement\",\r\n      \
-      \          \"value\": {}\r\n            },\r\n            {\r\n            \
-      \    \"name\": \"Decontamination\",\r\n                \"label\": \"Décontamination\"\
-      ,\r\n                \"value\": {}\r\n            },\r\n            {\r\n  \
-      \              \"name\": \"RechercheAmiante\",\r\n                \"label\"\
-      : \"Recherche amiante\",\r\n                \"value\": {}\r\n            },\r\
-      \n            {\r\n                \"name\": \"AttenteDocumentsClient\",\r\n\
-      \                \"label\": \"En attente de documents client\",\r\n        \
-      \        \"value\": {}\r\n            },\r\n            {\r\n              \
-      \  \"name\": \"BesoinNouveauRDV\",\r\n                \"label\": \"Besoin d'un\
-      \ nouveau RDV\",\r\n                \"value\": {}\r\n            },\r\n    \
-      \        {\r\n                \"name\": \"Autre\",\r\n                \"label\"\
-      : \"Autre\",\r\n                \"value\": {}\r\n            },\r\n        \
-      \    {\r\n                \"name\": \"ComportementAssure\",\r\n            \
-      \    \"label\": \"Comportement assuré\",\r\n                \"value\": {}\r\n\
-      \            },\r\n            {\r\n                \"name\": \"AdresseAssureErronee\"\
-      ,\r\n                \"label\": \"Adresse assuré erronée\",\r\n            \
-      \    \"value\": {}\r\n            },\r\n            {\r\n                \"\
-      name\": \"BesoinDEchanger\",\r\n                \"label\": \"Besoin d’échanger\
-      \ avec le gestionnaire\",\r\n                \"value\": {}\r\n            },\r\
-      \n            {\r\n                \"name\": \"ClientNonJoignable\",\r\n   \
-      \             \"label\": \"Client non joignable\",\r\n                \"value\"\
-      : {}\r\n            }\r\n        ],\r\n        \"optional\": false\r\n    },\r\
-      \n    \"etape\": {\r\n        \"oneOf\": [\r\n            {\r\n            \
-      \    \"name\": \"Missionnement\",\r\n                \"label\": \"Missionnement\"\
-      ,\r\n                \"value\": {}\r\n            },\r\n            {\r\n  \
-      \              \"name\": \"RendezVous\",\r\n                \"label\": \"Rendez-Vous\"\
-      ,\r\n                \"value\": {}\r\n            },\r\n            {\r\n  \
-      \              \"name\": \"Expertise\",\r\n                \"label\": \"Expertise\"\
-      ,\r\n                \"value\": {}\r\n            },\r\n            {\r\n  \
-      \              \"name\": \"Facturation\",\r\n                \"label\": \"Facturation\"\
-      ,\r\n                \"value\": {}\r\n            }\r\n        ],\r\n      \
-      \  \"optional\": false\r\n    },\r\n    \"datePrevisionnelleReprise\": {\r\n\
-      \        \"type\": \"date\",\r\n        \"optional\": true\r\n    },\r\n   \
-      \ \"complement\": {\r\n        \"type\": \"nonEmptyString\",\r\n        \"optional\"\
-      : true\r\n    },\r\n    \"verifying\": [\r\n        {\r\n            \"Default\
-      \ Valide Rule\": \"Default Valide Rule\"\r\n        },\r\n        {\r\n    \
-      \        \"RG_DIFFICULTE_0003\": \"Le champs datePrevisionnelleReprise est obligatoire\
-      \ si le motif est un Delai.\"\r\n        },\r\n        {\r\n            \"RG_DIFFICULTE_0004\"\
-      : \"Le champs complement est obligatoire si le motif est Besoin d’échanger avec\
-      \ le gestionnaire ou Autre.\"\r\n        }\r\n    ]\r\n}"
-  FormatVerifierGarantie:
-    type: "object"
-    properties:
-      optional:
-        type: "boolean"
-      /garanties:
-        type: "object"
-        properties:
-          optional:
-            type: "boolean"
-          type:
-            type: "object"
-            properties:
-              array:
-                type: "object"
-                properties:
-                  optional:
-                    type: "boolean"
-                  /id:
-                    type: "object"
-                    properties:
-                      optional:
-                        type: "boolean"
-                      type:
-                        type: "string"
-                  /positionGarantie:
-                    type: "object"
-                    properties:
-                      optional:
-                        type: "boolean"
-                      oneOf:
-                        type: "array"
-                        items:
-                          type: "object"
-                          properties:
-                            name:
-                              type: "string"
-                            label:
-                              type: "string"
-                  /montant:
-                    type: "object"
-                    properties:
-                      optional:
-                        type: "boolean"
-                      type:
-                        type: "string"
-                  /commentaire:
-                    type: "object"
-                    properties:
-                      optional:
-                        type: "boolean"
-                      type:
-                        type: "string"
-      verifying:
-        type: "array"
-        items:
-          type: "object"
-          properties:
-            RG_GARANTIE_001:
-              type: "string"
-    example: "{\r\n    \"optional\": false,\r\n    \"/garanties\": {\r\n        \"\
-      optional\": false,\r\n        \"type\": {\r\n            \"array\": {\r\n  \
-      \              \"optional\": false,\r\n                \"/id\": {\r\n      \
-      \              \"optional\": false,\r\n                    \"type\": \"objectId\"\
-      \r\n                },\r\n                \"/positionGarantie\": {\r\n     \
-      \               \"optional\": false,\r\n                    \"oneOf\": [\r\n\
-      \                        {\r\n                            \"name\": \"SansReserve\"\
-      ,\r\n                            \"label\": \"Sans réserve\"\r\n           \
-      \             },\r\n                        {\r\n                          \
-      \  \"name\": \"AvecReserve\",\r\n                            \"label\": \"Avec\
-      \ réserve\"\r\n                        },\r\n                        {\r\n \
-      \                           \"name\": \"GarantieNonAcquise\",\r\n          \
-      \                  \"label\": \"Garantie non acquise\"\r\n                 \
-      \       }\r\n                    ]\r\n                },\r\n               \
-      \ \"/montant\": {\r\n                    \"optional\": true,\r\n           \
-      \         \"type\": \"Montant\"\r\n                },\r\n                \"\
-      /commentaire\": {\r\n                    \"optional\": true,\r\n           \
-      \         \"type\": \"nonEmptyString\"\r\n                }\r\n            }\r\
-      \n        }\r\n    },\r\n    \"verifying\": [\r\n        {\r\n            \"\
-      RG_GARANTIE_001\": \"La garantie n'existe pas\"\r\n        },\r\n        {\r\
-      \n            \"Default Valide Rule\": \"Default Valide Rule\"\r\n        }\r\
-      \n    ]\r\n}"
-  FormatAjouterPiecesJointes:
-    type: "object"
-    properties:
-      verifying:
-        type: "array"
-        items:
-          type: "object"
-          properties:
-            Default Valide Rule:
-              type: "string"
-    example: "{\r\n    \"verifying\": [\r\n        {\r\n            \"Default Valide\
-      \ Rule\": \"Default Valide Rule\"\r\n        },\r\n        {\r\n           \
-      \ \"RG_PIECEJOINTE_STD_0013\": \"Au moins une pièce justificative doit être\
-      \ fournie.\"\r\n        },\r\n        {\r\n            \"RG_PIECEJOINTE_STD_0014\"\
-      : \"Le contexte et l'habilitation de l'utilisateur ne permet pas l'ajout d'une\
-      \ pièce jointe.\"\r\n        }\r\n    ]\r\n}"
   FormatSupprimerActeur:
     type: "object"
     properties:
@@ -4313,6 +3937,599 @@ definitions:
       \    \"RG_COMPTERENDU_STD_0001\": \"Il est nécessaire d'indiquer si la cause\
       \ du sinistre a été supprimée pour un Dégâts des eaux.\"\r\n        }\r\n  \
       \  ]\r\n}"
+  CommandeModifierExpert:
+    type: "object"
+    properties:
+      nom:
+        $ref: "#/definitions/NonEmptyString"
+      prenom:
+        $ref: "#/definitions/ModificationNonEmptyString"
+      telephone:
+        $ref: "#/definitions/ModificationNonEmptyString"
+      reference:
+        $ref: "#/definitions/ModificationNonEmptyString"
+  CommandePrendreRendezVous:
+    type: "object"
+    required:
+    - "horaire"
+    - "nomIntervenant"
+    - "prenomIntervenant"
+    - "referenceIntervenant"
+    - "telephoneIntervenant"
+    - "typeRendezVous"
+    properties:
+      horaire:
+        $ref: "#/definitions/Horaire"
+      dureeRendezVous:
+        $ref: "#/definitions/FiniteDuration"
+      notes:
+        $ref: "#/definitions/NonEmptyString"
+      typeRendezVous:
+        $ref: "#/definitions/TypeRendezVous"
+      nomIntervenant:
+        type: "string"
+      prenomIntervenant:
+        type: "string"
+      telephoneIntervenant:
+        type: "string"
+      referenceIntervenant:
+        type: "string"
+  CommandeQualifierPrestation:
+    type: "object"
+    required:
+    - "caracterePrestation"
+    - "complexe"
+    - "typeDePrestation"
+    properties:
+      typeDePrestation:
+        $ref: "#/definitions/TypePrestation"
+      complexe:
+        type: "boolean"
+        description: "Prestation complexe (Oui/Non) ?"
+      convention:
+        $ref: "#/definitions/ConventionAppliquee"
+      criticite:
+        $ref: "#/definitions/Criticite"
+      urgence:
+        type: "object"
+        description: "Si la criticité est urgente"
+        properties:
+          motif:
+            $ref: "#/definitions/MotifUrgence"
+          complement:
+            type: "string"
+            description: "Commentaire libre"
+      intervenant:
+        type: "object"
+        description: "Liste des intervenants sur la prestation"
+        properties:
+          nom:
+            type: "string"
+            description: "Nom de l'intervenant"
+          prenom:
+            type: "string"
+            description: "Prénom de l'intervenant"
+          telephone:
+            type: "string"
+            description: "Coordonnées de l'intervenant"
+          reference:
+            type: "string"
+            description: "Référence de l'intervenant"
+      caracterePrestation:
+        $ref: "#/definitions/CaracterePrestation"
+      canal:
+        $ref: "#/definitions/CanalPrestation"
+      natureDesDommages:
+        $ref: "#/definitions/NatureDommage"
+  CommandeDemanderFinPrestation:
+    type: "object"
+    required:
+    - "motif"
+    properties:
+      motif:
+        $ref: "#/definitions/MotifFinPrestation"
+      commentaire:
+        type: "string"
+        description: "Devient obligatoire si le motif est Autre"
+  CommandeVerifierGarantie:
+    type: "object"
+    required:
+    - "garanties"
+    properties:
+      garanties:
+        type: "array"
+        items:
+          required:
+          - "id"
+          type: "object"
+          properties:
+            id:
+              $ref: "#/definitions/BSONObjectID"
+            positionGarantie:
+              type: "string"
+            montant:
+              $ref: "#/definitions/Montant"
+            commentaire:
+              $ref: "#/definitions/NonEmptyString"
+  CommandeQualifierRisque:
+    type: "object"
+    required:
+    - "autresMotifs"
+    - "descriptionRisqueErronee"
+    - "garantieCapitauxInsuffisants"
+    - "risqueConforme"
+    - "risqueVerifie"
+    properties:
+      risqueVerifie:
+        type: "boolean"
+        example: true
+      motifNonVerificationRisque:
+        $ref: "#/definitions/MotifNonVerificationRisque"
+      commentaireNonVerificationRisque:
+        $ref: "#/definitions/NonEmptyString"
+      risqueConforme:
+        type: "boolean"
+        example: true
+      descriptionRisqueErronee:
+        type: "boolean"
+        example: true
+      garantieCapitauxInsuffisants:
+        type: "boolean"
+        example: true
+      descriptifGarantieCapitauxInsuffisants:
+        $ref: "#/definitions/NonEmptyString"
+      autresMotifs:
+        type: "boolean"
+        example: true
+      descriptifAutresMotifs:
+        $ref: "#/definitions/NonEmptyString"
+      modificationRisque:
+        type: "object"
+        properties:
+          typeRisque:
+            $ref: "#/definitions/TypeRisque"
+          risqueAtypique:
+            $ref: "#/definitions/ModificationBoolean"
+          usageAssure:
+            $ref: "#/definitions/TypeUsageAssure"
+          description:
+            $ref: "#/definitions/NonEmptyString"
+          nouvellesMesures:
+            type: "array"
+            items:
+              required:
+              - "typeMesure"
+              - "valeur"
+              type: "object"
+              properties:
+                typeMesure:
+                  $ref: "#/definitions/TypeMesure"
+                valeur:
+                  $ref: "#/definitions/Montant"
+          mesuresASupprimer:
+            type: "array"
+            items:
+              required:
+              - "typeMesure"
+              - "valeur"
+              type: "object"
+              properties:
+                typeMesure:
+                  $ref: "#/definitions/TypeMesure"
+                valeur:
+                  $ref: "#/definitions/Montant"
+          nouveauxIndicateurs:
+            type: "array"
+            items:
+              required:
+              - "typeIndicateur"
+              - "valeur"
+              type: "object"
+              properties:
+                typeIndicateur:
+                  $ref: "#/definitions/TypeIndicateur"
+                valeur:
+                  $ref: "#/definitions/Montant"
+          indicateursASupprimer:
+            type: "array"
+            items:
+              required:
+              - "typeIndicateur"
+              - "valeur"
+              type: "object"
+              properties:
+                typeIndicateur:
+                  $ref: "#/definitions/TypeIndicateur"
+                valeur:
+                  $ref: "#/definitions/Montant"
+          anneeConstruction:
+            type: "string"
+            example: "1990"
+  CommandeQualifierSinistre:
+    type: "object"
+    required:
+    - "conformiteSinistre"
+    properties:
+      conformiteSinistre:
+        required:
+        - "sinistreConforme"
+        type: "object"
+        properties:
+          sinistreConforme:
+            type: "boolean"
+      modificationSinistreExpertise:
+        type: "object"
+        properties:
+          date:
+            type: "string"
+            format: "date"
+          heure:
+            type: "string"
+          caracteristiques:
+            $ref: "#/definitions/CaracteristiqueSinistre"
+          adresse:
+            $ref: "#/definitions/Adresse"
+          nonSuppressionDeCause:
+            required:
+            - "name"
+            - "value"
+            type: "object"
+            properties:
+              name:
+                type: "string"
+                enum:
+                - "Remove"
+                - "ReplaceWith"
+              value:
+                required:
+                - "motif"
+                type: "object"
+                description: "Obligatoire si name = RemplaceWith"
+                properties:
+                  motif:
+                    $ref: "#/definitions/NonSuppressionDeCause"
+                  precision:
+                    type: "string"
+          rappelMesuresConservatoires:
+            $ref: "#/definitions/ModificationString"
+          analyseResponsabilites:
+            $ref: "#/definitions/ModificationString"
+          circonstances:
+            $ref: "#/definitions/ModificationString"
+          dommagesConstates:
+            $ref: "#/definitions/ModificationString"
+  CommandeQualifierPreventionRisque:
+    type: "object"
+    properties:
+      environnementRisqueNonSignale:
+        required:
+        - "typeEnvironnementRisqueNonSignale"
+        type: "object"
+        properties:
+          typeEnvironnementRisqueNonSignale:
+            type: "array"
+            items:
+              $ref: "#/definitions/TypeEnvironnementRisqueNonSignale"
+          commentaire:
+            $ref: "#/definitions/NonEmptyString"
+      preventionRisqueAggrave:
+        required:
+        - "typePreventionRisqueAggrave"
+        type: "object"
+        properties:
+          typePreventionRisqueAggrave:
+            type: "array"
+            items:
+              $ref: "#/definitions/TypePreventionRisqueAggrave"
+          commentaire:
+            $ref: "#/definitions/NonEmptyString"
+      preventionAnomalieProtectionVol:
+        required:
+        - "typePreventionAnomalieProtectionVol"
+        type: "object"
+        properties:
+          typePreventionAnomalieProtectionVol:
+            type: "array"
+            items:
+              $ref: "#/definitions/TypePreventionAnomalieProtectionVol"
+          commentaire:
+            $ref: "#/definitions/NonEmptyString"
+      suggestionVisitePreventeur:
+        type: "boolean"
+  CommandeEstimerDommages:
+    type: "object"
+    required:
+    - "acteurId"
+    - "dommages"
+    - "franchise"
+    - "tvaRecuperable"
+    properties:
+      acteurId:
+        $ref: "#/definitions/BSONObjectID"
+      tvaRecuperable:
+        type: "boolean"
+      positionIndemnite:
+        $ref: "#/definitions/PositionIndemnite"
+      modeIndemnite:
+        $ref: "#/definitions/ModeIndemnite"
+      franchise:
+        $ref: "#/definitions/Montant"
+      acompteVerse:
+        $ref: "#/definitions/Montant"
+      penaliteAppliquee:
+        $ref: "#/definitions/Montant"
+      applicationPenalite:
+        $ref: "#/definitions/NonEmptyString"
+      dommages:
+        type: "array"
+        items:
+          required:
+          - "garantieId"
+          - "natureDommages"
+          - "typeLigne"
+          type: "object"
+          properties:
+            garantieId:
+              $ref: "#/definitions/BSONObjectID"
+            natureDommages:
+              $ref: "#/definitions/NatureDesDommages"
+            plafond:
+              $ref: "#/definitions/Montant"
+            typeLigne:
+              $ref: "#/definitions/TypeLigne"
+            montantHT:
+              $ref: "#/definitions/Montant"
+            montantTVA:
+              $ref: "#/definitions/Montant"
+            montantVetuste:
+              $ref: "#/definitions/Montant"
+            montantVetusteMax:
+              $ref: "#/definitions/Montant"
+            detailDommages:
+              type: "array"
+              items:
+                required:
+                - "detailNature"
+                - "montantHT"
+                - "tauxTVA"
+                type: "object"
+                properties:
+                  detailNature:
+                    $ref: "#/definitions/DetailNature"
+                  descriptif:
+                    $ref: "#/definitions/NonEmptyString"
+                  montantHT:
+                    $ref: "#/definitions/Montant"
+                  tauxTVA:
+                    required:
+                    - "application"
+                    - "type"
+                    type: "object"
+                    properties:
+                      type:
+                        $ref: "#/definitions/TypeTauxTVA"
+                      application:
+                        $ref: "#/definitions/ApplicationTauxTVA"
+                      taux:
+                        $ref: "#/definitions/Montant"
+                  tauxVetuste:
+                    type: "integer"
+                  tauxVetusteMax:
+                    type: "integer"
+  CommandeDeposerCompteRendu:
+    type: "object"
+    required:
+    - "restePrestation"
+    properties:
+      restePrestation:
+        type: "array"
+        items:
+          $ref: "#/definitions/ResteAFaire"
+  CommandeAnnulerMission:
+    type: "object"
+    required:
+    - "motif"
+    properties:
+      motif:
+        type: "string"
+        enum:
+        - "Indetermine"
+      commentaire:
+        $ref: "#/definitions/Commentaire"
+  CommandeModifierRisque:
+    $ref: "#/definitions/Risque"
+  CommandeModifierSinistreExpert:
+    type: "object"
+    properties:
+      caracteristiques:
+        $ref: "#/definitions/CaracteristiqueSinistre"
+      date:
+        $ref: "#/definitions/ModificationString"
+      heure:
+        $ref: "#/definitions/ModificationString"
+      adresse:
+        $ref: "#/definitions/Adresse"
+      dommagesConstates:
+        $ref: "#/definitions/ModificationString"
+      circonstances:
+        $ref: "#/definitions/ModificationString"
+      rappelMesuresConservatoires:
+        $ref: "#/definitions/ModificationString"
+  CommandeAjouterActeur:
+    type: "object"
+    required:
+    - "typeActeur"
+    properties:
+      typeActeur:
+        $ref: "#/definitions/TypeActeur"
+      informationsAssure:
+        type: "object"
+        properties:
+          dateAnciennete:
+            type: "string"
+            format: "date"
+          profession:
+            type: "string"
+          particulariteClient:
+            $ref: "#/definitions/ParticulariteClient"
+          precisionParticulariteClient:
+            type: "string"
+          situationComptable:
+            type: "string"
+      personne:
+        $ref: "#/definitions/Personne"
+      acteurConvoque:
+        type: "boolean"
+      acteurPresent:
+        type: "boolean"
+      responsableSinistre:
+        type: "boolean"
+      misEnCause:
+        type: "boolean"
+      references:
+        $ref: "#/definitions/TypeReference"
+      relationAuRisque:
+        $ref: "#/definitions/RelationAuRisque"
+      representants:
+        $ref: "#/definitions/Representants"
+      lese:
+        type: "boolean"
+      intervenantDe:
+        $ref: "#/definitions/BSONObjectID"
+  CommandeModifierActeur:
+    type: "object"
+    required:
+    - "id"
+    - "typeActeur"
+    properties:
+      id:
+        $ref: "#/definitions/BSONObjectID"
+      typeActeur:
+        $ref: "#/definitions/TypeActeur"
+      informationsAssure:
+        type: "object"
+        properties:
+          profession:
+            $ref: "#/definitions/ModificationString"
+          particulariteClient:
+            type: "object"
+            properties:
+              name:
+                type: "string"
+                enum:
+                - "Remove"
+                - "ReplaceWith"
+              label:
+                type: "string"
+                enum:
+                - "Remove"
+                - "ReplaceWith"
+              value:
+                $ref: "#/definitions/ParticulariteClient"
+          precisionParticulariteClient:
+            $ref: "#/definitions/ModificationString"
+      personne:
+        $ref: "#/definitions/Personne"
+      acteurConvoque:
+        $ref: "#/definitions/ModificationBoolean"
+      acteurPresent:
+        $ref: "#/definitions/ModificationBoolean"
+      responsableSinistre:
+        $ref: "#/definitions/ModificationBoolean"
+      misEnCause:
+        $ref: "#/definitions/ModificationBoolean"
+      nouvellesReferences:
+        type: "array"
+        items:
+          $ref: "#/definitions/TypeReference"
+      referencesASupprimer:
+        type: "array"
+        items:
+          $ref: "#/definitions/TypeReference"
+      relationAuRisque:
+        type: "object"
+        properties:
+          name:
+            type: "string"
+            enum:
+            - "Remove"
+            - "ReplaceWith"
+          label:
+            type: "string"
+            enum:
+            - "Remove"
+            - "ReplaceWith"
+          value:
+            $ref: "#/definitions/RelationAuRisque"
+      nouveauxRepresentants:
+        type: "object"
+        description: "TO DO"
+        properties:
+          informationsComplementaires:
+            type: "string"
+          personne:
+            $ref: "#/definitions/Personne"
+          qualite:
+            $ref: "#/definitions/Qualite"
+      representantsASupprimer:
+        type: "object"
+        properties:
+          informationsComplementaires:
+            type: "string"
+          personne:
+            $ref: "#/definitions/Personne"
+          qualite:
+            $ref: "#/definitions/Qualite"
+      lese:
+        type: "boolean"
+      intervenantDe:
+        $ref: "#/definitions/BSONObjectID"
+  CommandeSignalerUneDifficute:
+    type: "object"
+    required:
+    - "etape"
+    - "motif"
+    properties:
+      motif:
+        $ref: "#/definitions/MotifDifficulte"
+      etape:
+        $ref: "#/definitions/TitreEtape"
+      datePrevisionnelleReprise:
+        type: "string"
+      complement:
+        type: "string"
+    example: "{\n                        \"motif\": \n                           \
+      \     {\n                                    \"name\": \"AssureIndisponible\"\
+      ,\n                                    \"label\": \"Assuré indisponible\"\n\
+      \                                },\n                        \"etape\":    \
+      \                             {\n                                    \"name\"\
+      : \"Missionnement\",\n                                    \"label\": \"Missionnement\"\
+      \n                                },\n                        \"datePrevisionnelleReprise\"\
+      : \"2035-04-20\",\n                        \"complement\": \"En vacances\"\n\
+      \                    }"
+  RequeteConnexion:
+    type: "object"
+    required:
+    - "login"
+    - "password"
+    properties:
+      login:
+        type: "string"
+      password:
+        type: "string"
+  CommandeMissionnerExpert:
+    type: "object"
+    required:
+    - "prestataire"
+    properties:
+      prestataire:
+        $ref: "#/definitions/Prestataire"
+      mission:
+        $ref: "#/definitions/Mission"
+      dossier:
+        $ref: "#/definitions/Dossier"
+      prestation:
+        $ref: "#/definitions/PrestationMissionner"
   ApplicationGarantie:
     type: "object"
     required:
@@ -4471,7 +4688,7 @@ definitions:
       typeActeur:
         $ref: "#/definitions/TypeActeur"
       informationsAssure:
-        $rel: "#/definitions/InformationsAssure"
+        $ref: "#/definitions/InformationsAssure"
       personne:
         $ref: "#/definitions/Personne"
       relationAuRisque:
@@ -4573,17 +4790,6 @@ definitions:
         type: "string"
       fax:
         type: "string"
-  ExpertPhysique:
-    type: "object"
-    properties:
-      nom:
-        $ref: "#/definitions/NonEmptyString"
-      prenom:
-        $ref: "#/definitions/ModificationNonEmptyString"
-      telephone:
-        $ref: "#/definitions/ModificationNonEmptyString"
-      reference:
-        $ref: "#/definitions/ModificationNonEmptyString"
   Franchise:
     type: "object"
     required:
@@ -4781,10 +4987,18 @@ definitions:
         $ref: "#/definitions/TypePreventionAnomalieProtectionVol"
   Horaire:
     type: "object"
+    required:
+    - "name"
+    - "value"
     properties:
       name:
-        $ref: "#/definitions/EnumHoraire"
+        type: "string"
+        enum:
+        - "HoraireFixe"
+        - "HorairePlage"
       value:
+        required:
+        - "date"
         type: "object"
         properties:
           date:
@@ -4792,6 +5006,13 @@ definitions:
             format: "date"
           heure:
             type: "string"
+            description: "renseigné si HoraireFixe"
+          heureDebut:
+            type: "string"
+            description: "renseigné si HorairePlage"
+          heureFin:
+            type: "string"
+            description: "renseigné si HorairePlage"
       label:
         type: "string"
         description: "En mise à jour la “label” est ignoré.\n\nIl est toujours pré\
@@ -4867,7 +5088,7 @@ definitions:
       id:
         $ref: "#/definitions/BSONObjectID"
       typeGarantie:
-        $ref: "#/definitions/TypeGarantie"
+        type: "string"
       typeGarantieComplementaire:
         $ref: "#/definitions/TypeGarantieComplementaire"
       plafonds:
@@ -5267,7 +5488,7 @@ definitions:
       typeActeur:
         $ref: "#/definitions/TypeActeur"
       informationsAssure:
-        $rel: "#/definitions/InformationsAssure"
+        $ref: "#/definitions/InformationsAssure"
       personne:
         $ref: "#/definitions/Personne"
       relationAuRisque:
@@ -5385,10 +5606,7 @@ definitions:
         $ref: "#/definitions/FiniteDuration"
     description: "Liste des valeurs possibles des \"name\" en cas de modification\
       \ d'un champ"
-  EnumHoraire:
-    type: "string"
-    description: "[Voir la liste des valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Horaire)"
-  EnumLiensPrestation:
+  LiensRessourcePrestation:
     type: "object"
     description: "* commands\n* events\n* linked-events\n* eventsNotCreatedByMe\n\
       * **rendezVous**\n* current\n* first\n* last\n* next"
@@ -5656,111 +5874,6 @@ definitions:
         - "Perte Exploitation"
         - "Syndic Bénévole"
         - "RC Dirigeants"
-  TypeGarantie:
-    type: "object"
-    required:
-    - "name"
-    properties:
-      name:
-        type: "string"
-        enum:
-        - "Incendie"
-        - "Degats Des Eaux"
-        - "Vol"
-        - "Bris De Glace"
-        - "Tog Ou Tng"
-        - "Cat Nat"
-        - "Dommages Electriques"
-        - "Choc Vtm"
-        - "Defense Recours"
-        - "Explosion"
-        - "Dommages Menagers"
-        - "Attentat"
-        - "Rc Proprietaire"
-        - "Rc Professionnelle"
-        - "Rc Immobilier"
-        - "Perte D'Exploitation"
-        - "Catastrophe Technologique"
-        - "Perte De Valeur"
-        - "Effondrement  "
-        - "Bris De Machine"
-        - "Intervention Secours"
-        - "Risque Informatique"
-        - "Valeur A Neuf"
-        - "Protection Juridique"
-        - "Equipement De Loisir"
-        - "Responsabilite Civile Generale"
-        - "Materiel Transporte Tous Lieux"
-        - "Perte En Congelateur (Contenu)"
-        - "Divers Immobilier"
-        - "Voyages / Vacances"
-        - "Divers"
-        - "Gel"
-        - "Hors Garanties"
-        - "Vandalisme"
-        - "Amenagements Immobiliers Exterieurs/Arbre"
-        - "Fumee"
-        - "Incidents Domestiques"
-        - "Rc Chef De Famille"
-        - "Biens Professionnels En Tous Lieux"
-        - "Rc Diverse"
-        - "Dommages Immateriels Consecutifs"
-        - "Dommages Aux Biens / Instruments De Musique"
-        - "Dommages Aux Materiaux / Marchandises Sur Chantier"
-        - "Evt Naturel"
-        - "Tous Risques"
-        - "Rc Vie Privee"
-        - "Autre"
-      label:
-        type: "string"
-        enum:
-        - "Incendie"
-        - "DegatsDesEaux"
-        - "Vol"
-        - "BrisDeGlace"
-        - "TogOuTng"
-        - "CatNat"
-        - "DommagesElectriques"
-        - "ChocVtm"
-        - "DefenseRecours"
-        - "Explosion"
-        - "DommagesMenagers"
-        - "Attentat"
-        - "RcProprietaire"
-        - "RcProfessionnelle"
-        - "PerteD'Exploitation"
-        - "PerteDeValeur"
-        - "BrisDeMachine"
-        - "RisqueInformatique"
-        - "ProtectionJuridique"
-        - "ResponsabiliteCivileGenerale"
-        - "PerteEnCongelateurContenu"
-        - "VoyagesVacances"
-        - "Gel"
-        - "Vandalisme"
-        - "Fumee"
-        - "RcChefDeFamille"
-        - "RcDiverse"
-        - "DommagesAuxBiensInstrumentsDeMusique"
-        - "EvtNaturel"
-        - "RcViePrivee"
-        - "RcImmobilier"
-        - "CatastropheTechnologique"
-        - "Effondrement"
-        - "InterventionSecours"
-        - "ValeurANeuf"
-        - "EquipementDeLoisir"
-        - "MaterielTransporteTousLieux"
-        - "DiversImmobilier"
-        - "Divers"
-        - "HorsGaranties"
-        - "AmenagementsImmobiliersExterieursArbre"
-        - "IncidentsDomestiques"
-        - "BiensProfessionnelsEnTousLieux"
-        - "DommagesImmaterielsConsecutifs"
-        - "DommagesAuxMateriauxMarchandisesSurChantier"
-        - "TousRisques"
-        - "Autre"
   TypePlafond:
     type: "object"
     required:
@@ -7267,6 +7380,155 @@ definitions:
     example: 90
   Montant:
     type: "number"
+  ListeRessourceDifficulte:
+    type: "object"
+    required:
+    - "href"
+    - "properties"
+    properties:
+      href:
+        type: "string"
+      properties:
+        $ref: "#/definitions/propertiesItems"
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/RessourceDifficulte"
+      links:
+        type: "array"
+        items:
+          $ref: "#/definitions/Links"
+  LinksPartenaire:
+    type: "array"
+    items:
+      type: "object"
+      required:
+      - "href"
+      - "rel"
+      properties:
+        rel:
+          type: "string"
+          enum:
+          - "commands"
+          - "events"
+          - "linked-events"
+          - "eventsNotCreatedByMe"
+          - "missions"
+          - "abstractMissions"
+          - "users"
+          - "profilPublic"
+          - "partenairesAvecAgrement"
+          - "current"
+          - "first"
+          - "last"
+          - "next"
+        href:
+          type: "string"
+  TypeGarantie:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+        enum:
+        - "Incendie"
+        - "Degats Des Eaux"
+        - "Vol"
+        - "Bris De Glace"
+        - "Tog Ou Tng"
+        - "Cat Nat"
+        - "Dommages Electriques"
+        - "Choc Vtm"
+        - "Defense Recours"
+        - "Explosion"
+        - "Dommages Menagers"
+        - "Attentat"
+        - "Rc Proprietaire"
+        - "Rc Professionnelle"
+        - "Rc Immobilier"
+        - "Perte D'Exploitation"
+        - "Catastrophe Technologique"
+        - "Perte De Valeur"
+        - "Effondrement  "
+        - "Bris De Machine"
+        - "Intervention Secours"
+        - "Risque Informatique"
+        - "Valeur A Neuf"
+        - "Protection Juridique"
+        - "Equipement De Loisir"
+        - "Responsabilite Civile Generale"
+        - "Materiel Transporte Tous Lieux"
+        - "Perte En Congelateur (Contenu)"
+        - "Divers Immobilier"
+        - "Voyages / Vacances"
+        - "Divers"
+        - "Gel"
+        - "Hors Garanties"
+        - "Vandalisme"
+        - "Amenagements Immobiliers Exterieurs/Arbre"
+        - "Fumee"
+        - "Incidents Domestiques"
+        - "Rc Chef De Famille"
+        - "Biens Professionnels En Tous Lieux"
+        - "Rc Diverse"
+        - "Dommages Immateriels Consecutifs"
+        - "Dommages Aux Biens / Instruments De Musique"
+        - "Dommages Aux Materiaux / Marchandises Sur Chantier"
+        - "Evt Naturel"
+        - "Tous Risques"
+        - "Rc Vie Privee"
+        - "Autre"
+      label:
+        type: "string"
+        enum:
+        - "Incendie"
+        - "DegatsDesEaux"
+        - "Vol"
+        - "BrisDeGlace"
+        - "TogOuTng"
+        - "CatNat"
+        - "DommagesElectriques"
+        - "ChocVtm"
+        - "DefenseRecours"
+        - "Explosion"
+        - "DommagesMenagers"
+        - "Attentat"
+        - "RcProprietaire"
+        - "RcProfessionnelle"
+        - "PerteD'Exploitation"
+        - "PerteDeValeur"
+        - "BrisDeMachine"
+        - "RisqueInformatique"
+        - "ProtectionJuridique"
+        - "ResponsabiliteCivileGenerale"
+        - "PerteEnCongelateurContenu"
+        - "VoyagesVacances"
+        - "Gel"
+        - "Vandalisme"
+        - "Fumee"
+        - "RcChefDeFamille"
+        - "RcDiverse"
+        - "DommagesAuxBiensInstrumentsDeMusique"
+        - "EvtNaturel"
+        - "RcViePrivee"
+        - "RcImmobilier"
+        - "CatastropheTechnologique"
+        - "Effondrement"
+        - "InterventionSecours"
+        - "ValeurANeuf"
+        - "EquipementDeLoisir"
+        - "MaterielTransporteTousLieux"
+        - "DiversImmobilier"
+        - "Divers"
+        - "HorsGaranties"
+        - "AmenagementsImmobiliersExterieursArbre"
+        - "IncidentsDomestiques"
+        - "BiensProfessionnelsEnTousLieux"
+        - "DommagesImmaterielsConsecutifs"
+        - "DommagesAuxMateriauxMarchandisesSurChantier"
+        - "TousRisques"
+        - "Autre"
   InformationsAssure:
     type: "object"
     properties:

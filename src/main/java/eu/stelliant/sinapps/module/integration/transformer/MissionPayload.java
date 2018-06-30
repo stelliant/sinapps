@@ -1,6 +1,7 @@
 package eu.stelliant.sinapps.module.integration.transformer;
 
 import com.darva.sinapps.api.client.expertise.model.RessourceAbstractMissions;
+import com.darva.sinapps.api.client.expertise.model.RessourceMission;
 import eu.stelliant.sinapps.module.api.config.ApiProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.annotation.Transformer;
@@ -27,7 +28,7 @@ public class MissionPayload {
     return MessageBuilder.withPayload("")
         .copyHeaders(msg.getHeaders())
         .setHeader("url", properties.getApi().getHost() + missionPath)
-        .setHeader("expected-response-type", com.darva.sinapps.api.client.expertise.model.RessourceMission.class)
+        .setHeader("expected-response-type", RessourceMission.class)
         .setHeader(FileHeaders.FILENAME, msg.getPayload().getProperties().getId())
         .build();
   }

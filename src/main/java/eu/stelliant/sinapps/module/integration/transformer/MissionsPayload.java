@@ -1,7 +1,8 @@
 package eu.stelliant.sinapps.module.integration.transformer;
 
-import com.darva.sinapps.api.client.transverse.model.LinksPartenaireInner;
-import com.darva.sinapps.api.client.transverse.model.RessourcePartenaire;
+import com.darva.sinapps.api.client.expertise.model.LinksPartenaireInner;
+import com.darva.sinapps.api.client.expertise.model.RessourceListeAbstractMissions;
+import com.darva.sinapps.api.client.expertise.model.RessourcePartenaire;
 import eu.stelliant.sinapps.module.api.config.ApiProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.annotation.Transformer;
@@ -31,7 +32,7 @@ public class MissionsPayload {
     return MessageBuilder.withPayload("")
         .copyHeaders(msg.getHeaders())
         .setHeader("url", properties.getApi().getHost() + missionsPath)
-        .setHeader("expected-response-type", com.darva.sinapps.api.client.expertise.model.InlineResponse2001.class)
+        .setHeader("expected-response-type", RessourceListeAbstractMissions.class)
         .build();
   }
 }

@@ -3,14 +3,14 @@ package eu.stelliant.sinapps.module.api;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-import com.darva.sinapps.api.client.expertise.model.InlineResponse2001;
+import com.darva.sinapps.api.client.expertise.model.LinksPartenaireInner;
+import com.darva.sinapps.api.client.expertise.model.RequeteConnexion;
 import com.darva.sinapps.api.client.expertise.model.RessourceAbstractMissions;
+import com.darva.sinapps.api.client.expertise.model.RessourceListeAbstractMissions;
 import com.darva.sinapps.api.client.expertise.model.RessourceMission;
+import com.darva.sinapps.api.client.expertise.model.RessourcePartenaire;
 import com.darva.sinapps.api.client.expertise.model.RessourceUser;
 import com.darva.sinapps.api.client.expertise.model.RessourceUserLinks;
-import com.darva.sinapps.api.client.transverse.model.Body;
-import com.darva.sinapps.api.client.transverse.model.LinksPartenaireInner;
-import com.darva.sinapps.api.client.transverse.model.RessourcePartenaire;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,10 +40,10 @@ public class ApiDiscoveryTest extends TestApiSetup {
       HttpHeaders requestHeaders = new HttpHeaders();
       requestHeaders.setContentType(new MediaType("application", "json"));
 
-      Body body = new Body();
-      body.setLogin(apiProperties.getApi().getLogin().getUsername());
-      body.setPassword(apiProperties.getApi().getLogin().getPassword());
-      HttpEntity<Body> bodyEntity = new HttpEntity<>(body, requestHeaders);
+      RequeteConnexion requeteConnexion = new RequeteConnexion();
+      requeteConnexion.setLogin(apiProperties.getApi().getLogin().getUsername());
+      requeteConnexion.setPassword(apiProperties.getApi().getLogin().getPassword());
+      HttpEntity<RequeteConnexion> bodyEntity = new HttpEntity<>(requeteConnexion, requestHeaders);
 
       ResponseEntity<RessourceUser> ressourceUser = restTemplate
           .exchange(
@@ -75,11 +75,11 @@ public class ApiDiscoveryTest extends TestApiSetup {
           .map(LinksPartenaireInner::getHref)
           .findFirst()
           .orElse("");
-      ResponseEntity<InlineResponse2001> listeRessources = restTemplate
+      ResponseEntity<RessourceListeAbstractMissions> listeRessources = restTemplate
           .exchange(apiProperties.getApi().getHost() + missionsPath,
                     HttpMethod.GET,
                     requestEntity,
-                    InlineResponse2001.class);
+                    RessourceListeAbstractMissions.class);
 
       for (RessourceAbstractMissions items :
           listeRessources.getBody().getItems()) {

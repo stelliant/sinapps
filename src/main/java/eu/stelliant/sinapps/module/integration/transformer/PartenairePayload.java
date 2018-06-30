@@ -1,5 +1,6 @@
 package eu.stelliant.sinapps.module.integration.transformer;
 
+import com.darva.sinapps.api.client.expertise.model.RessourcePartenaire;
 import com.darva.sinapps.api.client.expertise.model.RessourceUser;
 import com.darva.sinapps.api.client.expertise.model.RessourceUserLinks;
 import eu.stelliant.sinapps.module.api.config.ApiProperties;
@@ -31,7 +32,7 @@ public class PartenairePayload {
     return MessageBuilder.withPayload("")
         .copyHeaders(msg.getHeaders())
         .setHeader("url", properties.getApi().getHost() + partenairePath)
-        .setHeader("expected-response-type", com.darva.sinapps.api.client.transverse.model.RessourcePartenaire.class)
+        .setHeader("expected-response-type", RessourcePartenaire.class)
         .build();
   }
 }

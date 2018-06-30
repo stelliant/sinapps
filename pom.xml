@@ -131,46 +131,13 @@
         <version>2.3.1</version>
         <executions>
           <execution>
-            <id>transverse</id>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-            <configuration>
-              <output>${project.build.directory}</output>
-              <inputSpec>src/main/resources/swagger/api-sinapps-transverse-v3.1.yaml</inputSpec>
-              <language>java</language>
-              <library>resttemplate</library>
-              <generateApis>true</generateApis>
-              <generateApiTests>false</generateApiTests>
-              <generateApiDocumentation>false</generateApiDocumentation>
-              <generateModelTests>false</generateModelTests>
-              <generateModelDocumentation>false</generateModelDocumentation>
-              <generateSupportingFiles>true</generateSupportingFiles>
-              <configOptions>
-                <sourceFolder>generated-sources</sourceFolder>
-                <apiPackage>com.darva.sinapps.api.client.transverse</apiPackage>
-                <invokerPackage>com.darva.sinapps.api.client</invokerPackage>
-                <dateLibrary>java8</dateLibrary>
-                <!--<useBeanValidation>true</useBeanValidation>-->
-                <java8>true</java8>
-                <modelPackage>com.darva.sinapps.api.client.transverse.model</modelPackage>
-              </configOptions>
-              <!--<typeMappings>-->
-                <!--<typeMapping>OffsetDateTime=ZonedDateTime</typeMapping>-->
-              <!--</typeMappings>-->
-              <!--<importMappings>-->
-                <!--<importMapping>java.time.OffsetDateTime=java.time.ZonedDateTime</importMapping>-->
-              <!--</importMappings>-->
-            </configuration>
-          </execution>
-          <execution>
             <id>expertise</id>
             <goals>
               <goal>generate</goal>
             </goals>
             <configuration>
               <output>${project.build.directory}</output>
-              <inputSpec>src/main/resources/swagger/api-sinapps-expertise-v3.1.yaml
+              <inputSpec>src/main/resources/swagger/api-sinapps-expertise-v3.texa.yaml
               </inputSpec>
               <language>java</language>
               <library>resttemplate</library>
