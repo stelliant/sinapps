@@ -19,7 +19,8 @@ spring:
     restart:
       enabled: true
   jackson:
-    serialization.indent_output: true
+    serialization:
+      indent_output: true
 
 logging:
   file: sinapps.log
@@ -27,7 +28,7 @@ logging:
   level:
     eu.stelliant: ERROR
     org.springframework: ERROR
-    org.springframework.integration: DEBUG
+    org.springframework.integration: WARN
     org.springframework.web.client: ERROR
 
 sinapps:

@@ -273,6 +273,17 @@ paths:
           description: "Status 200"
           schema:
             $ref: "#/definitions/RessourceListeAbstractMissions"
+  /consulter lien partenaire:
+    get:
+      tags:
+      - "Services CommServices Commun"
+      summary: "Lien \"partenaire\""
+      parameters: []
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            $ref: "#/definitions/RessourceListePartenaire"
   /exécuter commande MissionnerExpert:
     put:
       tags:
@@ -296,17 +307,6 @@ paths:
           description: "Status 200"
           schema:
             $ref: "#/definitions/ResultatCommande"
-  /consulter lien partenaire:
-    get:
-      tags:
-      - "Services CommServices Commun"
-      summary: "Lien \"partenaire\""
-      parameters: []
-      responses:
-        200:
-          description: "Status 200"
-          schema:
-            $ref: "#/definitions/RessourceListePartenaire"
   /missions/{idMission}:
     get:
       tags:
@@ -475,7 +475,7 @@ paths:
         \ de la pénalité est obligatoire si le montant de la pénalité appliquée est\
         \ renseigné|\n\n## Evénement généré\nDommagesEstimes\nSi positionIndemnite\
         \ = \"AcceptationIndemnite\", alors on génère également l'événement IndemniteAcceptee\n\
-        Si positionIndemnite = \"Refus\", alors on génère également l'événement IndemniteRefusee"
+        Si positionIndemnite = \"Refus\", alors on génère également l'événement IndemniteRefusee\n"
       operationId: "estimerDommages"
       consumes: []
       parameters:
@@ -1131,7 +1131,7 @@ definitions:
           agreePar:
             type: "array"
             items:
-              type: "string"
+              $ref: "#/definitions/BSONObjectID"
           id:
             type: "string"
           version:
@@ -1191,8 +1191,38 @@ definitions:
       \n        }\n    ]\n}"
   TypePartenaire:
     type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+        enum:
+        - "Darva"
+        - "Reparateur"
+        - "Assureur"
+        - "Expert"
+      label:
+        type: "string"
+        enum:
+        - "Darva"
+        - "Reparateur"
+        - "Assureur"
+        - "Expert"
   ModelePartenaire:
     type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+        enum:
+        - "Covea"
+        - "Standard"
+      label:
+        type: "string"
+        enum:
+        - "Covea"
+        - "Standard"
   ListeCommandesMissionExpert:
     type: "object"
     required:
@@ -3986,6 +4016,7 @@ definitions:
     required:
     - "caracterePrestation"
     - "complexe"
+    - "criticite"
     - "typeDePrestation"
     properties:
       typeDePrestation:
@@ -6187,7 +6218,7 @@ definitions:
         - "Facture de travaux déposée"
         - "Facture de gestion déposée"
         - "Chiffrage en attente de validation"
-        - "Mission annulée"
+        - "Annulée"
         - "Mission arrêtée"
         - "Mission transmise"
         - "Mission acceptée"

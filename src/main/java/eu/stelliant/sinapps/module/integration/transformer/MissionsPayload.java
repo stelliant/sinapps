@@ -1,8 +1,8 @@
 package eu.stelliant.sinapps.module.integration.transformer;
 
-import com.darva.sinapps.api.client.expertise.model.LinksPartenaireInner;
 import com.darva.sinapps.api.client.expertise.model.RessourceListeAbstractMissions;
 import com.darva.sinapps.api.client.expertise.model.RessourcePartenaire;
+import com.darva.sinapps.api.client.expertise.model.RessourcePartenaireLinks;
 import eu.stelliant.sinapps.module.api.config.ApiProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.annotation.Transformer;
@@ -24,8 +24,8 @@ public class MissionsPayload {
   public Message<?> get(Message<RessourcePartenaire> msg) {
 
     String missionsPath = msg.getPayload().getLinks().stream()
-        .filter(link -> LinksPartenaireInner.RelEnum.ABSTRACTMISSIONS == link.getRel())
-        .map(LinksPartenaireInner::getHref)
+        .filter(link -> RessourcePartenaireLinks.RelEnum.ABSTRACTMISSIONS == link.getRel())
+        .map(RessourcePartenaireLinks::getHref)
         .findFirst()
         .orElse("");
 
