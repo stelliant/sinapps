@@ -1,8 +1,8 @@
 package eu.stelliant.sinapps.module.integration.transformer;
 
+import com.darva.sinapps.api.client.expertise.model.LinksUserInner;
 import com.darva.sinapps.api.client.expertise.model.RessourcePartenaire;
 import com.darva.sinapps.api.client.expertise.model.RessourceUser;
-import com.darva.sinapps.api.client.expertise.model.RessourceUserLinks;
 import eu.stelliant.sinapps.module.api.config.ApiProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.annotation.Transformer;
@@ -24,8 +24,8 @@ public class PartenairePayload {
   public Message<?> get(Message<RessourceUser> msg) {
 
     String partenairePath = msg.getPayload().getLinks().stream()
-        .filter(link -> RessourceUserLinks.RelEnum.PARTENAIRE == link.getRel())
-        .map(RessourceUserLinks::getHref)
+        .filter(link -> LinksUserInner.RelEnum.PARTENAIRE == link.getRel())
+        .map(LinksUserInner::getHref)
         .findFirst()
         .orElse("");
 

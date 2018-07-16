@@ -1,8 +1,8 @@
 package eu.stelliant.sinapps.module.integration.transformer;
 
-import com.darva.sinapps.api.client.expertise.model.RessourceListeAbstractMissions;
+import com.darva.sinapps.api.client.expertise.model.LinksPartenaireInner;
+import com.darva.sinapps.api.client.expertise.model.ListeAbstractMissions;
 import com.darva.sinapps.api.client.expertise.model.RessourcePartenaire;
-import com.darva.sinapps.api.client.expertise.model.RessourcePartenaireLinks;
 import eu.stelliant.sinapps.module.api.config.ApiProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.annotation.Transformer;
@@ -24,15 +24,15 @@ public class MissionsPayload {
   public Message<?> get(Message<RessourcePartenaire> msg) {
 
     String missionsPath = msg.getPayload().getLinks().stream()
-        .filter(link -> RessourcePartenaireLinks.RelEnum.ABSTRACTMISSIONS == link.getRel())
-        .map(RessourcePartenaireLinks::getHref)
+        .filter(link -> LinksPartenaireInner.RelEnum.ABSTRACTMISSIONS == link.getRel())
+        .map(LinksPartenaireInner::getHref)
         .findFirst()
         .orElse("");
 
     return MessageBuilder.withPayload("")
         .copyHeaders(msg.getHeaders())
         .setHeader("url", properties.getApi().getHost() + missionsPath)
-        .setHeader("expected-response-type", RessourceListeAbstractMissions.class)
+        .setHeader("expected-response-type", ListeAbstractMissions.class)
         .build();
   }
 }

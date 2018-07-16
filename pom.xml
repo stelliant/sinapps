@@ -137,15 +137,14 @@
             </goals>
             <configuration>
               <output>${project.build.directory}</output>
-              <inputSpec>src/main/resources/swagger/api-sinapps-expertise-v3.texa.yaml
-              <!--<inputSpec>src/main/resources/swagger/api-sinapps-expertise-v3.yaml-->
+              <inputSpec>src/main/resources/swagger/api-sinapps-expertise-v3.yaml
               </inputSpec>
               <language>java</language>
               <library>resttemplate</library>
               <generateApis>true</generateApis>
-              <generateApiTests>true</generateApiTests>
+              <generateApiTests>false</generateApiTests>
               <generateApiDocumentation>false</generateApiDocumentation>
-              <generateModelTests>true</generateModelTests>
+              <generateModelTests>false</generateModelTests>
               <generateModelDocumentation>false</generateModelDocumentation>
               <generateSupportingFiles>true</generateSupportingFiles>
               <configOptions>
