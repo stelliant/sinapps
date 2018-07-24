@@ -12,5 +12,5 @@
 
 spring:
     profiles:
-        active: test
-        include: local
+      active: test
+      include: local

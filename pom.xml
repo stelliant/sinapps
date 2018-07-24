@@ -5,12 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>eu.stelliant</groupId>
-  <artifactId>sinapps</artifactId>
+  <artifactId>neurone</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
-
-  <name>sinapps</name>
-  <description>Demo project for Spring Boot</description>
+  <name>${project.artifactId}</name>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -137,7 +135,7 @@
             </goals>
             <configuration>
               <output>${project.build.directory}</output>
-              <inputSpec>src/main/resources/swagger/api-sinapps-expertise-v3.yaml
+              <inputSpec>src/main/resources/sinapps/swagger/api-sinapps-expertise-v3.yaml
               </inputSpec>
               <language>java</language>
               <library>resttemplate</library>
@@ -171,7 +169,7 @@
             </goals>
             <configuration>
               <output>${project.build.directory}</output>
-              <inputSpec>src/main/resources/swagger/data-types.yaml
+              <inputSpec>src/main/resources/sinapps/swagger/data-types.yaml
               </inputSpec>
               <language>java</language>
               <library>resttemplate</library>
@@ -216,7 +214,7 @@
           <clearOutputDir>false</clearOutputDir>
           <outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
           <sources>
-            <source>src/main/resources/jaxb</source>
+            <source>src/main/resources/itex/jaxb</source>
           </sources>
         </configuration>
       </plugin>

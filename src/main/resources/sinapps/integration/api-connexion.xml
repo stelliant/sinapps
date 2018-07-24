@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:int="http://www.springframework.org/schema/integration"
+  xmlns:int-http="http://www.springframework.org/schema/integration/http"
+  xmlns:int-file="http://www.springframework.org/schema/integration/file"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+    http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http.xsd
+		http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
+
+  <!-- Connexion Poller -->
+  <int:inbound-channel-adapter id="sinapps.missionScheduler" channel="sinapps.channel.login" expression="''">
+    <!-- for batch processing -->
+    <int:poller fixed-delay="60000"></int:poller>
+  </int:inbound-channel-adapter>
+
+  <!-- Connexion -->
+  <int:chain id="channel.login" input-channel="sinapps.channel.login" output-channel="sinapps.channel.partenaire">
+    <int:transformer ref="loginPayload"/>
+    <int-http:outbound-gateway
+      rest-template="restTemplateSinapps"
+      http-method="POST"
+      url-expression="headers['url']"
+      expected-response-type-expression="headers['expected-response-type']"
+      reply-timeout="1000"
+      transfer-cookies="true">
+    </int-http:outbound-gateway>
+  </int:chain>
+
+  <!-- Partenaire -->
+  <int:chain id="channel.partenaire" input-channel="sinapps.channel.partenaire"
+    output-channel="sinapps.channel.abstractMissions">
+    <int:transformer ref="partenairePayload"/>
+    <int-http:outbound-gateway
+      rest-template="restTemplateSinapps"
+      reply-timeout="1000"
+      url-expression="headers['url']"
+      expected-response-type-expression="headers['expected-response-type']"
+      http-method="GET"
+      transfer-cookies="true">
+    </int-http:outbound-gateway>
+  </int:chain>
+
+  <!-- AbstractMissions -->
+  <int:chain id="channel.abstractMissions" input-channel="sinapps.channel.abstractMissions"
+    output-channel="sinapps.channel.mission">
+    <int:transformer ref="missionsPayload"/>
+    <int-http:outbound-gateway
+      rest-template="restTemplateSinapps"
+      http-method="GET"
+      url-expression="headers['url']"
+      expected-response-type-expression="headers['expected-response-type']"
+      reply-timeout="1000"
+      transfer-cookies="true">
+    </int-http:outbound-gateway>
+    <int:splitter ref="missionSplitter" method="split"/>
+  </int:chain>
+
+  <!-- Mission -->
+  <int:chain id="channel.mission" input-channel="sinapps.channel.mission" output-channel="itex.channel.file">
+    <int:transformer ref="missionPayload"/>
+    <int-http:outbound-gateway
+      rest-template="restTemplateSinapps"
+      http-method="GET"
+      url-expression="headers['url']"
+      expected-response-type-expression="headers['expected-response-type']"
+      reply-timeout="1000"
+      transfer-cookies="true">
+    </int-http:outbound-gateway>
+    <int:transformer
+      expression="payload + '#{systemProperties['line.separator']}'"/>
+  </int:chain>
+
+  <int-file:outbound-channel-adapter id="itex.channel.file"
+    mode="REPLACE"
+    charset="UTF-8"
+    directory-expression="'${itex.file.path}'"/>
+
+</beans>

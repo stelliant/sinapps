@@ -1,7 +1,7 @@
 # ===================================================================
 # Spring Boot configuration.
 #
-# This configuration will be overriden by the Spring profile you use,
+# This configuration will be overwritten by the Spring profile you use,
 # for example application-dev.yml if you use the "dev" profile.
 # ===================================================================
 
@@ -13,7 +13,7 @@
 
 spring:
     application:
-        name: sinapps
+        name: neurone
     profiles:
         # The commented value for `active` can be replaced with valid Spring profiles to load.
         # Otherwise, it will be filled in by maven when building the WAR file

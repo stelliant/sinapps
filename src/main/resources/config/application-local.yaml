@@ -23,10 +23,10 @@ spring:
       indent_output: true
 
 logging:
-  file: sinapps.log
-  path: /Users/guytou/TBOX/WORK/STELLIANT/sinapps
+  file: neurone.log
+  path: /Users/guytou/TBOX/WORK/STELLIANT/neurone
   level:
-    eu.stelliant: ERROR
+    eu.stelliant: INFO
     org.springframework: ERROR
     org.springframework.integration: WARN
     org.springframework.web.client: ERROR
@@ -35,7 +35,7 @@ sinapps:
   api:
     host: https://sinapps-ird-v2.demo.darva.com
     ssl:
-      truststore: classpath:security/keystore.pks
+      truststore: classpath:sinapps/security/keystore.pks
       storepass: storepass
     login:
       mapping: /core/api/login
@@ -44,4 +44,4 @@ sinapps:
 
 itex:
   file:
-    path: /Users/guytou/TBOX/WORK/STELLIANT/itex
+    path: /Users/guytou/TBOX/WORK/STELLIANT/itex_fs
